@@ -1,0 +1,85 @@
+{
+  "mode": "baseline",
+  "video_name": "alley_1",
+  "n_flow_files": 0,
+  "n_frames_total": 50,
+  "global_complexity": 0.0,
+  "n_frames_selected": 8,
+  "selected_frames": [
+    {
+      "index": 1,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 8,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 15,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 22,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 29,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 36,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 43,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 50,
+      "weight": 1.0,
+      "complexity": 0.0
+    }
+  ],
+  "motion_profile": [],
+  "spatial_analysis": [],
+  "inference": {
+    "generated_text": "The video frames depict a scene with a repetitive pattern of wooden planks arranged in a grid-like structure. The planks are dark brown and appear to be part of a wooden floor or wall. The texture of the planks is consistent, with a slightly rough surface that suggests they are made of wood. The lighting in the scene is soft, casting gentle shadows that add depth to the image. The overall atmosphere is calm and somewhat monotonous, with no visible movement or characters present in the frames. The scene lacks any dynamic elements, focusing solely on the static arrangement of the wooden planks.",
+    "n_tokens": 121,
+    "encode_time_ms": 705.0,
+    "generation_time_ms": 689.0
+  },
+  "metrics": {
+    "motion_coverage": 0.0,
+    "shannon_entropy": 4.194616167098087,
+    "temporal_reduction": 0.84,
+    "avg_spatial_savings": 0.0
+  },
+  "timing": {
+    "flow_analysis_ms": 0.0,
+    "frame_selection_ms": 0.0,
+    "encode_ms": 705.0,
+    "generation_ms": 689.0,
+    "total_ms": 4019.0
+  },
+  "params": {
+    "flow_analysis_skipped": true,
+    "perf_region": 0,
+    "warmup_iters": 1,
+    "sintel_dir": "/data/spring26/CPP/modelsRepo/MPI_bkp/MPI-Sintel",
+    "video_name": "alley_1",
+    "min_frames": 3,
+    "max_frames": 24,
+    "base_frames": 8,
+    "motion_threshold": 2.0,
+    "motion_percentile": 0.949999988079071,
+    "patch_grid": 4,
+    "spatial_threshold": 0.05000000074505806
+  }
+}

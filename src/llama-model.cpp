@@ -9003,6 +9003,20 @@ float llama_model_rope_freq_scale_train(const llama_model * model) {
     return model->hparams.rope_freq_scale_train;
 }
 
+float llama_model_rope_freq_base_train(const llama_model * model) {
+    return model->hparams.rope_freq_base_train;
+}
+
+void llama_model_rope_sections(const llama_model * model, int32_t sections[4]) {
+    for (int i = 0; i < 4; i++) {
+        sections[i] = model->hparams.rope_sections[i];
+    }
+}
+
+int32_t llama_model_n_embd_head_k(const llama_model * model) {
+    return model->hparams.n_embd_head_k;
+}
+
 int32_t llama_model_meta_val_str(const llama_model * model, const char * key, char * buf, size_t buf_size) {
     const auto & it = model->gguf_kv.find(key);
     if (it == model->gguf_kv.end()) {

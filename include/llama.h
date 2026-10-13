@@ -546,6 +546,15 @@ extern "C" {
     // Get the model's RoPE frequency scaling factor
     LLAMA_API float llama_model_rope_freq_scale_train(const struct llama_model * model);
 
+    // Get the model's RoPE frequency base (for re-rotation kernels)
+    LLAMA_API float llama_model_rope_freq_base_train(const struct llama_model * model);
+
+    // Get the model's RoPE section dimensions [4] (for M-RoPE temporal/y/x/unused)
+    LLAMA_API void llama_model_rope_sections(const struct llama_model * model, int32_t sections[4]);
+
+    // Get the K embedding dimension per head
+    LLAMA_API int32_t llama_model_n_embd_head_k(const struct llama_model * model);
+
     // Returns the number of classifier outputs (only valid for classifier models)
     // Undefined behavior for non-classifier models
     LLAMA_API uint32_t llama_model_n_cls_out(const struct llama_model * model);
@@ -697,6 +706,46 @@ extern "C" {
               llama_seq_id seq_id,
                  llama_pos p0,
                  llama_pos p1);
+
+    // Remove a single KV entry matching exact position and 2D spatial coordinates (M-RoPE).
+    // Useful for removing individual visual tokens when multiple tokens share the same
+    // temporal position but have different spatial (x, y) coordinates.
+    // Returns true if found and removed, false otherwise.
+    LLAMA_API bool llama_memory_seq_rm_pos_ext(
+            llama_memory_t mem,
+              llama_seq_id seq_id,
+                 llama_pos pos,
+                 llama_pos ext_x,
+                 llama_pos ext_y);
+
+    // Compact the KV cache by moving occupied cells to fill gaps left by removals.
+    // Physically copies K/V tensor data so that the effective n_kv shrinks,
+    // reducing attention FLOPs in subsequent generation steps.
+    // if ctx is provided, uses GPU-native defrag (fast); otherwise CPU bulk transfer (slow)
+    LLAMA_API void llama_memory_defragment(llama_memory_t mem, llama_context * ctx = nullptr);
+
+    // Get the K cache tensor for a given model layer (for manual attention computation)
+    // Returns nullptr if not supported by this memory type
+    LLAMA_API const struct ggml_tensor * llama_memory_k_tensor(llama_memory_t mem, int32_t il);
+
+    // Get the V cache tensor for a given model layer
+    // Returns nullptr if not supported by this memory type
+    LLAMA_API const struct ggml_tensor * llama_memory_v_tensor(llama_memory_t mem, int32_t il);
+
+    // Returns true if the V cache is stored in transposed layout
+    LLAMA_API bool llama_memory_v_trans(llama_memory_t mem);
+
+    // Reserve KV cache cells with metadata (pos, seq_id, ext) WITHOUT running the transformer.
+    // Allocates cells and sets positions/sequences, but does not compute K/V values.
+    // out_cell_indices: if non-null, filled with allocated cell indices [n_tokens]
+    // Returns true on success.
+    LLAMA_API bool llama_memory_reserve_cells(
+            llama_memory_t   mem,
+              llama_seq_id   seq_id,
+                   int32_t   n_tokens,
+           const llama_pos * pos,
+                      bool   is_pos_2d,
+                   int32_t * out_cell_indices);
 
     // Copy all tokens that belong to the specified sequence to another sequence
     // p0 < 0 : [0,  p1]
@@ -935,6 +984,17 @@ extern "C" {
     // n_threads is the number of threads used for generation (single token)
     // n_threads_batch is the number of threads used for prompt and batch processing (multiple tokens)
     LLAMA_API void llama_set_n_threads(struct llama_context * ctx, int32_t n_threads, int32_t n_threads_batch);
+
+    // Set pyramid KV prefill parameters (Architecture B)
+    // Must be called before the prefill llama_decode that contains visual tokens
+    LLAMA_API void llama_set_pyramid_params(
+            struct llama_context * ctx,
+            int   clie_layer,
+            float pvc_min,
+            int   visual_start,
+            int   n_visual,
+            int   tokens_per_frame,
+            bool  protect_frame0);
 
     // Get the number of threads used for generation of a single token.
     LLAMA_API int32_t llama_n_threads(struct llama_context * ctx);

@@ -1,0 +1,609 @@
+{
+  "mode": "video",
+  "align": 0,
+  "base_frames": 8,
+  "frame_step": 0,
+  "video_fps": 2.0,
+  "tokens_per_second": 2,
+  "n_predict": 128,
+  "requests": [
+    {
+      "video": "alley_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 58.82699966430664,
+      "tokenize_ms": 47.95800018310547,
+      "vit_ms": 340.3580017089844,
+      "prefill_ms": 369.9610290527344,
+      "decode_ms": 2121.324951171875,
+      "total_ms": 2938.51806640625,
+      "group_encode_ms": [
+        169.16099548339844,
+        59.334999084472656,
+        56.16699981689453,
+        55.69499969482422
+      ],
+      "n_tokens": 128,
+      "text": "The scene depicted in the video frames appears to be from a video game, likely set in a medieval or fantasy environment. The character, a young woman with brown, wavy hair, is seen from behind, holding an apple in her right hand. She is dressed in a sleeveless top and has a tattoo on her right arm. The setting includes stone buildings with wooden beams and a cobblestone street, giving the impression of an old town or a village.\n\nThe character's motion seems to involve walking or moving forward, as her headi and the position of the apple in her hand suggest a steady progression. The lighting in the scene"
+    },
+    {
+      "video": "alley_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 58.60499954223633,
+      "tokenize_ms": 40.676998138427734,
+      "vit_ms": 222.5679931640625,
+      "prefill_ms": 358.781005859375,
+      "decode_ms": 2159.989990234375,
+      "total_ms": 2840.69189453125,
+      "group_encode_ms": [
+        56.178001403808594,
+        55.42900085449219,
+        55.37099838256836,
+        55.59000015258789
+      ],
+      "n_tokens": 128,
+      "text": "The scene depicted in the video frames is set in a narrow alleyway between two multi-story buildings. The alley is dimly lit, with sunlight filtering through the gaps in the buildings and creating long shadows on the ground. The walls are made of a weathered, textured material, possibly stone or concrete, and there are various objects scattered around, such as wooden crates and hanging nets, suggesting an area that is under砜 or in�---\n\nThe character in the scene is a female with orange hair,的理由是她有橙色的头发。 The woman is dressed in a sleeveless top and cargo pants, and she appears to be in"
+    },
+    {
+      "video": "ambush_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 48.22700119018555,
+      "tokenize_ms": 40.26100158691406,
+      "vit_ms": 222.28700256347656,
+      "prefill_ms": 359.6689758300781,
+      "decode_ms": 2154.705078125,
+      "total_ms": 2825.2119140625,
+      "group_encode_ms": [
+        55.41600036621094,
+        56.01499938964844,
+        55.45800018310547,
+        55.39799880981445
+      ],
+      "n_tokens": 128,
+      "text": "The scene appears to be a dynamic and intense moment from a video game or animated sequence. The setting is a snowy, icy landscape, with large, undulating ice formations in the background, suggesting a cold and harsh environment.\n\n### Motion Patterns:\n- The character in the foreground is in motion, with their body slightly twisted and their arm extended forward, as if they are either attacking or defending. The motion blur on the character's hand and the slight blur of the background indicate a fast movement.\n- The��集聚 (Moju) in the background一分 (one博览 (yībàng) is also in motion, with its limbs"
+    },
+    {
+      "video": "ambush_4",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 53.939998626708984,
+      "tokenize_ms": 40.76300048828125,
+      "vit_ms": 226.37899780273438,
+      "prefill_ms": 362.802001953125,
+      "decode_ms": 2175.944091796875,
+      "total_ms": 2859.89306640625,
+      "group_encode_ms": [
+        56.95899963378906,
+        56.61000061035156,
+        56.47700119018555,
+        56.33300018310547
+      ],
+      "n_tokens": 128,
+      "text": "The scene appears to be朵oma from the video大大小小大分ุ่า (an anime or video game). The character is in一时半刻木 (a momentary state), suggesting a dynamic or intense moment. The character is wearing a brown outfit with a hood and has a backpack, indicating they might be on a journey or adventure. The background is a snowy landscape with large, rocky structures that seem to be either part of a natural formation or a part of a larger, possibly magical, environment.\n\nThe character's posture and the motion blur on the arms and legs suggest movement, likely running or dodging. The character's"
+    },
+    {
+      "video": "ambush_5",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 52.35300064086914,
+      "tokenize_ms": 38.86800003051758,
+      "vit_ms": 221.8509979248047,
+      "prefill_ms": 358.9480285644531,
+      "decode_ms": 2121.743896484375,
+      "total_ms": 2793.8369140625,
+      "group_encode_ms": [
+        55.45800018310547,
+        55.362998962402344,
+        55.292999267578125,
+        55.73699951171875
+      ],
+      "n_tokens": 128,
+      "text": "The scene appears to be a dramatic and intense moment from a video game or animated sequence. The setting is a rugged, mountainous landscape with a backdrop of snow-capped peaks and a cloudy sky, suggesting a cold and harsh environment. \n\n### Key Visual Elements:\n1. **Characters**: \n   - There are two characters in the foreground. One character has long brown hair and is wearing使用权 a brown outfit with a fur-lined hood. This character appears to be in a defensive posture, holding a weapon (a staff or a similar object) in their right hand, and their left hand is raised, possibly in a gesture of defense or"
+    },
+    {
+      "video": "ambush_6",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 55.29899978637695,
+      "tokenize_ms": 40.694000244140625,
+      "vit_ms": 221.55899047851563,
+      "prefill_ms": 359.1600036621094,
+      "decode_ms": 2123.02099609375,
+      "total_ms": 2799.799072265625,
+      "group_encode_ms": [
+        55.5620002746582,
+        55.28799819946289,
+        55.29199981689453,
+        55.41699981689453
+      ],
+      "n_tokens": 128,
+      "text": "The scene depicts a dynamic and intense moment between two characters in a snowy, mountainous environment. The setting is characterized by jagged, dark rock formations and a backdrop of a large, partially ice-covered structure, possibly a mountain or a natural formation. The sky is overcast, adding a sense of cold and tension to the atmosphere.\n\n### Motion Patterns:\n- The character on the left, with reddish hair, is in a crouched position, holding a staff or a similar object in one hand and a knife in the other. This posture suggests readiness for combat or defense.\n- The character on the right, who appears to be"
+    },
+    {
+      "video": "ambush_7",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 48.0099983215332,
+      "tokenize_ms": 38.74700164794922,
+      "vit_ms": 220.76800537109375,
+      "prefill_ms": 359.00897216796875,
+      "decode_ms": 2120.111083984375,
+      "total_ms": 2786.7041015625,
+      "group_encode_ms": [
+        55.1510009765625,
+        55.02899932861328,
+        55.39799880981445,
+        55.189998626708984
+      ],
+      "n_tokens": 128,
+      "text": "The image shows a close-up of a hand gripping a staff or杖 in a snowy or icy environment. The staff has a weathered, metallic appearance with a circular emblem at the bottom featuring an intricate design课内预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预习预"
+    },
+    {
+      "video": "bamboo_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 64.80699920654297,
+      "tokenize_ms": 40.64799880981445,
+      "vit_ms": 223.04901123046875,
+      "prefill_ms": 359.1499938964844,
+      "decode_ms": 2121.569091796875,
+      "total_ms": 2809.298095703125,
+      "group_encode_ms": [
+        56.8129997253418,
+        55.2869987487793,
+        55.34000015258789,
+        55.60900115966797
+      ],
+      "n_tokens": 128,
+      "text": "The image depicts a lush, dense bamboo forest with a variety of green hues and textures. The bamboo stalks are tall and slender, with节 (sections) running vertically down their length. The leaves are large and fan-shaped, with a vibrant green color and some showing signs of aging with yellowing edges. The forest floor is covered with a mix of greenery, including smaller plants and patches of grass.\n\nIn the center of the image, a character with long, reddish-brown hair is crouched or lying on the ground, surrounded by the bamboo. The character's posture suggests they might be in a moment of rest,"
+    },
+    {
+      "video": "bamboo_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 61.12200164794922,
+      "tokenize_ms": 40.77199935913086,
+      "vit_ms": 221.22900390625,
+      "prefill_ms": 359.3659973144531,
+      "decode_ms": 2121.39794921875,
+      "total_ms": 2803.947021484375,
+      "group_encode_ms": [
+        55.470001220703125,
+        55.42100143432617,
+        55.152000427246094,
+        55.18600082397461
+      ],
+      "n_tokens": 128,
+      "text": "The scene depicts a character navigating a dense bamboo forest. The character, with reddish-brown hair andениurр买单肯丰丰肯丰肯丰肯丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰丰"
+    },
+    {
+      "video": "bandage_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 58.470001220703125,
+      "tokenize_ms": 38.948001861572266,
+      "vit_ms": 220.3300018310547,
+      "prefill_ms": 359.24798583984375,
+      "decode_ms": 2217.425048828125,
+      "total_ms": 2894.48388671875,
+      "group_encode_ms": [
+        55.14799880981445,
+        55.20600128173828,
+        54.875,
+        55.10100173950195
+      ],
+      "n_tokens": 128,
+      "text": "The scene depicts a close-up interaction between a human and a small, reptilian creature. The human, wearing a sleeveless top and gloves, is tending to the creature, which appears to have a wound on its side. The human's hands are gently placed on the creature, and there is visible blood onci the creature's side, indicating that the creature is生产和受伤。The setting seems to be in a rustic or outdoor environment, with a wooden structure and a textured floor in the background. The lighting is warm, suggesting a daytime scene with sunlight filtering in. The overall motion pattern in the frames suggests a calm and careful interaction"
+    },
+    {
+      "video": "bandage_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 59.88600158691406,
+      "tokenize_ms": 40.69200134277344,
+      "vit_ms": 220.78500366210938,
+      "prefill_ms": 360.3479919433594,
+      "decode_ms": 2139.337890625,
+      "total_ms": 2821.114990234375,
+      "group_encode_ms": [
+        55.46200180053711,
+        55.393001556396484,
+        54.875,
+        55.05500030517578
+      ],
+      "n_tokens": 128,
+      "text": "The scene appears to be from a video game or animated film, featuring a character with red hair and a笔记本 I tardos t-1aaa-�������������������������������������������������������-倩倩-倩倩-倩倩-倩倩-倩倩-倩倩-倩倩-倩倩-倩倩-倩倩-倩倩-倩倩-倩倩-"
+    },
+    {
+      "video": "cave_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 55.37699890136719,
+      "tokenize_ms": 40.56800079345703,
+      "vit_ms": 229.6429901123047,
+      "prefill_ms": 366.448974609375,
+      "decode_ms": 2122.0390625,
+      "total_ms": 2814.155029296875,
+      "group_encode_ms": [
+        55.465999603271484,
+        59.874000549316406,
+        59.07099914550781,
+        55.231998443603516
+      ],
+      "n_tokens": 128,
+      "text": "The scene depicts a tense moment in a video game where a female character is facing off against a铛t铛t铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛铛"
+    },
+    {
+      "video": "cave_4",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 58.35499954223633,
+      "tokenize_ms": 40.59600067138672,
+      "vit_ms": 221.27398681640625,
+      "prefill_ms": 358.8009948730469,
+      "decode_ms": 2121.800048828125,
+      "total_ms": 2800.89208984375,
+      "group_encode_ms": [
+        55.42499923706055,
+        55.03099822998047,
+        55.494998931884766,
+        55.323001861572266
+      ],
+      "n_tokens": 128,
+      "text": "The scene depicts a dramatic and intense moment in a cave setting. A character with red hair, dressed in a white top and brown pants, is engaged in a dynamic battle with a large, serpentinemere t tutton t t t- t- t- t--a t--t--t--t--t- -t- -t- -t- -t- -t- -t- -t- -t- -t- -t- -t- -t- -t- -t- -t- -t- -t- -t- -t-"
+    },
+    {
+      "video": "market_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 54.845001220703125,
+      "tokenize_ms": 38.948001861572266,
+      "vit_ms": 221.1630096435547,
+      "prefill_ms": 359.4380187988281,
+      "decode_ms": 2121.714111328125,
+      "total_ms": 2796.180908203125,
+      "group_encode_ms": [
+        55.750999450683594,
+        55.32500076293945,
+        55.150001525878906,
+        54.9370002746582
+      ],
+      "n_tokens": 128,
+      "text": "The scene appears to be a bustling, somewhat chaotic market place, possibly from a video game, given the realistic yet slightly cartoony style of建模 and animation. The setting is an outdoor area with wooden stalls and a variety of goods on display, including barrels, crates, and produce like apples and pumpkins. The lighting is natural, suggesting a daytime scene.\n\n### Key Visual Elements:\n1. **Market Environment**: The area is filled with various market stalls and goods, indicating a lively marketplace. The presence of wooden crates, barrels, and produce suggests a setting where goods are being traded or sold.\n2. **Characters**: There"
+    },
+    {
+      "video": "market_5",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 52.75400161743164,
+      "tokenize_ms": 40.25899887084961,
+      "vit_ms": 221.56399536132813,
+      "prefill_ms": 359.2799987792969,
+      "decode_ms": 2141.89892578125,
+      "total_ms": 2815.843017578125,
+      "group_encode_ms": [
+        55.465999603271484,
+        55.50600051879883,
+        55.10900115966797,
+        55.483001708984375
+      ],
+      "n_tokens": 128,
+      "text": "The scene depicted in the video frames appears to be from a video game, characterized by a dynamic and action-packed environment. The setting is an indoor area with a high ceiling, possibly a warehouse or a similar industrial space, with visible structural elements like beams and crates. The lighting is dim, with some areas illuminated by artificial light sources, creating a dramatic and tense atmosphere.\n\n### Motion Patterns:\n1. **Character A (Foreground):**\n   - The character in the foreground is a large, reptilian creature with a textured, scaly body. It is in a crouched or low-ready stance, suggesting it is either preparing for an"
+    },
+    {
+      "video": "market_6",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 55.12699890136719,
+      "tokenize_ms": 38.7760009765625,
+      "vit_ms": 228.07901000976563,
+      "prefill_ms": 369.6800231933594,
+      "decode_ms": 2120.047119140625,
+      "total_ms": 2811.7880859375,
+      "group_encode_ms": [
+        56.02399826049805,
+        58.805999755859375,
+        58.17300033569336,
+        55.07600021362305
+      ],
+      "n_tokens": 128,
+      "text": "The scene appears to be a post-apocalyptic or fantasy setting, featuring a chaotic and dynamic environment. The key visual elements include:\n\n1. **D神奇的场景**: The scene is set in a dilapidated urban area with wooden and stone structures. The buildings are partially collapsed, with debris and broken wooden planks scattered around. The ground is made of cobblestones, adding to the rugged and worn appearance of the environment.\n\n2. **The Cart and Ox**: A wooden cart, possibly used for transportation or trade, is in the foreground. It is being pulled by a large, brown ox with curved horns. The cart"
+    },
+    {
+      "video": "mountain_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 53.84199905395508,
+      "tokenize_ms": 39.064998626708984,
+      "vit_ms": 221.28700256347656,
+      "prefill_ms": 365.95599365234375,
+      "decode_ms": 2158.06201171875,
+      "total_ms": 2838.281005859375,
+      "group_encode_ms": [
+        55.61199951171875,
+        55.34199905395508,
+        55.189998626708984,
+        55.143001556396484
+      ],
+      "n_tokens": 128,
+      "text": "Theolie video frames depict a dramatic and rugged alpine landscape  covered in snow. The terrain is steep and rocky, with jagged peaks and cliffs. The snow blankets the ground and clings to the crevices of the steep slopes, indicating heavy积雪言较伊利较为陡峻待预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预预"
+    },
+    {
+      "video": "shaman_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 55.845001220703125,
+      "tokenize_ms": 38.7599983215332,
+      "vit_ms": 221.86700439453125,
+      "prefill_ms": 358.6600036621094,
+      "decode_ms": 2121.76904296875,
+      "total_ms": 2796.97412109375,
+      "group_encode_ms": [
+        55.42599868774414,
+        55.23899841308594,
+        55.262001037597656,
+        55.939998626708984
+      ],
+      "n_tokens": 128,
+      "text": "The image appears to be a scene from a video game or animated惟物。 The setting seems to be an indoor environment, possibly a�间 with a dark一种墙壁背景上有印��似的荚样。 The lighting is dim, with a warm tone, suggesting it might be evening or night.\n\nIn the foreground, there is a character with a large, bushy beard and a headband adorned with what looks like feathers or spines. The character's face is partially obscured by the beard and headband, and they have a serious expression. Their skin is textured, and they appear to be wearing minimal clothing, with visible tattoos on"
+    },
+    {
+      "video": "shaman_3",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 59.83399963378906,
+      "tokenize_ms": 40.70000076293945,
+      "vit_ms": 221.1750030517578,
+      "prefill_ms": 358.5840148925781,
+      "decode_ms": 2119.868896484375,
+      "total_ms": 2800.22607421875,
+      "group_encode_ms": [
+        55.28799819946289,
+        55.08100128173828,
+        55.38399887084961,
+        55.422000885009766
+      ],
+      "n_tokens": 128,
+      "text": "The image shows a first-person perspective of a hand interacting with a circular, ornate object. The object appears to be a metallic disc with intricate engravings, including a central design of张彂肩负着抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹抹"
+    },
+    {
+      "video": "sleeping_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 55.70399856567383,
+      "tokenize_ms": 40.029998779296875,
+      "vit_ms": 221.27700805664063,
+      "prefill_ms": 359.2939758300781,
+      "decode_ms": 2139.384033203125,
+      "total_ms": 2815.77587890625,
+      "group_encode_ms": [
+        55.22200012207031,
+        55.09000015258789,
+        55.36899948120117,
+        55.59600067138672
+      ],
+      "n_tokens": 128,
+      "text": "The scene in the video frames depicts a close interaction between a human character and a dinosaur-like creature, likely a nod to theプレダ�이祺祷祷祷祷祷�祷怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨怨"
+    },
+    {
+      "video": "sleeping_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 62.72100067138672,
+      "tokenize_ms": 40.060001373291016,
+      "vit_ms": 221.37200927734375,
+      "prefill_ms": 359.3849792480469,
+      "decode_ms": 2122.970947265625,
+      "total_ms": 2806.5810546875,
+      "group_encode_ms": [
+        55.46500015258789,
+        55.005001068115234,
+        55.292999267578125,
+        55.60900115966797
+      ],
+      "n_tokens": 128,
+      "text": "The scene depicted in these video frames appears to be a detailed and atmospheric depiction of a medieval or fantasy setting. Here's a breakdown of the elements:\n\n1. **Atmosphere and Setting**:\n   - The lighting is warm and dim, suggesting a low-lit environment, possibly a dungeon, a ship's hold, or a similar enclosed space.\n   - The walls and floor are made of stone and wood, with ropes and wooden beams, adding to the rustic and medieval feel.\n   - The presence of�or�\nuteur\nThe scene in the provided image appears to be set in a dimly-lit�or�"
+    },
+    {
+      "video": "temple_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 53.1879997253418,
+      "tokenize_ms": 40.62799835205078,
+      "vit_ms": 221.7119903564453,
+      "prefill_ms": 359.60101318359375,
+      "decode_ms": 2121.278076171875,
+      "total_ms": 2796.47998046875,
+      "group_encode_ms": [
+        55.50899887084961,
+        55.150001525878906,
+        55.45199966430664,
+        55.60100173950195
+      ],
+      "n_tokens": 128,
+      "text": "The scene is a dynamic and action-packed moment set in a fantastical, medieval-style environment. The background features a large, partially destroyed stone city with tall, gothic-style towers and walls, bathed in the warm hues of a setting or rising sun. The sky is a gradient of orange and yellow, adding a dramatic and intense atmosphere to the scene.\n\nIn the foreground, a dragon is in mid-flight, its wings spread wide and its body angled as itapparentlyapproaches or不舍 Públicoc什么事a单体or depdatorororororororororororororororororororor"
+    },
+    {
+      "video": "temple_3",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 50.45100021362305,
+      "tokenize_ms": 40.88199996948242,
+      "vit_ms": 221.0070037841797,
+      "prefill_ms": 361.18499755859375,
+      "decode_ms": 2137.64111328125,
+      "total_ms": 2811.22412109375,
+      "group_encode_ms": [
+        55.641998291015625,
+        55.04100036621094,
+        55.06100082397461,
+        55.26300048828125
+      ],
+      "n_tokens": 128,
+      "text": "The scene depicted in the video frames appears to从业预告aric口气中充满了一种紧张和动态的氛围。画面中，一个角色似乎正在与一只巨大的生物进行互动。角色的背影指向天边，天空中布满了橙黄色的光芒，天上的生物看起来像是一种翼龙或翼龙一般的食肉生物。生物发出的火焰或能量从其尾部射出，形成了动态的光束，增加了场景的紧张感。\n\n角色的头发是红棕色的，穿着似乎是某种粗糙的半臂装，可能是在某种原始或不规则的环境中。角色的面部表情看起来"
+    }
+  ]
+}

@@ -1,0 +1,398 @@
+{
+  "alley_1": {
+    "n_frames": 3,
+    "encode_ms": 261.0,
+    "generation_ms": 749.0,
+    "total_ms": 2823.0,
+    "flow_analysis_ms": 780.0,
+    "n_tokens_generated": 142,
+    "entropy": 5.591,
+    "generated_text": "The video frames depict a scene with a person walking on a surface that appears to be made of wooden planks or tiles. The person is wearing a pair of brown shoes and has a bundle of brown sticks or branches in their left hand. The bundle of sticks is being held in a way that suggests the person is walking or moving forward. The background consists of a pattern of wooden planks or tiles, which are arranged in a grid-like fashion. The lighting in the scene is consistent, suggesting that the video was taken in a controlled environment or during a time of day when the lighting is stable. The overall atmosphere of the video is calm and steady, with the person's movement being the primary focus.",
+    "bleu4_vs_baseline": 0.1304,
+    "rouge_l_vs_baseline": 0.3019,
+    "cosine_sim_vs_baseline": 0.7906,
+    "encoder_savings_pct": 55.067567567567565,
+    "patch_reuse_motion": 8.0,
+    "per_frame_detail": [
+      {
+        "frame_index": 6,
+        "type": "KEYFRAME",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 85.0
+      },
+      {
+        "frame_index": 24,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 112,
+        "tokens_cached": 480,
+        "vit_encode_ms": 25.0
+      },
+      {
+        "frame_index": 25,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 94,
+        "tokens_cached": 498,
+        "vit_encode_ms": 21.0
+      }
+    ]
+  },
+  "sleeping_1": {
+    "n_frames": 3,
+    "encode_ms": 218.0,
+    "generation_ms": 622.0,
+    "total_ms": 2676.0,
+    "flow_analysis_ms": 796.0,
+    "n_tokens_generated": 118,
+    "entropy": 5.67,
+    "generated_text": "The video frames depict a highly repetitive and symmetrical pattern of a person's legs and feet. The legs are positioned in a staggered, alternating pattern, with each leg slightly overlapping the next. The feet are in a standing position, with the toes pointing forward. The skin tone of the legs and feet appears to be a light color, possibly white or light beige. The background is dark, which contrasts with the lighter color of the legs and feet, making them stand out prominently. The overall visual effect is one of symmetry and repetition, creating a visually striking and somewhat surreal image.",
+    "bleu4_vs_baseline": 0.1638,
+    "rouge_l_vs_baseline": 0.3251,
+    "cosine_sim_vs_baseline": 0.8185,
+    "encoder_savings_pct": 66.66666666666667,
+    "patch_reuse_motion": 8.0,
+    "per_frame_detail": [
+      {
+        "frame_index": 3,
+        "type": "KEYFRAME",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 85.0
+      },
+      {
+        "frame_index": 12,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 0,
+        "tokens_cached": 592,
+        "vit_encode_ms": 0.0
+      },
+      {
+        "frame_index": 13,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 0,
+        "tokens_cached": 592,
+        "vit_encode_ms": 0.0
+      }
+    ]
+  },
+  "bamboo_1": {
+    "n_frames": 3,
+    "encode_ms": 217.0,
+    "generation_ms": 791.0,
+    "total_ms": 2834.0,
+    "flow_analysis_ms": 794.0,
+    "n_tokens_generated": 150,
+    "entropy": 5.841,
+    "generated_text": "The scene depicts a dense, lush green environment filled with various types of vegetation. The ground is covered with a mix of grass, leaves, and small plants, creating a vibrant and natural setting. The colors range from deep greens to lighter shades, indicating a variety of plant species. The foliage appears to be thriving, suggesting a healthy ecosystem.\n\nKey visual elements include:\n\n1. **Vegetation**: The scene is dominated by greenery, with different types of plants and leaves scattered throughout. The plants vary in size and shape, contributing to the diversity of the environment.\n2. **Ground Cover**: The ground is covered with a mix of grass, leaves, and small plants, creating a dense and natural appearance.\n3. **Color Variety**: The",
+    "bleu4_vs_baseline": 0.0,
+    "rouge_l_vs_baseline": 0.2435,
+    "cosine_sim_vs_baseline": 0.774,
+    "encoder_savings_pct": 66.66666666666667,
+    "patch_reuse_motion": 8.0,
+    "per_frame_detail": [
+      {
+        "frame_index": 32,
+        "type": "KEYFRAME",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 86.0
+      },
+      {
+        "frame_index": 45,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 0,
+        "tokens_cached": 592,
+        "vit_encode_ms": 0.0
+      },
+      {
+        "frame_index": 46,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 0,
+        "tokens_cached": 592,
+        "vit_encode_ms": 0.0
+      }
+    ]
+  },
+  "cave_2": {
+    "n_frames": 11,
+    "encode_ms": 1049.0,
+    "generation_ms": 633.0,
+    "total_ms": 3590.0,
+    "flow_analysis_ms": 769.0,
+    "n_tokens_generated": 113,
+    "entropy": 5.607,
+    "generated_text": "The video frames depict a mesmerizing scene of numerous manta rays swimming in a dark, oceanic environment. The manta rays are densely packed together, creating a sense of movement and fluidity as they glide through the water. Their wings are spread wide, showcasing their impressive size and the intricate patterns on their undersides. The lighting in the scene is dim, with a blueish tint that enhances the ethereal quality of the underwater environment. The manta rays' movements are graceful and synchronized, contributing to the overall dynamic and serene atmosphere of the video.",
+    "bleu4_vs_baseline": 0.2333,
+    "rouge_l_vs_baseline": 0.3716,
+    "cosine_sim_vs_baseline": 0.8355,
+    "encoder_savings_pct": 0.0,
+    "patch_reuse_motion": 8.0,
+    "per_frame_detail": [
+      {
+        "frame_index": 22,
+        "type": "KEYFRAME",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 86.0
+      },
+      {
+        "frame_index": 23,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 46.0
+      },
+      {
+        "frame_index": 24,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 45.0
+      },
+      {
+        "frame_index": 25,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 45.0
+      },
+      {
+        "frame_index": 26,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 46.0
+      },
+      {
+        "frame_index": 27,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 45.0
+      },
+      {
+        "frame_index": 28,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 45.0
+      },
+      {
+        "frame_index": 29,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 44.0
+      },
+      {
+        "frame_index": 32,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 44.0
+      },
+      {
+        "frame_index": 33,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 45.0
+      },
+      {
+        "frame_index": 34,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 45.0
+      }
+    ]
+  },
+  "ambush_5": {
+    "n_frames": 11,
+    "encode_ms": 1026.0,
+    "generation_ms": 527.0,
+    "total_ms": 3443.0,
+    "flow_analysis_ms": 756.0,
+    "n_tokens_generated": 94,
+    "entropy": 5.398,
+    "generated_text": "The video frames depict a scene with a repetitive pattern of a character or figure, which appears to be a humanoid figure with a dark, textured head and a brown, flowing garment. The figure is shown in various poses, suggesting movement or animation. The background is a gradient of light to dark shades, giving a sense of depth and dimension. The overall visual style is somewhat abstract and stylized, with a focus on the repetitive pattern and the character's dynamic poses.",
+    "bleu4_vs_baseline": 0.1221,
+    "rouge_l_vs_baseline": 0.3143,
+    "cosine_sim_vs_baseline": 0.736,
+    "encoder_savings_pct": 10.012285012285012,
+    "patch_reuse_motion": 8.0,
+    "per_frame_detail": [
+      {
+        "frame_index": 30,
+        "type": "KEYFRAME",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 85.0
+      },
+      {
+        "frame_index": 31,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 346,
+        "tokens_cached": 246,
+        "vit_encode_ms": 35.0
+      },
+      {
+        "frame_index": 32,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 338,
+        "tokens_cached": 254,
+        "vit_encode_ms": 32.0
+      },
+      {
+        "frame_index": 35,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 49.0
+      },
+      {
+        "frame_index": 36,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 45.0
+      },
+      {
+        "frame_index": 38,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 45.0
+      },
+      {
+        "frame_index": 40,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 552,
+        "tokens_cached": 40,
+        "vit_encode_ms": 45.0
+      },
+      {
+        "frame_index": 43,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 45.0
+      },
+      {
+        "frame_index": 46,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 480,
+        "tokens_cached": 112,
+        "vit_encode_ms": 44.0
+      },
+      {
+        "frame_index": 47,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 44.0
+      },
+      {
+        "frame_index": 48,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 44.0
+      }
+    ]
+  },
+  "market_5": {
+    "n_frames": 11,
+    "encode_ms": 1044.0,
+    "generation_ms": 837.0,
+    "total_ms": 3781.0,
+    "flow_analysis_ms": 757.0,
+    "n_tokens_generated": 150,
+    "entropy": 6.036,
+    "generated_text": "The scene depicts a chaotic and dynamic environment, likely a room filled with numerous wooden planks or boards. The planks are arranged in a somewhat haphazard manner, creating a sense of disarray. The lighting is dim, contributing to the overall dark and eerie atmosphere.\n\nKey visual elements include:\n1. **Wooden Planks**: The planks are of varying sizes and orientations, some stacked on top of each other, while others are scattered around. The texture of the wood appears rough and weathered.\n2. **Dark Lighting**: The scene is dimly lit, with shadows casting over the planks, enhancing the sense of depth and mystery.\n3. **Motion Patterns**: There is a noticeable motion blur effect, suggesting movement within the",
+    "bleu4_vs_baseline": 0.0937,
+    "rouge_l_vs_baseline": 0.2594,
+    "cosine_sim_vs_baseline": 0.7058,
+    "encoder_savings_pct": 5.2518427518427515,
+    "patch_reuse_motion": 8.0,
+    "per_frame_detail": [
+      {
+        "frame_index": 5,
+        "type": "KEYFRAME",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 86.0
+      },
+      {
+        "frame_index": 6,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 524,
+        "tokens_cached": 68,
+        "vit_encode_ms": 46.0
+      },
+      {
+        "frame_index": 9,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 468,
+        "tokens_cached": 124,
+        "vit_encode_ms": 45.0
+      },
+      {
+        "frame_index": 12,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 542,
+        "tokens_cached": 50,
+        "vit_encode_ms": 45.0
+      },
+      {
+        "frame_index": 14,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 562,
+        "tokens_cached": 30,
+        "vit_encode_ms": 45.0
+      },
+      {
+        "frame_index": 15,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 552,
+        "tokens_cached": 40,
+        "vit_encode_ms": 45.0
+      },
+      {
+        "frame_index": 18,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 572,
+        "tokens_cached": 20,
+        "vit_encode_ms": 45.0
+      },
+      {
+        "frame_index": 19,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 582,
+        "tokens_cached": 10,
+        "vit_encode_ms": 44.0
+      },
+      {
+        "frame_index": 22,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 45.0
+      },
+      {
+        "frame_index": 23,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 44.0
+      },
+      {
+        "frame_index": 24,
+        "type": "CROP_SPLICE",
+        "tokens_encoded": 592,
+        "tokens_cached": 0,
+        "vit_encode_ms": 44.0
+      }
+    ]
+  }
+}

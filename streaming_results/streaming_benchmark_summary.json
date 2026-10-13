@@ -1,0 +1,1852 @@
+{
+  "n_videos": 30,
+  "analyses": [
+    {
+      "variant": "optimized",
+      "video": "alley_1",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.6016260162601627,
+        "bleu_2": 0.3781659197779647,
+        "bleu_4": 0.17254809431608167,
+        "rouge_1": 0.6311475409836066,
+        "rouge_2": 0.2396694214876033,
+        "rouge_l": 0.40163934426229503,
+        "jaccard": 0.3302752293577982,
+        "cosine": 0.8622456887403493
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2454.0,
+          "generation_ms": 2412.0,
+          "total_ms": 7704.0
+        },
+        "optimized": {
+          "selection_ms": 773.0,
+          "encode_ms": 1555.0,
+          "generation_ms": 2434.0,
+          "pruning_overhead_ms": 0.0,
+          "total_ms": 7534.0
+        },
+        "speedup": 1.0225643748340856,
+        "encode_speedup": 1.5781350482315113
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5080,
+        "optimized_tokens_cached": 840,
+        "optimized_encoder_savings_pct": 14.18918918918919,
+        "optimized_encode_speedup": 2.424698829650879
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.225364304828093,
+        "optimized": 4.225439750212255
+      },
+      "generation": {
+        "baseline_tokens": 146,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized+pruning",
+      "video": "alley_1",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.43918469326485515,
+        "bleu_2": 0.29510519408074115,
+        "bleu_4": 0.11953200752676427,
+        "rouge_1": 0.5428571428571429,
+        "rouge_2": 0.24038461538461542,
+        "rouge_l": 0.3714285714285714,
+        "jaccard": 0.29411764705882354,
+        "cosine": 0.8295225505370281
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2454.0,
+          "generation_ms": 2412.0,
+          "total_ms": 7704.0
+        },
+        "optimized": {
+          "selection_ms": 779.0,
+          "encode_ms": 1725.0,
+          "generation_ms": 1664.0,
+          "pruning_overhead_ms": 5.0,
+          "total_ms": 6955.0
+        },
+        "speedup": 1.1076923076923078,
+        "encode_speedup": 1.422608695652174
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5080,
+        "optimized_tokens_cached": 840,
+        "optimized_encoder_savings_pct": 14.18918918918919,
+        "optimized_encode_speedup": 2.503864049911499
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.225364304828093,
+        "optimized": 4.228168596720469
+      },
+      "pruning": {
+        "initial_tokens": 3787,
+        "after_round1": 1936,
+        "after_round2": 1355,
+        "total_reduction_pct": 64.21969897016108,
+        "overhead_ms": 5.0
+      },
+      "prefill_pruning": {
+        "tokens_pruned": 2133,
+        "overhead_ms": 14.0
+      },
+      "generation": {
+        "baseline_tokens": 146,
+        "optimized_tokens": 106
+      }
+    },
+    {
+      "variant": "optimized+prellm",
+      "video": "alley_1",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.609375,
+        "bleu_2": 0.4489160172584412,
+        "bleu_4": 0.28910830783611396,
+        "rouge_1": 0.6506024096385542,
+        "rouge_2": 0.36437246963562747,
+        "rouge_l": 0.4738955823293173,
+        "jaccard": 0.35344827586206895,
+        "cosine": 0.8791640817733165
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2454.0,
+          "generation_ms": 2412.0,
+          "total_ms": 7704.0
+        },
+        "optimized": {
+          "selection_ms": 760.0,
+          "encode_ms": 1741.0,
+          "generation_ms": 2401.0,
+          "pruning_overhead_ms": 0.0,
+          "total_ms": 7660.0
+        },
+        "speedup": 1.0057441253263708,
+        "encode_speedup": 1.4095347501435955
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5080,
+        "optimized_tokens_cached": 840,
+        "optimized_encoder_savings_pct": 14.18918918918919,
+        "optimized_encode_speedup": 2.104391098022461
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.225364304828093,
+        "optimized": 4.217275361128482
+      },
+      "pre_llm_pruning": {
+        "tokens_before": 5328,
+        "tokens_injected": 2664,
+        "tokens_pruned": 2664,
+        "savings_pct": 50.0,
+        "keep_ratio": 0.5
+      },
+      "generation": {
+        "baseline_tokens": 146,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized",
+      "video": "ambush_2",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.49205248305492505,
+        "bleu_2": 0.3299668693389699,
+        "bleu_4": 0.17238039308682185,
+        "rouge_1": 0.5019305019305019,
+        "rouge_2": 0.22568093385214008,
+        "rouge_l": 0.34749034749034746,
+        "jaccard": 0.256,
+        "cosine": 0.8024789809201175
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2460.0,
+          "generation_ms": 2480.0,
+          "total_ms": 7355.0
+        },
+        "optimized": {
+          "selection_ms": 311.0,
+          "encode_ms": 1556.0,
+          "generation_ms": 2434.0,
+          "pruning_overhead_ms": 0.0,
+          "total_ms": 6660.0
+        },
+        "speedup": 1.1043543543543544,
+        "encode_speedup": 1.5809768637532133
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5920,
+        "optimized_tokens_cached": 0,
+        "optimized_encoder_savings_pct": 0.0,
+        "optimized_encode_speedup": 2.4210526943206787
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 21,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.198102274977727,
+        "optimized": 4.205437952686856
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized+pruning",
+      "video": "ambush_2",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.5604567934820686,
+        "bleu_2": 0.38694582967593977,
+        "bleu_4": 0.15522437576425263,
+        "rouge_1": 0.5670498084291188,
+        "rouge_2": 0.2702702702702703,
+        "rouge_l": 0.33716475095785436,
+        "jaccard": 0.2892561983471074,
+        "cosine": 0.8544932592822077
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2460.0,
+          "generation_ms": 2480.0,
+          "total_ms": 7355.0
+        },
+        "optimized": {
+          "selection_ms": 309.0,
+          "encode_ms": 1725.0,
+          "generation_ms": 2371.0,
+          "pruning_overhead_ms": 5.0,
+          "total_ms": 6754.0
+        },
+        "speedup": 1.0889843055966835,
+        "encode_speedup": 1.4260869565217391
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5920,
+        "optimized_tokens_cached": 0,
+        "optimized_encoder_savings_pct": 0.0,
+        "optimized_encode_speedup": 2.5
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 21,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.198102274977727,
+        "optimized": 4.170267211793778
+      },
+      "pruning": {
+        "initial_tokens": 3787,
+        "after_round1": 1900,
+        "after_round2": 1330,
+        "total_reduction_pct": 64.87985212569316,
+        "overhead_ms": 5.0
+      },
+      "prefill_pruning": {
+        "tokens_pruned": 2133,
+        "overhead_ms": 12.0
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized+prellm",
+      "video": "ambush_2",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.42403954008340056,
+        "bleu_2": 0.2479660740802654,
+        "bleu_4": 0.034802075118026854,
+        "rouge_1": 0.43076923076923074,
+        "rouge_2": 0.14728682170542637,
+        "rouge_l": 0.25384615384615383,
+        "jaccard": 0.21238938053097345,
+        "cosine": 0.7343968342537334
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2460.0,
+          "generation_ms": 2480.0,
+          "total_ms": 7355.0
+        },
+        "optimized": {
+          "selection_ms": 313.0,
+          "encode_ms": 1723.0,
+          "generation_ms": 2402.0,
+          "pruning_overhead_ms": 0.0,
+          "total_ms": 6804.0
+        },
+        "speedup": 1.0809817754262199,
+        "encode_speedup": 1.4277423099245503
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5920,
+        "optimized_tokens_cached": 0,
+        "optimized_encoder_savings_pct": 0.0,
+        "optimized_encode_speedup": 1.9696969985961914
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 21,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.198102274977727,
+        "optimized": 4.159387219897045
+      },
+      "pre_llm_pruning": {
+        "tokens_before": 5328,
+        "tokens_injected": 2664,
+        "tokens_pruned": 2664,
+        "savings_pct": 50.0,
+        "keep_ratio": 0.5
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized",
+      "video": "bamboo_1",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.5396825396825397,
+        "bleu_2": 0.2369113423350265,
+        "bleu_4": 0.05764233183702103,
+        "rouge_1": 0.5555555555555556,
+        "rouge_2": 0.11200000000000002,
+        "rouge_l": 0.2777777777777778,
+        "jaccard": 0.2605042016806723,
+        "cosine": 0.8515639399163135
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2457.0,
+          "generation_ms": 2478.0,
+          "total_ms": 7806.0
+        },
+        "optimized": {
+          "selection_ms": 772.0,
+          "encode_ms": 1558.0,
+          "generation_ms": 2434.0,
+          "pruning_overhead_ms": 0.0,
+          "total_ms": 7554.0
+        },
+        "speedup": 1.0333598093725178,
+        "encode_speedup": 1.5770218228498074
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5380,
+        "optimized_tokens_cached": 540,
+        "optimized_encoder_savings_pct": 9.121621621621621,
+        "optimized_encode_speedup": 2.4137930870056152
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.191284333907561,
+        "optimized": 4.229419808375436
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized+pruning",
+      "video": "bamboo_1",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.47692307692307695,
+        "bleu_2": 0.2506996768378592,
+        "bleu_4": 0.06271023990908006,
+        "rouge_1": 0.49218749999999994,
+        "rouge_2": 0.13385826771653545,
+        "rouge_l": 0.25,
+        "jaccard": 0.208,
+        "cosine": 0.8120001285485201
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2457.0,
+          "generation_ms": 2478.0,
+          "total_ms": 7806.0
+        },
+        "optimized": {
+          "selection_ms": 781.0,
+          "encode_ms": 1726.0,
+          "generation_ms": 2376.0,
+          "pruning_overhead_ms": 5.0,
+          "total_ms": 7682.0
+        },
+        "speedup": 1.0161416297839105,
+        "encode_speedup": 1.4235225955967554
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5380,
+        "optimized_tokens_cached": 540,
+        "optimized_encoder_savings_pct": 9.121621621621621,
+        "optimized_encode_speedup": 2.496147871017456
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.191284333907561,
+        "optimized": 4.173102231266007
+      },
+      "pruning": {
+        "initial_tokens": 3787,
+        "after_round1": 2024,
+        "after_round2": 1416,
+        "total_reduction_pct": 62.608925270662795,
+        "overhead_ms": 5.0
+      },
+      "prefill_pruning": {
+        "tokens_pruned": 2133,
+        "overhead_ms": 14.0
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized+prellm",
+      "video": "bamboo_1",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.5116279069767442,
+        "bleu_2": 0.32237310465460844,
+        "bleu_4": 0.15002356627314936,
+        "rouge_1": 0.5176470588235295,
+        "rouge_2": 0.20553359683794467,
+        "rouge_l": 0.2823529411764706,
+        "jaccard": 0.25203252032520324,
+        "cosine": 0.8290454675808724
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2457.0,
+          "generation_ms": 2478.0,
+          "total_ms": 7806.0
+        },
+        "optimized": {
+          "selection_ms": 774.0,
+          "encode_ms": 1727.0,
+          "generation_ms": 2402.0,
+          "pruning_overhead_ms": 0.0,
+          "total_ms": 7702.0
+        },
+        "speedup": 1.013502986237341,
+        "encode_speedup": 1.4226983207874928
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5380,
+        "optimized_tokens_cached": 540,
+        "optimized_encoder_savings_pct": 9.121621621621621,
+        "optimized_encode_speedup": 1.9915965795516968
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.191284333907561,
+        "optimized": 4.219347827695916
+      },
+      "pre_llm_pruning": {
+        "tokens_before": 5328,
+        "tokens_injected": 2664,
+        "tokens_pruned": 2664,
+        "savings_pct": 50.0,
+        "keep_ratio": 0.5
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized",
+      "video": "bandage_1",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.4732824427480916,
+        "bleu_2": 0.2630057971313961,
+        "bleu_4": 0.03348212815177785,
+        "rouge_1": 0.4769230769230769,
+        "rouge_2": 0.14728682170542637,
+        "rouge_l": 0.23076923076923075,
+        "jaccard": 0.2542372881355932,
+        "cosine": 0.7792997701162508
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2456.0,
+          "generation_ms": 2479.0,
+          "total_ms": 7558.0
+        },
+        "optimized": {
+          "selection_ms": 547.0,
+          "encode_ms": 1558.0,
+          "generation_ms": 2436.0,
+          "pruning_overhead_ms": 0.0,
+          "total_ms": 7089.0
+        },
+        "speedup": 1.0661588376357738,
+        "encode_speedup": 1.5763799743260591
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5920,
+        "optimized_tokens_cached": 0,
+        "optimized_encoder_savings_pct": 0.0,
+        "optimized_encode_speedup": 2.4210526943206787
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.1879161464893135,
+        "optimized": 4.186669367279922
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized+pruning",
+      "video": "bandage_1",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.34767240177563286,
+        "bleu_2": 0.19474237212103224,
+        "bleu_4": 0.031177163151739188,
+        "rouge_1": 0.3790322580645162,
+        "rouge_2": 0.11382113821138211,
+        "rouge_l": 0.21774193548387097,
+        "jaccard": 0.1864406779661017,
+        "cosine": 0.630075201509426
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2456.0,
+          "generation_ms": 2479.0,
+          "total_ms": 7558.0
+        },
+        "optimized": {
+          "selection_ms": 546.0,
+          "encode_ms": 1722.0,
+          "generation_ms": 2121.0,
+          "pruning_overhead_ms": 5.0,
+          "total_ms": 6933.0
+        },
+        "speedup": 1.090148564834848,
+        "encode_speedup": 1.4262485481997678
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5920,
+        "optimized_tokens_cached": 0,
+        "optimized_encoder_savings_pct": 0.0,
+        "optimized_encode_speedup": 2.5077881813049316
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.1879161464893135,
+        "optimized": 4.17367257026906
+      },
+      "pruning": {
+        "initial_tokens": 3787,
+        "after_round1": 1920,
+        "after_round2": 1344,
+        "total_reduction_pct": 64.51016635859519,
+        "overhead_ms": 5.0
+      },
+      "prefill_pruning": {
+        "tokens_pruned": 2133,
+        "overhead_ms": 13.0
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 135
+      }
+    },
+    {
+      "variant": "optimized+prellm",
+      "video": "bandage_1",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.4108527131782946,
+        "bleu_2": 0.22661992222063537,
+        "bleu_4": 0.03366049314873516,
+        "rouge_1": 0.4108527131782946,
+        "rouge_2": 0.125,
+        "rouge_l": 0.23255813953488372,
+        "jaccard": 0.26732673267326734,
+        "cosine": 0.6169661719338226
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2456.0,
+          "generation_ms": 2479.0,
+          "total_ms": 7558.0
+        },
+        "optimized": {
+          "selection_ms": 536.0,
+          "encode_ms": 1725.0,
+          "generation_ms": 2403.0,
+          "pruning_overhead_ms": 0.0,
+          "total_ms": 7223.0
+        },
+        "speedup": 1.046379620656237,
+        "encode_speedup": 1.423768115942029
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5920,
+        "optimized_tokens_cached": 0,
+        "optimized_encoder_savings_pct": 0.0,
+        "optimized_encode_speedup": 1.976450800895691
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.1879161464893135,
+        "optimized": 4.162036369017826
+      },
+      "pre_llm_pruning": {
+        "tokens_before": 5328,
+        "tokens_injected": 2664,
+        "tokens_pruned": 2664,
+        "savings_pct": 50.0,
+        "keep_ratio": 0.5
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized",
+      "video": "cave_2",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.488,
+        "bleu_2": 0.25865657889651983,
+        "bleu_4": 0.034007588952831284,
+        "rouge_1": 0.4939271255060729,
+        "rouge_2": 0.13877551020408163,
+        "rouge_l": 0.21052631578947367,
+        "jaccard": 0.26956521739130435,
+        "cosine": 0.7514164146591095
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2461.0,
+          "generation_ms": 2480.0,
+          "total_ms": 7790.0
+        },
+        "optimized": {
+          "selection_ms": 777.0,
+          "encode_ms": 1559.0,
+          "generation_ms": 2433.0,
+          "pruning_overhead_ms": 0.0,
+          "total_ms": 7542.0
+        },
+        "speedup": 1.0328825245293025,
+        "encode_speedup": 1.578576010262989
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5920,
+        "optimized_tokens_cached": 0,
+        "optimized_encoder_savings_pct": 0.0,
+        "optimized_encode_speedup": 2.417417526245117
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.176270520124003,
+        "optimized": 4.180858064853461
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized+pruning",
+      "video": "cave_2",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.5234375,
+        "bleu_2": 0.32735368192654585,
+        "bleu_4": 0.08846044155548385,
+        "rouge_1": 0.5519999999999999,
+        "rouge_2": 0.20967741935483872,
+        "rouge_l": 0.248,
+        "jaccard": 0.26666666666666666,
+        "cosine": 0.8167790320600634
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2461.0,
+          "generation_ms": 2480.0,
+          "total_ms": 7790.0
+        },
+        "optimized": {
+          "selection_ms": 769.0,
+          "encode_ms": 1725.0,
+          "generation_ms": 2372.0,
+          "pruning_overhead_ms": 5.0,
+          "total_ms": 7630.0
+        },
+        "speedup": 1.020969855832241,
+        "encode_speedup": 1.4266666666666667
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5920,
+        "optimized_tokens_cached": 0,
+        "optimized_encoder_savings_pct": 0.0,
+        "optimized_encode_speedup": 2.5116279125213623
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.176270520124003,
+        "optimized": 4.169885917246298
+      },
+      "pruning": {
+        "initial_tokens": 3787,
+        "after_round1": 1900,
+        "after_round2": 1330,
+        "total_reduction_pct": 64.87985212569316,
+        "overhead_ms": 5.0
+      },
+      "prefill_pruning": {
+        "tokens_pruned": 2133,
+        "overhead_ms": 15.0
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized+prellm",
+      "video": "cave_2",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.40476190476190477,
+        "bleu_2": 0.2129162589689508,
+        "bleu_4": 0.03491525476944309,
+        "rouge_1": 0.41935483870967744,
+        "rouge_2": 0.11382113821138214,
+        "rouge_l": 0.25806451612903225,
+        "jaccard": 0.2222222222222222,
+        "cosine": 0.6879588990185199
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2461.0,
+          "generation_ms": 2480.0,
+          "total_ms": 7790.0
+        },
+        "optimized": {
+          "selection_ms": 752.0,
+          "encode_ms": 1724.0,
+          "generation_ms": 2401.0,
+          "pruning_overhead_ms": 0.0,
+          "total_ms": 7653.0
+        },
+        "speedup": 1.0179014765451457,
+        "encode_speedup": 1.427494199535963
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5920,
+        "optimized_tokens_cached": 0,
+        "optimized_encoder_savings_pct": 0.0,
+        "optimized_encode_speedup": 1.9713563919067383
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.176270520124003,
+        "optimized": 4.215779357882766
+      },
+      "pre_llm_pruning": {
+        "tokens_before": 5328,
+        "tokens_injected": 2664,
+        "tokens_pruned": 2664,
+        "savings_pct": 50.0,
+        "keep_ratio": 0.5
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized",
+      "video": "market_5",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.5681818181818182,
+        "bleu_2": 0.4216964516017963,
+        "bleu_4": 0.2698417897853743,
+        "rouge_1": 0.6111111111111112,
+        "rouge_2": 0.336,
+        "rouge_l": 0.4444444444444445,
+        "jaccard": 0.35185185185185186,
+        "cosine": 0.8270684170520082
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2459.0,
+          "generation_ms": 2479.0,
+          "total_ms": 7757.0
+        },
+        "optimized": {
+          "selection_ms": 750.0,
+          "encode_ms": 1558.0,
+          "generation_ms": 2435.0,
+          "pruning_overhead_ms": 0.0,
+          "total_ms": 7494.0
+        },
+        "speedup": 1.0350947424606352,
+        "encode_speedup": 1.5783055198973042
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5920,
+        "optimized_tokens_cached": 0,
+        "optimized_encoder_savings_pct": 0.0,
+        "optimized_encode_speedup": 2.428785562515259
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.2200422586236765,
+        "optimized": 4.219435948377002
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized+pruning",
+      "video": "market_5",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.5227272727272727,
+        "bleu_2": 0.4093799580276227,
+        "bleu_4": 0.27686901422831417,
+        "rouge_1": 0.5555555555555556,
+        "rouge_2": 0.336,
+        "rouge_l": 0.4126984126984127,
+        "jaccard": 0.3333333333333333,
+        "cosine": 0.7915074341184928
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2459.0,
+          "generation_ms": 2479.0,
+          "total_ms": 7757.0
+        },
+        "optimized": {
+          "selection_ms": 750.0,
+          "encode_ms": 1725.0,
+          "generation_ms": 2372.0,
+          "pruning_overhead_ms": 5.0,
+          "total_ms": 7610.0
+        },
+        "speedup": 1.019316688567674,
+        "encode_speedup": 1.4255072463768117
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5920,
+        "optimized_tokens_cached": 0,
+        "optimized_encoder_savings_pct": 0.0,
+        "optimized_encode_speedup": 2.5038881301879883
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.2200422586236765,
+        "optimized": 4.199914556659278
+      },
+      "pruning": {
+        "initial_tokens": 3787,
+        "after_round1": 1900,
+        "after_round2": 1330,
+        "total_reduction_pct": 64.87985212569316,
+        "overhead_ms": 5.0
+      },
+      "prefill_pruning": {
+        "tokens_pruned": 2133,
+        "overhead_ms": 13.0
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized+prellm",
+      "video": "market_5",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.5703125,
+        "bleu_2": 0.3282919288547635,
+        "bleu_4": 0.11658720860696754,
+        "rouge_1": 0.6129032258064516,
+        "rouge_2": 0.1951219512195122,
+        "rouge_l": 0.34677419354838707,
+        "jaccard": 0.30357142857142855,
+        "cosine": 0.850231351391339
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2459.0,
+          "generation_ms": 2479.0,
+          "total_ms": 7757.0
+        },
+        "optimized": {
+          "selection_ms": 760.0,
+          "encode_ms": 1729.0,
+          "generation_ms": 2402.0,
+          "pruning_overhead_ms": 0.0,
+          "total_ms": 7640.0
+        },
+        "speedup": 1.0153141361256544,
+        "encode_speedup": 1.4222093695777906
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5920,
+        "optimized_tokens_cached": 0,
+        "optimized_encoder_savings_pct": 0.0,
+        "optimized_encode_speedup": 2.0
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.2200422586236765,
+        "optimized": 4.244976349823051
+      },
+      "pre_llm_pruning": {
+        "tokens_before": 5328,
+        "tokens_injected": 2664,
+        "tokens_pruned": 2664,
+        "savings_pct": 50.0,
+        "keep_ratio": 0.5
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized",
+      "video": "mountain_1",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.6356589147286822,
+        "bleu_2": 0.5130326689206497,
+        "bleu_4": 0.34636257303944085,
+        "rouge_1": 0.6511627906976745,
+        "rouge_2": 0.421875,
+        "rouge_l": 0.4573643410852713,
+        "jaccard": 0.3482142857142857,
+        "cosine": 0.9206530260642815
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2457.0,
+          "generation_ms": 2479.0,
+          "total_ms": 7759.0
+        },
+        "optimized": {
+          "selection_ms": 743.0,
+          "encode_ms": 1558.0,
+          "generation_ms": 2435.0,
+          "pruning_overhead_ms": 0.0,
+          "total_ms": 7497.0
+        },
+        "speedup": 1.0349473122582367,
+        "encode_speedup": 1.5770218228498074
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5272,
+        "optimized_tokens_cached": 648,
+        "optimized_encoder_savings_pct": 10.945945945945946,
+        "optimized_encode_speedup": 2.428785562515259
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.231943994356902,
+        "optimized": 4.236147621475684
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized+pruning",
+      "video": "mountain_1",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.522868503364541,
+        "bleu_2": 0.3521492460867611,
+        "bleu_4": 0.18738782195351764,
+        "rouge_1": 0.6239316239316239,
+        "rouge_2": 0.2844827586206896,
+        "rouge_l": 0.3931623931623932,
+        "jaccard": 0.33980582524271846,
+        "cosine": 0.903575663390647
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2457.0,
+          "generation_ms": 2479.0,
+          "total_ms": 7759.0
+        },
+        "optimized": {
+          "selection_ms": 752.0,
+          "encode_ms": 1723.0,
+          "generation_ms": 1935.0,
+          "pruning_overhead_ms": 5.0,
+          "total_ms": 7171.0
+        },
+        "speedup": 1.0819969320875749,
+        "encode_speedup": 1.4260011607661056
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5272,
+        "optimized_tokens_cached": 648,
+        "optimized_encoder_savings_pct": 10.945945945945946,
+        "optimized_encode_speedup": 2.5
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.231943994356902,
+        "optimized": 4.225907881620326
+      },
+      "pruning": {
+        "initial_tokens": 3787,
+        "after_round1": 2028,
+        "after_round2": 1419,
+        "total_reduction_pct": 62.52970689199895,
+        "overhead_ms": 5.0
+      },
+      "prefill_pruning": {
+        "tokens_pruned": 2133,
+        "overhead_ms": 14.0
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 123
+      }
+    },
+    {
+      "variant": "optimized+prellm",
+      "video": "mountain_1",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.7045454545454546,
+        "bleu_2": 0.5727746364650362,
+        "bleu_4": 0.4171587549657245,
+        "rouge_1": 0.7279693486590039,
+        "rouge_2": 0.47104247104247104,
+        "rouge_l": 0.5057471264367817,
+        "jaccard": 0.4380952380952381,
+        "cosine": 0.9464463314037878
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2457.0,
+          "generation_ms": 2479.0,
+          "total_ms": 7759.0
+        },
+        "optimized": {
+          "selection_ms": 753.0,
+          "encode_ms": 1725.0,
+          "generation_ms": 2403.0,
+          "pruning_overhead_ms": 0.0,
+          "total_ms": 7648.0
+        },
+        "speedup": 1.0145135983263598,
+        "encode_speedup": 1.4243478260869564
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5272,
+        "optimized_tokens_cached": 648,
+        "optimized_encoder_savings_pct": 10.945945945945946,
+        "optimized_encode_speedup": 1.9561551809310913
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.231943994356902,
+        "optimized": 4.197470360635104
+      },
+      "pre_llm_pruning": {
+        "tokens_before": 5328,
+        "tokens_injected": 2664,
+        "tokens_pruned": 2664,
+        "savings_pct": 50.0,
+        "keep_ratio": 0.5
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized",
+      "video": "shaman_2",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.46825396825396826,
+        "bleu_2": 0.3352326839390103,
+        "bleu_4": 0.16677801582127677,
+        "rouge_1": 0.48,
+        "rouge_2": 0.24193548387096772,
+        "rouge_l": 0.288,
+        "jaccard": 0.2636363636363636,
+        "cosine": 0.7027818700723268
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2456.0,
+          "generation_ms": 2480.0,
+          "total_ms": 7637.0
+        },
+        "optimized": {
+          "selection_ms": 635.0,
+          "encode_ms": 1438.0,
+          "generation_ms": 2435.0,
+          "pruning_overhead_ms": 0.0,
+          "total_ms": 7137.0
+        },
+        "speedup": 1.0700574471066275,
+        "encode_speedup": 1.7079276773296246
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 4408,
+        "optimized_tokens_cached": 1512,
+        "optimized_encoder_savings_pct": 25.54054054054054,
+        "optimized_encode_speedup": 2.8113880157470703
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.2132441834002785,
+        "optimized": 4.220035313804278
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized+pruning",
+      "video": "shaman_2",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.484375,
+        "bleu_2": 0.2830079573740072,
+        "bleu_4": 0.09497497316980609,
+        "rouge_1": 0.5158730158730158,
+        "rouge_2": 0.184,
+        "rouge_l": 0.3174603174603175,
+        "jaccard": 0.2440944881889764,
+        "cosine": 0.7669713162824279
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2456.0,
+          "generation_ms": 2480.0,
+          "total_ms": 7637.0
+        },
+        "optimized": {
+          "selection_ms": 619.0,
+          "encode_ms": 1583.0,
+          "generation_ms": 2373.0,
+          "pruning_overhead_ms": 5.0,
+          "total_ms": 7197.0
+        },
+        "speedup": 1.0611365846880645,
+        "encode_speedup": 1.5514845230574859
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 4408,
+        "optimized_tokens_cached": 1512,
+        "optimized_encoder_savings_pct": 25.54054054054054,
+        "optimized_encode_speedup": 3.1141200065612793
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.2132441834002785,
+        "optimized": 4.228041633479796
+      },
+      "pruning": {
+        "initial_tokens": 3787,
+        "after_round1": 1908,
+        "after_round2": 1335,
+        "total_reduction_pct": 64.74782149458674,
+        "overhead_ms": 5.0
+      },
+      "prefill_pruning": {
+        "tokens_pruned": 2133,
+        "overhead_ms": 14.0
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized+prellm",
+      "video": "shaman_2",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.44485351706856113,
+        "bleu_2": 0.2901586167087924,
+        "bleu_4": 0.13129630292014494,
+        "rouge_1": 0.5248868778280543,
+        "rouge_2": 0.21917808219178084,
+        "rouge_l": 0.30769230769230765,
+        "jaccard": 0.2692307692307692,
+        "cosine": 0.8215352261440328
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2456.0,
+          "generation_ms": 2480.0,
+          "total_ms": 7637.0
+        },
+        "optimized": {
+          "selection_ms": 626.0,
+          "encode_ms": 1418.0,
+          "generation_ms": 1762.0,
+          "pruning_overhead_ms": 0.0,
+          "total_ms": 6438.0
+        },
+        "speedup": 1.186237962100031,
+        "encode_speedup": 1.7320169252468265
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 4408,
+        "optimized_tokens_cached": 1512,
+        "optimized_encoder_savings_pct": 25.54054054054054,
+        "optimized_encode_speedup": 2.626262664794922
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.2132441834002785,
+        "optimized": 4.164879535455338
+      },
+      "pre_llm_pruning": {
+        "tokens_before": 5328,
+        "tokens_injected": 2664,
+        "tokens_pruned": 2664,
+        "savings_pct": 50.0,
+        "keep_ratio": 0.5
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 110
+      }
+    },
+    {
+      "variant": "optimized",
+      "video": "sleeping_1",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.5923076923076923,
+        "bleu_2": 0.41217314619567585,
+        "bleu_4": 0.21109348228121738,
+        "rouge_1": 0.6,
+        "rouge_2": 0.2868217054263566,
+        "rouge_l": 0.3076923076923077,
+        "jaccard": 0.3392857142857143,
+        "cosine": 0.840045634611246
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2458.0,
+          "generation_ms": 2480.0,
+          "total_ms": 7801.0
+        },
+        "optimized": {
+          "selection_ms": 794.0,
+          "encode_ms": 1559.0,
+          "generation_ms": 2434.0,
+          "pruning_overhead_ms": 0.0,
+          "total_ms": 7560.0
+        },
+        "speedup": 1.0318783068783068,
+        "encode_speedup": 1.576651699807569
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5920,
+        "optimized_tokens_cached": 0,
+        "optimized_encoder_savings_pct": 0.0,
+        "optimized_encode_speedup": 2.417417526245117
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.1681942761065205,
+        "optimized": 4.181644036555885
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized+pruning",
+      "video": "sleeping_1",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.6222222222222222,
+        "bleu_2": 0.41449683777327717,
+        "bleu_4": 0.23160133070573935,
+        "rouge_1": 0.6641509433962265,
+        "rouge_2": 0.2889733840304183,
+        "rouge_l": 0.3622641509433962,
+        "jaccard": 0.3888888888888889,
+        "cosine": 0.8613591744961916
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2458.0,
+          "generation_ms": 2480.0,
+          "total_ms": 7801.0
+        },
+        "optimized": {
+          "selection_ms": 791.0,
+          "encode_ms": 1724.0,
+          "generation_ms": 2375.0,
+          "pruning_overhead_ms": 6.0,
+          "total_ms": 7678.0
+        },
+        "speedup": 1.016019796822089,
+        "encode_speedup": 1.425754060324826
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5920,
+        "optimized_tokens_cached": 0,
+        "optimized_encoder_savings_pct": 0.0,
+        "optimized_encode_speedup": 2.4960997104644775
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.1681942761065205,
+        "optimized": 4.120575717822813
+      },
+      "pruning": {
+        "initial_tokens": 3787,
+        "after_round1": 2024,
+        "after_round2": 1416,
+        "total_reduction_pct": 62.608925270662795,
+        "overhead_ms": 6.0
+      },
+      "prefill_pruning": {
+        "tokens_pruned": 2133,
+        "overhead_ms": 14.0
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized+prellm",
+      "video": "sleeping_1",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.5833333333333334,
+        "bleu_2": 0.3947814804455738,
+        "bleu_4": 0.159705410720964,
+        "rouge_1": 0.5954198473282443,
+        "rouge_2": 0.2769230769230769,
+        "rouge_l": 0.3206106870229008,
+        "jaccard": 0.34579439252336447,
+        "cosine": 0.8175174129572278
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2458.0,
+          "generation_ms": 2480.0,
+          "total_ms": 7801.0
+        },
+        "optimized": {
+          "selection_ms": 790.0,
+          "encode_ms": 1725.0,
+          "generation_ms": 2401.0,
+          "pruning_overhead_ms": 0.0,
+          "total_ms": 7731.0
+        },
+        "speedup": 1.009054456085888,
+        "encode_speedup": 1.424927536231884
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5920,
+        "optimized_tokens_cached": 0,
+        "optimized_encoder_savings_pct": 0.0,
+        "optimized_encode_speedup": 1.9814502000808716
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.1681942761065205,
+        "optimized": 4.09470018461951
+      },
+      "pre_llm_pruning": {
+        "tokens_before": 5328,
+        "tokens_injected": 2664,
+        "tokens_pruned": 2664,
+        "savings_pct": 50.0,
+        "keep_ratio": 0.5
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized",
+      "video": "temple_2",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.5065637622569548,
+        "bleu_2": 0.3228768341750396,
+        "bleu_4": 0.11047791105924552,
+        "rouge_1": 0.53125,
+        "rouge_2": 0.2125984251968504,
+        "rouge_l": 0.25,
+        "jaccard": 0.33043478260869563,
+        "cosine": 0.7572642998849579
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2457.0,
+          "generation_ms": 2479.0,
+          "total_ms": 7742.0
+        },
+        "optimized": {
+          "selection_ms": 762.0,
+          "encode_ms": 1558.0,
+          "generation_ms": 2434.0,
+          "pruning_overhead_ms": 0.0,
+          "total_ms": 7511.0
+        },
+        "speedup": 1.0307548928238583,
+        "encode_speedup": 1.5770218228498074
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5920,
+        "optimized_tokens_cached": 0,
+        "optimized_encoder_savings_pct": 0.0,
+        "optimized_encode_speedup": 2.4283559322357178
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.196143463188622,
+        "optimized": 4.222253534330543
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized+pruning",
+      "video": "temple_2",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.4236015328788975,
+        "bleu_2": 0.2273357123528734,
+        "bleu_4": 0.05924099567595852,
+        "rouge_1": 0.45136186770428016,
+        "rouge_2": 0.12549019607843137,
+        "rouge_l": 0.24124513618677046,
+        "jaccard": 0.2,
+        "cosine": 0.7670804206283729
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2457.0,
+          "generation_ms": 2479.0,
+          "total_ms": 7742.0
+        },
+        "optimized": {
+          "selection_ms": 759.0,
+          "encode_ms": 1726.0,
+          "generation_ms": 2374.0,
+          "pruning_overhead_ms": 5.0,
+          "total_ms": 7616.0
+        },
+        "speedup": 1.0165441176470589,
+        "encode_speedup": 1.4235225955967554
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5920,
+        "optimized_tokens_cached": 0,
+        "optimized_encoder_savings_pct": 0.0,
+        "optimized_encode_speedup": 2.496124029159546
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.196143463188622,
+        "optimized": 4.226076096654999
+      },
+      "pruning": {
+        "initial_tokens": 3787,
+        "after_round1": 1960,
+        "after_round2": 1372,
+        "total_reduction_pct": 63.77079482439927,
+        "overhead_ms": 5.0
+      },
+      "prefill_pruning": {
+        "tokens_pruned": 2133,
+        "overhead_ms": 14.0
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    },
+    {
+      "variant": "optimized+prellm",
+      "video": "temple_2",
+      "warnings": [],
+      "quality": {
+        "bleu_1": 0.6515151515151515,
+        "bleu_2": 0.4404117687160446,
+        "bleu_4": 0.22459591988843391,
+        "rouge_1": 0.6666666666666666,
+        "rouge_2": 0.3053435114503817,
+        "rouge_l": 0.4242424242424243,
+        "jaccard": 0.4215686274509804,
+        "cosine": 0.8924581005586593
+      },
+      "latency": {
+        "baseline": {
+          "selection_ms": 0.0,
+          "encode_ms": 2457.0,
+          "generation_ms": 2479.0,
+          "total_ms": 7742.0
+        },
+        "optimized": {
+          "selection_ms": 747.0,
+          "encode_ms": 1728.0,
+          "generation_ms": 2402.0,
+          "pruning_overhead_ms": 0.0,
+          "total_ms": 7659.0
+        },
+        "speedup": 1.0108369238804022,
+        "encode_speedup": 1.421875
+      },
+      "encoder": {
+        "baseline_tokens_encoded": 9472,
+        "baseline_tokens_cached": 0,
+        "optimized_tokens_encoded": 5920,
+        "optimized_tokens_cached": 0,
+        "optimized_encoder_savings_pct": 0.0,
+        "optimized_encode_speedup": 1.9983206987380981
+      },
+      "selection": {
+        "baseline_frames": 16,
+        "optimized_frames": 10,
+        "total_frames": 50,
+        "baseline_method": "uniform",
+        "optimized_method": "cumulative_motion"
+      },
+      "entropy": {
+        "baseline": 4.196143463188622,
+        "optimized": 4.184998532638729
+      },
+      "pre_llm_pruning": {
+        "tokens_before": 5328,
+        "tokens_injected": 2664,
+        "tokens_pruned": 2664,
+        "savings_pct": 50.0,
+        "keep_ratio": 0.5
+      },
+      "generation": {
+        "baseline_tokens": 150,
+        "optimized_tokens": 150
+      }
+    }
+  ],
+  "aggregate": {
+    "avg_bleu_1": 0.5201431885192082,
+    "avg_bleu_2": 0.3366048188980607,
+    "avg_bleu_4": 0.1491215322073149,
+    "avg_rouge_1": 0.5478026545308928,
+    "avg_rouge_2": 0.23244081568760702,
+    "avg_rouge_l": 0.32575512831971315,
+    "avg_jaccard": 0.29467627492801374,
+    "avg_cosine": 0.8067967366635216,
+    "avg_total_speedup": 1.04604901488386,
+    "avg_encode_speedup": 1.494067855479796,
+    "avg_encoder_savings_pct": 5.97972972972973,
+    "avg_baseline_entropy": 4.200850575600269,
+    "avg_optimized_entropy": 4.196126830342597,
+    "avg_baseline_tokens": 149.6,
+    "avg_optimized_tokens": 145.8
+  }
+}

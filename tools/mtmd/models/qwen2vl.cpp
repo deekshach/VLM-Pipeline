@@ -22,9 +22,22 @@ ggml_cgraph * clip_graph_qwen2vl::build() {
     GGML_ASSERT(img.nx % (patch_size * 2) == 0);
     GGML_ASSERT(img.ny % (patch_size * 2) == 0);
 
+    // Second temporal slice of the patch embedding.
+    //
+    // The original model's patch_embed is one Conv3d with temporal kernel 2;
+    // convert_hf_to_gguf.py splits it into patch_embeddings_0 (t=0) and
+    // patch_embeddings_1 (t=1). Feeding a DISTINCT frame to each slot reproduces
+    // that Conv3d exactly:   out = W0 (*) f0 + W1 (*) f1
+    // clip fills inp_raw_1 with the paired frame when one is supplied, and with a
+    // copy of inp_raw otherwise -- which is what the reference does for a still
+    // image, and keeps single-image behaviour bit-identical.
+    ggml_tensor * inp_raw_1 = ggml_new_tensor_3d(ctx0, GGML_TYPE_F32, img.nx, img.ny, 3);
+    ggml_set_name(inp_raw_1, "inp_raw_1");
+    ggml_set_input(inp_raw_1);
+
     // second conv dimension
     {
-        auto inp_1 = ggml_conv_2d(ctx0, model.patch_embeddings_1, inp_raw, patch_size, patch_size, 0, 0, 1, 1);
+        auto inp_1 = ggml_conv_2d(ctx0, model.patch_embeddings_1, inp_raw_1, patch_size, patch_size, 0, 0, 1, 1);
         inp = ggml_add(ctx0, inp, inp_1);
 
         inp = ggml_permute(ctx0, inp, 1, 2, 0, 3);  // [w, h, c, b] -> [c, w, h, b]

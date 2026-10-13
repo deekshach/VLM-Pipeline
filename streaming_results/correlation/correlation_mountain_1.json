@@ -1,0 +1,772 @@
+{
+  "mode": "streaming_optimized",
+  "video_name": "mountain_1",
+  "n_frames_total": 50,
+  "n_frames_selected": 10,
+  "global_complexity": 0.12676824629306793,
+  "streaming": {
+    "fps": 4.0,
+    "video_duration_s": 12.25,
+    "online_selection": {
+      "method": "cumulative_motion",
+      "cumulative_threshold": 15.0,
+      "max_selected_frames": 10,
+      "decisions": [
+        {
+          "frame_index": 1,
+          "arrival_time_s": 0.0,
+          "p95_magnitude": 0.0,
+          "cumulative_motion": 0.0,
+          "selected": true,
+          "selection_latency_ms": 0.0
+        },
+        {
+          "frame_index": 2,
+          "arrival_time_s": 0.25,
+          "p95_magnitude": 14.811638832092285,
+          "cumulative_motion": 14.811638832092285,
+          "selected": false,
+          "selection_latency_ms": 23.0
+        },
+        {
+          "frame_index": 3,
+          "arrival_time_s": 0.5,
+          "p95_magnitude": 15.395197868347168,
+          "cumulative_motion": 30.206836700439453,
+          "selected": true,
+          "selection_latency_ms": 18.0
+        },
+        {
+          "frame_index": 4,
+          "arrival_time_s": 0.75,
+          "p95_magnitude": 15.9519624710083,
+          "cumulative_motion": 15.9519624710083,
+          "selected": true,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 5,
+          "arrival_time_s": 1.0,
+          "p95_magnitude": 16.541133880615234,
+          "cumulative_motion": 16.541133880615234,
+          "selected": true,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 6,
+          "arrival_time_s": 1.25,
+          "p95_magnitude": 17.085466384887695,
+          "cumulative_motion": 17.085466384887695,
+          "selected": true,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 7,
+          "arrival_time_s": 1.5,
+          "p95_magnitude": 17.601831436157227,
+          "cumulative_motion": 17.601831436157227,
+          "selected": true,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 8,
+          "arrival_time_s": 1.75,
+          "p95_magnitude": 18.083599090576172,
+          "cumulative_motion": 18.083599090576172,
+          "selected": true,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 9,
+          "arrival_time_s": 2.0,
+          "p95_magnitude": 18.587871551513672,
+          "cumulative_motion": 18.587871551513672,
+          "selected": true,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 10,
+          "arrival_time_s": 2.25,
+          "p95_magnitude": 19.110517501831055,
+          "cumulative_motion": 19.110517501831055,
+          "selected": true,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 11,
+          "arrival_time_s": 2.5,
+          "p95_magnitude": 19.48279571533203,
+          "cumulative_motion": 19.48279571533203,
+          "selected": true,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 12,
+          "arrival_time_s": 2.75,
+          "p95_magnitude": 19.851001739501953,
+          "cumulative_motion": 19.851001739501953,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 13,
+          "arrival_time_s": 3.0,
+          "p95_magnitude": 20.227357864379883,
+          "cumulative_motion": 40.07836151123047,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 14,
+          "arrival_time_s": 3.25,
+          "p95_magnitude": 20.658199310302734,
+          "cumulative_motion": 60.7365608215332,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 15,
+          "arrival_time_s": 3.5,
+          "p95_magnitude": 21.311832427978516,
+          "cumulative_motion": 82.04839324951172,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 16,
+          "arrival_time_s": 3.75,
+          "p95_magnitude": 21.961082458496094,
+          "cumulative_motion": 104.00947570800781,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 17,
+          "arrival_time_s": 4.0,
+          "p95_magnitude": 22.64008331298828,
+          "cumulative_motion": 126.6495590209961,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 18,
+          "arrival_time_s": 4.25,
+          "p95_magnitude": 23.49806022644043,
+          "cumulative_motion": 150.14761352539063,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 19,
+          "arrival_time_s": 4.5,
+          "p95_magnitude": 24.493059158325195,
+          "cumulative_motion": 174.6406707763672,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 20,
+          "arrival_time_s": 4.75,
+          "p95_magnitude": 25.868078231811523,
+          "cumulative_motion": 200.5087432861328,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 21,
+          "arrival_time_s": 5.0,
+          "p95_magnitude": 27.506383895874023,
+          "cumulative_motion": 228.01512145996094,
+          "selected": false,
+          "selection_latency_ms": 14.0
+        },
+        {
+          "frame_index": 22,
+          "arrival_time_s": 5.25,
+          "p95_magnitude": 29.314599990844727,
+          "cumulative_motion": 257.3297119140625,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 23,
+          "arrival_time_s": 5.5,
+          "p95_magnitude": 31.5313777923584,
+          "cumulative_motion": 288.861083984375,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 24,
+          "arrival_time_s": 5.75,
+          "p95_magnitude": 33.09458541870117,
+          "cumulative_motion": 321.9556579589844,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 25,
+          "arrival_time_s": 6.0,
+          "p95_magnitude": 32.383018493652344,
+          "cumulative_motion": 354.33868408203125,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 26,
+          "arrival_time_s": 6.25,
+          "p95_magnitude": 30.300508499145508,
+          "cumulative_motion": 384.6391906738281,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 27,
+          "arrival_time_s": 6.5,
+          "p95_magnitude": 23.939252853393555,
+          "cumulative_motion": 408.57843017578125,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 28,
+          "arrival_time_s": 6.75,
+          "p95_magnitude": 10.69334888458252,
+          "cumulative_motion": 419.27178955078125,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 29,
+          "arrival_time_s": 7.0,
+          "p95_magnitude": 10.438095092773438,
+          "cumulative_motion": 429.70989990234375,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 30,
+          "arrival_time_s": 7.25,
+          "p95_magnitude": 10.416996955871582,
+          "cumulative_motion": 440.12689208984375,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 31,
+          "arrival_time_s": 7.5,
+          "p95_magnitude": 10.434468269348145,
+          "cumulative_motion": 450.5613708496094,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 32,
+          "arrival_time_s": 7.75,
+          "p95_magnitude": 10.504979133605957,
+          "cumulative_motion": 461.06634521484375,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 33,
+          "arrival_time_s": 8.0,
+          "p95_magnitude": 10.64265251159668,
+          "cumulative_motion": 471.708984375,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 34,
+          "arrival_time_s": 8.25,
+          "p95_magnitude": 10.802303314208984,
+          "cumulative_motion": 482.51129150390625,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 35,
+          "arrival_time_s": 8.5,
+          "p95_magnitude": 10.958683013916016,
+          "cumulative_motion": 493.469970703125,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 36,
+          "arrival_time_s": 8.75,
+          "p95_magnitude": 11.125786781311035,
+          "cumulative_motion": 504.59576416015625,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 37,
+          "arrival_time_s": 9.0,
+          "p95_magnitude": 11.290528297424316,
+          "cumulative_motion": 515.8862915039063,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 38,
+          "arrival_time_s": 9.25,
+          "p95_magnitude": 11.478480339050293,
+          "cumulative_motion": 527.36474609375,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 39,
+          "arrival_time_s": 9.5,
+          "p95_magnitude": 11.669169425964355,
+          "cumulative_motion": 539.033935546875,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 40,
+          "arrival_time_s": 9.75,
+          "p95_magnitude": 11.862756729125977,
+          "cumulative_motion": 550.8966674804688,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 41,
+          "arrival_time_s": 10.0,
+          "p95_magnitude": 12.042737007141113,
+          "cumulative_motion": 562.9393920898438,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 42,
+          "arrival_time_s": 10.25,
+          "p95_magnitude": 12.217398643493652,
+          "cumulative_motion": 575.1567993164063,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 43,
+          "arrival_time_s": 10.5,
+          "p95_magnitude": 12.353546142578125,
+          "cumulative_motion": 587.5103759765625,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 44,
+          "arrival_time_s": 10.75,
+          "p95_magnitude": 12.469286918640137,
+          "cumulative_motion": 599.9796752929688,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 45,
+          "arrival_time_s": 11.0,
+          "p95_magnitude": 12.576107025146484,
+          "cumulative_motion": 612.5557861328125,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 46,
+          "arrival_time_s": 11.25,
+          "p95_magnitude": 12.659882545471191,
+          "cumulative_motion": 625.2156982421875,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 47,
+          "arrival_time_s": 11.5,
+          "p95_magnitude": 12.80361270904541,
+          "cumulative_motion": 638.019287109375,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 48,
+          "arrival_time_s": 11.75,
+          "p95_magnitude": 12.959820747375488,
+          "cumulative_motion": 650.9791259765625,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 49,
+          "arrival_time_s": 12.0,
+          "p95_magnitude": 13.114875793457031,
+          "cumulative_motion": 664.093994140625,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 50,
+          "arrival_time_s": 12.25,
+          "p95_magnitude": 13.284725189208984,
+          "cumulative_motion": 677.3787231445313,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        }
+      ]
+    }
+  },
+  "selected_frames": [
+    {
+      "index": 1,
+      "weight": 0.0
+    },
+    {
+      "index": 3,
+      "weight": 15.395197868347168
+    },
+    {
+      "index": 4,
+      "weight": 15.9519624710083
+    },
+    {
+      "index": 5,
+      "weight": 16.541133880615234
+    },
+    {
+      "index": 6,
+      "weight": 17.085466384887695
+    },
+    {
+      "index": 7,
+      "weight": 17.601831436157227
+    },
+    {
+      "index": 8,
+      "weight": 18.083599090576172
+    },
+    {
+      "index": 9,
+      "weight": 18.587871551513672
+    },
+    {
+      "index": 10,
+      "weight": 19.110517501831055
+    },
+    {
+      "index": 11,
+      "weight": 19.48279571533203
+    }
+  ],
+  "inference": {
+    "generated_text": "The scene depicts a breathtaking view of a snow-covered mountain range. The mountains are rugged and jagged, with steep cliffs and rocky outcrops. The snow blankets the peaks and slopes, creating a stark contrast against the dark rocks. The sky is overcast, with a grayish-blue hue that adds to the dramatic atmosphere. The camera pans slowly across the landscape, capturing the grandeur of the mountains and the vastness of the sky. The overall mood of the scene is one of awe and tranquility, as the viewer is transported to a remote and pristine wilderness.",
+    "n_tokens": 116,
+    "encode_time_ms": 2702.0,
+    "generation_time_ms": 1906.0
+  },
+  "metrics": {
+    "motion_coverage": 0.2083546049709625,
+    "shannon_entropy": 4.218955933041427,
+    "temporal_reduction": 0.8,
+    "total_tokens_encoded": 5272,
+    "total_tokens_cached": 648,
+    "encoder_savings_pct": 10.945945945945946,
+    "total_encode_time_ms": 1179.0,
+    "estimated_full_encode_time_ms": 2380.0,
+    "encode_speedup": 2.018659830093384
+  },
+  "per_frame_cache": [
+    {
+      "frame_index": 1,
+      "is_keyframe": true,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 238.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 3,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 520,
+      "n_tokens_cached": 72,
+      "encode_time_ms": 108.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 4,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 520,
+      "n_tokens_cached": 72,
+      "encode_time_ms": 105.0,
+      "splice_time_ms": 1.0
+    },
+    {
+      "frame_index": 5,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 520,
+      "n_tokens_cached": 72,
+      "encode_time_ms": 104.0,
+      "splice_time_ms": 1.0
+    },
+    {
+      "frame_index": 6,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 520,
+      "n_tokens_cached": 72,
+      "encode_time_ms": 103.0,
+      "splice_time_ms": 1.0
+    },
+    {
+      "frame_index": 7,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 520,
+      "n_tokens_cached": 72,
+      "encode_time_ms": 105.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 8,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 520,
+      "n_tokens_cached": 72,
+      "encode_time_ms": 105.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 9,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 520,
+      "n_tokens_cached": 72,
+      "encode_time_ms": 104.0,
+      "splice_time_ms": 1.0
+    },
+    {
+      "frame_index": 10,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 520,
+      "n_tokens_cached": 72,
+      "encode_time_ms": 103.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 11,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 520,
+      "n_tokens_cached": 72,
+      "encode_time_ms": 104.0,
+      "splice_time_ms": 1.0
+    }
+  ],
+  "pruning": {
+    "enabled": false
+  },
+  "prefill_pruning": {
+    "enabled": false
+  },
+  "pre_llm_pruning": {
+    "enabled": false
+  },
+  "attention_correlation": {
+    "n_tokens_analyzed": 5920,
+    "pearson_r": 0.02664431743323803,
+    "spearman_rho": 0.10674785822629929,
+    "avg_attn_kept": 6.147835392766865e-06,
+    "avg_attn_pruned": 8.76099420565879e-06,
+    "attn_ratio": 0.7017280459403992,
+    "n_kept": 2960,
+    "n_pruned": 2960,
+    "strategy": "combined",
+    "keep_ratio": 0.5,
+    "per_frame": [
+      {
+        "frame_pos": 4,
+        "n_tokens": 592,
+        "pearson_r": -0.052342385053634644,
+        "avg_attn_kept": 1.1838034879474435e-05,
+        "avg_attn_pruned": 2.590263102320023e-05,
+        "attn_ratio": 0.4570205509662628,
+        "prefill_attn_retained_pct": 31.58382225036621
+      },
+      {
+        "frame_pos": 43,
+        "n_tokens": 592,
+        "pearson_r": -0.04569139704108238,
+        "avg_attn_kept": 6.816163477196824e-06,
+        "avg_attn_pruned": 1.5999106835806742e-05,
+        "attn_ratio": 0.42603400349617004,
+        "prefill_attn_retained_pct": 29.048648834228516
+      },
+      {
+        "frame_pos": 82,
+        "n_tokens": 592,
+        "pearson_r": -0.03710920736193657,
+        "avg_attn_kept": 5.0220623961649835e-06,
+        "avg_attn_pruned": 6.734956059517572e-06,
+        "attn_ratio": 0.7456711530685425,
+        "prefill_attn_retained_pct": 42.81298065185547
+      },
+      {
+        "frame_pos": 121,
+        "n_tokens": 592,
+        "pearson_r": -0.020546521991491318,
+        "avg_attn_kept": 4.493050710152602e-06,
+        "avg_attn_pruned": 5.067641723144334e-06,
+        "attn_ratio": 0.8866156935691833,
+        "prefill_attn_retained_pct": 47.6383171081543
+      },
+      {
+        "frame_pos": 160,
+        "n_tokens": 592,
+        "pearson_r": -0.010715404525399208,
+        "avg_attn_kept": 4.786968929693103e-06,
+        "avg_attn_pruned": 5.431290901469765e-06,
+        "attn_ratio": 0.8813685178756714,
+        "prefill_attn_retained_pct": 48.419857025146484
+      },
+      {
+        "frame_pos": 199,
+        "n_tokens": 592,
+        "pearson_r": -0.008768737316131592,
+        "avg_attn_kept": 4.72844567411812e-06,
+        "avg_attn_pruned": 5.1636507123475894e-06,
+        "attn_ratio": 0.9157175421714783,
+        "prefill_attn_retained_pct": 50.41753005981445
+      },
+      {
+        "frame_pos": 238,
+        "n_tokens": 592,
+        "pearson_r": -0.009630873799324036,
+        "avg_attn_kept": 5.430711553344736e-06,
+        "avg_attn_pruned": 5.66815106139984e-06,
+        "attn_ratio": 0.9581098556518555,
+        "prefill_attn_retained_pct": 53.30535888671875
+      },
+      {
+        "frame_pos": 277,
+        "n_tokens": 592,
+        "pearson_r": 0.002173240063712001,
+        "avg_attn_kept": 5.471104941534577e-06,
+        "avg_attn_pruned": 5.113790393806994e-06,
+        "attn_ratio": 1.0698727369308472,
+        "prefill_attn_retained_pct": 54.706939697265625
+      },
+      {
+        "frame_pos": 316,
+        "n_tokens": 592,
+        "pearson_r": 0.02317352034151554,
+        "avg_attn_kept": 6.4682790252845734e-06,
+        "avg_attn_pruned": 5.057052476331592e-06,
+        "attn_ratio": 1.2790610790252686,
+        "prefill_attn_retained_pct": 59.49580383300781
+      },
+      {
+        "frame_pos": 355,
+        "n_tokens": 592,
+        "pearson_r": -0.005590903572738171,
+        "avg_attn_kept": 6.423537797672907e-06,
+        "avg_attn_pruned": 7.471764092770172e-06,
+        "attn_ratio": 0.859708309173584,
+        "prefill_attn_retained_pct": 50.12784957885742
+      }
+    ],
+    "prefill": {
+      "attn_retained_pct": 43.92323303222656,
+      "attn_total": 7.167186737060547,
+      "attn_on_kept": 3.1480600833892822,
+      "n_visual_tokens": 5920,
+      "keep_ratio": 0.5,
+      "per_frame": [
+        {
+          "frame_pos": 4,
+          "n_tokens": 592,
+          "prefill_attn_retained_pct": 31.58382225036621
+        },
+        {
+          "frame_pos": 43,
+          "n_tokens": 592,
+          "prefill_attn_retained_pct": 29.048648834228516
+        },
+        {
+          "frame_pos": 82,
+          "n_tokens": 592,
+          "prefill_attn_retained_pct": 42.81298065185547
+        },
+        {
+          "frame_pos": 121,
+          "n_tokens": 592,
+          "prefill_attn_retained_pct": 47.6383171081543
+        },
+        {
+          "frame_pos": 160,
+          "n_tokens": 592,
+          "prefill_attn_retained_pct": 48.419857025146484
+        },
+        {
+          "frame_pos": 199,
+          "n_tokens": 592,
+          "prefill_attn_retained_pct": 50.41753005981445
+        },
+        {
+          "frame_pos": 238,
+          "n_tokens": 592,
+          "prefill_attn_retained_pct": 53.30535888671875
+        },
+        {
+          "frame_pos": 277,
+          "n_tokens": 592,
+          "prefill_attn_retained_pct": 54.706939697265625
+        },
+        {
+          "frame_pos": 316,
+          "n_tokens": 592,
+          "prefill_attn_retained_pct": 59.49580383300781
+        },
+        {
+          "frame_pos": 355,
+          "n_tokens": 592,
+          "prefill_attn_retained_pct": 50.12784957885742
+        }
+      ]
+    }
+  },
+  "timing": {
+    "selection_ms": 772.0,
+    "encode_ms": 2702.0,
+    "generation_ms": 1906.0,
+    "pruning_overhead_ms": 0.0,
+    "prefill_pruning_overhead_ms": 0.0,
+    "total_ms": 8128.0
+  },
+  "params": {
+    "sintel_dir": "/data/Fall25/multimodalRAG/VLM/Qwen2.5-VL/MPI-Sintel",
+    "video_name": "mountain_1",
+    "fps": 4.0,
+    "cumulative_threshold": 15.0,
+    "max_selected_frames": 10,
+    "patch_grid": 4,
+    "spatial_threshold": 0.05000000074505806,
+    "patch_reuse_motion": 0.0,
+    "enable_pruning": false,
+    "enable_prefill_pruning": false,
+    "enable_pre_llm_pruning": false
+  }
+}

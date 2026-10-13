@@ -1,0 +1,87 @@
+{
+  "mode": "baseline",
+  "video_name": "alley_1",
+  "n_flow_files": 0,
+  "n_frames_total": 50,
+  "global_complexity": 0.0,
+  "n_frames_selected": 8,
+  "selected_frames": [
+    {
+      "index": 1,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 8,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 15,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 22,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 29,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 36,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 43,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 50,
+      "weight": 1.0,
+      "complexity": 0.0
+    }
+  ],
+  "motion_profile": [],
+  "spatial_analysis": [],
+  "inference": {
+    "generated_text": "a woman with short, reddish-brown hair, wearing a gray tank top and a black scarf around her neck. She is holding a red apple in her right hand. The setting appears to be an outdoor area with a rustic, medieval-style building in the background. The building has a stone wall and a wooden door. There is a wooden barrel and a metal bucket on the left side of the image. The woman is looking to her right, and her gaze is directed towards the building. The lighting in the scene is natural, suggesting it might be daytime. The woman's expression is neutral, and she appears to be in a contempl",
+    "n_tokens": 128,
+    "encode_time_ms": 8146.0,
+    "generation_time_ms": 15746.0
+  },
+  "metrics": {
+    "motion_coverage": 0.0,
+    "shannon_entropy": 4.195349668833219,
+    "temporal_reduction": 0.84,
+    "avg_spatial_savings": 0.0
+  },
+  "timing": {
+    "flow_analysis_ms": 0.0,
+    "frame_selection_ms": 0.0,
+    "encode_ms": 8146.0,
+    "generation_ms": 15746.0,
+    "total_ms": 37067.0
+  },
+  "params": {
+    "flow_analysis_skipped": true,
+    "perf_region": 0,
+    "warmup_iters": 1,
+    "fps": 0.0,
+    "source_fps": 24.0,
+    "sintel_dir": "/data/spring26/CPP/modelsRepo/MPI_bkp/MPI-Sintel",
+    "video_name": "alley_1",
+    "min_frames": 3,
+    "max_frames": 24,
+    "base_frames": 8,
+    "motion_threshold": 2.0,
+    "motion_percentile": 0.949999988079071,
+    "patch_grid": 4,
+    "spatial_threshold": 0.05000000074505806
+  }
+}

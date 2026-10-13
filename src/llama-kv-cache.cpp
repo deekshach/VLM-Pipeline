@@ -289,6 +289,171 @@ bool llama_kv_cache::seq_rm(llama_seq_id seq_id, llama_pos p0, llama_pos p1) {
     return true;
 }
 
+bool llama_kv_cache::seq_rm_pos_ext(llama_seq_id seq_id, llama_pos pos, llama_pos ext_x, llama_pos ext_y) {
+    GGML_ASSERT(seq_id >= 0 && (size_t) seq_id < seq_to_stream.size());
+
+    auto & cells = v_cells[seq_to_stream[seq_id]];
+    auto & head  = v_heads[seq_to_stream[seq_id]];
+
+    for (uint32_t i = 0; i < cells.size(); ++i) {
+        if (cells.is_empty(i)) {
+            continue;
+        }
+
+        if (cells.pos_get(i) != pos) {
+            continue;
+        }
+
+        // Check 2D spatial coordinates
+        const auto & cell_ext = cells.ext_get(i);
+        if (cell_ext.x != ext_x || cell_ext.y != ext_y) {
+            continue;
+        }
+
+        if (cells.seq_has(i, seq_id) && cells.seq_rm(i, seq_id)) {
+            if (i < head) {
+                head = i;
+            }
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void llama_kv_cache::defragment(llama_context * lctx) {
+    // For each stream, compact occupied cells to the front, copying K/V tensor data.
+    // This makes n_kv (based on used_max_p1) reflect the actual used count,
+    // so the attention kernel processes fewer positions.
+    //
+    // If lctx is provided, uses GPU-native defrag via ggml compute graph (fast, <5ms).
+    // Otherwise falls back to bulk GPU<->CPU transfers (slow, ~85ms).
+
+    for (uint32_t s = 0; s < v_cells.size(); ++s) {
+        auto & cells = v_cells[s];
+
+        const uint32_t max_used = cells.used_max_p1();
+        const uint32_t n_used   = cells.get_used();
+        if (max_used == 0 || max_used == n_used) {
+            // already compact (no gaps)
+            continue;
+        }
+
+        // Build a permutation: perm[new_idx] = old_idx for each occupied cell
+        std::vector<uint32_t> perm_u32;
+        perm_u32.reserve(n_used);
+        for (uint32_t i = 0; i < max_used; ++i) {
+            if (!cells.is_empty(i)) {
+                perm_u32.push_back(i);
+            }
+        }
+        GGML_ASSERT(perm_u32.size() == n_used);
+
+        // Check if already compact (first n_used cells are the occupied ones)
+        bool needs_move = false;
+        for (uint32_t i = 0; i < n_used; ++i) {
+            if (perm_u32[i] != i) {
+                needs_move = true;
+                break;
+            }
+        }
+        if (!needs_move) {
+            continue;
+        }
+
+        if (lctx) {
+            // GPU path: build and execute defrag graph
+            // Convert permutation to int32_t for ggml tensor
+            std::vector<int32_t> perm_i32(perm_u32.begin(), perm_u32.end());
+
+            auto * sched = lctx->get_sched();
+            ggml_backend_sched_reset(sched);
+
+            auto * res = lctx->get_gf_res_reserve();
+            res->reset();
+
+            auto * gf = build_graph_defrag(res, lctx, perm_i32, n_used, s);
+            if (!ggml_backend_sched_alloc_graph(sched, gf)) {
+                LLAMA_LOG_ERROR("%s: failed to allocate compute graph for defrag\n", __func__);
+                continue;
+            }
+
+            res->set_inputs(nullptr);
+
+            if (lctx->graph_compute(gf, false) != GGML_STATUS_SUCCESS) {
+                LLAMA_LOG_ERROR("%s: failed to compute defrag graph\n", __func__);
+                continue;
+            }
+        } else {
+            // CPU fallback: bulk GPU<->CPU transfers
+            for (auto & layer : layers) {
+                auto rearrange_rows = [&](ggml_tensor * t) {
+                    if (!t) return;
+
+                    const size_t row_size  = ggml_row_size(t->type, t->ne[0]);
+                    const size_t read_size = row_size * max_used;
+
+                    std::vector<uint8_t> src_data(read_size);
+                    ggml_backend_tensor_get(t, src_data.data(), 0, read_size);
+
+                    std::vector<uint8_t> dst_data(row_size * n_used);
+                    for (uint32_t i = 0; i < n_used; ++i) {
+                        memcpy(dst_data.data() + i * row_size,
+                               src_data.data() + perm_u32[i] * row_size,
+                               row_size);
+                    }
+
+                    ggml_backend_tensor_set(t, dst_data.data(), 0, row_size * n_used);
+                };
+
+                auto * k = layer.k_stream[s];
+                auto * v = layer.v_stream[s];
+
+                rearrange_rows(k);
+
+                if (v && !v_trans) {
+                    rearrange_rows(v);
+                } else if (v && v_trans) {
+                    const size_t kv_size   = v->ne[1];
+                    const size_t n_embd    = v->ne[0];
+                    const size_t elem_size = ggml_type_size(v->type);
+                    const size_t read_size = n_embd * kv_size * elem_size;
+
+                    std::vector<uint8_t> src_data(read_size);
+                    ggml_backend_tensor_get(v, src_data.data(), 0, read_size);
+
+                    for (uint32_t i = 0; i < n_used; ++i) {
+                        if (perm_u32[i] == i) continue;
+                        for (size_t d = 0; d < n_embd; ++d) {
+                            size_t src_off = (d * kv_size + perm_u32[i]) * elem_size;
+                            size_t dst_off = (d * kv_size + i) * elem_size;
+                            memcpy(src_data.data() + dst_off, src_data.data() + src_off, elem_size);
+                        }
+                    }
+
+                    ggml_backend_tensor_set(v, src_data.data(), 0, read_size);
+                }
+            }
+        }
+
+        // Build move list for cell metadata (only cells that actually moved)
+        std::vector<std::pair<uint32_t, uint32_t>> moves;
+        for (uint32_t i = 0; i < n_used; ++i) {
+            if (perm_u32[i] != i) {
+                moves.push_back({perm_u32[i], i});
+            }
+        }
+
+        // Update cell metadata
+        for (auto & [src_idx, dst_idx] : moves) {
+            cells.mv(src_idx, dst_idx);
+        }
+
+        // Reset the search head to 0 since everything is compacted
+        v_heads[s] = cells.get_used();
+    }
+}
+
 void llama_kv_cache::seq_cp(llama_seq_id seq_id_src, llama_seq_id seq_id_dst, llama_pos p0, llama_pos p1) {
     GGML_ASSERT(seq_id_src >= 0 && (size_t) seq_id_src < seq_to_stream.size());
     GGML_ASSERT(seq_id_dst >= 0 && (size_t) seq_id_dst < seq_to_stream.size());
@@ -491,6 +656,73 @@ llama_pos llama_kv_cache::seq_pos_max(llama_seq_id seq_id) const {
     const auto & cells = v_cells[seq_to_stream[seq_id]];
 
     return cells.seq_pos_max(seq_id);
+}
+
+const ggml_tensor * llama_kv_cache::get_k_tensor(int32_t il) const {
+    const int32_t ikv = map_layer_ids.at(il);
+    return layers[ikv].k;
+}
+
+const ggml_tensor * llama_kv_cache::get_v_tensor(int32_t il) const {
+    const int32_t ikv = map_layer_ids.at(il);
+    return layers[ikv].v;
+}
+
+bool llama_kv_cache::get_v_trans() const {
+    return v_trans;
+}
+
+bool llama_kv_cache::reserve_cells(llama_seq_id seq_id, int32_t n_tokens,
+                                   const llama_pos * pos, bool is_pos_2d,
+                                   int32_t * out_cell_indices) {
+    if (n_tokens <= 0) {
+        return true;
+    }
+
+    // Build a synthetic ubatch with the provided positions
+    std::vector<int32_t>        n_seq_id_vec(n_tokens, 1);
+    std::vector<llama_seq_id>   seq_id_storage(1, seq_id);
+    std::vector<llama_seq_id *> seq_ids(n_tokens, seq_id_storage.data());
+    std::vector<int8_t>         output_vec(n_tokens, 0);
+    std::vector<int32_t>        seq_idx_vec(LLAMA_MAX_SEQ, -1);
+    seq_idx_vec[seq_id] = 0;
+
+    llama_ubatch ubatch;
+    ubatch.b_equal_seqs   = 1;
+    ubatch.n_tokens       = (uint32_t)n_tokens;
+    ubatch.n_seq_tokens   = (uint32_t)n_tokens;
+    ubatch.n_seqs         = 1;
+    ubatch.n_seqs_unq     = 1;
+    ubatch.n_pos          = is_pos_2d ? 4u : 1u;
+    ubatch.token           = nullptr;
+    ubatch.embd            = nullptr;
+    ubatch.pos             = const_cast<llama_pos *>(pos);
+    ubatch.n_seq_id        = n_seq_id_vec.data();
+    ubatch.seq_id          = seq_ids.data();
+    ubatch.seq_id_unq      = seq_id_storage.data();
+    ubatch.seq_idx         = seq_idx_vec.data();
+    ubatch.output          = output_vec.data();
+    ubatch.data            = nullptr;
+
+    // Find a slot
+    slot_info sinfo = find_slot(ubatch, false);
+    if (sinfo.empty()) {
+        LLAMA_LOG_ERROR("%s: failed to find slot for %d tokens\n", __func__, n_tokens);
+        return false;
+    }
+
+    // Apply cell metadata
+    apply_ubatch(sinfo, ubatch);
+
+    // Output the allocated cell indices
+    if (out_cell_indices) {
+        GGML_ASSERT(sinfo.idxs.size() >= 1);
+        for (int i = 0; i < n_tokens; i++) {
+            out_cell_indices[i] = (int32_t)sinfo.idxs[0][i];
+        }
+    }
+
+    return true;
 }
 
 std::map<ggml_backend_buffer_type_t, size_t> llama_kv_cache::memory_breakdown() const {
@@ -1642,6 +1874,57 @@ ggml_cgraph * llama_kv_cache::build_graph_shift(llm_graph_result * res, llama_co
 
     res->add_input(std::move(inp));
 
+    return gf;
+}
+
+class llm_graph_input_defrag : public llm_graph_input_i {
+public:
+    llm_graph_input_defrag(const std::vector<int32_t> & perm) : perm(perm) {}
+    virtual ~llm_graph_input_defrag() = default;
+
+    void set_input(const llama_ubatch * ubatch) override {
+        GGML_UNUSED(ubatch);
+        if (indices) {
+            ggml_backend_tensor_set(indices, perm.data(), 0, perm.size() * sizeof(int32_t));
+        }
+    }
+
+    ggml_tensor * indices = nullptr; // I32 [n_kept]
+
+    const std::vector<int32_t> & perm;
+};
+
+ggml_cgraph * llama_kv_cache::build_graph_defrag(
+        llm_graph_result * res, llama_context * lctx,
+        const std::vector<int32_t> & perm, uint32_t n_kept, uint32_t stream) const {
+    GGML_UNUSED(lctx);
+
+    auto * ctx = res->get_ctx();
+    auto * gf  = res->get_gf();
+
+    auto inp = std::make_unique<llm_graph_input_defrag>(perm);
+    inp->indices = ggml_new_tensor_1d(ctx, GGML_TYPE_I32, n_kept);
+    ggml_set_input(inp->indices);
+
+    for (const auto & layer : layers) {
+        auto * k = layer.k_stream[stream];
+        if (k) {
+            ggml_tensor * k_gathered = ggml_get_rows(ctx, k, inp->indices);
+            ggml_tensor * k_dst = ggml_view_2d(ctx, k, k->ne[0], n_kept,
+                                    ggml_row_size(k->type, k->ne[0]), 0);
+            ggml_build_forward_expand(gf, ggml_cpy(ctx, k_gathered, k_dst));
+        }
+
+        auto * v = layer.v_stream[stream];
+        if (v && !v_trans) {
+            ggml_tensor * v_gathered = ggml_get_rows(ctx, v, inp->indices);
+            ggml_tensor * v_dst = ggml_view_2d(ctx, v, v->ne[0], n_kept,
+                                    ggml_row_size(v->type, v->ne[0]), 0);
+            ggml_build_forward_expand(gf, ggml_cpy(ctx, v_gathered, v_dst));
+        }
+    }
+
+    res->add_input(std::move(inp));
     return gf;
 }
 

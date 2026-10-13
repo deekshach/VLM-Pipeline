@@ -41,4 +41,13 @@ struct llama_cparams {
 
     ggml_backend_sched_eval_callback cb_eval;
     void * cb_eval_user_data;
+
+    // Pyramid KV Prefill (Architecture B) — visual token dropping during prefill
+    bool  pyramid_enabled       = false;
+    int   pyramid_clie_layer    = 2;      // scout depth (layers 0..clie_layer-1)
+    float pyramid_pvc_min       = 0.20f;  // minimum retention ratio at deepest layer
+    int   pyramid_visual_start  = 0;      // KV cache cell index of first visual token
+    int   pyramid_n_visual      = 0;      // total visual token count
+    int   pyramid_tokens_per_frame = 0;   // tokens in frame 0 (protected)
+    bool  pyramid_protect_frame0 = true;
 };

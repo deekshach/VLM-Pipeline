@@ -1,0 +1,643 @@
+{
+  "mode": "streaming_optimized",
+  "video_name": "bandage_1",
+  "n_frames_total": 50,
+  "n_frames_selected": 10,
+  "global_complexity": 0.10814311355352402,
+  "streaming": {
+    "fps": 4.0,
+    "video_duration_s": 12.25,
+    "online_selection": {
+      "method": "cumulative_motion",
+      "cumulative_threshold": 15.0,
+      "max_selected_frames": 10,
+      "decisions": [
+        {
+          "frame_index": 1,
+          "arrival_time_s": 0.0,
+          "p95_magnitude": 0.0,
+          "cumulative_motion": 0.0,
+          "selected": true,
+          "selection_latency_ms": 0.0
+        },
+        {
+          "frame_index": 2,
+          "arrival_time_s": 0.25,
+          "p95_magnitude": 12.138568878173828,
+          "cumulative_motion": 12.138568878173828,
+          "selected": false,
+          "selection_latency_ms": 13.0
+        },
+        {
+          "frame_index": 3,
+          "arrival_time_s": 0.5,
+          "p95_magnitude": 20.695789337158203,
+          "cumulative_motion": 32.83435821533203,
+          "selected": true,
+          "selection_latency_ms": 10.0
+        },
+        {
+          "frame_index": 4,
+          "arrival_time_s": 0.75,
+          "p95_magnitude": 30.733156204223633,
+          "cumulative_motion": 30.733156204223633,
+          "selected": true,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 5,
+          "arrival_time_s": 1.0,
+          "p95_magnitude": 16.669471740722656,
+          "cumulative_motion": 16.669471740722656,
+          "selected": true,
+          "selection_latency_ms": 12.0
+        },
+        {
+          "frame_index": 6,
+          "arrival_time_s": 1.25,
+          "p95_magnitude": 11.69632339477539,
+          "cumulative_motion": 11.69632339477539,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 7,
+          "arrival_time_s": 1.5,
+          "p95_magnitude": 9.782235145568848,
+          "cumulative_motion": 21.478557586669922,
+          "selected": true,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 8,
+          "arrival_time_s": 1.75,
+          "p95_magnitude": 10.177504539489746,
+          "cumulative_motion": 10.177504539489746,
+          "selected": false,
+          "selection_latency_ms": 12.0
+        },
+        {
+          "frame_index": 9,
+          "arrival_time_s": 2.0,
+          "p95_magnitude": 10.74205493927002,
+          "cumulative_motion": 20.919559478759766,
+          "selected": true,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 10,
+          "arrival_time_s": 2.25,
+          "p95_magnitude": 11.75158405303955,
+          "cumulative_motion": 11.75158405303955,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 11,
+          "arrival_time_s": 2.5,
+          "p95_magnitude": 12.99803352355957,
+          "cumulative_motion": 24.749618530273438,
+          "selected": true,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 12,
+          "arrival_time_s": 2.75,
+          "p95_magnitude": 14.156448364257813,
+          "cumulative_motion": 14.156448364257813,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 13,
+          "arrival_time_s": 3.0,
+          "p95_magnitude": 15.356966972351074,
+          "cumulative_motion": 29.513416290283203,
+          "selected": true,
+          "selection_latency_ms": 12.0
+        },
+        {
+          "frame_index": 14,
+          "arrival_time_s": 3.25,
+          "p95_magnitude": 17.12605857849121,
+          "cumulative_motion": 17.12605857849121,
+          "selected": true,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 15,
+          "arrival_time_s": 3.5,
+          "p95_magnitude": 19.33031463623047,
+          "cumulative_motion": 19.33031463623047,
+          "selected": true,
+          "selection_latency_ms": 12.0
+        },
+        {
+          "frame_index": 16,
+          "arrival_time_s": 3.75,
+          "p95_magnitude": 24.052597045898438,
+          "cumulative_motion": 24.052597045898438,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 17,
+          "arrival_time_s": 4.0,
+          "p95_magnitude": 29.241212844848633,
+          "cumulative_motion": 53.29380798339844,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 18,
+          "arrival_time_s": 4.25,
+          "p95_magnitude": 28.490331649780273,
+          "cumulative_motion": 81.78414154052734,
+          "selected": false,
+          "selection_latency_ms": 10.0
+        },
+        {
+          "frame_index": 19,
+          "arrival_time_s": 4.5,
+          "p95_magnitude": 22.01643180847168,
+          "cumulative_motion": 103.80057525634766,
+          "selected": false,
+          "selection_latency_ms": 10.0
+        },
+        {
+          "frame_index": 20,
+          "arrival_time_s": 4.75,
+          "p95_magnitude": 18.13887596130371,
+          "cumulative_motion": 121.939453125,
+          "selected": false,
+          "selection_latency_ms": 10.0
+        },
+        {
+          "frame_index": 21,
+          "arrival_time_s": 5.0,
+          "p95_magnitude": 19.737852096557617,
+          "cumulative_motion": 141.67730712890625,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 22,
+          "arrival_time_s": 5.25,
+          "p95_magnitude": 13.819744110107422,
+          "cumulative_motion": 155.49705505371094,
+          "selected": false,
+          "selection_latency_ms": 10.0
+        },
+        {
+          "frame_index": 23,
+          "arrival_time_s": 5.5,
+          "p95_magnitude": 10.031401634216309,
+          "cumulative_motion": 165.52845764160156,
+          "selected": false,
+          "selection_latency_ms": 10.0
+        },
+        {
+          "frame_index": 24,
+          "arrival_time_s": 5.75,
+          "p95_magnitude": 9.75079345703125,
+          "cumulative_motion": 175.2792510986328,
+          "selected": false,
+          "selection_latency_ms": 10.0
+        },
+        {
+          "frame_index": 25,
+          "arrival_time_s": 6.0,
+          "p95_magnitude": 9.770686149597168,
+          "cumulative_motion": 185.04994201660156,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 26,
+          "arrival_time_s": 6.25,
+          "p95_magnitude": 9.683174133300781,
+          "cumulative_motion": 194.73312377929688,
+          "selected": false,
+          "selection_latency_ms": 10.0
+        },
+        {
+          "frame_index": 27,
+          "arrival_time_s": 6.5,
+          "p95_magnitude": 8.842729568481445,
+          "cumulative_motion": 203.5758514404297,
+          "selected": false,
+          "selection_latency_ms": 10.0
+        },
+        {
+          "frame_index": 28,
+          "arrival_time_s": 6.75,
+          "p95_magnitude": 8.023484230041504,
+          "cumulative_motion": 211.59933471679688,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 29,
+          "arrival_time_s": 7.0,
+          "p95_magnitude": 7.912130832672119,
+          "cumulative_motion": 219.51145935058594,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 30,
+          "arrival_time_s": 7.25,
+          "p95_magnitude": 7.651846885681152,
+          "cumulative_motion": 227.16329956054688,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 31,
+          "arrival_time_s": 7.5,
+          "p95_magnitude": 7.492321014404297,
+          "cumulative_motion": 234.65562438964844,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 32,
+          "arrival_time_s": 7.75,
+          "p95_magnitude": 7.325082778930664,
+          "cumulative_motion": 241.980712890625,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 33,
+          "arrival_time_s": 8.0,
+          "p95_magnitude": 7.1519012451171875,
+          "cumulative_motion": 249.1326141357422,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 34,
+          "arrival_time_s": 8.25,
+          "p95_magnitude": 6.996280193328857,
+          "cumulative_motion": 256.12890625,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 35,
+          "arrival_time_s": 8.5,
+          "p95_magnitude": 6.869665622711182,
+          "cumulative_motion": 262.9985656738281,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 36,
+          "arrival_time_s": 8.75,
+          "p95_magnitude": 6.792961120605469,
+          "cumulative_motion": 269.7915344238281,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 37,
+          "arrival_time_s": 9.0,
+          "p95_magnitude": 6.912193298339844,
+          "cumulative_motion": 276.7037353515625,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 38,
+          "arrival_time_s": 9.25,
+          "p95_magnitude": 7.047439098358154,
+          "cumulative_motion": 283.75115966796875,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 39,
+          "arrival_time_s": 9.5,
+          "p95_magnitude": 7.273596286773682,
+          "cumulative_motion": 291.0247497558594,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 40,
+          "arrival_time_s": 9.75,
+          "p95_magnitude": 7.024601936340332,
+          "cumulative_motion": 298.0493469238281,
+          "selected": false,
+          "selection_latency_ms": 10.0
+        },
+        {
+          "frame_index": 41,
+          "arrival_time_s": 10.0,
+          "p95_magnitude": 6.615286350250244,
+          "cumulative_motion": 304.6646423339844,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 42,
+          "arrival_time_s": 10.25,
+          "p95_magnitude": 6.55070686340332,
+          "cumulative_motion": 311.2153625488281,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 43,
+          "arrival_time_s": 10.5,
+          "p95_magnitude": 6.811114311218262,
+          "cumulative_motion": 318.0264892578125,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 44,
+          "arrival_time_s": 10.75,
+          "p95_magnitude": 7.080103397369385,
+          "cumulative_motion": 325.1065979003906,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 45,
+          "arrival_time_s": 11.0,
+          "p95_magnitude": 7.904762268066406,
+          "cumulative_motion": 333.0113525390625,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 46,
+          "arrival_time_s": 11.25,
+          "p95_magnitude": 9.015168190002441,
+          "cumulative_motion": 342.0265197753906,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 47,
+          "arrival_time_s": 11.5,
+          "p95_magnitude": 10.442992210388184,
+          "cumulative_motion": 352.4695129394531,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 48,
+          "arrival_time_s": 11.75,
+          "p95_magnitude": 11.617040634155273,
+          "cumulative_motion": 364.0865478515625,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 49,
+          "arrival_time_s": 12.0,
+          "p95_magnitude": 11.906965255737305,
+          "cumulative_motion": 375.9934997558594,
+          "selected": false,
+          "selection_latency_ms": 11.0
+        },
+        {
+          "frame_index": 50,
+          "arrival_time_s": 12.25,
+          "p95_magnitude": 11.50184440612793,
+          "cumulative_motion": 387.4953308105469,
+          "selected": false,
+          "selection_latency_ms": 12.0
+        }
+      ]
+    }
+  },
+  "selected_frames": [
+    {
+      "index": 1,
+      "weight": 0.0
+    },
+    {
+      "index": 3,
+      "weight": 20.695789337158203
+    },
+    {
+      "index": 4,
+      "weight": 30.733156204223633
+    },
+    {
+      "index": 5,
+      "weight": 16.669471740722656
+    },
+    {
+      "index": 7,
+      "weight": 9.782235145568848
+    },
+    {
+      "index": 9,
+      "weight": 10.74205493927002
+    },
+    {
+      "index": 11,
+      "weight": 12.99803352355957
+    },
+    {
+      "index": 13,
+      "weight": 15.356966972351074
+    },
+    {
+      "index": 14,
+      "weight": 17.12605857849121
+    },
+    {
+      "index": 15,
+      "weight": 19.33031463623047
+    }
+  ],
+  "inference": {
+    "generated_text": "In this frame, we see a close-up of a dragon and a human character. The dragon is brown with scales and has its mouth open, revealing its sharp teeth. The human character is wearing a white tank top and brown leather arm bracers. The dragon is positioned on the human's back, and the human is holding the dragon's head with one hand. The dragon's mouth is open, and it appears to be growling or hissing. The human's arm bracers are visible, and they are made of brown leather. The human's hand is positioned on the dragon's head, and the dragon's mouth is open, showing its sharp teeth. The human's arm bracers are visible, and they are made of brown leather.",
+    "n_tokens": 150,
+    "encode_time_ms": 1725.0,
+    "generation_time_ms": 2403.0
+  },
+  "metrics": {
+    "motion_coverage": 0.27932441565244315,
+    "shannon_entropy": 4.162036369017826,
+    "temporal_reduction": 0.8,
+    "total_tokens_encoded": 5920,
+    "total_tokens_cached": 0,
+    "encoder_savings_pct": 0.0,
+    "total_encode_time_ms": 1189.0,
+    "estimated_full_encode_time_ms": 2350.0,
+    "encode_speedup": 1.976450800895691
+  },
+  "per_frame_cache": [
+    {
+      "frame_index": 1,
+      "is_keyframe": true,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 235.0,
+      "splice_time_ms": 0.0,
+      "n_tokens_pre_llm_pruned": 0,
+      "n_tokens_injected": 0
+    },
+    {
+      "frame_index": 3,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 108.0,
+      "splice_time_ms": 0.0,
+      "n_tokens_pre_llm_pruned": 296,
+      "n_tokens_injected": 296
+    },
+    {
+      "frame_index": 4,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 108.0,
+      "splice_time_ms": 1.0,
+      "n_tokens_pre_llm_pruned": 296,
+      "n_tokens_injected": 296
+    },
+    {
+      "frame_index": 5,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 106.0,
+      "splice_time_ms": 1.0,
+      "n_tokens_pre_llm_pruned": 296,
+      "n_tokens_injected": 296
+    },
+    {
+      "frame_index": 7,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 105.0,
+      "splice_time_ms": 1.0,
+      "n_tokens_pre_llm_pruned": 296,
+      "n_tokens_injected": 296
+    },
+    {
+      "frame_index": 9,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 106.0,
+      "splice_time_ms": 0.0,
+      "n_tokens_pre_llm_pruned": 296,
+      "n_tokens_injected": 296
+    },
+    {
+      "frame_index": 11,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 105.0,
+      "splice_time_ms": 1.0,
+      "n_tokens_pre_llm_pruned": 296,
+      "n_tokens_injected": 296
+    },
+    {
+      "frame_index": 13,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 105.0,
+      "splice_time_ms": 1.0,
+      "n_tokens_pre_llm_pruned": 296,
+      "n_tokens_injected": 296
+    },
+    {
+      "frame_index": 14,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 105.0,
+      "splice_time_ms": 1.0,
+      "n_tokens_pre_llm_pruned": 296,
+      "n_tokens_injected": 296
+    },
+    {
+      "frame_index": 15,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 106.0,
+      "splice_time_ms": 0.0,
+      "n_tokens_pre_llm_pruned": 296,
+      "n_tokens_injected": 296
+    }
+  ],
+  "pruning": {
+    "enabled": false
+  },
+  "prefill_pruning": {
+    "enabled": false
+  },
+  "pre_llm_pruning": {
+    "enabled": true,
+    "keep_ratio": 0.5,
+    "weights": {
+      "motion": 0.30000001192092896,
+      "norm": 0.30000001192092896,
+      "attn": 0.4000000059604645
+    },
+    "total_tokens_before": 5328,
+    "total_tokens_injected": 2664,
+    "total_tokens_pruned": 2664,
+    "savings_pct": 50.0
+  },
+  "timing": {
+    "selection_ms": 536.0,
+    "encode_ms": 1725.0,
+    "generation_ms": 2403.0,
+    "pruning_overhead_ms": 0.0,
+    "prefill_pruning_overhead_ms": 0.0,
+    "total_ms": 7223.0
+  },
+  "params": {
+    "sintel_dir": "/data/Fall25/multimodalRAG/VLM/Qwen2.5-VL/MPI-Sintel",
+    "video_name": "bandage_1",
+    "fps": 4.0,
+    "cumulative_threshold": 15.0,
+    "max_selected_frames": 10,
+    "patch_grid": 4,
+    "spatial_threshold": 0.05000000074505806,
+    "patch_reuse_motion": 0.0,
+    "enable_pruning": false,
+    "enable_prefill_pruning": false,
+    "enable_pre_llm_pruning": true,
+    "pre_llm_keep_ratio": 0.5,
+    "pre_llm_weight_motion": 0.30000001192092896,
+    "pre_llm_weight_norm": 0.30000001192092896,
+    "pre_llm_weight_attn": 0.4000000059604645
+  }
+}

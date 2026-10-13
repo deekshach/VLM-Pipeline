@@ -1,0 +1,130 @@
+{
+  "video": "sleeping_1",
+  "n_frames": 8,
+  "keep_ratio": 0.30000001192092896,
+  "reference_text": "A woman and a dragon are lying on a bed. The woman is wearing a white tank top and a brown skirt. The dragon is brown and has a scaly texture. The woman is holding a knife in her hand. The dragon is resting its head on the woman's hand. The woman is looking at the dragon. The dragon is looking at the woman. The woman is smiling. The dragon is not moving. The woman is not moving. The bed is covered with a red blanket. The room is dimly lit.",
+  "reference_concepts": [
+    "blanket",
+    "brown",
+    "covered",
+    "dimly",
+    "dragon",
+    "head",
+    "holding",
+    "knife",
+    "lying",
+    "moving",
+    "resting",
+    "room",
+    "scaly",
+    "skirt",
+    "smiling",
+    "tank",
+    "texture",
+    "wearing",
+    "white",
+    "woman",
+    "womans"
+  ],
+  "runs": [
+    {
+      "strategy": "BASELINE",
+      "n_visual_tokens": 4736,
+      "n_generated": 106,
+      "prefill_ms": 985.0,
+      "gen_ms": 1713.0,
+      "tokens_per_sec": 61.87974166870117,
+      "text": "A woman and a dragon are lying on a bed. The woman is wearing a white tank top and a brown skirt. The dragon is brown and has a scaly texture. The woman is holding a knife in her hand. The dragon is resting its head on the woman's hand. The woman is looking at the dragon. The dragon is looking at the woman. The woman is smiling. The dragon is not moving. The woman is not moving. The bed is covered with a red blanket. The room is dimly lit.",
+      "rouge1_f1": 1.0,
+      "concept_recall": 1.0
+    },
+    {
+      "strategy": "MOTION",
+      "n_visual_tokens": 1831,
+      "n_generated": 97,
+      "prefill_ms": 781.0,
+      "gen_ms": 1548.0,
+      "tokens_per_sec": 62.6614990234375,
+      "text": "The video begins with a close-up shot of a woman lying on a bed, holding a small, scaly creature in her hands. The creature appears to be a baby dragon, with its eyes closed and its body curled up in a peaceful sleep. The woman is gently cradling the dragon, her fingers gently stroking its scales. The scene is peaceful and serene, with the woman's soft touch and the dragon's peaceful slumber creating a sense of calm and tranquility.",
+      "rouge1_f1": 0.38823530077934265,
+      "concept_recall": 0.2857142984867096
+    },
+    {
+      "strategy": "STATIC",
+      "n_visual_tokens": 1831,
+      "n_generated": 86,
+      "prefill_ms": 782.0,
+      "gen_ms": 1376.0,
+      "tokens_per_sec": 62.499996185302734,
+      "text": "A woman with red hair is lying on a bed, holding a needle and thread. She is sewing a piece of fabric, which is being held by a large, brown, scaly creature. The creature is lying on its back, with its legs spread out. The woman is focused on her task, carefully stitching the fabric. The scene is intimate and peaceful, with the woman and the creature sharing a moment of quiet concentration.",
+      "rouge1_f1": 0.4268292784690857,
+      "concept_recall": 0.2380952388048172
+    },
+    {
+      "strategy": "COSINE_KF",
+      "n_visual_tokens": 1831,
+      "n_generated": 99,
+      "prefill_ms": 785.0,
+      "gen_ms": 1581.0,
+      "tokens_per_sec": 62.618595123291016,
+      "text": "A woman with red hair is lying on a bed, holding a small, scaly creature in her hands. The creature appears to be a baby dragon or a similar mythical creature. The woman is wearing a white dress and a brown belt. The bed has a red blanket and a brown pillow. The woman is looking at the creature with a gentle expression, and the creature is looking back at her. The scene is peaceful and intimate, suggesting a moment of connection between the woman and the creature.",
+      "rouge1_f1": 0.5586591958999634,
+      "concept_recall": 0.4285714328289032
+    },
+    {
+      "strategy": "COSINE_CTR",
+      "n_visual_tokens": 1831,
+      "n_generated": 119,
+      "prefill_ms": 780.0,
+      "gen_ms": 1898.0,
+      "tokens_per_sec": 62.697574615478516,
+      "text": "A woman is lying on a bed, holding a small, scaly creature in her hands. The creature appears to be a baby dragon, with a small, pointed snout and a body covered in scales. The woman is gently cradling the dragon, her fingers carefully wrapped around its tiny body. The dragon seems to be comfortable in her hands, its eyes closed as if it's sleeping. The woman's expression is one of tenderness and care, suggesting a deep bond between them. The scene is peaceful and serene, capturing a moment of quiet connection between the woman and the dragon.",
+      "rouge1_f1": 0.43386244773864746,
+      "concept_recall": 0.3333333432674408
+    },
+    {
+      "strategy": "NORM",
+      "n_visual_tokens": 1831,
+      "n_generated": 136,
+      "prefill_ms": 786.0,
+      "gen_ms": 2165.0,
+      "tokens_per_sec": 62.81755447387695,
+      "text": "The video begins with a close-up shot of a woman lying on a bed, holding a small, scaly creature in her hands. The creature is brown and has a long tail. The woman is wearing a white tank top and a brown corset. The bed has a red blanket and a brown pillow. The woman is looking at the creature with a gentle expression. The camera then zooms in on the creature, showing its detailed features. The woman continues to hold the creature, and the camera slowly pans out, showing the entire bed and the woman lying on it. The video ends with a shot of the woman and the creature, with the woman still holding the creature.",
+      "rouge1_f1": 0.5454545617103577,
+      "concept_recall": 0.4285714328289032
+    },
+    {
+      "strategy": "BLEND",
+      "n_visual_tokens": 1831,
+      "n_generated": 154,
+      "prefill_ms": 787.0,
+      "gen_ms": 2450.0,
+      "tokens_per_sec": 62.85714340209961,
+      "text": "The video begins with a close-up shot of a woman lying on a bed, holding a small, scaly creature in her hands. The creature appears to be a baby dragon, with a light brown color and a small, pointed snout. The woman is wearing a white tank top and has her hair tied back in a ponytail. She is looking down at the dragon with a gentle expression on her face. The bed she is lying on is covered with a red blanket, and there is a pillow behind her head. The lighting in the room is soft and warm, creating a cozy atmosphere. The woman's hands are gently cradling the dragon, and she seems to be talking to it softly. The dragon appears to be calm and comfortable in her hands.",
+      "rouge1_f1": 0.5201793909072876,
+      "concept_recall": 0.6666666865348816
+    },
+    {
+      "strategy": "RANDOM",
+      "n_visual_tokens": 1831,
+      "n_generated": 78,
+      "prefill_ms": 781.0,
+      "gen_ms": 1249.0,
+      "tokens_per_sec": 62.4499626159668,
+      "text": "A woman with red hair is lying on a bed, holding a small, scaly creature in her hands. The creature appears to be a lizard or a similar reptile. The woman is wearing a white tank top and brown gloves. The bed has a red blanket and a patterned pillow. The scene is intimate and peaceful, with the woman and the creature sharing a moment of connection.",
+      "rouge1_f1": 0.5063291192054749,
+      "concept_recall": 0.4285714328289032
+    },
+    {
+      "strategy": "MOTION+KF",
+      "n_visual_tokens": 1831,
+      "n_generated": 108,
+      "prefill_ms": 783.0,
+      "gen_ms": 1722.0,
+      "tokens_per_sec": 62.717769622802734,
+      "text": "A woman and a large, scaly creature are lying on a bed together. The woman is wearing a white tank top and brown pants, and she is holding the creature's head in her hands. The creature is brown and has a rough, scaly texture. The woman is looking at the creature with a gentle expression. The bed they are lying on is covered with a red blanket and has a wooden headboard. The scene is peaceful and intimate, with the woman and the creature appearing to be comfortable and at ease with each other.",
+      "rouge1_f1": 0.6054053902626038,
+      "concept_recall": 0.5714285969734192
+    }
+  ]
+}

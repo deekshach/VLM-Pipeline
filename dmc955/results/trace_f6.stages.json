@@ -1,0 +1,118 @@
+{
+  "trace": "trace_f6.sqlite",
+  "vit_stream": 17,
+  "llm_stream": 15,
+  "requests": [
+    {
+      "vit_ms": 307.8102,
+      "prefill_ms": 575.78219,
+      "encode_wall_ms": 902.340306,
+      "encode_busy_ms": 849.759674,
+      "overlap_ms": 33.832716,
+      "overlap_pct": 10.991421336914762,
+      "encode_idle_ms": 52.580632,
+      "decode_ms": 2145.810055,
+      "decode_busy_ms": 2072.27555,
+      "decode_kernels": 21635,
+      "vit_kernels": 7620,
+      "prefill_kernels": 16141,
+      "request_gpu_ms": 3048.150361,
+      "encode_hw": {
+        "sm_active": 86.46048985924858,
+        "sm_issue": 15.93627396652998,
+        "tensor_active": 25.81669067937493,
+        "dram_rd": 31.56500055413942,
+        "dram_wr": 12.240718164690236,
+        "unalloc_warps": 15074033.974066274,
+        "comp_warps": 6055446.883963205,
+        "dram_total": 43.80571871882965,
+        "unalloc_pct": 71.34124153522657
+      },
+      "decode_hw": {
+        "sm_active": 92.31871563053407,
+        "sm_issue": 10.852409357815267,
+        "tensor_active": 0,
+        "dram_rd": 87.55242799888154,
+        "dram_wr": 1.3212787771460528,
+        "unalloc_warps": 1648194.294109423,
+        "comp_warps": 21891958.23357256,
+        "dram_total": 88.87370677602759,
+        "unalloc_pct": 7.001629629082619
+      }
+    },
+    {
+      "vit_ms": 316.009732,
+      "prefill_ms": 586.873228,
+      "encode_wall_ms": 893.425617,
+      "encode_busy_ms": 856.989695,
+      "overlap_ms": 45.893265,
+      "overlap_pct": 14.522737863022522,
+      "encode_idle_ms": 36.435922,
+      "decode_ms": 2149.892674,
+      "decode_busy_ms": 2080.730781,
+      "decode_kernels": 21635,
+      "vit_kernels": 7620,
+      "prefill_kernels": 16394,
+      "request_gpu_ms": 3043.318291,
+      "encode_hw": {
+        "sm_active": 88.23953436310723,
+        "sm_issue": 16.13577344974256,
+        "tensor_active": 26.11708081486456,
+        "dram_rd": 32.671143944481756,
+        "dram_wr": 12.444817550929034,
+        "unalloc_warps": 15334249.247257667,
+        "comp_warps": 6207413.412805014,
+        "dram_total": 45.11596149541079,
+        "unalloc_pct": 71.18414901040441
+      },
+      "decode_hw": {
+        "sm_active": 92.3531327038467,
+        "sm_issue": 10.835806316572864,
+        "tensor_active": 0,
+        "dram_rd": 87.39104144378808,
+        "dram_wr": 1.3923438299455788,
+        "unalloc_warps": 1647085.705102563,
+        "comp_warps": 21902310.301502395,
+        "dram_total": 88.78338527373366,
+        "unalloc_pct": 6.9941738830184885
+      }
+    },
+    {
+      "vit_ms": 316.784947,
+      "prefill_ms": 589.769032,
+      "encode_wall_ms": 894.551046,
+      "encode_busy_ms": 858.747828,
+      "overlap_ms": 47.806151,
+      "overlap_pct": 15.091042504617494,
+      "encode_idle_ms": 35.803218,
+      "decode_ms": 2150.015468,
+      "decode_busy_ms": 2080.368851,
+      "decode_kernels": 21635,
+      "vit_kernels": 7620,
+      "prefill_kernels": 16447,
+      "request_gpu_ms": 3044.566514,
+      "encode_hw": {
+        "sm_active": 88.33623966018332,
+        "sm_issue": 16.144645651687906,
+        "tensor_active": 26.137379834562932,
+        "dram_rd": 32.726805276101054,
+        "dram_wr": 12.416051866756092,
+        "unalloc_warps": 15311153.380617036,
+        "comp_warps": 6218331.918622849,
+        "dram_total": 45.142857142857146,
+        "unalloc_pct": 71.11713618698356
+      },
+      "decode_hw": {
+        "sm_active": 92.33786046511628,
+        "sm_issue": 10.837720930232559,
+        "tensor_active": 0,
+        "dram_rd": 87.38381395348837,
+        "dram_wr": 1.3908372093023256,
+        "unalloc_warps": 1644814.3255813953,
+        "comp_warps": 21900587.781767443,
+        "dram_total": 88.77465116279069,
+        "unalloc_pct": 6.985713465764199
+      }
+    }
+  ]
+}

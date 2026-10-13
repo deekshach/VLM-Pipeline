@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1060" height="350" viewBox="0 0 1060 350">
+<rect width="1060" height="350" fill="#fbfbfc"/>
+<text x="66.00" y="24.00" text-anchor="start" font-size="16" font-family="IBM Plex Sans, DejaVu Sans, Helvetica, Arial, sans-serif" font-weight="600" fill="#111318">Share of GPU stage time</text>
+<text x="66.00" y="41.00" text-anchor="start" font-size="11.5" font-family="IBM Plex Sans, DejaVu Sans, Helvetica, Arial, sans-serif" font-weight="400" fill="#878d99">Decode dominates at one frame; the encode path is the majority by sixteen</text>
+<rect x="740.3" y="15.0" width="11" height="11" rx="2" fill="#2a78d6"/><text x="758.30" y="24.00" text-anchor="start" font-size="12" font-family="IBM Plex Sans, DejaVu Sans, Helvetica, Arial, sans-serif" font-weight="400" fill="#565b66">ViT encode</text><rect x="845.3" y="15.0" width="11" height="11" rx="2" fill="#eb6834"/><text x="863.30" y="24.00" text-anchor="start" font-size="12" font-family="IBM Plex Sans, DejaVu Sans, Helvetica, Arial, sans-serif" font-weight="400" fill="#565b66">LLM prefill</text><rect x="957.0" y="15.0" width="11" height="11" rx="2" fill="#1baf7a"/><text x="975.00" y="24.00" text-anchor="start" font-size="12" font-family="IBM Plex Sans, DejaVu Sans, Helvetica, Arial, sans-serif" font-weight="400" fill="#565b66">LLM decode</text>
+<line x1="66" x2="1042" y1="298.00" y2="298.00" stroke="#e0e2e8" stroke-width="1"/>
+<text x="56.00" y="302.00" text-anchor="end" font-size="11" font-family="IBM Plex Mono, DejaVu Sans Mono, Menlo, Consolas, monospace" font-weight="400" fill="#878d99">0%</text>
+<line x1="66" x2="1042" y1="237.50" y2="237.50" stroke="#e0e2e8" stroke-width="1"/>
+<text x="56.00" y="241.50" text-anchor="end" font-size="11" font-family="IBM Plex Mono, DejaVu Sans Mono, Menlo, Consolas, monospace" font-weight="400" fill="#878d99">25%</text>
+<line x1="66" x2="1042" y1="177.00" y2="177.00" stroke="#e0e2e8" stroke-width="1"/>
+<text x="56.00" y="181.00" text-anchor="end" font-size="11" font-family="IBM Plex Mono, DejaVu Sans Mono, Menlo, Consolas, monospace" font-weight="400" fill="#878d99">50%</text>
+<line x1="66" x2="1042" y1="116.50" y2="116.50" stroke="#e0e2e8" stroke-width="1"/>
+<text x="56.00" y="120.50" text-anchor="end" font-size="11" font-family="IBM Plex Mono, DejaVu Sans Mono, Menlo, Consolas, monospace" font-weight="400" fill="#878d99">75%</text>
+<line x1="66" x2="1042" y1="56.00" y2="56.00" stroke="#e0e2e8" stroke-width="1"/>
+<text x="56.00" y="60.00" text-anchor="end" font-size="11" font-family="IBM Plex Mono, DejaVu Sans Mono, Menlo, Consolas, monospace" font-weight="400" fill="#878d99">100%</text>
+<path d="M105.10,298.00 L105.10,294.58 Q105.10,294.58 105.10,294.58 L129.10,294.58 Q129.10,294.58 129.10,294.58 L129.10,298.00 Z" fill="#2a78d6"/>
+<path d="M105.10,292.58 L105.10,284.04 Q105.10,284.04 105.10,284.04 L129.10,284.04 Q129.10,284.04 129.10,284.04 L129.10,292.58 Z" fill="#eb6834"/>
+<path d="M105.10,282.04 L105.10,60.00 Q105.10,56.00 109.10,56.00 L125.10,56.00 Q129.10,56.00 129.10,60.00 L129.10,282.04 Z" fill="#1baf7a"/>
+<text x="117.10" y="173.02" text-anchor="middle" font-size="10.5" font-family="IBM Plex Mono, DejaVu Sans Mono, Menlo, Consolas, monospace" font-weight="600" fill="#ffffff">93%</text>
+<text x="117.10" y="318.00" text-anchor="middle" font-size="12" font-family="IBM Plex Mono, DejaVu Sans Mono, Menlo, Consolas, monospace" font-weight="400" fill="#565b66">1</text>
+<path d="M207.30,298.00 L207.30,289.54 Q207.30,289.54 207.30,289.54 L231.30,289.54 Q231.30,289.54 231.30,289.54 L231.30,298.00 Z" fill="#2a78d6"/>
+<path d="M207.30,287.54 L207.30,270.07 Q207.30,270.07 207.30,270.07 L231.30,270.07 Q231.30,270.07 231.30,270.07 L231.30,287.54 Z" fill="#eb6834"/>
+<path d="M207.30,268.07 L207.30,60.00 Q207.30,56.00 211.30,56.00 L227.30,56.00 Q231.30,56.00 231.30,60.00 L231.30,268.07 Z" fill="#1baf7a"/>
+<text x="219.30" y="318.00" text-anchor="middle" font-size="12" font-family="IBM Plex Mono, DejaVu Sans Mono, Menlo, Consolas, monospace" font-weight="400" fill="#565b66">2</text>
+<path d="M309.50,298.00 L309.50,285.43 Q309.50,285.43 309.50,285.43 L333.50,285.43 Q333.50,285.43 333.50,285.43 L333.50,298.00 Z" fill="#2a78d6"/>
+<path d="M309.50,283.43 L309.50,258.41 Q309.50,258.41 309.50,258.41 L333.50,258.41 Q333.50,258.41 333.50,258.41 L333.50,283.43 Z" fill="#eb6834"/>
+<path d="M309.50,256.41 L309.50,60.00 Q309.50,56.00 313.50,56.00 L329.50,56.00 Q333.50,56.00 333.50,60.00 L333.50,256.41 Z" fill="#1baf7a"/>
+<text x="321.50" y="318.00" text-anchor="middle" font-size="12" font-family="IBM Plex Mono, DejaVu Sans Mono, Menlo, Consolas, monospace" font-weight="400" fill="#565b66">3</text>
+<path d="M411.70,298.00 L411.70,281.57 Q411.70,281.57 411.70,281.57 L435.70,281.57 Q435.70,281.57 435.70,281.57 L435.70,298.00 Z" fill="#2a78d6"/>
+<path d="M411.70,279.57 L411.70,247.39 Q411.70,247.39 411.70,247.39 L435.70,247.39 Q435.70,247.39 435.70,247.39 L435.70,279.57 Z" fill="#eb6834"/>
+<path d="M411.70,245.39 L411.70,60.00 Q411.70,56.00 415.70,56.00 L431.70,56.00 Q435.70,56.00 435.70,60.00 L435.70,245.39 Z" fill="#1baf7a"/>
+<text x="423.70" y="318.00" text-anchor="middle" font-size="12" font-family="IBM Plex Mono, DejaVu Sans Mono, Menlo, Consolas, monospace" font-weight="400" fill="#565b66">4</text>
+<path d="M513.90,298.00 L513.90,278.09 Q513.90,278.09 513.90,278.09 L537.90,278.09 Q537.90,278.09 537.90,278.09 L537.90,298.00 Z" fill="#2a78d6"/>
+<path d="M513.90,276.09 L513.90,237.42 Q513.90,237.42 513.90,237.42 L537.90,237.42 Q537.90,237.42 537.90,237.42 L537.90,276.09 Z" fill="#eb6834"/>
+<path d="M513.90,235.42 L513.90,60.00 Q513.90,56.00 517.90,56.00 L533.90,56.00 Q537.90,56.00 537.90,60.00 L537.90,235.42 Z" fill="#1baf7a"/>
+<text x="525.90" y="318.00" text-anchor="middle" font-size="12" font-family="IBM Plex Mono, DejaVu Sans Mono, Menlo, Consolas, monospace" font-weight="400" fill="#565b66">5</text>
+<path d="M616.09,298.00 L616.09,275.09 Q616.09,275.09 616.09,275.09 L640.09,275.09 Q640.09,275.09 640.09,275.09 L640.09,298.00 Z" fill="#2a78d6"/>
+<path d="M616.09,273.09 L616.09,228.69 Q616.09,228.69 616.09,228.69 L640.09,228.69 Q640.09,228.69 640.09,228.69 L640.09,273.09 Z" fill="#eb6834"/>
+<path d="M616.09,226.69 L616.09,60.00 Q616.09,56.00 620.09,56.00 L636.09,56.00 Q640.09,56.00 640.09,60.00 L640.09,226.69 Z" fill="#1baf7a"/>
+<text x="628.09" y="318.00" text-anchor="middle" font-size="12" font-family="IBM Plex Mono, DejaVu Sans Mono, Menlo, Consolas, monospace" font-weight="400" fill="#565b66">6</text>
+<path d="M718.29,298.00 L718.29,272.14 Q718.29,272.14 718.29,272.14 L742.29,272.14 Q742.29,272.14 742.29,272.14 L742.29,298.00 Z" fill="#2a78d6"/>
+<path d="M718.29,270.14 L718.29,220.18 Q718.29,220.18 718.29,220.18 L742.29,220.18 Q742.29,220.18 742.29,220.18 L742.29,270.14 Z" fill="#eb6834"/>
+<path d="M718.29,218.18 L718.29,60.00 Q718.29,56.00 722.29,56.00 L738.29,56.00 Q742.29,56.00 742.29,60.00 L742.29,218.18 Z" fill="#1baf7a"/>
+<text x="730.29" y="318.00" text-anchor="middle" font-size="12" font-family="IBM Plex Mono, DejaVu Sans Mono, Menlo, Consolas, monospace" font-weight="400" fill="#565b66">7</text>
+<path d="M820.49,298.00 L820.49,269.70 Q820.49,269.70 820.49,269.70 L844.49,269.70 Q844.49,269.70 844.49,269.70 L844.49,298.00 Z" fill="#2a78d6"/>
+<path d="M820.49,267.70 L820.49,212.83 Q820.49,212.83 820.49,212.83 L844.49,212.83 Q844.49,212.83 844.49,212.83 L844.49,267.70 Z" fill="#eb6834"/>
+<path d="M820.49,210.83 L820.49,60.00 Q820.49,56.00 824.49,56.00 L840.49,56.00 Q844.49,56.00 844.49,60.00 L844.49,210.83 Z" fill="#1baf7a"/>
+<text x="832.49" y="318.00" text-anchor="middle" font-size="12" font-family="IBM Plex Mono, DejaVu Sans Mono, Menlo, Consolas, monospace" font-weight="400" fill="#565b66">8</text>
+<path d="M978.90,298.00 L978.90,256.59 Q978.90,256.59 978.90,256.59 L1002.90,256.59 Q1002.90,256.59 1002.90,256.59 L1002.90,298.00 Z" fill="#2a78d6"/>
+<path d="M978.90,254.59 L978.90,172.54 Q978.90,172.54 978.90,172.54 L1002.90,172.54 Q1002.90,172.54 1002.90,172.54 L1002.90,254.59 Z" fill="#eb6834"/>
+<path d="M978.90,170.54 L978.90,60.00 Q978.90,56.00 982.90,56.00 L998.90,56.00 Q1002.90,56.00 1002.90,60.00 L1002.90,170.54 Z" fill="#1baf7a"/>
+<text x="990.90" y="117.27" text-anchor="middle" font-size="10.5" font-family="IBM Plex Mono, DejaVu Sans Mono, Menlo, Consolas, monospace" font-weight="600" fill="#ffffff">47%</text>
+<text x="990.90" y="318.00" text-anchor="middle" font-size="12" font-family="IBM Plex Mono, DejaVu Sans Mono, Menlo, Consolas, monospace" font-weight="400" fill="#565b66">16</text>
+<text x="911.70" y="318.00" text-anchor="middle" font-size="12" font-family="IBM Plex Mono, DejaVu Sans Mono, Menlo, Consolas, monospace" font-weight="400" fill="#878d99">⁄⁄</text>
+<line x1="66" x2="1042" y1="298.00" y2="298.00" stroke="#c7cad3" stroke-width="1"/>
+<text x="554.00" y="338.00" text-anchor="middle" font-size="11.5" font-family="IBM Plex Sans, DejaVu Sans, Helvetica, Arial, sans-serif" font-weight="400" fill="#878d99">frames per request</text>
+</svg>

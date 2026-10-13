@@ -572,6 +572,9 @@ extern "C" {
 
         GGML_OP_GLU,
 
+        GGML_OP_VISUAL_ATTN_REDUCE,
+        GGML_OP_PYRAMID_MASK_GEN,
+
         GGML_OP_COUNT,
     };
 

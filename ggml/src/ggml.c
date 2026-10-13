@@ -1045,9 +1045,12 @@ static const char * GGML_OP_NAME[GGML_OP_COUNT] = {
     "OPT_STEP_SGD",
 
     "GLU",
+
+    "VISUAL_ATTN_REDUCE",
+    "PYRAMID_MASK_GEN",
 };
 
-static_assert(GGML_OP_COUNT == 95, "GGML_OP_COUNT != 95");
+static_assert(GGML_OP_COUNT == 97, "GGML_OP_COUNT != 97");
 
 static const char * GGML_OP_SYMBOL[GGML_OP_COUNT] = {
     "none",
@@ -1154,9 +1157,12 @@ static const char * GGML_OP_SYMBOL[GGML_OP_COUNT] = {
     "sgd(x)",
 
     "glu(x)",
+
+    "visual_attn_reduce(x)",
+    "pyramid_mask_gen(x,y)",
 };
 
-static_assert(GGML_OP_COUNT == 95, "GGML_OP_COUNT != 95");
+static_assert(GGML_OP_COUNT == 97, "GGML_OP_COUNT != 97");
 
 static_assert(GGML_OP_POOL_COUNT == 2, "GGML_OP_POOL_COUNT != 2");
 
@@ -5983,6 +5989,63 @@ struct ggml_tensor * ggml_custom_inplace(
 
     return result;
 }
+// ggml_visual_attn_reduce
+// Reduces attention weights [n_kv, n_heads_kv, n_q] to importance scores + thresholds
+// Output: [n_visual + n_layers] (first n_visual = scores, last n_layers = thresholds)
+
+struct ggml_tensor * ggml_visual_attn_reduce(
+        struct ggml_context * ctx,
+        struct ggml_tensor  * kq_soft,
+        int visual_start, int n_visual, int n_layers, int clie_layer,
+        float pvc_min, int tokens_per_frame, int protect_frame0) {
+
+    int64_t ne[1] = { n_visual + n_layers };
+    struct ggml_tensor * result = ggml_new_tensor(ctx, GGML_TYPE_F32, 1, ne);
+
+    int32_t params[8];
+    params[0] = visual_start;
+    params[1] = n_visual;
+    params[2] = n_layers;
+    params[3] = clie_layer;
+    memcpy(&params[4], &pvc_min, sizeof(float));
+    params[5] = tokens_per_frame;
+    params[6] = protect_frame0;
+    params[7] = 0; // reserved
+    ggml_set_op_params(result, params, sizeof(params));
+
+    result->op     = GGML_OP_VISUAL_ATTN_REDUCE;
+    result->src[0] = kq_soft;
+
+    return result;
+}
+
+// ggml_pyramid_mask_gen
+// Generates per-layer drop mask: -INF at dropped visual positions, 0 elsewhere
+// Input src0: base KQ mask [n_kv, n_q], src1: scores+thresholds [n_visual + n_layers]
+// Output: modified KQ mask [n_kv, n_q]
+
+struct ggml_tensor * ggml_pyramid_mask_gen(
+        struct ggml_context * ctx,
+        struct ggml_tensor  * base_mask,
+        struct ggml_tensor  * scores_and_thresholds,
+        int visual_start, int n_visual, int layer_idx, int n_layers) {
+
+    struct ggml_tensor * result = ggml_dup_tensor(ctx, base_mask);
+
+    int32_t params[4];
+    params[0] = visual_start;
+    params[1] = n_visual;
+    params[2] = layer_idx;
+    params[3] = n_layers;
+    ggml_set_op_params(result, params, sizeof(params));
+
+    result->op     = GGML_OP_PYRAMID_MASK_GEN;
+    result->src[0] = base_mask;
+    result->src[1] = scores_and_thresholds;
+
+    return result;
+}
+
 // ggml_cross_entropy_loss
 
 struct ggml_tensor * ggml_cross_entropy_loss(

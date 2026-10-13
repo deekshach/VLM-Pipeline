@@ -128,6 +128,8 @@ public:
     void clear(bool data) override;
 
     bool seq_rm  (llama_seq_id seq_id,                              llama_pos p0, llama_pos p1) override;
+    bool seq_rm_pos_ext(llama_seq_id seq_id, llama_pos pos, llama_pos ext_x, llama_pos ext_y) override;
+    void defragment(llama_context * lctx = nullptr) override;
     void seq_cp  (llama_seq_id seq_id_src, llama_seq_id seq_id_dst, llama_pos p0, llama_pos p1) override;
     void seq_keep(llama_seq_id seq_id)                                                          override;
     void seq_add (llama_seq_id seq_id,                              llama_pos p0, llama_pos p1, llama_pos shift) override;
@@ -135,6 +137,14 @@ public:
 
     llama_pos seq_pos_min(llama_seq_id seq_id) const override;
     llama_pos seq_pos_max(llama_seq_id seq_id) const override;
+
+    const ggml_tensor * get_k_tensor(int32_t il) const override;
+    const ggml_tensor * get_v_tensor(int32_t il) const override;
+    bool get_v_trans() const override;
+
+    bool reserve_cells(llama_seq_id seq_id, int32_t n_tokens,
+                       const llama_pos * pos, bool is_pos_2d,
+                       int32_t * out_cell_indices) override;
 
     std::map<ggml_backend_buffer_type_t, size_t> memory_breakdown() const override;
 
@@ -269,6 +279,13 @@ private:
     ggml_cgraph * build_graph_shift(
                llm_graph_result * res,
                   llama_context * lctx) const;
+
+    ggml_cgraph * build_graph_defrag(
+               llm_graph_result * res,
+                  llama_context * lctx,
+        const std::vector<int32_t> & perm,
+                         uint32_t   n_kept,
+                         uint32_t   stream) const;
 
     struct cell_ranges_t {
         uint32_t strm;

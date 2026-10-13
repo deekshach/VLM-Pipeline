@@ -1,0 +1,24 @@
+# started on Mon Aug 31 12:42:10 2026
+
+
+ Performance counter stats for '/data/spring26/CPP/llama.cpp/build/bin/llama-baseline-vlm -m /data/spring26/CPP/modelsRepo/Qwen2.5VL/Qwen2.5-VL-3B-Instruct-q8_0.gguf --mmproj /data/spring26/CPP/modelsRepo/Qwen2.5VL/Qwen2.5-VL-3B-Instruct-mmproj-f16.gguf --sintel-dir /data/spring26/CPP/modelsRepo/MPI_bkp/MPI-Sintel --video alley_1 --base-frames 8 -ngl 99 -c 16384 -n 128 --temp 0 --seed 42 -fa on --no-flow-analysis --perf-region decode':
+
+     3,978,581,100      cpu_core/cycles/                                                        (41.49%)
+    10,053,284,128      cpu_core/instructions/                                                  (49.92%)
+     1,896,227,687      cpu_core/branches/                                                      (58.32%)
+           591,885      cpu_core/branch-misses/                                                 (66.75%)
+        10,622,164      cpu_core/cache-references/                                              (75.15%)
+         1,294,844      cpu_core/cache-misses/                                                  (75.15%)
+     3,382,350,734      cpu_core/L1-dcache-loads/                                               (75.15%)
+        71,416,110      cpu_core/L1-dcache-load-misses/  #    2.11% of all L1-dcache accesses   (75.15%)
+           519,441      cpu_core/LLC-loads/                                                     (75.15%)
+            39,799      cpu_core/LLC-load-misses/        #    7.66% of all LL-cache accesses    (75.08%)
+     3,381,179,093      cpu_core/dTLB-loads/                                                    (33.13%)
+            26,919      cpu_core/dTLB-load-misses/       #    0.00% of all dTLB cache accesses  (33.13%)
+
+       2.724048256 seconds time elapsed
+
+       0.000000000 seconds user
+       0.000000000 seconds sys
+
+

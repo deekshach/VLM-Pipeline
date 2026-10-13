@@ -636,6 +636,7 @@ ggml_tensor * clip_graph::build_attn(
         // ggml_mul_mat_set_prec(kq, GGML_PREC_F32);
 
         kq = ggml_soft_max_ext(ctx0, kq, kq_mask, kq_scale, 0.0f);
+        ggml_format_name(kq, "vit_kq_soft_max-%d", il);
 
         ggml_tensor * kqv = ggml_mul_mat(ctx0, v, kq);
         cur = ggml_permute(ctx0, kqv, 0, 2, 1, 3);
@@ -785,7 +786,11 @@ ggml_tensor * clip_graph::build_patch_merge_permute(ggml_tensor * cur, int scale
 }
 
 static ggml_cgraph * clip_image_build_graph(clip_ctx * ctx, const clip_image_f32_batch & imgs) {
-    GGML_ASSERT(imgs.entries.size() == 1 && "n_batch > 1 is not supported");
+    // A Qwen2-VL temporal pair is two entries feeding ONE graph (entry[0] -> the
+    // t=0 conv slice, entry[1] -> t=1), not a batch of two images. Both frames
+    // have identical geometry, so the graph is still built from entry[0].
+    const bool temporal_pair = imgs.entries.size() == 2 && ctx->model.patch_embeddings_1 != nullptr;
+    GGML_ASSERT((imgs.entries.size() == 1 || temporal_pair) && "n_batch > 1 is not supported");
 
     const clip_image_f32 & img = *imgs.entries[0];
     std::unique_ptr<clip_graph> builder;
@@ -3521,7 +3526,12 @@ bool clip_image_batch_encode(clip_ctx * ctx, const int n_threads, const clip_ima
 
     // TODO @ngxson : implement batch size > 1 as a loop
     //                we don't need true batching support because the cgraph will gonna be big anyway
-    if (batch_size != 1) {
+    //
+    // Exception: a Qwen2-VL temporal pair is TWO entries that feed one graph --
+    // entry[0] -> inp_raw (t=0 conv slice), entry[1] -> inp_raw_1 (t=1 slice).
+    // That is one image's worth of work, not a batch of two, so it is allowed.
+    const bool temporal_pair = (batch_size == 2) && (ctx->model.patch_embeddings_1 != nullptr);
+    if (batch_size != 1 && !temporal_pair) {
         return false; // only support batch size of 1
     }
 
@@ -3611,7 +3621,23 @@ bool clip_image_batch_encode(clip_ctx * ctx, const int n_threads, const clip_ima
                 }
             }
         }
-        set_input_f32("inp_raw", inp_raw);
+        // Temporal patching: when the graph declares inp_raw_1 (Qwen2-VL family),
+        // the patch embedding is a Conv3d split into two temporal slices, and each
+        // slice takes its own frame. Frame 0 -> inp_raw, frame 1 -> inp_raw_1.
+        // A single entry feeds the same frame to both, which is the reference
+        // behaviour for a still image and leaves existing results unchanged.
+        if (ggml_graph_get_tensor(gf, "inp_raw_1") != nullptr) {
+            const size_t per = (size_t) imgs.entries[0]->nx * imgs.entries[0]->ny * 3;
+            GGML_ASSERT(inp_raw.size() >= per);
+            std::vector<float> f0(inp_raw.begin(), inp_raw.begin() + per);
+            std::vector<float> f1 = (imgs.entries.size() > 1 && inp_raw.size() >= 2*per)
+                ? std::vector<float>(inp_raw.begin() + per, inp_raw.begin() + 2*per)
+                : f0;
+            set_input_f32("inp_raw",   f0);
+            set_input_f32("inp_raw_1", f1);
+        } else {
+            set_input_f32("inp_raw", inp_raw);
+        }
 
     } else {
         // audio input

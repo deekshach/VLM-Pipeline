@@ -1,0 +1,426 @@
+{
+  "mode": "baseline",
+  "video_name": "market_2",
+  "n_flow_files": 49,
+  "n_frames_total": 50,
+  "global_complexity": 0.14167940616607666,
+  "n_frames_selected": 8,
+  "selected_frames": [
+    {
+      "index": 1,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 8,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 15,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 22,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 29,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 36,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 43,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 50,
+      "weight": 1.0,
+      "complexity": 0.0
+    }
+  ],
+  "motion_profile": [
+    {
+      "frame": 1,
+      "mean_mag": 2.6081056594848633,
+      "p95_mag": 12.654974937438965,
+      "variance": 22.101192474365234,
+      "complexity": 0.29181355237960815
+    },
+    {
+      "frame": 2,
+      "mean_mag": 2.87741756439209,
+      "p95_mag": 15.25401782989502,
+      "variance": 29.933624267578125,
+      "complexity": 0.42793238162994385
+    },
+    {
+      "frame": 3,
+      "mean_mag": 3.5278213024139404,
+      "p95_mag": 22.377906799316406,
+      "variance": 67.2900619506836,
+      "complexity": 0.5715417861938477
+    },
+    {
+      "frame": 4,
+      "mean_mag": 3.6799590587615967,
+      "p95_mag": 26.747201919555664,
+      "variance": 64.32323455810547,
+      "complexity": 0.47066593170166016
+    },
+    {
+      "frame": 5,
+      "mean_mag": 3.5397872924804688,
+      "p95_mag": 19.890409469604492,
+      "variance": 66.2386245727539,
+      "complexity": 0.46465468406677246
+    },
+    {
+      "frame": 6,
+      "mean_mag": 3.0316951274871826,
+      "p95_mag": 17.568513870239258,
+      "variance": 53.023536682128906,
+      "complexity": 0.39929094910621643
+    },
+    {
+      "frame": 7,
+      "mean_mag": 2.981935977935791,
+      "p95_mag": 17.421228408813477,
+      "variance": 50.43797302246094,
+      "complexity": 0.39154475927352905
+    },
+    {
+      "frame": 8,
+      "mean_mag": 3.5601389408111572,
+      "p95_mag": 17.41397476196289,
+      "variance": 65.33256530761719,
+      "complexity": 0.47506195306777954
+    },
+    {
+      "frame": 9,
+      "mean_mag": 3.7815964221954346,
+      "p95_mag": 18.024986267089844,
+      "variance": 65.05047607421875,
+      "complexity": 0.488424688577652
+    },
+    {
+      "frame": 10,
+      "mean_mag": 3.688938856124878,
+      "p95_mag": 16.972440719604492,
+      "variance": 59.4173469543457,
+      "complexity": 0.528911292552948
+    },
+    {
+      "frame": 11,
+      "mean_mag": 3.6684253215789795,
+      "p95_mag": 16.191524505615234,
+      "variance": 54.93452453613281,
+      "complexity": 0.4584548771381378
+    },
+    {
+      "frame": 12,
+      "mean_mag": 3.8918709754943848,
+      "p95_mag": 16.776081085205078,
+      "variance": 53.97460174560547,
+      "complexity": 0.4829098880290985
+    },
+    {
+      "frame": 13,
+      "mean_mag": 4.158014297485352,
+      "p95_mag": 17.694141387939453,
+      "variance": 51.075347900390625,
+      "complexity": 0.5049227476119995
+    },
+    {
+      "frame": 14,
+      "mean_mag": 4.404548645019531,
+      "p95_mag": 18.773195266723633,
+      "variance": 50.57675552368164,
+      "complexity": 0.47386088967323303
+    },
+    {
+      "frame": 15,
+      "mean_mag": 4.638670921325684,
+      "p95_mag": 19.15239906311035,
+      "variance": 51.88840866088867,
+      "complexity": 0.5026108026504517
+    },
+    {
+      "frame": 16,
+      "mean_mag": 4.793003082275391,
+      "p95_mag": 18.21592903137207,
+      "variance": 50.59639358520508,
+      "complexity": 0.4970083236694336
+    },
+    {
+      "frame": 17,
+      "mean_mag": 5.1885809898376465,
+      "p95_mag": 20.496997833251953,
+      "variance": 60.437923431396484,
+      "complexity": 0.5456787943840027
+    },
+    {
+      "frame": 18,
+      "mean_mag": 5.302299499511719,
+      "p95_mag": 25.118677139282227,
+      "variance": 72.77074432373047,
+      "complexity": 0.5871227979660034
+    },
+    {
+      "frame": 19,
+      "mean_mag": 5.364882946014404,
+      "p95_mag": 29.480911254882813,
+      "variance": 89.25455474853516,
+      "complexity": 0.6216138005256653
+    },
+    {
+      "frame": 20,
+      "mean_mag": 5.731651306152344,
+      "p95_mag": 35.2933235168457,
+      "variance": 120.58543395996094,
+      "complexity": 0.7250422239303589
+    },
+    {
+      "frame": 21,
+      "mean_mag": 5.883605480194092,
+      "p95_mag": 38.56186294555664,
+      "variance": 140.39328002929688,
+      "complexity": 0.7835994958877563
+    },
+    {
+      "frame": 22,
+      "mean_mag": 5.375339984893799,
+      "p95_mag": 37.43455123901367,
+      "variance": 132.9483642578125,
+      "complexity": 0.7295435070991516
+    },
+    {
+      "frame": 23,
+      "mean_mag": 5.215873718261719,
+      "p95_mag": 38.65644836425781,
+      "variance": 146.3931427001953,
+      "complexity": 0.762030839920044
+    },
+    {
+      "frame": 24,
+      "mean_mag": 5.160896301269531,
+      "p95_mag": 37.824462890625,
+      "variance": 159.8748779296875,
+      "complexity": 0.8080171346664429
+    },
+    {
+      "frame": 25,
+      "mean_mag": 4.1237473487854,
+      "p95_mag": 28.554475784301758,
+      "variance": 106.76531219482422,
+      "complexity": 0.6205553412437439
+    },
+    {
+      "frame": 26,
+      "mean_mag": 2.610482931137085,
+      "p95_mag": 19.64164924621582,
+      "variance": 38.903255462646484,
+      "complexity": 0.3387943506240845
+    },
+    {
+      "frame": 27,
+      "mean_mag": 1.9569644927978516,
+      "p95_mag": 16.750743865966797,
+      "variance": 19.82844352722168,
+      "complexity": 0.20002378523349762
+    },
+    {
+      "frame": 28,
+      "mean_mag": 1.8885812759399414,
+      "p95_mag": 13.205971717834473,
+      "variance": 19.58003044128418,
+      "complexity": 0.20042763650417328
+    },
+    {
+      "frame": 29,
+      "mean_mag": 1.8293064832687378,
+      "p95_mag": 13.030462265014648,
+      "variance": 18.78223419189453,
+      "complexity": 0.19107265770435333
+    },
+    {
+      "frame": 30,
+      "mean_mag": 1.7116893529891968,
+      "p95_mag": 14.435545921325684,
+      "variance": 15.71912956237793,
+      "complexity": 0.1585327386856079
+    },
+    {
+      "frame": 31,
+      "mean_mag": 1.704242467880249,
+      "p95_mag": 14.94359302520752,
+      "variance": 17.290199279785156,
+      "complexity": 0.17826855182647705
+    },
+    {
+      "frame": 32,
+      "mean_mag": 1.5462331771850586,
+      "p95_mag": 14.222201347351074,
+      "variance": 14.360921859741211,
+      "complexity": 0.14330178499221802
+    },
+    {
+      "frame": 33,
+      "mean_mag": 1.4850327968597412,
+      "p95_mag": 13.499320030212402,
+      "variance": 15.2978515625,
+      "complexity": 0.14732679724693298
+    },
+    {
+      "frame": 34,
+      "mean_mag": 1.3966622352600098,
+      "p95_mag": 3.739455461502075,
+      "variance": 17.256441116333008,
+      "complexity": 0.1512565165758133
+    },
+    {
+      "frame": 35,
+      "mean_mag": 1.283660650253296,
+      "p95_mag": 2.4724819660186768,
+      "variance": 20.687442779541016,
+      "complexity": 0.1653566062450409
+    },
+    {
+      "frame": 36,
+      "mean_mag": 1.22142493724823,
+      "p95_mag": 1.2711817026138306,
+      "variance": 27.00237274169922,
+      "complexity": 0.19861438870429993
+    },
+    {
+      "frame": 37,
+      "mean_mag": 0.5831901431083679,
+      "p95_mag": 0.871486485004425,
+      "variance": 2.8476593494415283,
+      "complexity": 0.11453172564506531
+    },
+    {
+      "frame": 38,
+      "mean_mag": 0.5027121305465698,
+      "p95_mag": 0.870579183101654,
+      "variance": 0.23396055400371552,
+      "complexity": 0.0041788979433476925
+    },
+    {
+      "frame": 39,
+      "mean_mag": 0.5055444836616516,
+      "p95_mag": 0.8689134120941162,
+      "variance": 0.2574915885925293,
+      "complexity": 0.012081596069037914
+    },
+    {
+      "frame": 40,
+      "mean_mag": 0.5123605132102966,
+      "p95_mag": 0.8730217814445496,
+      "variance": 0.2537872791290283,
+      "complexity": 0.01120584737509489
+    },
+    {
+      "frame": 41,
+      "mean_mag": 0.5217407941818237,
+      "p95_mag": 0.8726749420166016,
+      "variance": 0.2770400941371918,
+      "complexity": 0.004621387459337711
+    },
+    {
+      "frame": 42,
+      "mean_mag": 0.5394964814186096,
+      "p95_mag": 0.8722708821296692,
+      "variance": 0.38738927245140076,
+      "complexity": 0.013725134544074535
+    },
+    {
+      "frame": 43,
+      "mean_mag": 0.5482962727546692,
+      "p95_mag": 0.8727224469184875,
+      "variance": 0.43483132123947144,
+      "complexity": 0.01986537128686905
+    },
+    {
+      "frame": 44,
+      "mean_mag": 0.5571507811546326,
+      "p95_mag": 0.8782773017883301,
+      "variance": 0.5030004382133484,
+      "complexity": 0.022351006045937538
+    },
+    {
+      "frame": 45,
+      "mean_mag": 0.5504295825958252,
+      "p95_mag": 0.9581092000007629,
+      "variance": 0.4697379767894745,
+      "complexity": 0.026117786765098572
+    },
+    {
+      "frame": 46,
+      "mean_mag": 0.5285910964012146,
+      "p95_mag": 0.872602105140686,
+      "variance": 0.36793801188468933,
+      "complexity": 0.016131345182657242
+    },
+    {
+      "frame": 47,
+      "mean_mag": 0.5165081024169922,
+      "p95_mag": 0.8704715967178345,
+      "variance": 0.3605242371559143,
+      "complexity": 0.013322055339813232
+    },
+    {
+      "frame": 48,
+      "mean_mag": 0.5337143540382385,
+      "p95_mag": 0.8708707690238953,
+      "variance": 0.4372848868370056,
+      "complexity": 0.015537267550826073
+    },
+    {
+      "frame": 49,
+      "mean_mag": 0.5672489404678345,
+      "p95_mag": 0.8705546259880066,
+      "variance": 0.7515656352043152,
+      "complexity": 0.026612283661961555
+    }
+  ],
+  "spatial_analysis": [],
+  "inference": {
+    "generated_text": "The video frames depict a highly abstract and chaotic scene, likely from a digital or computer-generated environment. The scene is dominated by numerous vertical and horizontal lines, shapes, and objects that appear to be floating or suspended in a void. The objects include various geometric shapes, such as cubes, spheres, and cylinders, as well as more organic forms like leaves and branches. The colors are predominantly dark, with shades of black, gray, and brown, creating a sense of depth and mystery.\n\nThe objects seem to be in constant motion, with some appearing to be falling or drifting through the space. The overall effect is one of disarray and randomness, as if the scene is part of a digital or virtual world where the laws of physics and gravity do not",
+    "n_tokens": 150,
+    "encode_time_ms": 738.0,
+    "generation_time_ms": 825.0
+  },
+  "metrics": {
+    "motion_coverage": 0.1411983801662253,
+    "shannon_entropy": 4.265246191177438,
+    "temporal_reduction": 0.84,
+    "avg_spatial_savings": 0.0
+  },
+  "timing": {
+    "flow_analysis_ms": 746.0,
+    "frame_selection_ms": 0.0,
+    "encode_ms": 738.0,
+    "generation_ms": 825.0,
+    "total_ms": 3394.0
+  },
+  "params": {
+    "sintel_dir": "/data/Fall25/multimodalRAG/VLM/Qwen2.5-VL/MPI-Sintel",
+    "video_name": "market_2",
+    "min_frames": 3,
+    "max_frames": 24,
+    "base_frames": 8,
+    "motion_threshold": 2.0,
+    "motion_percentile": 0.949999988079071,
+    "patch_grid": 4,
+    "spatial_threshold": 0.05000000074505806
+  }
+}

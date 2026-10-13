@@ -1,0 +1,101 @@
+Pyramid Generation — Jetson Orin Nano Port
+==========================================
+
+This archive contains 26 files. On your Jetson, after git-cloning
+llama.cpp, replace/add these files at the SAME relative paths.
+
+STEP 1: Clone llama.cpp on Jetson (if not already done)
+--------------------------------------------------------
+  git clone https://github.com/ggerganov/llama.cpp.git
+  cd llama.cpp
+
+STEP 2: Make sure you're on the same commit as this machine
+------------------------------------------------------------
+  git checkout b55dcdef5
+  (This is the commit these modifications are based on.)
+
+STEP 3: Extract and overwrite files
+-------------------------------------
+  tar xzf portedForJetson.tar.gz
+  cp -r portedForJetson/* .
+
+  This overwrites 19 modified core files and adds:
+    - dmc955/                          (your project directory — NEW)
+    - ggml/src/ggml-cuda/visual-pyramid.cu   (NEW)
+    - ggml/src/ggml-cuda/visual-pyramid.cuh  (NEW)
+
+FILES REPLACED (19 modified core files):
+  CMakeLists.txt
+  ggml/include/ggml.h
+  ggml/src/ggml.c
+  ggml/src/ggml-cpu/ggml-cpu.c
+  ggml/src/ggml-cuda/ggml-cuda.cu
+  include/llama.h
+  src/llama-context.cpp
+  src/llama-context.h
+  src/llama-cparams.h
+  src/llama-graph.cpp
+  src/llama-graph.h
+  src/llama-kv-cache.cpp
+  src/llama-kv-cache.h
+  src/llama-kv-cells.h
+  src/llama-memory.h
+  src/llama-model.cpp
+  src/models/qwen2vl.cpp
+  tools/mtmd/clip.cpp
+  tools/mtmd/mtmd.cpp
+
+FILES ADDED (7 new files):
+  dmc955/CMakeLists.txt
+  dmc955/generation-only/pyramid_generation.cpp
+  dmc955/generation-only/pyramid_prefill.h
+  dmc955/generation-only/visual_pyramid.cu
+  dmc955/generation-only/visual_pyramid.cuh
+  ggml/src/ggml-cuda/visual-pyramid.cu
+  ggml/src/ggml-cuda/visual-pyramid.cuh
+
+STEP 4: Build
+--------------
+  cmake -B build -DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=87
+  cmake --build build -j$(nproc)
+
+  CUDA arch 87 = Orin Nano (Ampere). This is required.
+
+  Produces:
+    build/bin/llama-pyramid-gen       (CPU scoring path)
+    build/bin/llama-pyramid-gen-cuda  (GPU scoring path)
+
+STEP 5: Download models
+-------------------------
+  BF16 model is ~14GB and WON'T fit in 8GB Orin Nano memory.
+  Use a quantized version (Q4_K_M ~4.5GB):
+
+    huggingface-cli download Qwen/Qwen2.5-VL-7B-Instruct-GGUF \
+      qwen2.5-vl-7b-instruct-q4_k_m.gguf --local-dir ./models/
+
+  The mmproj stays BF16 (small, ~600MB) — copy from this machine or download.
+
+STEP 6: Copy Sintel dataset
+-----------------------------
+  mkdir -p ~/data/MPI-Sintel/training/final/alley_1/
+  # Copy frame_0001.png ... frame_XXXX.png
+  # Optional for motion scoring:
+  mkdir -p ~/data/MPI-Sintel/training/flow/alley_1/
+
+STEP 7: Run
+------------
+  ./build/bin/llama-pyramid-gen-cuda \
+      -m ./models/qwen2.5-vl-7b-instruct-q4_k_m.gguf \
+      --mmproj ./models/mmproj-BF16.gguf \
+      --sintel-dir ~/data/MPI-Sintel \
+      --video alley_1 \
+      --n-frames 4 \
+      --n-predict 128 \
+      --output-json results.json \
+      -ngl 99
+
+NOTES:
+  - Use --n-frames 4 (not 8) to save memory on Orin Nano
+  - If OOM: add swap (sudo fallocate -l 8G /swapfile && sudo mkswap /swapfile && sudo swapon /swapfile)
+  - Run sudo jetson_clocks for max GPU/CPU clocks
+  - Default sintel path in code is /data/Fall25/... — always pass --sintel-dir to override

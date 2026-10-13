@@ -2061,6 +2061,12 @@ static void ggml_compute_forward(struct ggml_compute_params * params, struct ggm
                 ggml_compute_forward_opt_step_sgd(params, tensor);
             }
             break;
+        case GGML_OP_VISUAL_ATTN_REDUCE:
+        case GGML_OP_PYRAMID_MASK_GEN:
+            {
+                // GPU-only ops; CPU fallback is a no-op (should not reach here when CUDA is available)
+                GGML_ABORT("VISUAL_ATTN_REDUCE/PYRAMID_MASK_GEN require CUDA backend");
+            } break;
         case GGML_OP_NONE:
             {
                 // nop
@@ -2397,6 +2403,11 @@ static int ggml_get_n_tasks(struct ggml_tensor * node, int n_threads) {
         case GGML_OP_OPT_STEP_SGD:
             {
                 n_tasks = n_threads;
+            } break;
+        case GGML_OP_VISUAL_ATTN_REDUCE:
+        case GGML_OP_PYRAMID_MASK_GEN:
+            {
+                n_tasks = 1;
             } break;
         case GGML_OP_NONE:
             {

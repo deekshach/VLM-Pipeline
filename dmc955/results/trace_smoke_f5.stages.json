@@ -1,0 +1,81 @@
+{
+  "trace": "trace_smoke_f5.sqlite",
+  "vit_stream": 17,
+  "llm_stream": 15,
+  "requests": [
+    {
+      "vit_ms": 253.534453,
+      "prefill_ms": 474.18354,
+      "encode_wall_ms": 746.7842,
+      "encode_busy_ms": 701.417726,
+      "overlap_ms": 26.300267,
+      "overlap_pct": 10.37344892924671,
+      "encode_idle_ms": 45.366474,
+      "decode_ms": 2136.743714,
+      "decode_busy_ms": 2064.859889,
+      "decode_kernels": 21635,
+      "vit_kernels": 6350,
+      "prefill_kernels": 13539,
+      "request_gpu_ms": 2883.527914,
+      "encode_hw": {
+        "sm_active": 86.3361457077809,
+        "sm_issue": 15.879603589125486,
+        "tensor_active": 25.663452524440874,
+        "dram_rd": 31.756528726396144,
+        "dram_wr": 12.271059327708585,
+        "unalloc_warps": 15161863.495111825,
+        "comp_warps": 6094533.295031472,
+        "dram_total": 44.027588054104726,
+        "unalloc_pct": 71.32847417555953
+      },
+      "decode_hw": {
+        "sm_active": 92.44721078247848,
+        "sm_issue": 10.760295769374766,
+        "tensor_active": 0,
+        "dram_rd": 87.68382628229128,
+        "dram_wr": 1.395217147135904,
+        "unalloc_warps": 1598833.397182703,
+        "comp_warps": 22077478.798390117,
+        "dram_total": 89.07904342942719,
+        "unalloc_pct": 6.752881884543089
+      }
+    },
+    {
+      "vit_ms": 261.757732,
+      "prefill_ms": 485.839788,
+      "encode_wall_ms": 740.246613,
+      "encode_busy_ms": 710.40167,
+      "overlap_ms": 37.19585,
+      "overlap_pct": 14.210029142520229,
+      "encode_idle_ms": 29.844943,
+      "decode_ms": 2141.520399,
+      "decode_busy_ms": 2075.131396,
+      "decode_kernels": 21635,
+      "vit_kernels": 6350,
+      "prefill_kernels": 13787,
+      "request_gpu_ms": 2881.767012,
+      "encode_hw": {
+        "sm_active": 88.33027151154937,
+        "sm_issue": 16.09225989463731,
+        "tensor_active": 25.976766175874644,
+        "dram_rd": 32.89207078211536,
+        "dram_wr": 12.483182493583682,
+        "unalloc_warps": 15416455.164933136,
+        "comp_warps": 6272467.993786302,
+        "dram_total": 45.375253275699045,
+        "unalloc_pct": 71.07985515055583
+      },
+      "decode_hw": {
+        "sm_active": 92.49642773756713,
+        "sm_issue": 10.742283446182583,
+        "tensor_active": 0,
+        "dram_rd": 87.50558020079383,
+        "dram_wr": 1.470978286247957,
+        "unalloc_warps": 1591812.292084987,
+        "comp_warps": 22093875.455241654,
+        "dram_total": 88.97655848704179,
+        "unalloc_pct": 6.720566061100134
+      }
+    }
+  ]
+}

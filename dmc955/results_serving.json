@@ -1,0 +1,51 @@
+{
+  "mode": "serving",
+  "serve_rounds": 3,
+  "base_frames": 16,
+  "fps": 0.0,
+  "source_fps": 24.0,
+  "n_predict": 128,
+  "requests": [
+    {
+      "index": 0,
+      "round": 0,
+      "video": "alley_1",
+      "n_frames": 16,
+      "n_src_frames": 50,
+      "t_offset_ms": 1.0,
+      "request_ms": 5134.0,
+      "encode_ms": 2588.0,
+      "generation_ms": 2221.0,
+      "n_tokens": 128,
+      "tok_per_s": 57.63169743358847
+    },
+    {
+      "index": 1,
+      "round": 1,
+      "video": "alley_1",
+      "n_frames": 16,
+      "n_src_frames": 50,
+      "t_offset_ms": 5136.0,
+      "request_ms": 4846.0,
+      "encode_ms": 2458.0,
+      "generation_ms": 2218.0,
+      "n_tokens": 128,
+      "tok_per_s": 57.70964833183048
+    },
+    {
+      "index": 2,
+      "round": 2,
+      "video": "alley_1",
+      "n_frames": 16,
+      "n_src_frames": 50,
+      "t_offset_ms": 9983.0,
+      "request_ms": 4882.0,
+      "encode_ms": 2463.0,
+      "generation_ms": 2252.0,
+      "n_tokens": 128,
+      "tok_per_s": 56.83836589698047
+    }
+  ],
+  "total_ms": 14866.0,
+  "n_requests": 3
+}

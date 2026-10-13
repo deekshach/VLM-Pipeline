@@ -1,0 +1,609 @@
+{
+  "mode": "pairs",
+  "align": 0,
+  "base_frames": 8,
+  "frame_step": 0,
+  "video_fps": 2.0,
+  "tokens_per_second": 2,
+  "n_predict": 128,
+  "requests": [
+    {
+      "video": "alley_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 57.915000915527344,
+      "tokenize_ms": 48.61899948120117,
+      "vit_ms": 334.3370056152344,
+      "prefill_ms": 415.5169982910156,
+      "decode_ms": 2122.43505859375,
+      "total_ms": 2978.884033203125,
+      "group_encode_ms": [
+        164.73699951171875,
+        59.12799835205078,
+        55.37200164794922,
+        55.099998474121094
+      ],
+      "n_tokens": 128,
+      "text": "The image shows a woman with red hair, wearing a white tank top and a black arm guard, holding an apple in her right hand. She is standing in front of a building with a red roof and a window. The woman is looking to the right, and her hair is slightly tousled. The scene appears to be set in a medieval or fantasy setting, with the building and the woman's attire suggesting a historical or fantasy context. The woman's posture and the way she is holding the apple suggest that she is carefully observing something or someone off-screen. The image is still, and there is no indication of motion or movement. The"
+    },
+    {
+      "video": "alley_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 58.02299880981445,
+      "tokenize_ms": 40.57699966430664,
+      "vit_ms": 221.5290069580078,
+      "prefill_ms": 403.77801513671875,
+      "decode_ms": 1582.95703125,
+      "total_ms": 2306.929931640625,
+      "group_encode_ms": [
+        56.40999984741211,
+        54.8390007019043,
+        55.09199905395508,
+        55.1879997253418
+      ],
+      "n_tokens": 96,
+      "text": "The image shows a woman with orange hair, wearing a white tank top and brown pants, running down a narrow alleyway. The alleyway is lined with buildings on both sides, and there are wooden crates and barrels scattered on the ground. The woman is moving quickly, her arms outstretched for balance. The lighting in the scene is dim, with shadows cast by the buildings and the woman's hair. The overall atmosphere of the scene is one of urgency and movement."
+    },
+    {
+      "video": "ambush_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 47.63100051879883,
+      "tokenize_ms": 38.8380012512207,
+      "vit_ms": 223.4669952392578,
+      "prefill_ms": 415.6199951171875,
+      "decode_ms": 2129.5380859375,
+      "total_ms": 2855.14404296875,
+      "group_encode_ms": [
+        55.62099838256836,
+        54.82500076293945,
+        55.13600158691406,
+        57.8849983215332
+      ],
+      "n_tokens": 128,
+      "text": "咬牙切齿的利特克森正用尽全力将阿萨吉格踢向地面。阿萨吉格被踢得倒飞出去，空中翻了个跟头，然后重重地落在雪地上，发出一阵刺耳的响声。阿萨吉格的脸上满是不甘和痛楚，他努力地想要站起来，但似乎被某种元气所束缚，无法动弹。利特克森不耐烦地吐着唾沫水，'这天平高低平平平平平平平平平平平平平平平平平平平平平平平"
+    },
+    {
+      "video": "ambush_4",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 53.70500183105469,
+      "tokenize_ms": 41.07500076293945,
+      "vit_ms": 228.66900634765625,
+      "prefill_ms": 413.2860107421875,
+      "decode_ms": 1060.779052734375,
+      "total_ms": 1797.573974609375,
+      "group_encode_ms": [
+        57.13199996948242,
+        57.724998474121094,
+        57.46200180053711,
+        56.349998474121094
+      ],
+      "n_tokens": 65,
+      "text": "A character with orange hair is种种琐事躺在床上，其上身着装较为特别，既舍弃了衣服又舍弃了烟雾服。其握着一个黑色的物体，可能是一把枪。背景是灰蒙蒙的，有岩石和云朵，整体氛围显得有些压抑。"
+    },
+    {
+      "video": "ambush_5",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 54.43299865722656,
+      "tokenize_ms": 40.573001861572266,
+      "vit_ms": 223.38800048828125,
+      "prefill_ms": 412.7650146484375,
+      "decode_ms": 240.75999450683594,
+      "total_ms": 971.9940185546875,
+      "group_encode_ms": [
+        57.06700134277344,
+        55.207000732421875,
+        55.17100143432617,
+        55.94300079345703
+      ],
+      "n_tokens": 15,
+      "text": "<|object_ref_start|>\n !*** [0-3] ***ostatywرة\n"
+    },
+    {
+      "video": "ambush_6",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 55.07099914550781,
+      "tokenize_ms": 40.65299987792969,
+      "vit_ms": 223.8979949951172,
+      "prefill_ms": 405.9119873046875,
+      "decode_ms": 2137.72412109375,
+      "total_ms": 2863.31298828125,
+      "group_encode_ms": [
+        57.9010009765625,
+        55.20800018310547,
+        55.19900131225586,
+        55.59000015258789
+      ],
+      "n_tokens": 128,
+      "text": "A young woman with red hair is engaged in a sword fight with a bald man. The woman is in the foreground, her body leaning forward as she swings her sword with force. The man, in the background, is also wielding a sword and appears to be in the middle of a defensive move. The setting is a rocky, snowy landscape, with the ground covered in snow and the rocks appearing dark and jagged. The woman's red hair stands out against the white snow, and the man's bald head contrasts with the woman's full head of hair. The motion of the woman's sword suggests a dynamic, fast-paced battle. The"
+    },
+    {
+      "video": "ambush_7",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 48.650001525878906,
+      "tokenize_ms": 40.63199996948242,
+      "vit_ms": 226.76901245117188,
+      "prefill_ms": 410.2390441894531,
+      "decode_ms": 2141.068115234375,
+      "total_ms": 2867.410888671875,
+      "group_encode_ms": [
+        58.61899948120117,
+        56.417999267578125,
+        56.63399887084961,
+        55.097999572753906
+      ],
+      "n_tokens": 128,
+      "text": "A hand, appearing to be that of a person wearing a gray sleeve, is shown in the first image. The hand is reaching towards a staff or rod that is partially visible in the frame. The staff has a dark, possibly wooden handle and a metal grip with a tree design on it. The background is a plain, light-colored surface, possibly a wall or a piece of furniture.\n\nIn the second image, the hand is shown in the process of grasping the staff. The hand is now in a more forceful position, with the fingers wrapped around the metal grip. The tree design on the metal grip is more visible. The"
+    },
+    {
+      "video": "bamboo_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 64.63999938964844,
+      "tokenize_ms": 40.60499954223633,
+      "vit_ms": 220.17498779296875,
+      "prefill_ms": 404.2860107421875,
+      "decode_ms": 1789.626953125,
+      "total_ms": 2519.382080078125,
+      "group_encode_ms": [
+        55.07600021362305,
+        54.900001525878906,
+        54.9739990234375,
+        55.224998474121094
+      ],
+      "n_tokens": 109,
+      "text": "A woman with long brown hair is seen in a lush bamboo forest. She is wearing a brown dress and is crouching down, her hands on her knees. The forest is dense with tall bamboo stalks and green leaves, creating a natural canopy overhead. The woman is surrounded by the greenery, and the scene is peaceful and serene. The camera angle is from above, looking down on the woman and the bamboo forest. The woman's position and the surrounding greenery suggest a moment of quiet reflection or a pause in an adventure."
+    },
+    {
+      "video": "bamboo_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 59.266998291015625,
+      "tokenize_ms": 38.875,
+      "vit_ms": 222.802001953125,
+      "prefill_ms": 412.5559997558594,
+      "decode_ms": 1290.47705078125,
+      "total_ms": 2024.0469970703125,
+      "group_encode_ms": [
+        55.9119987487793,
+        54.9370002746582,
+        55.319000244140625,
+        56.63399887084961
+      ],
+      "n_tokens": 76,
+      "text": "影子在竹子之间移动，她弯腰掠过一根竹子。背景是幽静的竹林，竹子高大挺拔，竹叶翠绿。影子的头发金色，她正柔顺地披散下来，她身着一件无袖上衣和短裤，赤脚在竹林中轻盈地跳跃。"
+    },
+    {
+      "video": "bandage_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 58.72200012207031,
+      "tokenize_ms": 40.88800048828125,
+      "vit_ms": 221.1790008544922,
+      "prefill_ms": 404.52099609375,
+      "decode_ms": 1756.79296875,
+      "total_ms": 2482.14990234375,
+      "group_encode_ms": [
+        55.49100112915039,
+        55.2859992980957,
+        55.40399932861328,
+        54.99800109863281
+      ],
+      "n_tokens": 107,
+      "text": "A woman is seen in a dimly lit room, holding a small, injured creature in her hands. The creature appears to be a small, gray, reptilian-like animal with a long tail and a pair of small, sharp teeth. The woman is wearing a gray tank top and brown pants, and she has a tattoo on her left hand. The floor beneath her is covered in a reddish-b影响力的 tint, and there is a map岂�. The creature is费�。-ar 16:9"
+    },
+    {
+      "video": "bandage_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 59.61199951171875,
+      "tokenize_ms": 40.54399871826172,
+      "vit_ms": 221.11199951171875,
+      "prefill_ms": 404.49200439453125,
+      "decode_ms": 2121.10693359375,
+      "total_ms": 2846.9208984375,
+      "group_encode_ms": [
+        55.23699951171875,
+        55.597999572753906,
+        55.06800079345703,
+        55.20899963378906
+      ],
+      "n_tokens": 128,
+      "text": "A young woman with red hair is holding a small, brown, scaly creature in her hands. The creature appears to be a baby dragon or a similar mythical creature. The woman is wearing a white shirt and has a gentle expression on her face. She is looking at the creature with a mix of curiosity and affection. The background is a wooden structure, possibly a ship or a similar setting, with ropes牵着商学院. The lighting�the scene is warm and soft, suggesting it might be daytime. The woman's hands are gently cradling the creature, and the creature's eyes are wide open, looking up at the woman."
+    },
+    {
+      "video": "cave_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 55.617000579833984,
+      "tokenize_ms": 40.70100021362305,
+      "vit_ms": 220.18600463867188,
+      "prefill_ms": 403.5360107421875,
+      "decode_ms": 2120.552978515625,
+      "total_ms": 2840.639892578125,
+      "group_encode_ms": [
+        55.06800079345703,
+        54.99700164794922,
+        54.94900131225586,
+        55.172000885009766
+      ],
+      "n_tokens": 128,
+      "text": "A lone adventurerantafindz_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6_6"
+    },
+    {
+      "video": "cave_4",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 58.29199981689453,
+      "tokenize_ms": 40.48500061035156,
+      "vit_ms": 220.73500061035156,
+      "prefill_ms": 405.0810241699219,
+      "decode_ms": 2122.741943359375,
+      "total_ms": 2847.382080078125,
+      "group_encode_ms": [
+        55.37300109863281,
+        55.05500030517578,
+        55.33300018310547,
+        54.9739990234375
+      ],
+      "n_tokens": 128,
+      "text": "A woman with red hair is seen in a cave, holding a long spear. She is in the process of fighting a large, scaly dragon. The dragon is brown and has a long tail. The woman is wearing a white  top and brown pants. She is holding the spear with both hands and appears to be in the middle of a powerful swing. The dragon is on the ground, and its head is turned towards the woman. The cave is dark and rocky, with some crystals visible in the background. The woman is moving towards the dragon, and the dragon is moving away from her. The scene is dynamic, with the woman"
+    },
+    {
+      "video": "market_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 55.23099899291992,
+      "tokenize_ms": 38.94200134277344,
+      "vit_ms": 221.1920166015625,
+      "prefill_ms": 403.67901611328125,
+      "decode_ms": 2120.4609375,
+      "total_ms": 2839.552978515625,
+      "group_encode_ms": [
+        55.33100128173828,
+        55.13600158691406,
+        55.659000396728516,
+        55.066001892089844
+      ],
+      "n_tokens": 128,
+      "text": "A woman with red hair is seen in a dimly lit alleyway. She is wearing a white and gray outfit and is in the process of picking up a fruit from the ground. The alleyway is filled with various objects, including a wooden barrel, a stack of boxes, and a pile of sutile tad- ton t-- -t- -t- -t- -t- -t- -t- -t- -t- -t- -t- -t- -t- -t- -t- -t- -t- -t- -t- -t- -"
+    },
+    {
+      "video": "market_5",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 55.435001373291016,
+      "tokenize_ms": 40.505001068115234,
+      "vit_ms": 219.87899780273438,
+      "prefill_ms": 404.4360046386719,
+      "decode_ms": 1873.66796875,
+      "total_ms": 2593.971923828125,
+      "group_encode_ms": [
+        55.152000427246094,
+        55.167999267578125,
+        54.8120002746582,
+        54.74700164794922
+      ],
+      "n_tokens": 114,
+      "text": "A woman in a white tank top and blue jeans is leaping over a wooden crate. She is in mid-air, her body arched as she propels herself forward. Her hair is a vibrant red, and she appears to be in the midst of a dynamic action sequence. The crate is brown and made of wood, and it is located on a stone floor. The background is a mix of gray and brown tones, suggesting an industrial or warehouse setting. The scene conveys a sense of movement and energy, with the woman's leap being the focal point."
+    },
+    {
+      "video": "market_6",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 57.76100158691406,
+      "tokenize_ms": 40.46500015258789,
+      "vit_ms": 221.55099487304688,
+      "prefill_ms": 404.4029846191406,
+      "decode_ms": 1392.5589599609375,
+      "total_ms": 2116.7890625,
+      "group_encode_ms": [
+        55.4379997253418,
+        55.28300094604492,
+        55.09299850463867,
+        55.73699951171875
+      ],
+      "n_tokens": 85,
+      "text": "A bull is pulling a wooden cart through a cobblestone street in a medieval town. The cart is tilted to the side, and the bull is struggling to maintain control. The town is made up of wooden buildings with thatched roofs, and there are other people and animals in the background. The scene is action-packed, with the bull and cart moving quickly and the town appearing to be in a state of chaos."
+    },
+    {
+      "video": "mountain_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 52.96900177001953,
+      "tokenize_ms": 38.77399826049805,
+      "vit_ms": 220.8470001220703,
+      "prefill_ms": 403.23199462890625,
+      "decode_ms": 2120.177978515625,
+      "total_ms": 2836.053955078125,
+      "group_encode_ms": [
+        55.27799987792969,
+        55.207000732421875,
+        55.20500183105469,
+        55.15700149536133
+      ],
+      "n_tokens": 128,
+      "text": "The image shows a snowy mountain landscape with a prominent peak in the foreground. The sky is overcast with gray clouds, and the 3D model of the mountain has a realistic texture. The camera is positioned at a low angle, looking up at the 3D建模 mountain, giving a steep and dramatic view of the peak. The建模山峰 is covered with snow, and the surrounding 3D model of the mountain is rugged and rocky. The image captures the grandeur and majesty of the mountain, with the overcast sky adding a sense of mystery and depth to the scene. The camera remains stationary in this"
+    },
+    {
+      "video": "shaman_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 55.6609992980957,
+      "tokenize_ms": 38.74800109863281,
+      "vit_ms": 220.0709991455078,
+      "prefill_ms": 404.594970703125,
+      "decode_ms": 2121.06591796875,
+      "total_ms": 2840.19189453125,
+      "group_encode_ms": [
+        55.7859992980957,
+        54.762001037597656,
+        54.917999267578125,
+        54.60499954223633
+      ],
+      "n_tokens": 128,
+      "text": "The image shows a close-up of a bearded man with a red face and a large, pointed hat. He has a mustache and a goatee, and he is wearing a white tank top. The man is looking down at a woman who is sitting in front of him. The woman has red hair and is wearing a white tank top. She is looking up at the man. The background is dark and there is a pattern on the wall. The man's expression is serious and he is looking at the woman with a stern gaze. The woman's expression is one of concern and she is looking up at the man with a worried"
+    },
+    {
+      "video": "shaman_3",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 56.98400115966797,
+      "tokenize_ms": 38.667999267578125,
+      "vit_ms": 220.40699768066406,
+      "prefill_ms": 404.77398681640625,
+      "decode_ms": 2120.60009765625,
+      "total_ms": 2841.47802734375,
+      "group_encode_ms": [
+        55.39699935913086,
+        55.08700180053711,
+        55.24700164794922,
+        54.67599868774414
+      ],
+      "n_tokens": 128,
+      "text": "A hand is shown in the center of the image, pressing a button on a metallic object. The object has a circular design with a tree-like pattern in the middle. The hand is in the process of pressing the button, which is located in the middle of the object. The background is a textured brown surface, possibly a carpet or a piece of tibet tentcloth. The object appears to be a part of a larger mechanism, but the rest of the mechanism is not visible in the image. The hand is the only human element in the image, and it is the main focus of the scene. The motion pattern is a"
+    },
+    {
+      "video": "sleeping_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 55.60599899291992,
+      "tokenize_ms": 39.957000732421875,
+      "vit_ms": 226.57301330566406,
+      "prefill_ms": 415.48699951171875,
+      "decode_ms": 2120.510986328125,
+      "total_ms": 2858.18896484375,
+      "group_encode_ms": [
+        57.422000885009766,
+        59.19900131225586,
+        55.04399871826172,
+        54.90800094604492
+      ],
+      "n_tokens": 128,
+      "text": "A young woman and a dragon are depicted in a scene where the dragon is nuzzling the woman's hand. The woman is wearing a white tank top and brown pants, and the dragon has a mottled brown and tan coloration. The dragon's head is turned towards the woman's hand, and its body is curled up on a bed with a red blanket. The scene is set in a dimly lit room with a wooden floor. The dragon's head is moving slightly as it nuzzles the woman's hand, and the woman's hand is gently resting on the dragon's back. The overall mood of the scene is"
+    },
+    {
+      "video": "sleeping_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 62.819000244140625,
+      "tokenize_ms": 40.821998596191406,
+      "vit_ms": 229.37100219726563,
+      "prefill_ms": 425.8169860839844,
+      "decode_ms": 2268.68701171875,
+      "total_ms": 3027.576904296875,
+      "group_encode_ms": [
+        55.10200119018555,
+        55.42100143432617,
+        58.98500061035156,
+        59.862998962402344
+      ],
+      "n_tokens": 128,
+      "text": "The image showsci scene of a person in a medieval setting, possibly a black방��, lying on a wooden 开�. The person is wearing a tattered tunic and appears to础e been injured or is in distress. The scene is dimly lit, with shadows cast by the说什么preching and the person's body. The person's hands are raised,一种可能 is in a state of shock or pain. The background is a wooden structure, possibly a ship or a similar wooden building. There is a rope hanging from the ceiling, adding to the nes��� of 人际关系. The overall atmosphere"
+    },
+    {
+      "video": "temple_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 54.137001037597656,
+      "tokenize_ms": 41.25199890136719,
+      "vit_ms": 236.9639892578125,
+      "prefill_ms": 425.3089904785156,
+      "decode_ms": 2214.194091796875,
+      "total_ms": 2971.94189453125,
+      "group_encode_ms": [
+        60.32600021362305,
+        59.25600051879883,
+        58.637001037597656,
+        58.744998931884766
+      ],
+      "n_tokens": 128,
+      "text": "The image shows a scene with a dragon and a person oncsi a rooftop. The dragon is in the foreground, with its wings spread and its mouth open, as if it is about to breathe多少 as a fire. The person is standing onroam the rooftop, lookingar at the dragon. The background shows a sunset吼�t the rooftop,  with a castle and a statue visible. The dragon is in the foreground, with its wings spread and its mouth open, as if it is about to breathe多少 as a fire. The person is standing onroam the rooftop, lookingar at the dragon. The background shows a"
+    },
+    {
+      "video": "temple_3",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 47.81800079345703,
+      "tokenize_ms": 40.07500076293945,
+      "vit_ms": 219.8990020751953,
+      "prefill_ms": 404.865966796875,
+      "decode_ms": 2203.876953125,
+      "total_ms": 2916.5830078125,
+      "group_encode_ms": [
+        55.14400100708008,
+        55.13399887084961,
+        54.88199996948242,
+        54.73899841308594
+      ],
+      "n_tokens": 128,
+      "text": "A young woman with short orange hair is facing a小型翼龙建筑设计元素. She-uiing a İki品味上官羽装束, and is holding a long,一般候еж跫肯斯. The dragon is flying above her, with its wings spread wide. The background is a �天rfu_begu昏暗的天空, with a warm, orange glow. The woman's expression is one of surprise or fear as she looks up at the dragon. The dragon's بكお得的翅膀 are a mix of black and white, and it has a身形的龙尾. The woman'sstępsoj特�"
+    }
+  ]
+}

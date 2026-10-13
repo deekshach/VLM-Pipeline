@@ -1,0 +1,63 @@
+{
+  "mode": "video",
+  "align": 28,
+  "base_frames": 8,
+  "frame_step": 0,
+  "video_fps": 2.0,
+  "tokens_per_second": 2,
+  "n_predict": 48,
+  "requests": [
+    {
+      "video": "alley_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 102.89199829101563,
+      "tokenize_ms": 16.8700008392334,
+      "vit_ms": 232.40200805664063,
+      "prefill_ms": 362.5950012207031,
+      "decode_ms": 816.1749877929688,
+      "total_ms": 1556.613037109375,
+      "group_encode_ms": [
+        55.729000091552734,
+        58.393001556396484,
+        59.70000076293945,
+        58.58000183105469
+      ],
+      "n_tokens": 48,
+      "text": "The image depicts a scene from a video game, likely set in a medieval or fantasy setting. The character in the image is a woman with读懂d不解ar hair, wearing a sleeveless top andrigid. She is holding an apple"
+    },
+    {
+      "video": "market_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 100.43699645996094,
+      "tokenize_ms": 16.788000106811523,
+      "vit_ms": 231.44500732421875,
+      "prefill_ms": 365.7449951171875,
+      "decode_ms": 813.531005859375,
+      "total_ms": 1553.5419921875,
+      "group_encode_ms": [
+        55.09400177001953,
+        58.2859992980957,
+        59.50699996948242,
+        58.55799865722656
+      ],
+      "n_tokens": 48,
+      "text": "The scene depicted in the video frames appears to be a dynamic and action-packed 基于文本的描述。 The setting is an industrial or warehouse environment, characterized by a cluttered and somewhat chaotic atmosphere. The area is filled with wooden"
+    }
+  ]
+}

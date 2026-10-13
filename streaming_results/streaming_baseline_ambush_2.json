@@ -1,0 +1,278 @@
+{
+  "mode": "streaming_baseline",
+  "video_name": "ambush_2",
+  "n_frames_total": 21,
+  "n_frames_selected": 16,
+  "global_complexity": 0.8522183299064636,
+  "streaming": {
+    "fps": 4.0,
+    "video_duration_s": 5.0,
+    "online_selection": {
+      "method": "uniform",
+      "baseline_uniform_count": 16
+    }
+  },
+  "selected_frames": [
+    {
+      "index": 1,
+      "weight": 1.0
+    },
+    {
+      "index": 2,
+      "weight": 1.0
+    },
+    {
+      "index": 4,
+      "weight": 1.0
+    },
+    {
+      "index": 5,
+      "weight": 1.0
+    },
+    {
+      "index": 6,
+      "weight": 1.0
+    },
+    {
+      "index": 8,
+      "weight": 1.0
+    },
+    {
+      "index": 9,
+      "weight": 1.0
+    },
+    {
+      "index": 10,
+      "weight": 1.0
+    },
+    {
+      "index": 12,
+      "weight": 1.0
+    },
+    {
+      "index": 13,
+      "weight": 1.0
+    },
+    {
+      "index": 14,
+      "weight": 1.0
+    },
+    {
+      "index": 16,
+      "weight": 1.0
+    },
+    {
+      "index": 17,
+      "weight": 1.0
+    },
+    {
+      "index": 18,
+      "weight": 1.0
+    },
+    {
+      "index": 20,
+      "weight": 1.0
+    },
+    {
+      "index": 21,
+      "weight": 1.0
+    }
+  ],
+  "inference": {
+    "generated_text": "The scene is a close-up of a young man with red hair and a brown leather outfit. He is standing in a snowy landscape with a cloudy sky. The man is looking to the side with a concerned expression on his face. His right hand is raised, and his fingers are spread out. The lighting is soft and diffused, suggesting an overcast day. The color palette is muted, with shades of white, gray, and brown dominating the scene. The man's outfit appears to be made of leather, and he has a high collar on his jacket. The overall mood of the scene is one of concern and worry. The camera angle is slightly above the man, looking down at him. There is no visible motion or animation dynamics in the",
+    "n_tokens": 150,
+    "encode_time_ms": 2460.0,
+    "generation_time_ms": 2480.0
+  },
+  "metrics": {
+    "motion_coverage": 0.7087914692509676,
+    "shannon_entropy": 4.198102274977727,
+    "temporal_reduction": 0.23809523809523814,
+    "total_tokens_encoded": 9472,
+    "total_tokens_cached": 0,
+    "encoder_savings_pct": 0.0,
+    "total_encode_time_ms": 1073.0,
+    "estimated_full_encode_time_ms": 2544.0,
+    "encode_speedup": 2.370922565460205
+  },
+  "per_frame_cache": [
+    {
+      "frame_index": 1,
+      "is_keyframe": true,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 159.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 2,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 62.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 3,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 62.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 4,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 5,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 6,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 7,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 60.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 8,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 60.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 9,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 10,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 60.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 11,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 12,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 13,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 14,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 15,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 16,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    }
+  ],
+  "pruning": {
+    "enabled": false
+  },
+  "prefill_pruning": {
+    "enabled": false
+  },
+  "timing": {
+    "selection_ms": 0.0,
+    "encode_ms": 2460.0,
+    "generation_ms": 2480.0,
+    "total_ms": 7355.0
+  },
+  "params": {
+    "sintel_dir": "/data/Fall25/multimodalRAG/VLM/Qwen2.5-VL/MPI-Sintel",
+    "video_name": "ambush_2",
+    "fps": 4.0,
+    "baseline_uniform_count": 16
+  }
+}

@@ -1,0 +1,1831 @@
+{
+  "mode": "pairs",
+  "align": 0,
+  "base_frames": 8,
+  "frame_step": 0,
+  "video_fps": 2.0,
+  "tokens_per_second": 2,
+  "n_predict": 128,
+  "requests": [
+    {
+      "video": "-4wsuPCjDBc_5_15",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 912,
+      "load_ms": 16.23200035095215,
+      "tokenize_ms": 19.402000427246094,
+      "vit_ms": 192.39199829101563,
+      "prefill_ms": 220.42599487304688,
+      "decode_ms": 322.3999938964844,
+      "total_ms": 770.8690185546875,
+      "group_encode_ms": [
+        127.40799713134766,
+        22.19099998474121,
+        20.81599998474121,
+        21.976999282836914
+      ],
+      "n_tokens": 20,
+      "text": "a chipmunk isшиб with a peanut in its mouth as it sits on a table."
+    },
+    {
+      "video": "-7KMZQEsJW4_205_208",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.635000228881836,
+      "tokenize_ms": 7.131999969482422,
+      "vit_ms": 57.76300048828125,
+      "prefill_ms": 178.62899780273438,
+      "decode_ms": 186.34800720214844,
+      "total_ms": 436.5190124511719,
+      "group_encode_ms": [
+        17.364999771118164,
+        13.817000389099121,
+        13.993000030517578,
+        12.588000297546387
+      ],
+      "n_tokens": 12,
+      "text": "A man is holding a bunch of sunflower heads."
+    },
+    {
+      "video": "-8y1Q0rA3n8_108_115",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        46,
+        26
+      ],
+      "n_visual_tokens": 4784,
+      "n_prompt_tokens": 4812,
+      "load_ms": 72.60299682617188,
+      "tokenize_ms": 103.96299743652344,
+      "vit_ms": 730.5810546875,
+      "prefill_ms": 708.8770141601563,
+      "decode_ms": 156.33599853515625,
+      "total_ms": 1772.43505859375,
+      "group_encode_ms": [
+        209.9239959716797,
+        175.7270050048828,
+        172.89999389648438,
+        172.02999877929688
+      ],
+      "n_tokens": 10,
+      "text": "A man swings a sword at a bottle."
+    },
+    {
+      "video": "-8y1Q0rA3n8_95_102",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        46,
+        26
+      ],
+      "n_visual_tokens": 4784,
+      "n_prompt_tokens": 4812,
+      "load_ms": 73.12100219726563,
+      "tokenize_ms": 92.13700103759766,
+      "vit_ms": 695.051025390625,
+      "prefill_ms": 710.27392578125,
+      "decode_ms": 175.0189971923828,
+      "total_ms": 1745.7049560546875,
+      "group_encode_ms": [
+        175.9980010986328,
+        173.07200622558594,
+        175.31399536132813,
+        170.66700744628906
+      ],
+      "n_tokens": 11,
+      "text": "a man is swinging a sword at a target."
+    },
+    {
+      "video": "-9CUm-2cui8_39_44",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 20.399999618530273,
+      "tokenize_ms": 20.944000244140625,
+      "vit_ms": 118.64600372314453,
+      "prefill_ms": 264.177978515625,
+      "decode_ms": 307.3580017089844,
+      "total_ms": 731.5689697265625,
+      "group_encode_ms": [
+        33.172000885009766,
+        30.29800033569336,
+        27.658000946044922,
+        27.51799964904785
+      ],
+      "n_tokens": 19,
+      "text": "A-Okra is being cooked in a pot of大致煮沸的- water."
+    },
+    {
+      "video": "-AwoiGR6c8M_10_14",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        31,
+        17
+      ],
+      "n_visual_tokens": 2108,
+      "n_prompt_tokens": 2136,
+      "load_ms": 33.119998931884766,
+      "tokenize_ms": 39.47800064086914,
+      "vit_ms": 212.08499145507813,
+      "prefill_ms": 401.594970703125,
+      "decode_ms": 136.85299682617188,
+      "total_ms": 823.1749877929688,
+      "group_encode_ms": [
+        57.763999938964844,
+        51.59400177001953,
+        49.66999816894531,
+        53.05699920654297
+      ],
+      "n_tokens": 9,
+      "text": "A boy is sitting at a piano."
+    },
+    {
+      "video": "-Cv5LsqKUXc_17_25",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 14.654999732971191,
+      "tokenize_ms": 23.31999969482422,
+      "vit_ms": 117.5929946899414,
+      "prefill_ms": 261.9309997558594,
+      "decode_ms": 187.61399841308594,
+      "total_ms": 605.1489868164063,
+      "group_encode_ms": [
+        34.369998931884766,
+        27.913999557495117,
+        27.59600067138672,
+        27.71299934387207
+      ],
+      "n_tokens": 12,
+      "text": "A hand just- cut a一致好评 strawberry in half."
+    },
+    {
+      "video": "-Cv5LsqKUXc_71_76",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 18.3799991607666,
+      "tokenize_ms": 20.940000534057617,
+      "vit_ms": 113.35400390625,
+      "prefill_ms": 259.17901611328125,
+      "decode_ms": 2178.825927734375,
+      "total_ms": 2590.72998046875,
+      "group_encode_ms": [
+        28.091999053955078,
+        27.71299934387207,
+        28.599000930786133,
+        28.950000762939453
+      ],
+      "n_tokens": 128,
+      "text": "The woman is�篻篛篛篛篛篛篛endid篛��imate上市篛篛篛篝篛篛篛篛篛篛篛篛篛篛篛篛篛篛篛篛篐篐篐篐篐篐aklıs��篐篐�篐篐淡篐篐篬篐篬篬篬篬篬�篬�篬篬ռ篬篬篬�ռռ篬"
+    },
+    {
+      "video": "-DKuLXYoY3g_14_20",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        14,
+        8
+      ],
+      "n_visual_tokens": 448,
+      "n_prompt_tokens": 476,
+      "load_ms": 7.618000030517578,
+      "tokenize_ms": 8.383999824523926,
+      "vit_ms": 53.98899841308594,
+      "prefill_ms": 179.47801208496094,
+      "decode_ms": 219.80299377441406,
+      "total_ms": 469.2799987792969,
+      "group_encode_ms": [
+        16.20800018310547,
+        12.708999633789063,
+        12.880999565124512,
+        12.190999984741211
+      ],
+      "n_tokens": 14,
+      "text": "A young boy is dribbling a basketball on a gym floor."
+    },
+    {
+      "video": "-DRy7rBg0IQ_31_37",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        14,
+        11
+      ],
+      "n_visual_tokens": 616,
+      "n_prompt_tokens": 644,
+      "load_ms": 9.050000190734863,
+      "tokenize_ms": 11.267999649047852,
+      "vit_ms": 67.99000549316406,
+      "prefill_ms": 188.66998291015625,
+      "decode_ms": 544.833984375,
+      "total_ms": 821.8209838867188,
+      "group_encode_ms": [
+        19.969999313354492,
+        16.08300018310547,
+        15.522000312805176,
+        16.415000915527344
+      ],
+      "n_tokens": 33,
+      "text": "A woman is The woman is swimming underwater in a pool, using吆力 to move forward. She is wearing什么都游泳裤 and has a blue swimsuit."
+    },
+    {
+      "video": "-FugkxLmGO4_5_16",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 7.809000015258789,
+      "tokenize_ms": 7.468999862670898,
+      "vit_ms": 54.26599884033203,
+      "prefill_ms": 174.22201538085938,
+      "decode_ms": 133.5919952392578,
+      "total_ms": 377.3689880371094,
+      "group_encode_ms": [
+        18.295000076293945,
+        12.123000144958496,
+        11.913999557495117,
+        11.934000015258789
+      ],
+      "n_tokens": 9,
+      "text": "A  dog is in a cage."
+    },
+    {
+      "video": "-Ms9tsWmhyU_80_95",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.422999858856201,
+      "tokenize_ms": 7.5229997634887695,
+      "vit_ms": 51.70100021362305,
+      "prefill_ms": 173.60699462890625,
+      "decode_ms": 237.42300415039063,
+      "total_ms": 476.68499755859375,
+      "group_encode_ms": [
+        12.506999969482422,
+        13.675000190734863,
+        12.692000389099121,
+        12.82699966430664
+      ],
+      "n_tokens": 15,
+      "text": "A woman in一道黑裙子 is playing一二个笛子. "
+    },
+    {
+      "video": "-YI0cxuNcq8_262_272",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.3429999351501465,
+      "tokenize_ms": 7.581999778747559,
+      "vit_ms": 49.505001068115234,
+      "prefill_ms": 177.53298950195313,
+      "decode_ms": 184.16000366210938,
+      "total_ms": 425.1289978027344,
+      "group_encode_ms": [
+        11.92300033569336,
+        14.034000396728516,
+        11.630999565124512,
+        11.916999816894531
+      ],
+      "n_tokens": 12,
+      "text": "a woman does a sit睽 on a blue mat."
+    },
+    {
+      "video": "-_aaMGK6GGw_57_61",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 5.75,
+      "tokenize_ms": 7.546999931335449,
+      "vit_ms": 49.26599884033203,
+      "prefill_ms": 173.46701049804688,
+      "decode_ms": 342.34698486328125,
+      "total_ms": 578.3829956054688,
+      "group_encode_ms": [
+        12.934000015258789,
+        11.970000267028809,
+        11.79699993133545,
+        12.5649995803833
+      ],
+      "n_tokens": 21,
+      "text": "A man and一件小孩在沙发里躺着，一个男人在和一个女人在沙发上聊天。"
+    },
+    {
+      "video": "-_hbPLsZvvo_172_179",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 20.114999771118164,
+      "tokenize_ms": 20.139999389648438,
+      "vit_ms": 116.80400085449219,
+      "prefill_ms": 259.1449890136719,
+      "decode_ms": 2183.81396484375,
+      "total_ms": 2600.093994140625,
+      "group_encode_ms": [
+        32.29399871826172,
+        28.235000610351563,
+        27.913000106811523,
+        28.36199951171875
+      ],
+      "n_tokens": 128,
+      "text": "A woman in a kitchen  is��\n<|im_start|>\nmatchCondition\nA woman as she stirs a-�\n<|im_start|>\n addCriterion\nA woman is cooking as she stir a bowl of food with一番\n<|im_start|>\n��\n<|im_start|>\n<|im_start|>\n��\n<|im_start|>\n��\n(\",\", \"(\", \"(\", \"(\", \"(\", \"(\", \"(\", \"(\", \"(\", \"(\", \"(\", \"(\", \"(\", \"(\", \"(\", \"(\", \"(\", \"ite\", \"�\", \"preparing\", \"a并无\", \"(\", \"�\", \"(\", \"(\", \"�\", \"preparing\", \"a并无\", \"(\", \"(\", \""
+    },
+    {
+      "video": "-_hbPLsZvvo_18_25",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 17.18899917602539,
+      "tokenize_ms": 20.003000259399414,
+      "vit_ms": 120.25199890136719,
+      "prefill_ms": 258.3379821777344,
+      "decode_ms": 2174.98291015625,
+      "total_ms": 2590.841064453125,
+      "group_encode_ms": [
+        30.860000610351563,
+        30.31100082397461,
+        30.68899917602539,
+        28.392000198364258
+      ],
+      "n_tokens": 128,
+      "text": "A hand- the person st^cks a cucumber slice in a- the person aspts a small- the t^t^ t^- asp- asptasptasptasptasptas�t asptasptasptasptasptasptaspt-- asptaspt- asptaspt�t asptas�t asptas�t asptasptasptasptas��t asptasptasptasptasptasptasptasptasptasptasptasptas- asptaspt�t aspt"
+    },
+    {
+      "video": "-_hbPLsZvvo_19_25",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 18.36400032043457,
+      "tokenize_ms": 20.81399917602539,
+      "vit_ms": 114.6510009765625,
+      "prefill_ms": 262.510009765625,
+      "decode_ms": 120.24800109863281,
+      "total_ms": 536.64599609375,
+      "group_encode_ms": [
+        28.670000076293945,
+        30.225000381469727,
+        27.965999603271484,
+        27.790000915527344
+      ],
+      "n_tokens": 8,
+      "text": "Cucumbers are穷."
+    },
+    {
+      "video": "-_hbPLsZvvo_19_26",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 18.363000869750977,
+      "tokenize_ms": 20.957000732421875,
+      "vit_ms": 114.44600677490234,
+      "prefill_ms": 261.0039978027344,
+      "decode_ms": 239.3249969482422,
+      "total_ms": 654.1820068359375,
+      "group_encode_ms": [
+        29.780000686645508,
+        29.200000762939453,
+        27.858999252319336,
+        27.60700035095215
+      ],
+      "n_tokens": 15,
+      "text": "A person stirs a glass of iced tea with a spoon."
+    },
+    {
+      "video": "-_hbPLsZvvo_211_219",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 18.28700065612793,
+      "tokenize_ms": 20.091999053955078,
+      "vit_ms": 116.48300170898438,
+      "prefill_ms": 258.7080078125,
+      "decode_ms": 272.5920104980469,
+      "total_ms": 686.2230224609375,
+      "group_encode_ms": [
+        28.704999923706055,
+        30.63599967956543,
+        28.11199951171875,
+        29.030000686645508
+      ],
+      "n_tokens": 17,
+      "text": "A person is spreading the egg-liquid on the pan as they stir it."
+    },
+    {
+      "video": "-_hbPLsZvvo_269_275",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 19.1200008392334,
+      "tokenize_ms": 19.94700050354004,
+      "vit_ms": 112.8530044555664,
+      "prefill_ms": 261.0119934082031,
+      "decode_ms": 441.15301513671875,
+      "total_ms": 854.14501953125,
+      "group_encode_ms": [
+        29.99799919128418,
+        27.430999755859375,
+        27.645000457763672,
+        27.77899932861328
+      ],
+      "n_tokens": 27,
+      "text": "A person is�preparing food by主体责任方frying a美好生活in a pan and美好生活coating it with a batter."
+    },
+    {
+      "video": "-_hbPLsZvvo_288_305",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 19.808000564575195,
+      "tokenize_ms": 20.149999618530273,
+      "vit_ms": 114.5270004272461,
+      "prefill_ms": 261.8909912109375,
+      "decode_ms": 365.64300537109375,
+      "total_ms": 782.0759887695313,
+      "group_encode_ms": [
+        28.003999710083008,
+        28.000999450683594,
+        29.218000411987305,
+        29.304000854492188
+      ],
+      "n_tokens": 22,
+      "text": "A woman�s holding a piece of plastic wrap as she wraps a ball of�dough.-"
+    },
+    {
+      "video": "-_hbPLsZvvo_323_328",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 19.600000381469727,
+      "tokenize_ms": 20.91699981689453,
+      "vit_ms": 116.30899810791016,
+      "prefill_ms": 253.26400756835938,
+      "decode_ms": 409.468994140625,
+      "total_ms": 819.6229858398438,
+      "group_encode_ms": [
+        28.648000717163086,
+        28.7189998626709,
+        29.108999252319336,
+        29.83300018310547
+      ],
+      "n_tokens": 25,
+      "text": "A woman顿�s a piece of 重sushie with chopsticks and puts it on a black plate."
+    },
+    {
+      "video": "-_hbPLsZvvo_43_55",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 17.93600082397461,
+      "tokenize_ms": 20.93899917602539,
+      "vit_ms": 115.27900695800781,
+      "prefill_ms": 253.1320037841797,
+      "decode_ms": 276.54901123046875,
+      "total_ms": 683.8920288085938,
+      "group_encode_ms": [
+        28.839000701904297,
+        28.83300018310547,
+        28.905000686645508,
+        28.70199966430664
+      ],
+      "n_tokens": 17,
+      "text": "A woman华人 is using a knife to cut a carrot on a cutting board."
+    },
+    {
+      "video": "-_hbPLsZvvo_49_55",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 18.56100082397461,
+      "tokenize_ms": 20.98900032043457,
+      "vit_ms": 118.45399475097656,
+      "prefill_ms": 269.7760009765625,
+      "decode_ms": 420.75201416015625,
+      "total_ms": 848.60498046875,
+      "group_encode_ms": [
+        28.513999938964844,
+        31.680999755859375,
+        28.729000091552734,
+        29.530000686645508
+      ],
+      "n_tokens": 25,
+      "text": "A woman- who is wearing a green and purple  cape-充当了助手的角色，帮助切了菠菜。"
+    },
+    {
+      "video": "-_hbPLsZvvo_5_8",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 18.21500015258789,
+      "tokenize_ms": 21.007999420166016,
+      "vit_ms": 117.6610107421875,
+      "prefill_ms": 266.1349792480469,
+      "decode_ms": 266.4909973144531,
+      "total_ms": 689.5900268554688,
+      "group_encode_ms": [
+        28.56100082397461,
+        28.242000579833984,
+        30.172000885009766,
+        30.68600082397461
+      ],
+      "n_tokens": 16,
+      "text": "a woman秃�站在厨房里，她的后面有一个灰色的狗。"
+    },
+    {
+      "video": "-bjOB4zS0uE_100_105",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        46,
+        26
+      ],
+      "n_visual_tokens": 4784,
+      "n_prompt_tokens": 4812,
+      "load_ms": 66.90399932861328,
+      "tokenize_ms": 99.52100372314453,
+      "vit_ms": 695.9180297851563,
+      "prefill_ms": 704.9440307617188,
+      "decode_ms": 290.0010070800781,
+      "total_ms": 1857.3580322265625,
+      "group_encode_ms": [
+        183.24000549316406,
+        169.02000427246094,
+        171.6300048828125,
+        172.0279998779297
+      ],
+      "n_tokens": 18,
+      "text": "The woman is holding a glass with a spoon and an ice-cream in it."
+    },
+    {
+      "video": "-dm-ds5rRaM_44_52",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        16,
+        12
+      ],
+      "n_visual_tokens": 768,
+      "n_prompt_tokens": 796,
+      "load_ms": 13.522000312805176,
+      "tokenize_ms": 13.878999710083008,
+      "vit_ms": 75.3740005493164,
+      "prefill_ms": 199.9739990234375,
+      "decode_ms": 2225.969970703125,
+      "total_ms": 2528.73193359375,
+      "group_encode_ms": [
+        20.27899932861328,
+        18.12299919128418,
+        19.57900047302246,
+        17.39299964904785
+      ],
+      "n_tokens": 128,
+      "text": "A group of runners are sprinting on a track,�\n��\n怊\ngia\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半\n半"
+    },
+    {
+      "video": "-joBOHlg5J0_72_80",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        31,
+        17
+      ],
+      "n_visual_tokens": 2108,
+      "n_prompt_tokens": 2136,
+      "load_ms": 34.76900100708008,
+      "tokenize_ms": 38.1619987487793,
+      "vit_ms": 212.4639892578125,
+      "prefill_ms": 414.98199462890625,
+      "decode_ms": 274.9289855957031,
+      "total_ms": 975.3790283203125,
+      "group_encode_ms": [
+        56.5369987487793,
+        52.573001861572266,
+        50.224998474121094,
+        53.12900161743164
+      ],
+      "n_tokens": 16,
+      "text": "She is stippling the遮盖-skin foundation on her face. "
+    },
+    {
+      "video": "-mAoVOhKy0c_4_9",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 912,
+      "load_ms": 14.07800006866455,
+      "tokenize_ms": 16.711999893188477,
+      "vit_ms": 93.08000183105469,
+      "prefill_ms": 215.04400634765625,
+      "decode_ms": 251.31700134277344,
+      "total_ms": 590.2449951171875,
+      "group_encode_ms": [
+        26.89299964904785,
+        20.947999954223633,
+        23.368000030517578,
+        21.871000289916992
+      ],
+      "n_tokens": 16,
+      "text": "a yellow train is passing over a bridge with a mountain in the background."
+    },
+    {
+      "video": "-pUwIypksfE_13_23",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 912,
+      "load_ms": 13.880000114440918,
+      "tokenize_ms": 15.067999839782715,
+      "vit_ms": 87.9990005493164,
+      "prefill_ms": 214.4219970703125,
+      "decode_ms": 139.23199462890625,
+      "total_ms": 470.614013671875,
+      "group_encode_ms": [
+        22.788999557495117,
+        21.48900032043457,
+        21.840999603271484,
+        21.8799991607666
+      ],
+      "n_tokens": 9,
+      "text": "a panda诩 is eating a看点."
+    },
+    {
+      "video": "-rkErLY0rRc_26_35",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.28000020980835,
+      "tokenize_ms": 7.28000020980835,
+      "vit_ms": 53.702999114990234,
+      "prefill_ms": 173.72300720214844,
+      "decode_ms": 214.7519989013672,
+      "total_ms": 455.7449951171875,
+      "group_encode_ms": [
+        17.253000259399414,
+        12.0600004196167,
+        12.494000434875488,
+        11.895999908447266
+      ],
+      "n_tokens": 14,
+      "text": "A woman in a white dress is picking flowers from a bush."
+    },
+    {
+      "video": "-rkErLY0rRc_63_67",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 5.671000003814697,
+      "tokenize_ms": 7.146999835968018,
+      "vit_ms": 51.08500289916992,
+      "prefill_ms": 179.61500549316406,
+      "decode_ms": 1214.4549560546875,
+      "total_ms": 1457.9830322265625,
+      "group_encode_ms": [
+        12.871000289916992,
+        11.963000297546387,
+        13.093000411987305,
+        13.157999992370605
+      ],
+      "n_tokens": 73,
+      "text": "A woman-appears-ripping-a-box-off-莺歌-持-着-一-个-银色-的-奖杯-在-举-着-奖杯-的-同时-她-的-手-也-在-摆-着-奖杯-的-上下-摆-动-着-。"
+    },
+    {
+      "video": "-rvjK0lE3z4_33_43",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.802000045776367,
+      "tokenize_ms": 7.1620001792907715,
+      "vit_ms": 47.10599899291992,
+      "prefill_ms": 174.43301391601563,
+      "decode_ms": 203.04800415039063,
+      "total_ms": 438.5580139160156,
+      "group_encode_ms": [
+        11.996999740600586,
+        11.729000091552734,
+        11.696999549865723,
+        11.682999610900879
+      ],
+      "n_tokens": 13,
+      "text": "A person is cutting a zucchini on a心动at."
+    },
+    {
+      "video": "-s4-6QTT7HE_235_241",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        26,
+        17
+      ],
+      "n_visual_tokens": 1768,
+      "n_prompt_tokens": 1796,
+      "load_ms": 20.89900016784668,
+      "tokenize_ms": 33.62699890136719,
+      "vit_ms": 179.89698791503906,
+      "prefill_ms": 331.49200439453125,
+      "decode_ms": 317.2829895019531,
+      "total_ms": 883.2849731445313,
+      "group_encode_ms": [
+        50.12799835205078,
+        44.196998596191406,
+        43.24300003051758,
+        42.32899856567383
+      ],
+      "n_tokens": 19,
+      "text": "A group of dancers in traditional Indianen字号装 are�装pre非常好装t."
+    },
+    {
+      "video": "-t-ZWaJeH-o_0_15",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        19,
+        13
+      ],
+      "n_visual_tokens": 988,
+      "n_prompt_tokens": 1016,
+      "load_ms": 18.232999801635742,
+      "tokenize_ms": 19.033000946044922,
+      "vit_ms": 102.01899719238281,
+      "prefill_ms": 210.68899536132813,
+      "decode_ms": 269.9519958496094,
+      "total_ms": 619.93798828125,
+      "group_encode_ms": [
+        28.884000778198242,
+        24.084999084472656,
+        23.27899932861328,
+        25.770999908447266
+      ],
+      "n_tokens": 16,
+      "text": "A woman sings into a microphone as a woman烁烁走 to her."
+    },
+    {
+      "video": "-uT_1VDvXok_8_15",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.535999774932861,
+      "tokenize_ms": 7.489999771118164,
+      "vit_ms": 54.33000183105469,
+      "prefill_ms": 181.45700073242188,
+      "decode_ms": 257.4700012207031,
+      "total_ms": 507.2969970703125,
+      "group_encode_ms": [
+        16.381000518798828,
+        12.291999816894531,
+        12.651000022888184,
+        13.005999565124512
+      ],
+      "n_tokens": 16,
+      "text": "A baby rhino is夸张地和大一点的犀牛玩。"
+    },
+    {
+      "video": "-vKO3uSG6Do_3_14",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        26,
+        17
+      ],
+      "n_visual_tokens": 1768,
+      "n_prompt_tokens": 1796,
+      "load_ms": 11.991999626159668,
+      "tokenize_ms": 33.39899826049805,
+      "vit_ms": 176.68199157714844,
+      "prefill_ms": 322.70001220703125,
+      "decode_ms": 187.4600067138672,
+      "total_ms": 732.3170166015625,
+      "group_encode_ms": [
+        49.470001220703125,
+        41.18000030517578,
+        43.74399948120117,
+        42.28799819946289
+      ],
+      "n_tokens": 12,
+      "text": "Three animated characters are dancing�\n addCriterion\nThe武功"
+    },
+    {
+      "video": "-vg3vR86fu0_1_6",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 18.013999938964844,
+      "tokenize_ms": 22.44300079345703,
+      "vit_ms": 122.38499450683594,
+      "prefill_ms": 256.9570007324219,
+      "decode_ms": 331.0480041503906,
+      "total_ms": 750.89697265625,
+      "group_encode_ms": [
+        35.14400100708008,
+        28.65999984741211,
+        29.309999465942383,
+        29.270999908447266
+      ],
+      "n_tokens": 20,
+      "text": "A man改革开放自行车沿一条土路向前骑行，一辆吉普车在候车。"
+    },
+    {
+      "video": "-wa0umYJVGg_100_115",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.466000080108643,
+      "tokenize_ms": 7.311999797821045,
+      "vit_ms": 54.40800094604492,
+      "prefill_ms": 176.92401123046875,
+      "decode_ms": 346.9259948730469,
+      "total_ms": 592.0440063476563,
+      "group_encode_ms": [
+        16.273000717163086,
+        13.812999725341797,
+        12.043000221252441,
+        12.279000282287598
+      ],
+      "n_tokens": 21,
+      "text": "a woman is cooking in a-1000-egg--boiling-recipe."
+    },
+    {
+      "video": "-wa0umYJVGg_117_123",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.745999813079834,
+      "tokenize_ms": 7.492000102996826,
+      "vit_ms": 47.47699737548828,
+      "prefill_ms": 177.32000732421875,
+      "decode_ms": 236.09500122070313,
+      "total_ms": 475.135009765625,
+      "group_encode_ms": [
+        11.88700008392334,
+        11.746999740600586,
+        11.923999786376953,
+        11.918999671936035
+      ],
+      "n_tokens": 15,
+      "text": "A person is peeling an egg in a bowl of icecision."
+    },
+    {
+      "video": "-wa0umYJVGg_139_157",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 5.866000175476074,
+      "tokenize_ms": 7.136000156402588,
+      "vit_ms": 49.28599548339844,
+      "prefill_ms": 179.49600219726563,
+      "decode_ms": 310.3999938964844,
+      "total_ms": 552.1920166015625,
+      "group_encode_ms": [
+        12.138999938964844,
+        12.03600025177002,
+        13.190999984741211,
+        11.920000076293945
+      ],
+      "n_tokens": 19,
+      "text": "A person is using a knife to cut a piece of leek on a cutting board."
+    },
+    {
+      "video": "-wa0umYJVGg_168_176",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.889999866485596,
+      "tokenize_ms": 7.209000110626221,
+      "vit_ms": 50.053001403808594,
+      "prefill_ms": 176.81700134277344,
+      "decode_ms": 391.1839904785156,
+      "total_ms": 632.1619873046875,
+      "group_encode_ms": [
+        12.732000350952148,
+        12.78499984741211,
+        12.32699966430664,
+        12.208999633789063
+      ],
+      "n_tokens": 23,
+      "text": "A person is using chopsticks to stir a pot圉 of boiling water as告ur the water is boiling."
+    },
+    {
+      "video": "-wa0umYJVGg_23_41",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.8420000076293945,
+      "tokenize_ms": 7.4670000076293945,
+      "vit_ms": 49.2239990234375,
+      "prefill_ms": 179.1689910888672,
+      "decode_ms": 443.8280029296875,
+      "total_ms": 686.5390014648438,
+      "group_encode_ms": [
+        12.611000061035156,
+        12.013999938964844,
+        12.045000076293945,
+        12.553999900817871
+      ],
+      "n_tokens": 26,
+      "text": "A person is using tongs to place twoHINGigsplats美的 of raw meat into a black pot on a stove."
+    },
+    {
+      "video": "-wa0umYJVGg_271_276",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.513999938964844,
+      "tokenize_ms": 7.511000156402588,
+      "vit_ms": 52.96099853515625,
+      "prefill_ms": 180.7340087890625,
+      "decode_ms": 630.5490112304688,
+      "total_ms": 878.2769775390625,
+      "group_encode_ms": [
+        12.550999641418457,
+        13.440999984741211,
+        12.833999633789063,
+        14.135000228881836
+      ],
+      "n_tokens": 37,
+      "text": "A person并不代表肉片，然后将肉片放在切菜板上，然后将肉片放在托盘上。小翠在厨房里，她正在切肉。"
+    },
+    {
+      "video": "-wa0umYJVGg_286_290",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.275000095367432,
+      "tokenize_ms": 7.265999794006348,
+      "vit_ms": 48.11899948120117,
+      "prefill_ms": 179.49099731445313,
+      "decode_ms": 125.08399963378906,
+      "total_ms": 366.2439880371094,
+      "group_encode_ms": [
+        12.312999725341797,
+        11.918000221252441,
+        11.789999961853027,
+        12.097999572753906
+      ],
+      "n_tokens": 8,
+      "text": "a woman is cooking in光辉."
+    },
+    {
+      "video": "-zOrV-5vh1A_69_76",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        46,
+        26
+      ],
+      "n_visual_tokens": 4784,
+      "n_prompt_tokens": 4812,
+      "load_ms": 53.01300048828125,
+      "tokenize_ms": 100.91100311279297,
+      "vit_ms": 720.990966796875,
+      "prefill_ms": 734.93701171875,
+      "decode_ms": 53.71799850463867,
+      "total_ms": 1663.6490478515625,
+      "group_encode_ms": [
+        186.21299743652344,
+        176.32699584960938,
+        179.42799377441406,
+        179.0229949951172
+      ],
+      "n_tokens": 4,
+      "text": "b收起"
+    },
+    {
+      "video": "00jrXRMlZOY_0_10",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 912,
+      "load_ms": 15.67300033569336,
+      "tokenize_ms": 15.70300006866455,
+      "vit_ms": 92.63199615478516,
+      "prefill_ms": 212.47299194335938,
+      "decode_ms": 158.8300018310547,
+      "total_ms": 495.322998046875,
+      "group_encode_ms": [
+        25.708999633789063,
+        22.094999313354492,
+        24.18899917602539,
+        20.638999938964844
+      ],
+      "n_tokens": 10,
+      "text": "A man都想s to每一个人的头。"
+    },
+    {
+      "video": "02Z-kuB3IaM_2_13",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.795000076293945,
+      "tokenize_ms": 7.511000156402588,
+      "vit_ms": 54.830997467041016,
+      "prefill_ms": 180.7030029296875,
+      "decode_ms": 317.97601318359375,
+      "total_ms": 567.8309936523438,
+      "group_encode_ms": [
+        16.364999771118164,
+        12.295999526977539,
+        13.210000038146973,
+        12.960000038146973
+      ],
+      "n_tokens": 19,
+      "text": "A black bear israxing inasaretting of trees prenting to the left."
+    },
+    {
+      "video": "04Gt01vatkk_248_265",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 912,
+      "load_ms": 14.508000373840332,
+      "tokenize_ms": 15.748000144958496,
+      "vit_ms": 90.59800720214844,
+      "prefill_ms": 214.97698974609375,
+      "decode_ms": 197.30099487304688,
+      "total_ms": 533.14697265625,
+      "group_encode_ms": [
+        26.128999710083008,
+        21.89299964904785,
+        21.51300048828125,
+        21.062999725341797
+      ],
+      "n_tokens": 12,
+      "text": "A woman is using一二刀 to cut an onion."
+    },
+    {
+      "video": "04Gt01vatkk_308_321",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 912,
+      "load_ms": 14.614999771118164,
+      "tokenize_ms": 15.70300006866455,
+      "vit_ms": 84.56099700927734,
+      "prefill_ms": 210.1330108642578,
+      "decode_ms": 409.7130126953125,
+      "total_ms": 734.7379760742188,
+      "group_encode_ms": [
+        21.91699981689453,
+        21.631000518798828,
+        20.483999252319336,
+        20.52899932861328
+      ],
+      "n_tokens": 25,
+      "text": "A woman in a redande shirt is using a knife崇拜 aiddy on a�� on a cutting板�."
+    },
+    {
+      "video": "eyhzdC936uk_15_27",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 5.5879998207092285,
+      "tokenize_ms": 7.531000137329102,
+      "vit_ms": 55.599998474121094,
+      "prefill_ms": 181.635009765625,
+      "decode_ms": 205.1699981689453,
+      "total_ms": 455.5369873046875,
+      "group_encode_ms": [
+        16.535999298095703,
+        12.972999572753906,
+        13.289999961853027,
+        12.800999641418457
+      ],
+      "n_tokens": 13,
+      "text": "A man is季playing with a dog in a store."
+    },
+    {
+      "video": "fw8qvK67jYY_50_97",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        11
+      ],
+      "n_visual_tokens": 748,
+      "n_prompt_tokens": 776,
+      "load_ms": 10.3100004196167,
+      "tokenize_ms": 13.449999809265137,
+      "vit_ms": 77.2490005493164,
+      "prefill_ms": 206.0810089111328,
+      "decode_ms": 2250.3740234375,
+      "total_ms": 2557.47509765625,
+      "group_encode_ms": [
+        22.01799964904785,
+        18.676000595092773,
+        18.371999740600586,
+        18.183000564575195
+      ],
+      "n_tokens": 128,
+      "text": "A person-zi-voят с лимона-zwuнтu�-掇�u�-zae-zae-za-���юр-ур-у-у-у-у-у-у-у-�-у-у-у-у-у-у-�-у-у-�-у-у-u-у-у-у-у-�-у-у-у-يث-asis-ь-u�-êm-êm�-�-��-�-�-�-�-�-�-ь"
+    },
+    {
+      "video": "gtixLEvO2Us_0_6",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        19,
+        13
+      ],
+      "n_visual_tokens": 988,
+      "n_prompt_tokens": 1016,
+      "load_ms": 10.798999786376953,
+      "tokenize_ms": 17.496000289916992,
+      "vit_ms": 98.7040023803711,
+      "prefill_ms": 207.35000610351563,
+      "decode_ms": 271.20098876953125,
+      "total_ms": 605.5650024414063,
+      "group_encode_ms": [
+        27.079999923706055,
+        25.079999923706055,
+        23.36400032043457,
+        23.18000030517578
+      ],
+      "n_tokens": 17,
+      "text": "A woman is sitting on a stool and just-plain-liking herself."
+    },
+    {
+      "video": "hoinj6vyQ2g_8_16",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        17
+      ],
+      "n_visual_tokens": 1564,
+      "n_prompt_tokens": 1592,
+      "load_ms": 24.5049991607666,
+      "tokenize_ms": 26.016000747680664,
+      "vit_ms": 155.7939910888672,
+      "prefill_ms": 310.6519775390625,
+      "decode_ms": 527.198974609375,
+      "total_ms": 1044.240966796875,
+      "group_encode_ms": [
+        43.57699966430664,
+        39.13199996948242,
+        36.534000396728516,
+        36.55099868774414
+      ],
+      "n_tokens": 31,
+      "text": "A man is playing an一分 Toronto with his left hand on the neck and his right hand 开分 Tapping�分 the strings."
+    },
+    {
+      "video": "j4dMnAPZu70_12_17",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 3.5810000896453857,
+      "tokenize_ms": 7.14300012588501,
+      "vit_ms": 52.89899826049805,
+      "prefill_ms": 175.09197998046875,
+      "decode_ms": 194.20899963378906,
+      "total_ms": 432.9339904785156,
+      "group_encode_ms": [
+        15.960000038146973,
+        12.069999694824219,
+        12.932999610900879,
+        11.935999870300293
+      ],
+      "n_tokens": 12,
+      "text": "A panda cub is playing in the snow with昆仑."
+    },
+    {
+      "video": "kBMsuhDvg88_45_64",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 19.06100082397461,
+      "tokenize_ms": 21.01799964904785,
+      "vit_ms": 117.93399810791016,
+      "prefill_ms": 253.5260009765625,
+      "decode_ms": 202.75,
+      "total_ms": 614.3499755859375,
+      "group_encode_ms": [
+        32.15999984741211,
+        28.26799964904785,
+        28.5049991607666,
+        29.000999450683594
+      ],
+      "n_tokens": 13,
+      "text": "A group of people are posing for不易看出的图片."
+    },
+    {
+      "video": "kWLNZzuo3do_77_83",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 14.093999862670898,
+      "tokenize_ms": 20.027999877929688,
+      "vit_ms": 116.3740005493164,
+      "prefill_ms": 263.1999816894531,
+      "decode_ms": 2186.468994140625,
+      "total_ms": 2600.243896484375,
+      "group_encode_ms": [
+        28.73900032043457,
+        28.49799919128418,
+        29.43199920654297,
+        29.704999923706055
+      ],
+      "n_tokens": 128,
+      "text": "A-բ  нская  ы  � ��  镞  ’ ��  ’ �   bú  zł一脸  ’  ż�  开  渍  绸  诅  开功德  里  rut  课文  开  亮丽  亏  自理  开  诧  泩  泮  /gpl  icles  开  科教   Çalış�- icles  惮  �功德  acons- 里  �  � "
+    },
+    {
+      "video": "lcu-DwrnYY8_2_5",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 912,
+      "load_ms": 13.088000297546387,
+      "tokenize_ms": 14.98900032043457,
+      "vit_ms": 88.89399719238281,
+      "prefill_ms": 207.56298828125,
+      "decode_ms": 2188.514892578125,
+      "total_ms": 2513.06005859375,
+      "group_encode_ms": [
+        24.302000045776367,
+        20.691999435424805,
+        22.722999572753906,
+        21.177000045776367
+      ],
+      "n_tokens": 128,
+      "text": "A manAPA้น 无声 �e� 蹼 里程碑 闼 uent opl 秩 orts 乃 为 话语 亭 变 ewe� 踽 必不可 traîn� wróci� ubbo erable  avis idue ion rü 开 无意 ǔ 不死 � 势 ion 开 曩 仗 石头 镞 信息披露 ickly 瘾 ��� 旨 蛙 葫 嘞 退役 .clips ɡ fers 浣 开 乍 .Elapsed 劲 糠 ropol 愫 开 觚"
+    },
+    {
+      "video": "mOZkcBcWR8o_6_12",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        6
+      ],
+      "n_visual_tokens": 264,
+      "n_prompt_tokens": 292,
+      "load_ms": 4.064000129699707,
+      "tokenize_ms": 5.2820000648498535,
+      "vit_ms": 42.25199890136719,
+      "prefill_ms": 179.00999450683594,
+      "decode_ms": 218.91600036621094,
+      "total_ms": 449.5350036621094,
+      "group_encode_ms": [
+        13.189000129699707,
+        9.571999549865723,
+        9.692999839782715,
+        9.79800033569336
+      ],
+      "n_tokens": 14,
+      "text": "A little girl力气卡拉ok a shopping cart in a store."
+    },
+    {
+      "video": "nZSFn51l3hc_480_485",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        46,
+        26
+      ],
+      "n_visual_tokens": 4784,
+      "n_prompt_tokens": 4812,
+      "load_ms": 56.715999603271484,
+      "tokenize_ms": 94.04399871826172,
+      "vit_ms": 696.1950073242188,
+      "prefill_ms": 709.7210083007813,
+      "decode_ms": 140.87899780273438,
+      "total_ms": 1697.634033203125,
+      "group_encode_ms": [
+        178.74400329589844,
+        172.19700622558594,
+        171.7220001220703,
+        173.53199768066406
+      ],
+      "n_tokens": 9,
+      "text": "Cuts the meat with the knife."
+    },
+    {
+      "video": "oSnYUfCGiCA_7_17",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        26,
+        17
+      ],
+      "n_visual_tokens": 1768,
+      "n_prompt_tokens": 1796,
+      "load_ms": 18.992000579833984,
+      "tokenize_ms": 30.292999267578125,
+      "vit_ms": 174.16299438476563,
+      "prefill_ms": 313.75299072265625,
+      "decode_ms": 292.4729919433594,
+      "total_ms": 829.7670288085938,
+      "group_encode_ms": [
+        50.020999908447266,
+        41.202999114990234,
+        41.45500183105469,
+        41.48400115966797
+      ],
+      "n_tokens": 18,
+      "text": "A woman is putting makeup on a model's face as the一贯aughter�."
+    },
+    {
+      "video": "pdrBPJYfTC8_33_39",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 912,
+      "load_ms": 12.0600004196167,
+      "tokenize_ms": 16.527000427246094,
+      "vit_ms": 88.9679946899414,
+      "prefill_ms": 207.21499633789063,
+      "decode_ms": 265.177001953125,
+      "total_ms": 589.958984375,
+      "group_encode_ms": [
+        26.299999237060547,
+        20.524999618530273,
+        20.71299934387207,
+        21.43000030517578
+      ],
+      "n_tokens": 17,
+      "text": "A mug with a picture of a person on it is shown on a table."
+    },
+    {
+      "video": "qPXynwa_2iM_15_25",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        6
+      ],
+      "n_visual_tokens": 264,
+      "n_prompt_tokens": 292,
+      "load_ms": 4.281000137329102,
+      "tokenize_ms": 5.165999889373779,
+      "vit_ms": 41.821998596191406,
+      "prefill_ms": 170.38999938964844,
+      "decode_ms": 1711.4620361328125,
+      "total_ms": 1933.1290283203125,
+      "group_encode_ms": [
+        13.508999824523926,
+        9.633999824523926,
+        9.28600025177002,
+        9.392999649047852
+      ],
+      "n_tokens": 103,
+      "text": "A black dog�\n addCriterion\nThe image shows a black dog running through身形水. The dog appears to be in motion, with its legs italiane and its tail raised. The water around the dog is splashing, indicating that the dog is moving quickly. The dog's fur is wet, suggesting that it has been个别or in the water for some time. The dog's expression is one of concentration, as it focuses on its path through the water. The overall impression is one of energy and movement."
+    },
+    {
+      "video": "rlQ2kW-FvMk_66_79",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        17
+      ],
+      "n_visual_tokens": 1564,
+      "n_prompt_tokens": 1592,
+      "load_ms": 20.885000228881836,
+      "tokenize_ms": 27.91200065612793,
+      "vit_ms": 149.06700134277344,
+      "prefill_ms": 309.82501220703125,
+      "decode_ms": 222.98199462890625,
+      "total_ms": 730.7540283203125,
+      "group_encode_ms": [
+        41.92399978637695,
+        35.47700119018555,
+        35.8120002746582,
+        35.854000091552734
+      ],
+      "n_tokens": 14,
+      "text": "A woman is doing a kickче with a man's help."
+    },
+    {
+      "video": "sMscRb9TcQE_146_161",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        15
+      ],
+      "n_visual_tokens": 1380,
+      "n_prompt_tokens": 1408,
+      "load_ms": 17.8700008392334,
+      "tokenize_ms": 24.038999557495117,
+      "vit_ms": 131.2519989013672,
+      "prefill_ms": 270.802001953125,
+      "decode_ms": 1040.530029296875,
+      "total_ms": 1484.5389404296875,
+      "group_encode_ms": [
+        37.03300094604492,
+        31.385000228881836,
+        31.577999114990234,
+        31.256000518798828
+      ],
+      "n_tokens": 61,
+      "text": "The man in the 80's蓊tszi吊顶is holding the woman's hand and�uixiao isلسo تكيyin the woman's hand.cia�y is挽回 theENO怀抱 of the鹑人.�y is挽回 theENO怀抱 of the鹑人."
+    },
+    {
+      "video": "tn1d5DmdMqY_15_28",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.730999946594238,
+      "tokenize_ms": 7.242000102996826,
+      "vit_ms": 51.697998046875,
+      "prefill_ms": 173.37400817871094,
+      "decode_ms": 118.20700073242188,
+      "total_ms": 357.260009765625,
+      "group_encode_ms": [
+        15.741000175476074,
+        11.746000289916992,
+        11.833999633789063,
+        12.376999855041504
+      ],
+      "n_tokens": 8,
+      "text": "A man is playing a guitar."
+    },
+    {
+      "video": "v-9Gx0gJmfo_26_32",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 912,
+      "load_ms": 7.565000057220459,
+      "tokenize_ms": 15.779999732971191,
+      "vit_ms": 88.21200561523438,
+      "prefill_ms": 206.23199462890625,
+      "decode_ms": 251.6580047607422,
+      "total_ms": 569.4600219726563,
+      "group_encode_ms": [
+        24.70800018310547,
+        21.6560001373291,
+        21.06100082397461,
+        20.78700065612793
+      ],
+      "n_tokens": 16,
+      "text": "A person is swimming in the water with a好看的东西 in their hand."
+    },
+    {
+      "video": "wn9rDTZj-m4_8_18",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 16.61199951171875,
+      "tokenize_ms": 20.8700008392334,
+      "vit_ms": 119.93399810791016,
+      "prefill_ms": 258.22601318359375,
+      "decode_ms": 187.5749969482422,
+      "total_ms": 603.2780151367188,
+      "group_encode_ms": [
+        32.39799880981445,
+        28.614999771118164,
+        28.768999099731445,
+        30.152000427246094
+      ],
+      "n_tokens": 12,
+      "text": "A young girl is playing the violin on the beach."
+    },
+    {
+      "video": "xxHx6s_DbUo_173_177",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        22,
+        9
+      ],
+      "n_visual_tokens": 792,
+      "n_prompt_tokens": 820,
+      "load_ms": 7.906000137329102,
+      "tokenize_ms": 14.095999717712402,
+      "vit_ms": 86.18700408935547,
+      "prefill_ms": 208.19400024414063,
+      "decode_ms": 646.2899780273438,
+      "total_ms": 962.6829833984375,
+      "group_encode_ms": [
+        24.48900032043457,
+        20.83099937438965,
+        20.468000411987305,
+        20.39900016784668
+      ],
+      "n_tokens": 39,
+      "text": "A woman in a black shirt and white pants is performing a dance routine on a stage. She isptepping on a series of white plastic chairs and-�\njspb\n:frame a-"
+    },
+    {
+      "video": "ywMLb2VfHbI_13_20",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 5.605999946594238,
+      "tokenize_ms": 7.184999942779541,
+      "vit_ms": 53.303001403808594,
+      "prefill_ms": 172.0550079345703,
+      "decode_ms": 249.2899932861328,
+      "total_ms": 487.4460144042969,
+      "group_encode_ms": [
+        16.551000595092773,
+        12.008999824523926,
+        12.859000205993652,
+        11.883999824523926
+      ],
+      "n_tokens": 16,
+      "text": "A hedgehog is climbing up the side of a green hamster wheel."
+    }
+  ]
+}

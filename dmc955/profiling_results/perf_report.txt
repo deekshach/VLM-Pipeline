@@ -1,0 +1,25 @@
+    19.33%  llama-baseline-  libcuda.so.580.173.02  [.] 0x000000000022be17
+            |
+            ---0x796abe82be17
+               0x796abe8f26a2
+               0x796abf5531b4
+               0x796abe9a9156
+               cuStreamSynchronize
+               0x796acaa143a4
+               cudaStreamSynchronize
+               |          
+                --19.04%--ggml_backend_cuda_synchronize(ggml_backend*)
+                          ggml_backend_sched_synchronize
+                          llama_context::synchronize()
+                          common_sampler_sample(common_sampler*, llama_context*, int, bool)
+                          main
+                          0xffffffffffffffff
+     3.92%  llama-baseline-  [vdso]                 [.] 0x0000000000000b00
+            |
+            ---0x7ffd197e0b00
+               __GI___clock_gettime (inlined)
+               0x796abe9185c3
+               0x796abe82c0fb
+               0x796abe8f26a2
+               0x796abf5531b4
+               0x796abe9a9156

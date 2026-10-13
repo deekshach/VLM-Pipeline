@@ -58,6 +58,7 @@
 #include "ggml-cuda/pad_reflect_1d.cuh"
 #include "ggml-cuda/solve_tri.cuh"
 #include "ggml-cuda/tri.cuh"
+#include "ggml-cuda/visual-pyramid.cuh"
 #include "ggml-cuda/cumsum.cuh"
 #include "ggml-cuda/fill.cuh"
 #include "ggml.h"
@@ -2751,6 +2752,12 @@ static bool ggml_cuda_compute_forward(ggml_backend_cuda_context & ctx, struct gg
         case GGML_OP_FILL:
             ggml_cuda_op_fill(ctx, dst);
             break;
+        case GGML_OP_VISUAL_ATTN_REDUCE:
+            ggml_cuda_op_visual_attn_reduce(ctx, dst);
+            break;
+        case GGML_OP_PYRAMID_MASK_GEN:
+            ggml_cuda_op_pyramid_mask_gen(ctx, dst);
+            break;
         default:
             return false;
     }
@@ -4761,6 +4768,8 @@ static bool ggml_backend_cuda_device_supports_op(ggml_backend_dev_t dev, const g
         case GGML_OP_COS:
         case GGML_OP_CLAMP:
         case GGML_OP_LOG:
+        case GGML_OP_VISUAL_ATTN_REDUCE:
+        case GGML_OP_PYRAMID_MASK_GEN:
             return true;
         case GGML_OP_SSM_SCAN: {
             if (op->src[3]->ne[0] == 1) {

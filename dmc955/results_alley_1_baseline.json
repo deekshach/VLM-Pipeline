@@ -1,0 +1,67 @@
+{
+  "mode": "baseline",
+  "video_name": "alley_1",
+  "n_flow_files": 0,
+  "n_frames_total": 50,
+  "global_complexity": 0.0,
+  "n_frames_selected": 4,
+  "selected_frames": [
+    {
+      "index": 1,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 17,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 34,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 50,
+      "weight": 1.0,
+      "complexity": 0.0
+    }
+  ],
+  "motion_profile": [],
+  "spatial_analysis": [],
+  "inference": {
+    "generated_text": "",
+    "n_tokens": 0,
+    "encode_time_ms": 0.0,
+    "generation_time_ms": 0.0
+  },
+  "metrics": {
+    "motion_coverage": 0.0,
+    "shannon_entropy": 0.0,
+    "temporal_reduction": 0.92,
+    "avg_spatial_savings": 0.0
+  },
+  "timing": {
+    "flow_analysis_ms": 0.0,
+    "frame_selection_ms": 0.0,
+    "encode_ms": 0.0,
+    "generation_ms": 0.0,
+    "total_ms": 2316.0
+  },
+  "params": {
+    "flow_analysis_skipped": true,
+    "perf_region": 0,
+    "warmup_iters": 0,
+    "fps": 0.0,
+    "source_fps": 24.0,
+    "sintel_dir": "/data/spring26/CPP/modelsRepo/MPI_bkp/MPI-Sintel",
+    "video_name": "alley_1",
+    "min_frames": 3,
+    "max_frames": 24,
+    "base_frames": 4,
+    "motion_threshold": 2.0,
+    "motion_percentile": 0.949999988079071,
+    "patch_grid": 4,
+    "spatial_threshold": 0.05000000074505806
+  }
+}

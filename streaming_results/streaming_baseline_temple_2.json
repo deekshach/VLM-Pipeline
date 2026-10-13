@@ -1,0 +1,278 @@
+{
+  "mode": "streaming_baseline",
+  "video_name": "temple_2",
+  "n_frames_total": 50,
+  "n_frames_selected": 16,
+  "global_complexity": 0.4244733154773712,
+  "streaming": {
+    "fps": 4.0,
+    "video_duration_s": 12.25,
+    "online_selection": {
+      "method": "uniform",
+      "baseline_uniform_count": 16
+    }
+  },
+  "selected_frames": [
+    {
+      "index": 1,
+      "weight": 1.0
+    },
+    {
+      "index": 4,
+      "weight": 1.0
+    },
+    {
+      "index": 8,
+      "weight": 1.0
+    },
+    {
+      "index": 11,
+      "weight": 1.0
+    },
+    {
+      "index": 14,
+      "weight": 1.0
+    },
+    {
+      "index": 17,
+      "weight": 1.0
+    },
+    {
+      "index": 21,
+      "weight": 1.0
+    },
+    {
+      "index": 24,
+      "weight": 1.0
+    },
+    {
+      "index": 27,
+      "weight": 1.0
+    },
+    {
+      "index": 30,
+      "weight": 1.0
+    },
+    {
+      "index": 34,
+      "weight": 1.0
+    },
+    {
+      "index": 37,
+      "weight": 1.0
+    },
+    {
+      "index": 40,
+      "weight": 1.0
+    },
+    {
+      "index": 43,
+      "weight": 1.0
+    },
+    {
+      "index": 47,
+      "weight": 1.0
+    },
+    {
+      "index": 50,
+      "weight": 1.0
+    }
+  ],
+  "inference": {
+    "generated_text": "The scene is set on a rooftop at sunset, with a character standing on the edge, looking out at the cityscape. The character is wearing a brown outfit and has red hair. The city is made up of stone buildings and structures, with a large, ornate building in the background. The sky is a mix of orange and pink hues, indicating that the sun is setting. The character is looking out over the city, possibly contemplating something. The overall mood of the scene is peaceful and serene, with the warm colors of the sunset adding to the calm atmosphere. The character's posture and gaze suggest a sense of wonder or admiration for the view. The camera angle is slightly elevated, providing a clear view of the character and the city below.",
+    "n_tokens": 150,
+    "encode_time_ms": 2457.0,
+    "generation_time_ms": 2479.0
+  },
+  "metrics": {
+    "motion_coverage": 0.28210411000660834,
+    "shannon_entropy": 4.196143463188622,
+    "temporal_reduction": 0.6799999999999999,
+    "total_tokens_encoded": 9472,
+    "total_tokens_cached": 0,
+    "encoder_savings_pct": 0.0,
+    "total_encode_time_ms": 1069.0,
+    "estimated_full_encode_time_ms": 2560.0,
+    "encode_speedup": 2.394761562347412
+  },
+  "per_frame_cache": [
+    {
+      "frame_index": 1,
+      "is_keyframe": true,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 160.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 2,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 62.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 3,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 4,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 5,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 60.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 6,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 60.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 7,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 60.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 8,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 60.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 9,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 10,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 60.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 11,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 12,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 60.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 13,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 60.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 14,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 15,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 16,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    }
+  ],
+  "pruning": {
+    "enabled": false
+  },
+  "prefill_pruning": {
+    "enabled": false
+  },
+  "timing": {
+    "selection_ms": 0.0,
+    "encode_ms": 2457.0,
+    "generation_ms": 2479.0,
+    "total_ms": 7742.0
+  },
+  "params": {
+    "sintel_dir": "/data/Fall25/multimodalRAG/VLM/Qwen2.5-VL/MPI-Sintel",
+    "video_name": "temple_2",
+    "fps": 4.0,
+    "baseline_uniform_count": 16
+  }
+}

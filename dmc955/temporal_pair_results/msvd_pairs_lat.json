@@ -1,0 +1,1831 @@
+{
+  "mode": "pairs",
+  "align": 0,
+  "base_frames": 8,
+  "frame_step": 0,
+  "video_fps": 2.0,
+  "tokens_per_second": 2,
+  "n_predict": 128,
+  "requests": [
+    {
+      "video": "-4wsuPCjDBc_5_15",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 912,
+      "load_ms": 14.791999816894531,
+      "tokenize_ms": 15.215999603271484,
+      "vit_ms": 83.2239990234375,
+      "prefill_ms": 201.59400939941406,
+      "decode_ms": 2167.738037109375,
+      "total_ms": 2482.575927734375,
+      "group_encode_ms": [
+        22.288000106811523,
+        20.33099937438965,
+        20.239999771118164,
+        20.364999771118164
+      ],
+      "n_tokens": 128,
+      "text": "a chipmunk is eating a peanut. The chipmumk is in a cage. The chipmunk is in a cage. The chipmunk is in a cage. The chipmumk is in a cage. The chipmunk is in a cage. The chipmumk is in a cage. The chipmunk is in a cage. The chipmunk is in a cage. The chip- The chipm稻 is in a cage. The chipmunk is in a cage. The chipmumk is in a cage. The chip--- The chipmrumk is in a"
+    },
+    {
+      "video": "-7KMZQEsJW4_205_208",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.953999996185303,
+      "tokenize_ms": 7.482999801635742,
+      "vit_ms": 53.64299774169922,
+      "prefill_ms": 176.66600036621094,
+      "decode_ms": 2112.31201171875,
+      "total_ms": 2357.06689453125,
+      "group_encode_ms": [
+        17.136999130249023,
+        11.852999687194824,
+        11.67199993133545,
+        12.980999946594238
+      ],
+      "n_tokens": 128,
+      "text": "A person is holding a bundle of sunflower heads. The person then walks to a field with a white tarp and a green plant. The person stands in the field and holds the bundle of sunflower heads. The person then picks up a tarp and a bundle of twine. The person stands in the field and holds the tarp and twine. The person then walks to a field with a white tarp and a green plant. The person stands in the field and holds the tarp and twine. The person then walks to a field with a white tarp and a green plant. The person stands in the field"
+    },
+    {
+      "video": "-8y1Q0rA3n8_108_115",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        46,
+        26
+      ],
+      "n_visual_tokens": 4784,
+      "n_prompt_tokens": 4812,
+      "load_ms": 71.51499938964844,
+      "tokenize_ms": 97.7239990234375,
+      "vit_ms": 703.7860107421875,
+      "prefill_ms": 686.10498046875,
+      "decode_ms": 2235.02490234375,
+      "total_ms": 3794.217041015625,
+      "group_encode_ms": [
+        200.13600158691406,
+        167.92300415039063,
+        167.91099548339844,
+        167.8159942626953
+      ],
+      "n_tokens": 128,
+      "text": "A man seizes a sword and a green bottle. The man swings the sword. The man hovers the sword over the green bottle. The man pulls the sword from the green bottle. The man loks at the green bottle. The man pulls the sword from the green bottle. The man swings the sword. The man hovers the sword over the green bottle. The man pulls the sword from the green bottle. The man swings the sword. The man seizes the green bottle. The man loks at the green bottle. The man pulls the sword from the green bottle. The man hovers the sword over the green bottle."
+    },
+    {
+      "video": "-8y1Q0rA3n8_95_102",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        46,
+        26
+      ],
+      "n_visual_tokens": 4784,
+      "n_prompt_tokens": 4812,
+      "load_ms": 72.25800323486328,
+      "tokenize_ms": 95.86599731445313,
+      "vit_ms": 689.8680419921875,
+      "prefill_ms": 696.1920166015625,
+      "decode_ms": 2151.868896484375,
+      "total_ms": 3706.131103515625,
+      "group_encode_ms": [
+        185.50399780273438,
+        169.6300048828125,
+        167.02200317382813,
+        167.71200561523438
+      ],
+      "n_tokens": 128,
+      "text": "A man in a black shirt is swinging a sword at a target. He is wearing a black shirt and black pants. The target is red and has a silver design on it. There is a sign on the ground that says \"21\". There is a sign on the ground that says \"20\". There is a sign on the ground that says \"21\". There is a sign on the ground that says \"20\". There is a sign on the ground that says \"21\". There is a sign on the ground that says \"20\". There is a sign on the ground that says \"21\". There"
+    },
+    {
+      "video": "-9CUm-2cui8_39_44",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 20.667999267578125,
+      "tokenize_ms": 21.030000686645508,
+      "vit_ms": 114.11000061035156,
+      "prefill_ms": 251.23399353027344,
+      "decode_ms": 2157.6220703125,
+      "total_ms": 2564.7099609375,
+      "group_encode_ms": [
+        30.95400047302246,
+        27.718000411987305,
+        27.97800064086914,
+        27.459999084472656
+      ],
+      "n_tokens": 128,
+      "text": "A woman is cooking okra in a pan of boiling water. She is using a strainer to stir the okra. The okra is green and the water is bubbling. The woman is wearing a pink shirt. There is a microwave in the background. There is a bottle of oil on the counter. There is a cutting board on the counter. There is a bowl on the counter. There is a vase with flowers on the counter. There is a basket on the counter. The woman is smiling. The woman is looking at the okra. The woman is在于 the ok. The woman is� theonis. The woman"
+    },
+    {
+      "video": "-AwoiGR6c8M_10_14",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        31,
+        17
+      ],
+      "n_visual_tokens": 2108,
+      "n_prompt_tokens": 2136,
+      "load_ms": 33.426998138427734,
+      "tokenize_ms": 39.34600067138672,
+      "vit_ms": 213.72500610351563,
+      "prefill_ms": 404.5029602050781,
+      "decode_ms": 2127.39111328125,
+      "total_ms": 2818.43701171875,
+      "group_encode_ms": [
+        57.74800109863281,
+        52.84700012207031,
+        53.06399917602539,
+        50.066001892089844
+      ],
+      "n_tokens": 128,
+      "text": "A boy is sitting at a piano and playing it. The boy is wearing缇�o. The boy is playing the piano with his right hand. The boy is looking at the piano. The boy is wearing a black shirt. The boy is wearing a pair of gray shorts. The boy is wearing a pair of glasses. The boy is sitting on a black stool. The boy is sitting on a stool in front of a piano. The boy is sitting on a stool in front of a piano. The boy is sitting on a stool in front of a piano. The boy is sitting on a stool in front of a piano. The boy"
+    },
+    {
+      "video": "-Cv5LsqKUXc_17_25",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 14.045999526977539,
+      "tokenize_ms": 22.072999954223633,
+      "vit_ms": 115.52400207519531,
+      "prefill_ms": 252.0889892578125,
+      "decode_ms": 2107.198974609375,
+      "total_ms": 2510.97412109375,
+      "group_encode_ms": [
+        32.750999450683594,
+        27.909000396728516,
+        27.422000885009766,
+        27.441999435424805
+      ],
+      "n_tokens": 128,
+      "text": "A hand wips a strawberry with a knife. The hand soaps the strawberry and dries it. The hand soaps the strawberry again. The hand dries the strawberry again. The hand assembles the strawberry. The hand tucks the leaves into the strawberry. The hand sevies the strawberry. The hand tucks the leaves into the strawberry again. The hand sevies the strawberry. The hand just-rips the leaves from the strawberry. The hand assembles the strawberry. The hand--wipes the strawberry with a knife. The hand soaps the strawberry. The hand soaps the strawberry again. The hand"
+    },
+    {
+      "video": "-Cv5LsqKUXc_71_76",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 18.39299964904785,
+      "tokenize_ms": 20.840999603271484,
+      "vit_ms": 110.71099853515625,
+      "prefill_ms": 250.9510040283203,
+      "decode_ms": 2108.176025390625,
+      "total_ms": 2509.12109375,
+      "group_encode_ms": [
+        27.740999221801758,
+        27.638999938964844,
+        27.48699951171875,
+        27.8439998626709
+      ],
+      "n_tokens": 128,
+      "text": "Squirt of water is added to the flour in the mixing bowl. The flour is being mixed. The flour is mixed with the water. The flour is being mixed with the water. The flour is being mixed with the water. The flour is being mixed with the water. The flour is being mixed with the water. The flour is being mixed with the water. The flour is being mixed with the water. The flour is being mixed with the water. The flour is being mixed with the water. The flour is being mixed with the water. The flour is being mixed with the water. The flour is being mixed with the water."
+    },
+    {
+      "video": "-DKuLXYoY3g_14_20",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        14,
+        8
+      ],
+      "n_visual_tokens": 448,
+      "n_prompt_tokens": 476,
+      "load_ms": 7.564000129699707,
+      "tokenize_ms": 8.329999923706055,
+      "vit_ms": 53.624000549316406,
+      "prefill_ms": 170.92999267578125,
+      "decode_ms": 2099.655029296875,
+      "total_ms": 2340.110107421875,
+      "group_encode_ms": [
+        16.020000457763672,
+        12.668000221252441,
+        12.562999725341797,
+        12.373000144958496
+      ],
+      "n_tokens": 128,
+      "text": "A young boy in a blue jacket is dribbling a basketball on a gym floor. He is wearing green shorts and black and white sneakers. He is looking down at the ball as he dribbles. There is a green line on the floor and a red line on the floor. There is a blue wall in the background. The boy is wearing a number 11 on his back. The boy is wearing a blue and white jersey. The boy is wearing a blue and white hat. The boy is wearing a blue and white shirt. The boy is wearing a blue and white jacket. The boy is wearing a blue and white shorts."
+    },
+    {
+      "video": "-DRy7rBg0IQ_31_37",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        14,
+        11
+      ],
+      "n_visual_tokens": 616,
+      "n_prompt_tokens": 644,
+      "load_ms": 9.015000343322754,
+      "tokenize_ms": 11.206999778747559,
+      "vit_ms": 75.6240005493164,
+      "prefill_ms": 197.718017578125,
+      "decode_ms": 2172.382080078125,
+      "total_ms": 2465.9560546875,
+      "group_encode_ms": [
+        22.545000076293945,
+        18.655000686645508,
+        17.027999877929688,
+        17.395999908447266
+      ],
+      "n_tokens": 128,
+      "text": "A woman in a blue swimsuit is昙泳t in a pool. She is moving herlite and�ingptk. There are other people initian the background. The video is in Korean. The logo for Leports365 is in the bottom right corner. The woman is wearing a blue swimsuit. The woman is in the water. The woman is in the water. The woman is in the water. The woman is in the water. The woman is in the water. The woman is in the water. The woman is in the water. The woman is in the water. The woman is in the water"
+    },
+    {
+      "video": "-FugkxLmGO4_5_16",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 7.706999778747559,
+      "tokenize_ms": 7.505000114440918,
+      "vit_ms": 51.0,
+      "prefill_ms": 169.260009765625,
+      "decode_ms": 2088.596923828125,
+      "total_ms": 2324.075927734375,
+      "group_encode_ms": [
+        15.454000473022461,
+        11.812000274658203,
+        11.857000350952148,
+        11.876999855041504
+      ],
+      "n_tokens": 128,
+      "text": "The dog is standing in a cage. The dog is looking at the camera. The dog is standing in a cage. The dog is standing in a cage. The dog is looking at the camera. The dog is standing in a cage. The dog is looking at the camera. The dog is standing in a cage. The dog is looking at the camera. The dog is standing in a cage. The dog is looking at the camera. The dog is standing in a cage. The dog is looking at the camera. The dog is standing in a cage. The dog is looking at the camera. The dog is standing in a cage."
+    },
+    {
+      "video": "-Ms9tsWmhyU_80_95",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.310999870300293,
+      "tokenize_ms": 7.465000152587891,
+      "vit_ms": 46.84199905395508,
+      "prefill_ms": 169.82798767089844,
+      "decode_ms": 2086.84912109375,
+      "total_ms": 2317.302978515625,
+      "group_encode_ms": [
+        11.904999732971191,
+        11.645999908447266,
+        11.63700008392334,
+        11.654000282287598
+      ],
+      "n_tokens": 128,
+      "text": "A woman is playing a flute in a room with a white tiled wall. She is wearing a black dress and has short brown hair. She is holding the flute with both hands and is looking at the camera. There is a clock on the wall behind her. The woman is playing the flute with her mouth and is not using her fingers to press the keys. She is not moving her head or body while she is playing. The woman is not looking at the camera while she is playing the flute. The woman is not moving her head or body while she is playing. The woman is not moving her head or body while she is playing."
+    },
+    {
+      "video": "-YI0cxuNcq8_262_272",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.300000190734863,
+      "tokenize_ms": 7.459000110626221,
+      "vit_ms": 47.027000427246094,
+      "prefill_ms": 169.4550018310547,
+      "decode_ms": 2086.6630859375,
+      "total_ms": 2316.909912109375,
+      "group_encode_ms": [
+        12.111000061035156,
+        11.67199993133545,
+        11.659000396728516,
+        11.585000038146973
+      ],
+      "n_tokens": 128,
+      "text": "A woman is doing sit ups on a blue mat. She is wearing a gray tank top and gray shorts. She is also wearing a white headband. She is  doing the sit ups on a blue mat. The mat is on a brown floor. There is a white wall in the background. There is a white sign on the wall. The sign says \"SPARKPEOPLE\" in black letters. There is a blue and white logo on the sign. The logo is a diamond shape. There is a website address on the sign. The address is \"www.SparkPeople.com\". The sign is on the wall. The sign"
+    },
+    {
+      "video": "-_aaMGK6GGw_57_61",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 5.355000019073486,
+      "tokenize_ms": 7.124000072479248,
+      "vit_ms": 46.900001525878906,
+      "prefill_ms": 169.5030059814453,
+      "decode_ms": 2087.4609375,
+      "total_ms": 2316.34912109375,
+      "group_encode_ms": [
+        12.09000015258789,
+        11.609999656677246,
+        11.592000007629395,
+        11.607999801635742
+      ],
+      "n_tokens": 128,
+      "text": "a man is hugging a young boy. The young boy is looking at the camera. The man is looking at the camera. The man is looking at the young boy. The man is smiling. The young boy is not smiling. The man is wearing a gray shirt. The man is wearing a gray shirt. The man is wearing a gray shirt. The man is wearing a gray shirt. The man is wearing a gray shirt. The man is wearing a gray shirt. The man is wearing a gray shirt. The man is wearing a gray shirt. The man is wearing a gray shirt. The man is wearing a gray shirt. The"
+    },
+    {
+      "video": "-_hbPLsZvvo_172_179",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 19.320999145507813,
+      "tokenize_ms": 20.072999954223633,
+      "vit_ms": 114.04499816894531,
+      "prefill_ms": 250.6320037841797,
+      "decode_ms": 2107.7919921875,
+      "total_ms": 2511.89794921875,
+      "group_encode_ms": [
+        31.43899917602539,
+        27.555999755859375,
+        27.36199951171875,
+        27.687999725341797
+      ],
+      "n_tokens": 128,
+      "text": "A woman is to the right of a glass bowl with a spatula as she mixes the food in it. She an orange and a yellow towel on her shoulder. There is a stovetop behind her. There is a yellow bottle of oil to the right of her. There is a white teapot with red cherries on it to the left of the stovetop. There is a window behind the stovetop. There is a white and yellow daisy to the right of the window. There is a black and silver pot on the stovetop. There is a black and silver pan on the st"
+    },
+    {
+      "video": "-_hbPLsZvvo_18_25",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 17.2810001373291,
+      "tokenize_ms": 19.882999420166016,
+      "vit_ms": 110.50299835205078,
+      "prefill_ms": 250.47900390625,
+      "decode_ms": 2106.219970703125,
+      "total_ms": 2504.427001953125,
+      "group_encode_ms": [
+        28.007999420166016,
+        27.576000213623047,
+        27.413999557495117,
+        27.5049991607666
+      ],
+      "n_tokens": 128,
+      "text": "A person is using a knife to cut a cucumber into thin slices. The slices are then placed into a clear glass bowl. The person is using a wooden cutting board to cut the cucumber. The person is holding the knife with their right hand. The person is wearing a white shirt. The person is holding the cucumber with their left hand. The person is using a knife with a black handle. The person is using a knife with a silver blade. The person is using a knife with a black handle. The person is using a knife with a silver blade. The person is using a knife with a black handle. The person is using a"
+    },
+    {
+      "video": "-_hbPLsZvvo_19_25",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 18.44300079345703,
+      "tokenize_ms": 20.825000762939453,
+      "vit_ms": 110.6030044555664,
+      "prefill_ms": 251.05599975585938,
+      "decode_ms": 2111.8779296875,
+      "total_ms": 2512.87109375,
+      "group_encode_ms": [
+        27.867000579833984,
+        27.417999267578125,
+        27.48699951171875,
+        27.83099937438965
+      ],
+      "n_tokens": 128,
+      "text": "The man seethes the-lettuces in the-plate.2.0-sec-1.0-sec-2.0-sec-3.0-sec-4.0-sec-5.0-sec-6.0-sec-7--sec-8.0-sec-9.0-sec-10.0-sec-11.0-sec-12.0-sec-13.0-sec-14.0-sec-15.0-sec-16.0-sec-17.0-"
+    },
+    {
+      "video": "-_hbPLsZvvo_19_26",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 17.697999954223633,
+      "tokenize_ms": 19.889999389648438,
+      "vit_ms": 110.05799865722656,
+      "prefill_ms": 250.9320068359375,
+      "decode_ms": 2138.09912109375,
+      "total_ms": 2536.719970703125,
+      "group_encode_ms": [
+        27.843000411987305,
+        27.445999145507813,
+        27.381000518798828,
+        27.38800048828125
+      ],
+      "n_tokens": 128,
+      "text": "The man-2 takes the sliced cucumber and puts in a bowl. Then, the man-2 covers the bowl with a glass. #Unsure. #Unsure. #Unsure. #Unsure. #Unsure. #Unsure. #Unsure. #Unsure. #Unsure. #Unsure. #Unsure-2. #Unsure-2. #Unsure-2. #Un则. #Un则-2. #Un则-2. #Un则-2. #Un则-2. #Un则-2. #Un则-2. #Un"
+    },
+    {
+      "video": "-_hbPLsZvvo_211_219",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 18.327999114990234,
+      "tokenize_ms": 19.88800048828125,
+      "vit_ms": 112.20800018310547,
+      "prefill_ms": 251.3730010986328,
+      "decode_ms": 2121.737060546875,
+      "total_ms": 2523.5791015625,
+      "group_encode_ms": [
+        27.729999542236328,
+        27.30900001525879,
+        29.17099952697754,
+        27.99799919128418
+      ],
+      "n_tokens": 128,
+      "text": "Eggs are�poured into a pan. The eggs are then spread out.- The pan is then shaken. The pan is then flipped. The eggs are then spread with chopsticks. The eggs are then flipped. The eggs are then spread with the chopsticks. The pan is then flipped. The pan is then shaken. The君子 is then flipped. The君子 is then spread with the chopsticks. The君子 is then flipped. The君子 is then spread with the君子. The君子 is then flipped. The君子 is then spread with the君子. The君子 is then flipped. The君子 is then spread with the君子"
+    },
+    {
+      "video": "-_hbPLsZvvo_269_275",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 18.525999069213867,
+      "tokenize_ms": 19.875999450683594,
+      "vit_ms": 110.44699096679688,
+      "prefill_ms": 253.39100646972656,
+      "decode_ms": 2128.430908203125,
+      "total_ms": 2530.715087890625,
+      "group_encode_ms": [
+        27.927000045776367,
+        27.594999313354492,
+        27.58300018310547,
+        27.341999053955078
+      ],
+      "n_tokens": 128,
+      "text": "A piece of squash is being dipped in a batter. The squash is then placed on a rack. A piece of squash soaks in a bowl of batter. The squash is then raised一二三次. The squash is raised by a pair of chopsticks.-context: The squash is being raised by a pair of chopsticks. The squash is being raised by a pair of chopsticks. The squash is being raised by a pair of chopsticks. The squash is being raised by a pair of chopsticks. The squash is being raised by a pair of chopsticks. The squash is being raised by a pair of chopsticks. The squash"
+    },
+    {
+      "video": "-_hbPLsZvvo_288_305",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 19.297000885009766,
+      "tokenize_ms": 19.854999542236328,
+      "vit_ms": 111.51599884033203,
+      "prefill_ms": 250.96400451660156,
+      "decode_ms": 2131.531005859375,
+      "total_ms": 2533.218017578125,
+      "group_encode_ms": [
+        27.975000381469727,
+        27.864999771118164,
+        27.5939998626709,
+        28.082000732421875
+      ],
+      "n_tokens": 128,
+      "text": "A woman is preparing a dish in the kitchen. She is wrapping a ball of dough in plastic七月布. She is- -ing the dough in her hands. She is holding a草坪 in her other hand. She is as she as she is as she is as she is as she is as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as as"
+    },
+    {
+      "video": "-_hbPLsZvvo_323_328",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 19.054000854492188,
+      "tokenize_ms": 20.048999786376953,
+      "vit_ms": 113.07099914550781,
+      "prefill_ms": 252.3159942626953,
+      "decode_ms": 2122.006103515625,
+      "total_ms": 2526.551025390625,
+      "group_encode_ms": [
+        28.073999404907227,
+        29.50200080871582,
+        27.94300079345703,
+        27.552000045776367
+      ],
+      "n_tokens": 128,
+      "text": "A woman is- making a plate of food. The plate has a fish, a crab, and a roll. The fish is made� of an apple, the crab is made of a carrot, and the roll is made of a 1/2 of a hard-boiled egg. The woman is using a wooden chopstick to pick爪 the food. The woman is also using a wooden chopstick to pick up a roll of food. The roll of food is made of a 1/2 of a hard-boiled egg. The woman is also using a wooden chopstick to pick up a roll幻想 of food. The roll"
+    },
+    {
+      "video": "-_hbPLsZvvo_43_55",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 17.708999633789063,
+      "tokenize_ms": 19.82900047302246,
+      "vit_ms": 118.18399810791016,
+      "prefill_ms": 251.68199157714844,
+      "decode_ms": 2136.677001953125,
+      "total_ms": 2544.176025390625,
+      "group_encode_ms": [
+        30.423999786376953,
+        30.02899932861328,
+        27.79800033569336,
+        29.933000564575195
+      ],
+      "n_tokens": 128,
+      "text": "A woman is cutting a carrot on a cutting board. The dog watches her. The woman cuts the carrot in half. Then cuts the carrot in smaller pieces. The woman uses a large knife to cut the carrot. The dog continues to watch her. The woman is wearing a purple  shirt. The dog is grey. The woman is in the kitchen. There is a microwave in the background.- The dog is watching the woman. The woman is cutting圉\ngMaps\n<|im_start|>\nGuidId\nThe woman is cutting a carrot on a cutting board. The dog watches her. The woman cuts the carrot in half. Then cuts the carrot in"
+    },
+    {
+      "video": "-_hbPLsZvvo_49_55",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 17.89299964904785,
+      "tokenize_ms": 19.88599967956543,
+      "vit_ms": 111.56500244140625,
+      "prefill_ms": 252.22401428222656,
+      "decode_ms": 2126.0380859375,
+      "total_ms": 2527.65087890625,
+      "group_encode_ms": [
+        27.798999786376953,
+        27.538000106811523,
+        28.52400016784668,
+        27.70400047302246
+      ],
+      "n_tokens": 128,
+      "text": "A woman is cutting a bunch of greens on a cutting board. A dog is standing behind her. The woman is wearing a tunic. A man is cutting a carrot. The dog is standing on the floor. The dog is looking at the woman. The woman is looking at�- the dog. The dog is looking at the woman. The dog is looking at the woman. The dog is looking at the woman. The dog is looking at the woman. The dog is looking at the woman. The dog is looking at the woman. The dog is looking at the woman. The dog is looking at the woman. The dog is"
+    },
+    {
+      "video": "-_hbPLsZvvo_5_8",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 18.68000030517578,
+      "tokenize_ms": 20.891000747680664,
+      "vit_ms": 110.6719970703125,
+      "prefill_ms": 255.81199645996094,
+      "decode_ms": 2136.93505859375,
+      "total_ms": 2543.0400390625,
+      "group_encode_ms": [
+        27.93600082397461,
+        27.424999237060547,
+        27.631999969482422,
+        27.679000854492188
+      ],
+      "n_tokens": 128,
+      "text": "a woman is in a kitchen with a dog. the woman is speaking. the dog is standing on a counter. the woman is standing in front of a counter. on the counter are a bento米饭 box, a bottle of oil, and a cutting board with vegetables. the woman is wearing a  red上面衣. the dog is wearing a blue collar. the woman is wearing a red 靴子. the dog is standing on a counter. the woman is speaking. the woman is wearing a red 靉. the woman is wearing a red 靴. the dog is wearing a blue collar. the woman is"
+    },
+    {
+      "video": "-bjOB4zS0uE_100_105",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        46,
+        26
+      ],
+      "n_visual_tokens": 4784,
+      "n_prompt_tokens": 4812,
+      "load_ms": 64.9530029296875,
+      "tokenize_ms": 96.69300079345703,
+      "vit_ms": 683.6289672851563,
+      "prefill_ms": 695.865966796875,
+      "decode_ms": 2157.22900390625,
+      "total_ms": 3698.424072265625,
+      "group_encode_ms": [
+        174.80499267578125,
+        168.17599487304688,
+        170.2449951171875,
+        170.4029998779297
+      ],
+      "n_tokens": 128,
+      "text": "A woman enunciates while holding a glass with her left hand and族群 with her right hand. The glass is covered in food. The woman is in a kitchen. The woman is wearing a floral shirt. The woman is wearing pink nail polish. The woman is wearing a necklace. The woman is wearing a ring. The woman is wearing a bracelet. The woman is wearing a watch. The woman is wearing a watch. The woman is wearing a watch. The woman is wearing a watch. The woman is wearing a watch. The woman is wearing a watch. The woman is wearing a watch. The woman is wearing a watch. The"
+    },
+    {
+      "video": "-dm-ds5rRaM_44_52",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        16,
+        12
+      ],
+      "n_visual_tokens": 768,
+      "n_prompt_tokens": 796,
+      "load_ms": 13.267999649047852,
+      "tokenize_ms": 13.097000122070313,
+      "vit_ms": 72.51200103759766,
+      "prefill_ms": 196.04600524902344,
+      "decode_ms": 2134.10302734375,
+      "total_ms": 2429.034912109375,
+      "group_encode_ms": [
+        20.275999069213867,
+        17.55500030517578,
+        17.31399917602539,
+        17.367000579833984
+      ],
+      "n_tokens": 128,
+      "text": "A group of sprinters are racing on a track, with one runner in a black uniform taking the lead. The race is being broadcasted by the network VCSN. The time displayed on the screen is 17.6 seconds. The runners are currently at the 13.2 mark on the track. The lead runner is currently at theando 16.3 mark on the track. The lead runner is currently at theando 17.6 mark on the track. The lead runner is currently at theando 18.5 mark on the track. The lead runner is currently at theando "
+    },
+    {
+      "video": "-joBOHlg5J0_72_80",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        31,
+        17
+      ],
+      "n_visual_tokens": 2108,
+      "n_prompt_tokens": 2136,
+      "load_ms": 33.44300079345703,
+      "tokenize_ms": 37.59400177001953,
+      "vit_ms": 206.11500549316406,
+      "prefill_ms": 388.5639953613281,
+      "decode_ms": 2128.883056640625,
+      "total_ms": 2794.673095703125,
+      "group_encode_ms": [
+        55.85100173950195,
+        49.55699920654297,
+        51.61199951171875,
+        49.095001220703125
+      ],
+      "n_tokens": 128,
+      "text": "The lady is applying  foundation to  her face.  The lady is using a brush to apply foundation to her face.  The lady is using a brush to apply foundation to her face.  The lady is using a brush to apply foundation to her face.  The lady is using a brush to apply foundation to her face.  The lady is using a brush to apply foundation to her face.  The lady is using a brush to apply foundation to her face.  The lady is using a brush to apply foundation to her face.  The lady is using a brush to apply foundation to her face.  The lady is using"
+    },
+    {
+      "video": "-mAoVOhKy0c_4_9",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 912,
+      "load_ms": 13.440999984741211,
+      "tokenize_ms": 15.576000213623047,
+      "vit_ms": 87.6300048828125,
+      "prefill_ms": 202.40199279785156,
+      "decode_ms": 2108.573974609375,
+      "total_ms": 2427.6298828125,
+      "group_encode_ms": [
+        25.492000579833984,
+        20.666000366210938,
+        20.187999725341797,
+        21.284000396728516
+      ],
+      "n_tokens": 128,
+      "text": "A train is passing over a bridge with a mountain in the background. The train is yellow and black. The mountain is covered in snow. The sky is blue. The bridge is made of metal. The water under the bridge is calm. The rocks on the shore are gray. The  train is moving from left to right. The train is on the bridge. The bridge is over the water. The train is on the bridge. The train is on the bridge. The train is on the bridge. The train is on the bridge. The train is on the bridge. The train is on the bridge. The train is on the bridge"
+    },
+    {
+      "video": "-pUwIypksfE_13_23",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 912,
+      "load_ms": 14.696000099182129,
+      "tokenize_ms": 15.244000434875488,
+      "vit_ms": 82.83099365234375,
+      "prefill_ms": 201.97499084472656,
+      "decode_ms": 2112.702880859375,
+      "total_ms": 2427.4560546875,
+      "group_encode_ms": [
+        20.700000762939453,
+        20.466999053955078,
+        20.240999221801758,
+        21.42300033569336
+      ],
+      "n_tokens": 128,
+      "text": "Two pandas are looking at a green 3 layer cake. The panda on the right is Mene. The panda on the left is Anja. Mene is on the right. Anja is on the left. Mene is retronating. Anja is retronating. Anja is facing the cake. Mene is facing the cake. Mene is on the cake. Anja is on the ground. Anja is on the left. Mene is on the right. Mene is on the cake. Mene is on the cake. Anja is on the ground. Mene is on the cake."
+    },
+    {
+      "video": "-rkErLY0rRc_26_35",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.192999839782715,
+      "tokenize_ms": 7.110000133514404,
+      "vit_ms": 53.37300109863281,
+      "prefill_ms": 172.0880126953125,
+      "decode_ms": 2109.673095703125,
+      "total_ms": 2348.444091796875,
+      "group_encode_ms": [
+        16.698999404907227,
+        12.161999702453613,
+        12.581999778747559,
+        11.930000305175781
+      ],
+      "n_tokens": 128,
+      "text": "A woman is picking flowers and smiling at the camera. She is wearing a white dress and has blonde hair. She is holding a white bucket in her hand. The background is a garden with white flowers. The video is in black and white. The logo \"Something Weird\" is in the bottom right corner. The woman is also holding a white cloth in her hand. She is looking at the camera and smiling. The woman is standing in front of a white flower bush. The woman is holding a white clothald in her hand. The woman is holding a white cloth in her hand. The woman is holding a white cloth in her hand"
+    },
+    {
+      "video": "-rkErLY0rRc_63_67",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 5.442999839782715,
+      "tokenize_ms": 7.089000225067139,
+      "vit_ms": 47.444000244140625,
+      "prefill_ms": 169.1859893798828,
+      "decode_ms": 2113.7529296875,
+      "total_ms": 2342.9208984375,
+      "group_encode_ms": [
+        11.9399995803833,
+        11.786999702453613,
+        11.85200023651123,
+        11.864999771118164
+      ],
+      "n_tokens": 128,
+      "text": "A woman in a金字 dress is holding a trophy. She is smiling and appears to be happy. She is standing in front of a building. She is holding the trophy with both hands. She is wearing a主宰 dress. She is holding the trophy with both hands. She is holding the trophy with both hands. She is holding the trophy with both hands. She is holding the trophy with both hands. She is holding the trophy with both hands. She is holding the trophy with both hands. She is holding the trophy with both hands. She is holding the trophy with both hands. She is holding the trophy with both hands. She is"
+    },
+    {
+      "video": "-rvjK0lE3z4_33_43",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 7.122000217437744,
+      "tokenize_ms": 7.577000141143799,
+      "vit_ms": 48.76899719238281,
+      "prefill_ms": 171.3310089111328,
+      "decode_ms": 2089.635986328125,
+      "total_ms": 2324.43994140625,
+      "group_encode_ms": [
+        12.359999656677246,
+        11.91100025177002,
+        12.411999702453613,
+        12.086000442504883
+      ],
+      "n_tokens": 128,
+      "text": "A person is-paring a vegetable on a cutting board. The person is-paring a vegetable on a cutting board. The person is-paring a vegetable on a cutting board. The person is-paring a vegetable on a cutting board. The person is-paring a vegetable on a cutting board. The person- is-paring a vegetable on a cutting board. The person is-paring a vegetable on a cutting board. The person is-paring a vegetable on a cutting board. The person is-paring a vegetable on a cutting board. The person is-paring a vegetable on a cutting board. The person is-paring a vegetable"
+    },
+    {
+      "video": "-s4-6QTT7HE_235_241",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        26,
+        17
+      ],
+      "n_visual_tokens": 1768,
+      "n_prompt_tokens": 1796,
+      "load_ms": 20.242000579833984,
+      "tokenize_ms": 32.555999755859375,
+      "vit_ms": 171.75399780273438,
+      "prefill_ms": 310.8210144042969,
+      "decode_ms": 2134.485107421875,
+      "total_ms": 2669.93505859375,
+      "group_encode_ms": [
+        48.154998779296875,
+        41.691001892089844,
+        40.85200119018555,
+        41.055999755859375
+      ],
+      "n_tokens": 128,
+      "text": "A group of dancers in colorful costumes perform a traditional dance in a grassy field. They move in unison, their arms and bodies swaying to the rhythm of the music. The dancers' expressions are focused and intense as they execute their intricate movements. The camera captures the dancers from a distance, allowing the viewer to see the full scope of their performance. The dancers' costumes are vibrant and eye-catching, with bright�\n addCriterion\n<|im_start|>\n<|im_start|>\n>tag>1</tag> The image shows a group of people dressed in traditional Indian attire, performing a dance. The dancers are wearing colorful costumes and headpieces, and they are"
+    },
+    {
+      "video": "-t-ZWaJeH-o_0_15",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        19,
+        13
+      ],
+      "n_visual_tokens": 988,
+      "n_prompt_tokens": 1016,
+      "load_ms": 17.799999237060547,
+      "tokenize_ms": 17.8439998626709,
+      "vit_ms": 97.14799499511719,
+      "prefill_ms": 205.59400939941406,
+      "decode_ms": 2117.59912109375,
+      "total_ms": 2455.99609375,
+      "group_encode_ms": [
+        28.378999710083008,
+        23.059999465942383,
+        22.649999618530273,
+        23.05900001525879
+      ],
+      "n_tokens": 128,
+      "text": "2 women are singing into a microphone. The woman on the right is smiling. The woman on the left is moving her left arm. The woman on the right is moving her left arm. The woman on the left is moving her right arm. The woman on the right is moving her right arm. The woman on the right is moving her left leg. The woman on the left is moving her right leg. The woman on the right is moving her left leg. The woman on the left is moving her right leg. The woman on the right is moving her left leg. The woman on the left is moving her right leg. The woman"
+    },
+    {
+      "video": "-uT_1VDvXok_8_15",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.294000148773193,
+      "tokenize_ms": 7.14300012588501,
+      "vit_ms": 50.7130012512207,
+      "prefill_ms": 170.20999145507813,
+      "decode_ms": 2091.623046875,
+      "total_ms": 2325.992919921875,
+      "group_encode_ms": [
+        15.494999885559082,
+        11.85200023651123,
+        11.741999626159668,
+        11.62399959564209
+      ],
+      "n_tokens": 128,
+      "text": "A baby white rhino is standing next to an adult white rhino. The baby is looking at the camera. The adult is walking away from the baby. The baby is following the adult. The adult is walking on a dirt path. The baby is walking on a dirt path. The baby is following the adult. The adult is walking on a dirt path. The baby is following the adult. The adult is walking on a dirt path. The baby is following the adult. The adult is walking on a dirt path. The baby is following the adult. The adult is walking on a dirt path. The baby is following the adult."
+    },
+    {
+      "video": "-vKO3uSG6Do_3_14",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        26,
+        17
+      ],
+      "n_visual_tokens": 1768,
+      "n_prompt_tokens": 1796,
+      "load_ms": 11.468000411987305,
+      "tokenize_ms": 31.871999740600586,
+      "vit_ms": 170.88400268554688,
+      "prefill_ms": 311.40899658203125,
+      "decode_ms": 2125.987060546875,
+      "total_ms": 2651.702880859375,
+      "group_encode_ms": [
+        47.26599884033203,
+        42.00699996948242,
+        40.96099853515625,
+        40.650001525878906
+      ],
+      "n_tokens": 128,
+      "text": "Three 3D animated characters are dancing and moving their arms and legs in unison. The character on the left is holding a microphone and appears to be singing. The character in the middle is cluing a large bag and大地. The character on the right is also holding a microphone and appears to be singing. The characters are all moving their arms and legs in a synchronized dance. The background is a plain white. The characters are all wearing different outfits. The character on the left is wearing a white and black outfit. The character in the middle is wearing a brown and green outfit. The character on the right is wearing a white and"
+    },
+    {
+      "video": "-vg3vR86fu0_1_6",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 17.847000122070313,
+      "tokenize_ms": 22.04400062561035,
+      "vit_ms": 117.14199829101563,
+      "prefill_ms": 255.6489715576172,
+      "decode_ms": 2118.94091796875,
+      "total_ms": 2531.659912109375,
+      "group_encode_ms": [
+        33.38399887084961,
+        27.57699966430664,
+        28.489999771118164,
+        27.69099998474121
+      ],
+      "n_tokens": 128,
+      "text": "A man on a bike is riding on a dirt road behind a truck. The man is wearing a helmet. A second man is walking on the road. The man on the bike is pedaling. The man on the bike is pedaling faster. The man on the bike� is pedaling faster. The man on the bike is pedaling faster. The man on the bike is pedaling faster. The man on the bike is pedálng faster. The man on the bike is pedaling faster. The man on the bike is pedaling faster. The man on the bike is pedaling faster. The man on the bike is"
+    },
+    {
+      "video": "-wa0umYJVGg_100_115",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.697000026702881,
+      "tokenize_ms": 7.525000095367432,
+      "vit_ms": 51.27400207519531,
+      "prefill_ms": 171.60501098632813,
+      "decode_ms": 2111.587890625,
+      "total_ms": 2348.697998046875,
+      "group_encode_ms": [
+        15.54800033569336,
+        12.482000350952148,
+        11.630000114440918,
+        11.61400032043457
+      ],
+      "n_tokens": 128,
+      "text": "A woman is cooking eggs in a pot on the stove. She is using a strainer to remove the yolk from the egg whites. The strainer is being used to filter the egg whites from the yolk. The woman is�\n:blacking as she stirs the eggs with a spoon. The woman is standing in a kitchen. There is a microwave and a bowl of fruit on the counter. The woman is wearing a red shirt. The woman is holding a strainer in her right hand. The strainer is made of metal. The strainer is being used to filter the egg whites from the yolk. The woman"
+    },
+    {
+      "video": "-wa0umYJVGg_117_123",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.458000183105469,
+      "tokenize_ms": 7.177000045776367,
+      "vit_ms": 48.76900100708008,
+      "prefill_ms": 171.37701416015625,
+      "decode_ms": 2096.447021484375,
+      "total_ms": 2330.238037109375,
+      "group_encode_ms": [
+        12.095000267028809,
+        11.902999877929688,
+        12.854000091552734,
+        11.916999816894531
+      ],
+      "n_tokens": 128,
+      "text": "A woman-who is of Asian decent-is holding a hard boiled egg in her hand. She is in the kitchen and there is a dog sitting on the counter behind her. She is just about to crack the egg. She is in the process of peeling the shell off of the egg. The egg is in a bowl of ice water. The egg is almost fully peeled. The egg is in a bowl of ice water. The egg is almost fully peeled. The egg is in a bowl of ice water. The egg is almost fully peeled. The egg is in a bowl of ice water. The egg is almost fully peeled. The"
+    },
+    {
+      "video": "-wa0umYJVGg_139_157",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 5.90500020980835,
+      "tokenize_ms": 7.136000156402588,
+      "vit_ms": 47.645999908447266,
+      "prefill_ms": 168.9350128173828,
+      "decode_ms": 2113.2060546875,
+      "total_ms": 2342.83203125,
+      "group_encode_ms": [
+        12.137999534606934,
+        11.821999549865723,
+        11.857999801635742,
+        11.82800006866455
+      ],
+      "n_tokens": 128,
+      "text": "A person is using a knife to cut a green and white vegetable on a cutting board. The person is cutting the要不要 on the bias. The person is using a knife to cutOOOoO the vegetable. The person is using a knife to cut the要不要 on the bias. The person is using a knife to cut the vegetable. The person is using a knife to cut the vegetable.- The person is using a knife to cut the vegetable. The person is using a knife to cut the vegetable. The person is using a knife to cut the vegetable. The person is using a knife to cut the vegetable. The person is using"
+    },
+    {
+      "video": "-wa0umYJVGg_168_176",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 7.245999813079834,
+      "tokenize_ms": 7.5,
+      "vit_ms": 48.053001403808594,
+      "prefill_ms": 171.697998046875,
+      "decode_ms": 2105.02294921875,
+      "total_ms": 2339.529052734375,
+      "group_encode_ms": [
+        12.164999961853027,
+        11.869000434875488,
+        11.854000091552734,
+        12.164999961853027
+      ],
+      "n_tokens": 128,
+      "text": "A person is adding green vegetables to a pot of boiling water. The person is using chopsticks to stir the vegetables in the pot. The vegetables are being cooked in the pot of water. The person is�\n !*** \n<|im_start|>\n addCriterion\nperson is putting green vegetables in a pot of water. The person is using chopsticks to stir the vegetables in the pot. The vegetables are in the pot of water. The person is using chopsticks to stir the vegetables in the pot. The vegetables are in the pot of water. The person is using chopsticks to stir the vegetables in the pot. The vegetables are in the pot of water"
+    },
+    {
+      "video": "-wa0umYJVGg_23_41",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.624000072479248,
+      "tokenize_ms": 7.185999870300293,
+      "vit_ms": 48.112998962402344,
+      "prefill_ms": 169.54200744628906,
+      "decode_ms": 2112.405029296875,
+      "total_ms": 2343.876953125,
+      "group_encode_ms": [
+        12.140999794006348,
+        12.147000312805176,
+        11.961000442504883,
+        11.86400032043457
+      ],
+      "n_tokens": 128,
+      "text": "A person is cooking two pieces of meat in a pot on a stove. The meat is being turned over with a pair of tongs. The meat is a light pink color. The pot is black and has a handle on the side. The stove is a dark color. The person is�\n<|im_start|>\n:frame-0-1392830395-3�\ngMaps\nA person is cooking two pieces of meat in�\n addCriterion\n<|im_start|>\n taxp\nThe person is using a pair of tongs to turn the meat in a pot on a stove. The meat is a light pink color and is"
+    },
+    {
+      "video": "-wa0umYJVGg_271_276",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.2179999351501465,
+      "tokenize_ms": 7.135000228881836,
+      "vit_ms": 47.95299530029297,
+      "prefill_ms": 169.69900512695313,
+      "decode_ms": 2090.85498046875,
+      "total_ms": 2321.868896484375,
+      "group_encode_ms": [
+        12.1899995803833,
+        11.946000099182129,
+        11.90999984741211,
+        11.906999588012695
+      ],
+      "n_tokens": 128,
+      "text": "A person is using a knife to cut a piece of meat on a green cutting board. The person then uses a spatula to flip the meat over. The person is wearing a purple shirt and is standing in a kitchen. There is a dog sitting on the counter next to the person. The person is holding a spatula and is about to put the meat in the oven. The person is wearing a purple shirt and is standing in a kitchen. There is a dog sitting on the counter next to the person. The person is holding a spatula and is about to put the meat in the oven. The person is wearing a purple shirt"
+    },
+    {
+      "video": "-wa0umYJVGg_286_290",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.616000175476074,
+      "tokenize_ms": 7.315999984741211,
+      "vit_ms": 47.47699737548828,
+      "prefill_ms": 168.96499633789063,
+      "decode_ms": 2091.093994140625,
+      "total_ms": 2321.472900390625,
+      "group_encode_ms": [
+        11.987000465393066,
+        11.8100004196167,
+        11.843999862670898,
+        11.836000442504883
+      ],
+      "n_tokens": 128,
+      "text": "A woman is cooking noodles in a pot on the stove. A dog is watching her. The dog is standing on a counter. The woman is wearing a red shirt. The dog is gray. The woman is holding a pot. The woman is- looking at the dog. The woman is holding a pot. The woman is holding a pot. The woman is holding a pot. The woman is holding a pot. The woman is holding a pot. The woman is holding a pot. The woman is holding a pot. The woman is holding a pot. The woman is holding a pot. The woman is holding a pot. The woman is"
+    },
+    {
+      "video": "-zOrV-5vh1A_69_76",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        46,
+        26
+      ],
+      "n_visual_tokens": 4784,
+      "n_prompt_tokens": 4812,
+      "load_ms": 50.89500045776367,
+      "tokenize_ms": 97.2969970703125,
+      "vit_ms": 678.18701171875,
+      "prefill_ms": 686.3090209960938,
+      "decode_ms": 2144.95703125,
+      "total_ms": 3657.69189453125,
+      "group_encode_ms": [
+        175.197998046875,
+        167.3560028076172,
+        168.1719970703125,
+        167.46099853515625
+      ],
+      "n_tokens": 128,
+      "text": "A car is driving down a street with colorful confetti scattered on the ground. The car is moving at a high speed, and the confetti is being blown away by the wind. The car is red and has a black roof. The street is made of concrete and has a white line painted on it. There are also some trees and buildings in the background. The car is driving towards the right side of the screen. The confetti is in various colors, including red, blue, green, and yellow. The car is also making a turn, and the confetti is being blown away by the wind. The car is also making"
+    },
+    {
+      "video": "00jrXRMlZOY_0_10",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 912,
+      "load_ms": 15.571000099182129,
+      "tokenize_ms": 15.61400032043457,
+      "vit_ms": 85.64500427246094,
+      "prefill_ms": 202.56600952148438,
+      "decode_ms": 2102.547119140625,
+      "total_ms": 2421.949951171875,
+      "group_encode_ms": [
+        24.257999420166016,
+        20.599000930786133,
+        20.41900062561035,
+        20.368999481201172
+      ],
+      "n_tokens": 128,
+      "text": "A person is touching a turtle on a wooden table. The turtle is moving its head and legs. The person is wearing a white shirt. There are trees in the background. The turtle is on a wooden table. The person is touching the turtle's head. The turtle is moving its head and legs. The person is wearing a white shirt. There are trees in the background. The turtle is on a wooden table. The person is touching the turtle's head. The turtle is moving its head and legs. The person is wearing a white shirt. There are trees in the background. The turtle is on a wooden table. The person is"
+    },
+    {
+      "video": "02Z-kuB3IaM_2_13",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.441999912261963,
+      "tokenize_ms": 7.122000217437744,
+      "vit_ms": 51.519996643066406,
+      "prefill_ms": 169.07901000976563,
+      "decode_ms": 2090.85009765625,
+      "total_ms": 2325.01904296875,
+      "group_encode_ms": [
+        15.880999565124512,
+        11.996999740600586,
+        11.821999549865723,
+        11.819999694824219
+      ],
+      "n_tokens": 128,
+      "text": "A small black dog runs through a forest. A black bear is in the woods. A large black bear is in the woods. A large black bear is in the woods. A large black bear is in the woods. A large black bear is in the woods. A large black bear is in the woods. A large black bear is in the woods. A large black bear is in the woods. A large black bear is in the woods. A large black bear is in the woods. A large black bear is in the woods. A large black bear is in the woods. A large black bear is in the woods. A large black"
+    },
+    {
+      "video": "04Gt01vatkk_248_265",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 912,
+      "load_ms": 13.701000213623047,
+      "tokenize_ms": 14.96399974822998,
+      "vit_ms": 86.36599731445313,
+      "prefill_ms": 204.18199157714844,
+      "decode_ms": 2125.076904296875,
+      "total_ms": 2444.300048828125,
+      "group_encode_ms": [
+        24.576000213623047,
+        20.68600082397461,
+        20.541000366210938,
+        20.562999725341797
+      ],
+      "n_tokens": 128,
+      "text": "A woman is using a本报 to cut an onion. The onion is on a cutting board. The烦preparing the onion for a meal. The woman is wearing a red shirt. The woman is holding the onion with her left手. The woman is holding the knife with her right手. The woman is cutting the onion into smaller pieces. The woman is cutting the onion into smaller pieces. The woman is cutting the onion into smaller pieces. The woman is cutting the onion into smaller pieces. The woman is cutting the onion into smaller pieces. The woman is cutting the onion into smaller pieces. The woman is cutting the onion into smaller pieces"
+    },
+    {
+      "video": "04Gt01vatkk_308_321",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 912,
+      "load_ms": 14.062999725341797,
+      "tokenize_ms": 15.244000434875488,
+      "vit_ms": 82.8270034790039,
+      "prefill_ms": 204.11302185058594,
+      "decode_ms": 2130.988037109375,
+      "total_ms": 2447.242919921875,
+      "group_encode_ms": [
+        20.920000076293945,
+        20.27400016784668,
+        20.19099998474121,
+        21.441999435424805
+      ],
+      "n_tokens": 128,
+      "text": "The lady cuts the green stuff on the cutting board. #1100000000000000000000000000000000000000000000000000000000000000000-00000-00000-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-"
+    },
+    {
+      "video": "eyhzdC936uk_15_27",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 5.482999801635742,
+      "tokenize_ms": 7.164999961853027,
+      "vit_ms": 53.128997802734375,
+      "prefill_ms": 170.41099548339844,
+      "decode_ms": 2097.14794921875,
+      "total_ms": 2333.341064453125,
+      "group_encode_ms": [
+        15.70300006866455,
+        12.001999855041504,
+        11.878999710083008,
+        13.545000076293945
+      ],
+      "n_tokens": 128,
+      "text": "A man is playing with a dog in a store. The dog is sitting on the floor and the man is standing in front of it. The man is holding his hand up in the air and the dog is looking at him. The man is also holding a toy in his hand. The dog is looking at the toy and the man is looking at the dog. The man is also holding a cell phone in his hand. The dog is looking at the cell phone and the man is looking at the dog. The man is also holding a remote control in his hand. The dog is looking at the remote control and the man is looking at"
+    },
+    {
+      "video": "fw8qvK67jYY_50_97",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        11
+      ],
+      "n_visual_tokens": 748,
+      "n_prompt_tokens": 776,
+      "load_ms": 9.71399974822998,
+      "tokenize_ms": 12.779999732971191,
+      "vit_ms": 71.88199615478516,
+      "prefill_ms": 196.2689971923828,
+      "decode_ms": 2110.4208984375,
+      "total_ms": 2401.073974609375,
+      "group_encode_ms": [
+        20.642000198364258,
+        17.115999221801758,
+        16.94099998474121,
+        17.183000564575195
+      ],
+      "n_tokens": 128,
+      "text": "A person just grates a piece of ginger into圉.<|im_start|>\nstyleType\nThe image shows a person using a citrus juicer to extract juice from a lemon. The juicer is placed on a wooden cutting board, and the person is holding the lemon over the juicer. There is also a knife on the cutting board. The person is wearing a pink glove on their right hand. The juicer is white and has a small container to collect the juice. The lemon is yellow and appears to be ripe. The cutting board is made of wood and has a natural finish. The knife has a black handle and a silver blade. The"
+    },
+    {
+      "video": "gtixLEvO2Us_0_6",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        19,
+        13
+      ],
+      "n_visual_tokens": 988,
+      "n_prompt_tokens": 1016,
+      "load_ms": 10.243000030517578,
+      "tokenize_ms": 16.731000900268555,
+      "vit_ms": 96.94400024414063,
+      "prefill_ms": 205.46499633789063,
+      "decode_ms": 2110.4130859375,
+      "total_ms": 2439.81005859375,
+      "group_encode_ms": [
+        27.10700035095215,
+        24.027999877929688,
+        23.027999877929688,
+        22.7810001373291
+      ],
+      "n_tokens": 128,
+      "text": "A woman-1- is sitting on a chair and is clapping her hands. She is then singing. She then-1-  an arm and 1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1�\n<|im_start|>\n��\n��\n MediaTek\n<|im_start|>\nUsageId\n20210501160010000"
+    },
+    {
+      "video": "hoinj6vyQ2g_8_16",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        17
+      ],
+      "n_visual_tokens": 1564,
+      "n_prompt_tokens": 1592,
+      "load_ms": 23.275999069213867,
+      "tokenize_ms": 25.913000106811523,
+      "vit_ms": 147.9980010986328,
+      "prefill_ms": 301.0379943847656,
+      "decode_ms": 2121.0869140625,
+      "total_ms": 2619.37890625,
+      "group_encode_ms": [
+        41.41899871826172,
+        35.75400161743164,
+        35.32500076293945,
+        35.5
+      ],
+      "n_tokens": 128,
+      "text": "A man is sitting on a chair and playing an acoustic guitar. He is wearing a black shirt and blue jeans. He is looking down at the guitar. There is a desk with a lamp and a computer monitor in the background. There is a bed with a pillow and a blanket in the background. There is a curtain in the background. The man is playing the guitar with his right hand. The man is looking at the guitar. The man is playing the guitar右手. The man is playing the guitar with his right hand. The man is playing the guitar with his right hand. The man is playing the guitar with his right hand."
+    },
+    {
+      "video": "j4dMnAPZu70_12_17",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 3.7119998931884766,
+      "tokenize_ms": 7.559999942779541,
+      "vit_ms": 51.43300247192383,
+      "prefill_ms": 170.37301635742188,
+      "decode_ms": 2112.7099609375,
+      "total_ms": 2345.7939453125,
+      "group_encode_ms": [
+        15.567999839782715,
+        12.062000274658203,
+        11.836999893188477,
+        11.965999603271484
+      ],
+      "n_tokens": 128,
+      "text": "A baby panda is being carried by a person in the snow. The baby panda is then let go andosters to play in the snow. The baby panda is then seen walking in the snow. The baby panda is then seen being carried by a person in the snow. The baby panda is then seen walking in the snow. The baby panda is then seen being carried by a person in the snow. The baby panda is then seen walking in the snow咬着人的手。 The baby panda is then seen being carried by a person in the snow. The baby panda is then seen walking in the snow. The baby panda is then seen"
+    },
+    {
+      "video": "kBMsuhDvg88_45_64",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 18.197999954223633,
+      "tokenize_ms": 19.893999099731445,
+      "vit_ms": 116.97900390625,
+      "prefill_ms": 256.2799987792969,
+      "decode_ms": 2139.31494140625,
+      "total_ms": 2550.708984375,
+      "group_encode_ms": [
+        32.189998626708984,
+        27.865999221801758,
+        28.510000228881836,
+        28.413000106811523
+      ],
+      "n_tokens": 128,
+      "text": "A group of people are posing for a picture in a park. They are all crouchingPIOt and some are standing on top of others. They are all smiling and appear to be.DeserializeObject-1.0.0.10.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0"
+    },
+    {
+      "video": "kWLNZzuo3do_77_83",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 14.045000076293945,
+      "tokenize_ms": 20.094999313354492,
+      "vit_ms": 111.54400634765625,
+      "prefill_ms": 250.73899841308594,
+      "decode_ms": 2141.8759765625,
+      "total_ms": 2538.35498046875,
+      "group_encode_ms": [
+        27.975000381469727,
+        28.672000885009766,
+        27.594999313354492,
+        27.302000045776367
+      ],
+      "n_tokens": 128,
+      "text": "A person-1 puts the sliced mushrooms in a pot. A person-2 puts water in the pot. The pot is on the stove. A person-1 stirs the mushrooms. A person-2 stirs the mushrooms. A person月下s the pot. A person�s the pot. A person-� as the pot. A person-3 as the pot. A person-4 as the pot. A person-5 as the pot. A person-6 as the pot. A person-7 as the pot. A person-8 as the pot. A person-9 as the pot. A person-"
+    },
+    {
+      "video": "lcu-DwrnYY8_2_5",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 912,
+      "load_ms": 12.942999839782715,
+      "tokenize_ms": 14.885000228881836,
+      "vit_ms": 85.88899230957031,
+      "prefill_ms": 201.52700805664063,
+      "decode_ms": 2120.299072265625,
+      "total_ms": 2435.552001953125,
+      "group_encode_ms": [
+        24.201000213623047,
+        20.67799949645996,
+        20.740999221801758,
+        20.268999099731445
+      ],
+      "n_tokens": 128,
+      "text": "a man is jumping into a pool. he is wearing a black 2 piece swimsuit. he is in the air. he is about to hit the water. he is in the water. he is swimming. he is in the water. he is making a big splash. he is in the water. he is making邈a big splash. he is in the water. he is making a big splash. he is in the water. he is making a big splash. heis in the water. he is making a big splash. he is in theis water. he is making a big splash. he is in the water"
+    },
+    {
+      "video": "mOZkcBcWR8o_6_12",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        6
+      ],
+      "n_visual_tokens": 264,
+      "n_prompt_tokens": 292,
+      "load_ms": 3.9600000381469727,
+      "tokenize_ms": 5.111999988555908,
+      "vit_ms": 41.10100173950195,
+      "prefill_ms": 168.10499572753906,
+      "decode_ms": 2099.19091796875,
+      "total_ms": 2317.47509765625,
+      "group_encode_ms": [
+        13.039999961853027,
+        9.553999900817871,
+        9.25100040435791,
+        9.255999565124512
+      ],
+      "n_tokens": 128,
+      "text": "A little girl is pushing�a shopping cart in a store. She is wearing a white shirt and a black skirt. She is also wearing a pair of glasses. The cart is empty. The girl is looking at the camera. The girl is walking in a store. The girl is walking in a store. The girl is walking in a store. The girl is walking in a store. The girl is walking in a store. The girl is walking in a store. The girl is walking in a store. The girl is walking in a store. The girl is walking in a store. The girl is walking in a store. The girl"
+    },
+    {
+      "video": "nZSFn51l3hc_480_485",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        46,
+        26
+      ],
+      "n_visual_tokens": 4784,
+      "n_prompt_tokens": 4812,
+      "load_ms": 57.229000091552734,
+      "tokenize_ms": 92.7760009765625,
+      "vit_ms": 683.5740356445313,
+      "prefill_ms": 691.8519897460938,
+      "decode_ms": 2172.56005859375,
+      "total_ms": 3698.055908203125,
+      "group_encode_ms": [
+        176.1959991455078,
+        169.75100708007813,
+        167.8090057373047,
+        169.8179931640625
+      ],
+      "n_tokens": 128,
+      "text": "A person seizes a knife and severs the rib from the meat. The person then places the knife on the cutting board. The person绪sees the rib from the meat. The person then takes the rib and places it on top of the cutting board. The person then takes the knife and severs the rib from the meat. The person seizes the rib and places it on the cutting board. The person then takes the knife and severs the rib from the meat. The person then seizes the rib and places it on the cutting board. The person then takes the knife and severs the rib from the meat. The"
+    },
+    {
+      "video": "oSnYUfCGiCA_7_17",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        26,
+        17
+      ],
+      "n_visual_tokens": 1768,
+      "n_prompt_tokens": 1796,
+      "load_ms": 18.29199981689453,
+      "tokenize_ms": 29.88599967956543,
+      "vit_ms": 170.88999938964844,
+      "prefill_ms": 311.21502685546875,
+      "decode_ms": 2132.513916015625,
+      "total_ms": 2662.89111328125,
+      "group_encode_ms": [
+        48.11800003051758,
+        40.93899917602539,
+        40.94499969482422,
+        40.88800048828125
+      ],
+      "n_tokens": 128,
+      "text": "a womanalcon tye tye tople tye�- pre tye pre-- pre- pre- pre- pre- pre- pre- pre- pre- pre- pre- pre- pre- pre- pre- pre- pre- pre- pre- pre- pre- pre- pre- pre- pre- pre- pre- pre- pre- pre- pre-  tye tye tye tye tye tye tye tye tye tye tye tye tye tye tye tye tye--- pre- pre- pre- pre-- pre-"
+    },
+    {
+      "video": "pdrBPJYfTC8_33_39",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 912,
+      "load_ms": 11.880000114440918,
+      "tokenize_ms": 16.520999908447266,
+      "vit_ms": 86.97500610351563,
+      "prefill_ms": 205.7570037841797,
+      "decode_ms": 2139.02001953125,
+      "total_ms": 2460.162109375,
+      "group_encode_ms": [
+        25.672000885009766,
+        20.739999771118164,
+        20.277000427246094,
+        20.285999298095703
+      ],
+      "n_tokens": 128,
+      "text": "A mug with a drawing of Ernie is shown on a saucer. The camera then pans to the right and一批m New mugs are shown. The camera then pans to the right and a new mug is shown on a saucer. The camera then pans to the right and a new mug is shown on a saucer. The camera then pans to the right and a new mug is shown on a saucer. The camera then pans to the right and a new mug is shown on a saucer. The camera then pans to the right and a new mug is shown on a saucer. The camera then pans to the right"
+    },
+    {
+      "video": "qPXynwa_2iM_15_25",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        6
+      ],
+      "n_visual_tokens": 264,
+      "n_prompt_tokens": 292,
+      "load_ms": 4.453000068664551,
+      "tokenize_ms": 5.302999973297119,
+      "vit_ms": 42.81700134277344,
+      "prefill_ms": 166.95799255371094,
+      "decode_ms": 2104.25,
+      "total_ms": 2323.7900390625,
+      "group_encode_ms": [
+        12.972000122070313,
+        9.527999877929688,
+        9.246999740600586,
+        11.069999694824219
+      ],
+      "n_tokens": 128,
+      "text": "A black dog is running through the water. The dog is running in a straight line. The dog isensoing in the water. The dog is running in the water. The dog is running in the water. The dog is running in the water. The dog is running in the water. The dog is running in the water. The dog is running in the water. The dog is running in the water. The dog is running in the water. The dog is running in the water. The dog is running in the water. The dog is running in the water. The dog is running in the water. The dog is running in"
+    },
+    {
+      "video": "rlQ2kW-FvMk_66_79",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        17
+      ],
+      "n_visual_tokens": 1564,
+      "n_prompt_tokens": 1592,
+      "load_ms": 21.25200080871582,
+      "tokenize_ms": 27.993999481201172,
+      "vit_ms": 148.5240020751953,
+      "prefill_ms": 301.68798828125,
+      "decode_ms": 2115.717041015625,
+      "total_ms": 2615.260009765625,
+      "group_encode_ms": [
+        41.470001220703125,
+        35.472999572753906,
+        35.9739990234375,
+        35.606998443603516
+      ],
+      "n_tokens": 128,
+      "text": "A woman is doing a leg exercise with a man's assistance. The woman is doing a side lunge with her right leg and the man is holding her right foot. The woman is also holding her right arm up in the air. The man is standing behind the woman and is holding her right foot with his left hand. The woman is wearing a yellow sports bra and black shorts with yellow trim. The man is wearing a black 3/4 sleeve shirt and black shorts. They are in a gym. The woman is also wearing white sneakers. The man is wearing grey sneakers. The man is also wearing a watch on his left wrist"
+    },
+    {
+      "video": "sMscRb9TcQE_146_161",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        15
+      ],
+      "n_visual_tokens": 1380,
+      "n_prompt_tokens": 1408,
+      "load_ms": 17.121999740600586,
+      "tokenize_ms": 22.972999572753906,
+      "vit_ms": 128.7899932861328,
+      "prefill_ms": 262.4670104980469,
+      "decode_ms": 2110.30810546875,
+      "total_ms": 2541.708984375,
+      "group_encode_ms": [
+        34.606998443603516,
+        31.687000274658203,
+        31.27199935913086,
+        31.224000930786133
+      ],
+      "n_tokens": 128,
+      "text": "A man in a police uniform is holding a woman's hand as she sits in a chair. She is laughing and appears to be in a room with a fireplace. There is a mannequin in the background. The man is leaning over the woman and she is holding a red object in her other hand. The man is wearing a white shirt and black pants. The woman is wearing a blue shirt and glasses. The man is wearing a black hat and sunglasses. The woman is wearing a white headscarf. The man is holding a gun in his other hand. The woman is holding a red object in her other hand. The man"
+    },
+    {
+      "video": "tn1d5DmdMqY_15_28",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 6.678999900817871,
+      "tokenize_ms": 7.151000022888184,
+      "vit_ms": 51.46500015258789,
+      "prefill_ms": 170.07701110839844,
+      "decode_ms": 2090.64794921875,
+      "total_ms": 2326.029052734375,
+      "group_encode_ms": [
+        15.4399995803833,
+        12.008000373840332,
+        12.0600004196167,
+        11.956999778747559
+      ],
+      "n_tokens": 128,
+      "text": "A man is playing an acoustic guitar. The man is strumming the guitar with his right hand. He is holding the neck of the guitar with his left hand. The man is wearing a black shirt. The man is sitting in a chair. The man is looking at the guitar. The man is not singing. The man is not talking. The man is not dancing. The man is not eating. The man is not drinking. The man is not smoking. The man is not using a cell phone. The man is not using a computer. The man is not using a TV. The man is not using a radio. The"
+    },
+    {
+      "video": "v-9Gx0gJmfo_26_32",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 912,
+      "load_ms": 7.443999767303467,
+      "tokenize_ms": 15.020999908447266,
+      "vit_ms": 86.24400329589844,
+      "prefill_ms": 202.760009765625,
+      "decode_ms": 2102.55908203125,
+      "total_ms": 2414.0380859375,
+      "group_encode_ms": [
+        25.110000610351563,
+        20.482999801635742,
+        20.368000030517578,
+        20.283000946044922
+      ],
+      "n_tokens": 128,
+      "text": "A person is swimming in the water with a pink object in their mouth. The water is murky and there are trees in the background. The video is part of a series of clips featuring the artist Illaiyaraaja. The person is then seen walking on a dirt path with a large tree in the background. The video is part of a series of clips featuring the artist Illaiyaraaja. The person is then seen walking on a dirt path with a large tree in the background. The video is part of a series of clips featuring the artist Illaiyaraaja. The person is then seen walking on a dirt path with"
+    },
+    {
+      "video": "wn9rDTZj-m4_8_18",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1224,
+      "load_ms": 15.803000450134277,
+      "tokenize_ms": 19.84600067138672,
+      "vit_ms": 113.75599670410156,
+      "prefill_ms": 252.19700622558594,
+      "decode_ms": 2151.837890625,
+      "total_ms": 2553.48388671875,
+      "group_encode_ms": [
+        31.344999313354492,
+        27.799999237060547,
+        27.305999755859375,
+        27.30500030517578
+      ],
+      "n_tokens": 128,
+      "text": "A little girl is playing the violin on a beach in front of colorful houses. She is wearing a green shirt and has long blonde hair. The video then shows the same girl playing the violin in a different location, this一二三四五六七八九十. The video ends with a shot of a woman in a red dress standing in front of a building. The woman is holding a camera and appears to be taking a picture. The building behind her is made of stone and has a blue roof. There are also some people in the background, but they are not the focus of the video. The woman is the main focus of the"
+    },
+    {
+      "video": "xxHx6s_DbUo_173_177",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        22,
+        9
+      ],
+      "n_visual_tokens": 792,
+      "n_prompt_tokens": 820,
+      "load_ms": 7.833000183105469,
+      "tokenize_ms": 14.178999900817871,
+      "vit_ms": 82.34700012207031,
+      "prefill_ms": 204.04798889160156,
+      "decode_ms": 2163.865966796875,
+      "total_ms": 2472.283935546875,
+      "group_encode_ms": [
+        23.03499984741211,
+        19.795000076293945,
+        20.107999801635742,
+        19.409000396728516
+      ],
+      "n_tokens": 128,
+      "text": "a person is�突竝着竝着竝着竝着竝着竝着竝着竝着竝着竝着突竝着竝着竝着竝着竝着竝着竝着竝着竝着竝着竝着竝着��ddeprepredpredpredpredpredpredpredpredpredpredpredpredpredpredpredpredpredpredpred�竝着竝着“竝着竝着竝着竝着竝着竝着竝着竝着竝"
+    },
+    {
+      "video": "ywMLb2VfHbI_13_20",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 424,
+      "load_ms": 5.880000114440918,
+      "tokenize_ms": 7.581999778747559,
+      "vit_ms": 51.85199737548828,
+      "prefill_ms": 174.1929931640625,
+      "decode_ms": 2173.885986328125,
+      "total_ms": 2413.402099609375,
+      "group_encode_ms": [
+        16.2189998626709,
+        11.887999534606934,
+        12.057999610900879,
+        11.687000274658203
+      ],
+      "n_tokens": 128,
+      "text": "A hedgehog is in a clear plastic tube. The hedgehog is rolling around in the tube. The hedgehog is moving its head and legs. The hedgehog is in a clear plastic tube. The hedgehog is一会 in a clear plastic tube. The hedgehog is in a clear plastic tube. The hedgehog is in a clear plastic tube. The hedgehog�\n addCriterion\n豉\n<|im_start|>\n fkk\n<|im_start|>\n addCriterion\n豉\noration-1\nA hedgehog is in a clear有种塑料管里。它在滚动着。然后它向左转先先先先先先先先先先先先"
+    }
+  ]
+}

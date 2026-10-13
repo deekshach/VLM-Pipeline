@@ -1,0 +1,76 @@
+{
+  "mode": "serving",
+  "serve_rounds": 3,
+  "base_frames": 8,
+  "n_predict": 128,
+  "requests": [
+    {
+      "index": 0,
+      "round": 0,
+      "video": "alley_1",
+      "t_offset_ms": 0.0,
+      "request_ms": 1526.0,
+      "encode_ms": 746.0,
+      "generation_ms": 686.0,
+      "n_tokens": 121,
+      "tok_per_s": 176.38483965014575
+    },
+    {
+      "index": 1,
+      "round": 0,
+      "video": "cave_2",
+      "t_offset_ms": 1527.0,
+      "request_ms": 1512.0,
+      "encode_ms": 703.0,
+      "generation_ms": 727.0,
+      "n_tokens": 128,
+      "tok_per_s": 176.06602475928474
+    },
+    {
+      "index": 2,
+      "round": 1,
+      "video": "alley_1",
+      "t_offset_ms": 3040.0,
+      "request_ms": 1470.0,
+      "encode_ms": 699.0,
+      "generation_ms": 686.0,
+      "n_tokens": 121,
+      "tok_per_s": 176.38483965014575
+    },
+    {
+      "index": 3,
+      "round": 1,
+      "video": "cave_2",
+      "t_offset_ms": 4511.0,
+      "request_ms": 1511.0,
+      "encode_ms": 701.0,
+      "generation_ms": 728.0,
+      "n_tokens": 128,
+      "tok_per_s": 175.82417582417582
+    },
+    {
+      "index": 4,
+      "round": 2,
+      "video": "alley_1",
+      "t_offset_ms": 6023.0,
+      "request_ms": 1472.0,
+      "encode_ms": 700.0,
+      "generation_ms": 688.0,
+      "n_tokens": 121,
+      "tok_per_s": 175.87209302325581
+    },
+    {
+      "index": 5,
+      "round": 2,
+      "video": "cave_2",
+      "t_offset_ms": 7496.0,
+      "request_ms": 1509.0,
+      "encode_ms": 699.0,
+      "generation_ms": 729.0,
+      "n_tokens": 128,
+      "tok_per_s": 175.58299039780522
+    }
+  ],
+  "total_ms": 9006.0,
+  "n_requests": 6
+}

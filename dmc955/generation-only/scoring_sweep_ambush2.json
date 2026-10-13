@@ -1,0 +1,129 @@
+{
+  "video": "ambush_2",
+  "n_frames": 8,
+  "keep_ratio": 0.30000001192092896,
+  "reference_text": "A woman with red hair is seen in a foggy environment. She is wearing a black outfit and has a black glove on her right hand. She is holding a black object in her left hand. The fog is thick and obscures the background, making it difficult to see what is behind her. The woman appears to be moving, as the fog is swirling around her.",
+  "reference_concepts": [
+    "around",
+    "background",
+    "behind",
+    "black",
+    "difficult",
+    "environment",
+    "foggy",
+    "glove",
+    "hair",
+    "holding",
+    "making",
+    "moving",
+    "object",
+    "obscures",
+    "outfit",
+    "seen",
+    "swirling",
+    "thick",
+    "wearing",
+    "woman"
+  ],
+  "runs": [
+    {
+      "strategy": "BASELINE",
+      "n_visual_tokens": 4736,
+      "n_generated": 75,
+      "prefill_ms": 1143.0,
+      "gen_ms": 1223.0,
+      "tokens_per_sec": 61.324607849121094,
+      "text": "A woman with red hair is seen in a foggy environment. She is wearing a black outfit and has a black glove on her right hand. She is holding a black object in her left hand. The fog is thick and obscures the background, making it difficult to see what is behind her. The woman appears to be moving, as the fog is swirling around her.",
+      "rouge1_f1": 1.0,
+      "concept_recall": 1.0
+    },
+    {
+      "strategy": "MOTION",
+      "n_visual_tokens": 1831,
+      "n_generated": 81,
+      "prefill_ms": 792.0,
+      "gen_ms": 1301.0,
+      "tokens_per_sec": 62.25979995727539,
+      "text": "A man with a bald head and sunglasses is engaged in a physical altercation with another person. The man is wearing a brown jacket and appears to be in the process of delivering a punch to the other person. The other person is wearing a black shirt and is being struck by the man's fist. The scene is set in a foggy environment, which adds a sense of mystery and tension to the fight.",
+      "rouge1_f1": 0.38571426272392273,
+      "concept_recall": 0.20000000298023224
+    },
+    {
+      "strategy": "STATIC",
+      "n_visual_tokens": 1831,
+      "n_generated": 42,
+      "prefill_ms": 776.0,
+      "gen_ms": 681.0,
+      "tokens_per_sec": 61.67401123046875,
+      "text": "A woman with red hair is seen in a snowy environment. She is wearing a black jacket and a white shirt. She is holding a black object in her hand. The background is filled with snow and ice.",
+      "rouge1_f1": 0.576923131942749,
+      "concept_recall": 0.44999998807907104
+    },
+    {
+      "strategy": "COSINE_KF",
+      "n_visual_tokens": 1831,
+      "n_generated": 65,
+      "prefill_ms": 783.0,
+      "gen_ms": 1045.0,
+      "tokens_per_sec": 62.200958251953125,
+      "text": "A woman with short red hair is seen in a foggy environment. She is wearing a black outfit and has a serious expression on her face. She is holding a black object in her hand, which appears to be a weapon. The foggy environment and her serious expression suggest that she is in a tense or dangerous situation.",
+      "rouge1_f1": 0.6129032373428345,
+      "concept_recall": 0.5
+    },
+    {
+      "strategy": "COSINE_CTR",
+      "n_visual_tokens": 1831,
+      "n_generated": 55,
+      "prefill_ms": 786.0,
+      "gen_ms": 886.0,
+      "tokens_per_sec": 62.076751708984375,
+      "text": "A woman with red hair is seen in a close-up shot. She is wearing a black shirt and a black glove on her right hand. Her face is partially obscured by a black mask with a white design on it. She is looking to the left with a serious expression.",
+      "rouge1_f1": 0.5517241358757019,
+      "concept_recall": 0.30000001192092896
+    },
+    {
+      "strategy": "NORM",
+      "n_visual_tokens": 1831,
+      "n_generated": 102,
+      "prefill_ms": 787.0,
+      "gen_ms": 1629.0,
+      "tokens_per_sec": 62.61510467529297,
+      "text": "A woman with red hair is seen in the foreground, her face partially obscured by a cloud of smoke. She is wearing a black outfit and appears to be in a state of distress or surprise. In the background, a man with a bald head and sunglasses is seen in a fighting stance, his arms raised and fists clenched. He is wearing a brown outfit and appears to be in the middle of a fight. The scene is chaotic and intense, with the smoke adding to the sense of urgency and danger.",
+      "rouge1_f1": 0.41772153973579407,
+      "concept_recall": 0.3499999940395355
+    },
+    {
+      "strategy": "BLEND",
+      "n_visual_tokens": 1831,
+      "n_generated": 46,
+      "prefill_ms": 781.0,
+      "gen_ms": 745.0,
+      "tokens_per_sec": 61.744964599609375,
+      "text": "A woman with red hair is seen in a foggy environment. She is wearing a black outfit and appears to be in motion, possibly dancing or moving her arms. The fog creates a hazy, ethereal atmosphere around her.",
+      "rouge1_f1": 0.5576923489570618,
+      "concept_recall": 0.5
+    },
+    {
+      "strategy": "RANDOM",
+      "n_visual_tokens": 1831,
+      "n_generated": 35,
+      "prefill_ms": 780.0,
+      "gen_ms": 570.0,
+      "tokens_per_sec": 61.40351104736328,
+      "text": "A woman with red hair and a black outfit is standing in a foggy environment. She is holding a black glove in her hand and appears to be in a fighting stance.",
+      "rouge1_f1": 0.5714285373687744,
+      "concept_recall": 0.4000000059604645
+    },
+    {
+      "strategy": "MOTION+KF",
+      "n_visual_tokens": 1831,
+      "n_generated": 89,
+      "prefill_ms": 780.0,
+      "gen_ms": 1434.0,
+      "tokens_per_sec": 62.06415557861328,
+      "text": "A woman with red hair is seen in a foggy environment. She is wearing a black outfit and is holding her hand up in front of her face. The fog is thick and obscures the background, making it difficult to see what is behind her. The woman appears to be in a state of surprise or shock, as her eyes are wide open and her mouth is slightly agape. The overall atmosphere of the video is eerie and mysterious.",
+      "rouge1_f1": 0.7034482955932617,
+      "concept_recall": 0.75
+    }
+  ]
+}

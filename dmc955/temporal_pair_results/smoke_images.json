@@ -1,0 +1,71 @@
+{
+  "mode": "images",
+  "align": 28,
+  "base_frames": 8,
+  "frame_step": 0,
+  "video_fps": 2.0,
+  "tokens_per_second": 2,
+  "n_predict": 48,
+  "requests": [
+    {
+      "video": "alley_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 101.45999908447266,
+      "tokenize_ms": 17.77899932861328,
+      "vit_ms": 439.8800048828125,
+      "prefill_ms": 819.1779174804688,
+      "decode_ms": 826.0180053710938,
+      "total_ms": 2258.48193359375,
+      "group_encode_ms": [
+        53.90399932861328,
+        56.48899841308594,
+        56.21900177001953,
+        58.86800003051758,
+        53.172000885009766,
+        53.09199905395508,
+        55.0989990234375,
+        53.0369987487793
+      ],
+      "n_tokens": 48,
+      "text": "A young woman with short, wavy brown hair is standing in a courtyard. She is wearing a gray tank top and has a tattoo on her left arm. She is holding a red apple in her right hand and appears to be looking at"
+    },
+    {
+      "video": "market_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 101.57499694824219,
+      "tokenize_ms": 16.632999420166016,
+      "vit_ms": 439.0489807128906,
+      "prefill_ms": 816.58203125,
+      "decode_ms": 825.6649780273438,
+      "total_ms": 2251.708984375,
+      "group_encode_ms": [
+        54.52000045776367,
+        54.571998596191406,
+        56.20199966430664,
+        58.50299835205078,
+        53.19599914550781,
+        55.1510009765625,
+        53.68000030517578,
+        53.224998474121094
+      ],
+      "n_tokens": 48,
+      "text": "a woman with red hair, wearing a white top and brown 4-legged pants, is walking in an alley. The alley is narrow and has a rustic, old-world feel with wooden planks on the ground and a mix of old and"
+    }
+  ]
+}

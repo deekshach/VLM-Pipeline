@@ -1,0 +1,859 @@
+{
+  "mode": "adaptive_spatial_crop",
+  "video_name": "shaman_3",
+  "n_flow_files": 49,
+  "n_frames_total": 50,
+  "global_complexity": 0.05570380389690399,
+  "n_frames_selected": 3,
+  "crop_config": {
+    "crop_padding": 16,
+    "min_crop_dim": 112
+  },
+  "selected_frames": [
+    {
+      "index": 12,
+      "weight": 9.523293495178223,
+      "complexity": 0.5318475365638733
+    },
+    {
+      "index": 43,
+      "weight": 6.410904884338379,
+      "complexity": 0.6103208661079407
+    },
+    {
+      "index": 44,
+      "weight": 6.277345657348633,
+      "complexity": 0.5941787362098694
+    }
+  ],
+  "motion_profile": [
+    {
+      "frame": 1,
+      "mean_mag": 1.9878334999084473,
+      "p95_mag": 2.8718252182006836,
+      "variance": 2.438387870788574,
+      "complexity": 0.31036069989204407
+    },
+    {
+      "frame": 2,
+      "mean_mag": 2.066540002822876,
+      "p95_mag": 2.9202044010162354,
+      "variance": 3.116184711456299,
+      "complexity": 0.37263113260269165
+    },
+    {
+      "frame": 3,
+      "mean_mag": 2.1585867404937744,
+      "p95_mag": 2.978985071182251,
+      "variance": 4.086645603179932,
+      "complexity": 0.4495445489883423
+    },
+    {
+      "frame": 4,
+      "mean_mag": 2.2552413940429688,
+      "p95_mag": 3.046881914138794,
+      "variance": 5.1367597579956055,
+      "complexity": 0.527562141418457
+    },
+    {
+      "frame": 5,
+      "mean_mag": 2.3489432334899902,
+      "p95_mag": 3.1288137435913086,
+      "variance": 6.068667888641357,
+      "complexity": 0.5948284864425659
+    },
+    {
+      "frame": 6,
+      "mean_mag": 2.4326937198638916,
+      "p95_mag": 3.23500394821167,
+      "variance": 6.732314586639404,
+      "complexity": 0.6432903409004211
+    },
+    {
+      "frame": 7,
+      "mean_mag": 2.5101609230041504,
+      "p95_mag": 3.4524264335632324,
+      "variance": 7.120884418487549,
+      "complexity": 0.6782045364379883
+    },
+    {
+      "frame": 8,
+      "mean_mag": 2.572244167327881,
+      "p95_mag": 3.85469126701355,
+      "variance": 7.1307525634765625,
+      "complexity": 0.6863170862197876
+    },
+    {
+      "frame": 9,
+      "mean_mag": 2.6155054569244385,
+      "p95_mag": 4.298425197601318,
+      "variance": 6.756603240966797,
+      "complexity": 0.6673526763916016
+    },
+    {
+      "frame": 10,
+      "mean_mag": 2.649672269821167,
+      "p95_mag": 4.816756248474121,
+      "variance": 6.213413715362549,
+      "complexity": 0.6350138783454895
+    },
+    {
+      "frame": 11,
+      "mean_mag": 2.666208267211914,
+      "p95_mag": 10.65182113647461,
+      "variance": 5.4771037101745605,
+      "complexity": 0.5880276560783386
+    },
+    {
+      "frame": 12,
+      "mean_mag": 2.6651856899261475,
+      "p95_mag": 9.523293495178223,
+      "variance": 4.651673316955566,
+      "complexity": 0.5318475365638733
+    },
+    {
+      "frame": 13,
+      "mean_mag": 2.651339530944824,
+      "p95_mag": 8.395209312438965,
+      "variance": 3.850414514541626,
+      "complexity": 0.4721616208553314
+    },
+    {
+      "frame": 14,
+      "mean_mag": 2.6468372344970703,
+      "p95_mag": 7.606840133666992,
+      "variance": 3.320324182510376,
+      "complexity": 0.43999236822128296
+    },
+    {
+      "frame": 15,
+      "mean_mag": 2.6498336791992188,
+      "p95_mag": 7.04502534866333,
+      "variance": 2.9431114196777344,
+      "complexity": 0.4202105402946472
+    },
+    {
+      "frame": 16,
+      "mean_mag": 2.6419808864593506,
+      "p95_mag": 6.418106555938721,
+      "variance": 2.5240283012390137,
+      "complexity": 0.39366239309310913
+    },
+    {
+      "frame": 17,
+      "mean_mag": 2.6214683055877686,
+      "p95_mag": 5.7255167961120605,
+      "variance": 2.098975896835327,
+      "complexity": 0.36511898040771484
+    },
+    {
+      "frame": 18,
+      "mean_mag": 2.592043399810791,
+      "p95_mag": 5.254647731781006,
+      "variance": 1.7197511196136475,
+      "complexity": 0.33497896790504456
+    },
+    {
+      "frame": 19,
+      "mean_mag": 2.554137945175171,
+      "p95_mag": 4.785408020019531,
+      "variance": 1.4045765399932861,
+      "complexity": 0.3037547469139099
+    },
+    {
+      "frame": 20,
+      "mean_mag": 2.511579751968384,
+      "p95_mag": 4.2648091316223145,
+      "variance": 1.1869149208068848,
+      "complexity": 0.27786147594451904
+    },
+    {
+      "frame": 21,
+      "mean_mag": 2.47098708152771,
+      "p95_mag": 3.951186180114746,
+      "variance": 1.0749154090881348,
+      "complexity": 0.2563766837120056
+    },
+    {
+      "frame": 22,
+      "mean_mag": 2.442086935043335,
+      "p95_mag": 3.840294361114502,
+      "variance": 1.0302540063858032,
+      "complexity": 0.24235013127326965
+    },
+    {
+      "frame": 23,
+      "mean_mag": 2.4406821727752686,
+      "p95_mag": 3.7980313301086426,
+      "variance": 0.9853306412696838,
+      "complexity": 0.23740249872207642
+    },
+    {
+      "frame": 24,
+      "mean_mag": 2.4595038890838623,
+      "p95_mag": 3.819688320159912,
+      "variance": 0.938942015171051,
+      "complexity": 0.24024826288223267
+    },
+    {
+      "frame": 25,
+      "mean_mag": 2.488524913787842,
+      "p95_mag": 3.843398094177246,
+      "variance": 0.908307671546936,
+      "complexity": 0.24701030552387238
+    },
+    {
+      "frame": 26,
+      "mean_mag": 2.520613670349121,
+      "p95_mag": 3.867997169494629,
+      "variance": 0.8878213167190552,
+      "complexity": 0.25628775358200073
+    },
+    {
+      "frame": 27,
+      "mean_mag": 2.5518507957458496,
+      "p95_mag": 3.9048821926116943,
+      "variance": 0.8700225353240967,
+      "complexity": 0.2642943263053894
+    },
+    {
+      "frame": 28,
+      "mean_mag": 2.5813868045806885,
+      "p95_mag": 3.9463272094726563,
+      "variance": 0.8506662249565125,
+      "complexity": 0.2723340392112732
+    },
+    {
+      "frame": 29,
+      "mean_mag": 2.608642339706421,
+      "p95_mag": 3.981839895248413,
+      "variance": 0.8277848362922668,
+      "complexity": 0.2784063518047333
+    },
+    {
+      "frame": 30,
+      "mean_mag": 2.6418306827545166,
+      "p95_mag": 4.017519474029541,
+      "variance": 0.8045714497566223,
+      "complexity": 0.2817201018333435
+    },
+    {
+      "frame": 31,
+      "mean_mag": 2.6928884983062744,
+      "p95_mag": 4.094533920288086,
+      "variance": 0.8119561076164246,
+      "complexity": 0.26796239614486694
+    },
+    {
+      "frame": 32,
+      "mean_mag": 2.7644810676574707,
+      "p95_mag": 4.264449119567871,
+      "variance": 0.8689630627632141,
+      "complexity": 0.2902640104293823
+    },
+    {
+      "frame": 33,
+      "mean_mag": 2.853605270385742,
+      "p95_mag": 4.47703742980957,
+      "variance": 0.9863156080245972,
+      "complexity": 0.32185590267181396
+    },
+    {
+      "frame": 34,
+      "mean_mag": 2.9528450965881348,
+      "p95_mag": 4.751046657562256,
+      "variance": 1.171675205230713,
+      "complexity": 0.36879849433898926
+    },
+    {
+      "frame": 35,
+      "mean_mag": 3.0556259155273438,
+      "p95_mag": 5.150455951690674,
+      "variance": 1.39986252784729,
+      "complexity": 0.4198152422904968
+    },
+    {
+      "frame": 36,
+      "mean_mag": 3.144587755203247,
+      "p95_mag": 5.4792280197143555,
+      "variance": 1.6083709001541138,
+      "complexity": 0.46314147114753723
+    },
+    {
+      "frame": 37,
+      "mean_mag": 3.2313120365142822,
+      "p95_mag": 5.818563461303711,
+      "variance": 1.8307826519012451,
+      "complexity": 0.5039963126182556
+    },
+    {
+      "frame": 38,
+      "mean_mag": 3.3107690811157227,
+      "p95_mag": 6.115702152252197,
+      "variance": 2.0414648056030273,
+      "complexity": 0.5394142866134644
+    },
+    {
+      "frame": 39,
+      "mean_mag": 3.3809497356414795,
+      "p95_mag": 6.339669227600098,
+      "variance": 2.219416856765747,
+      "complexity": 0.5732390880584717
+    },
+    {
+      "frame": 40,
+      "mean_mag": 3.43522572517395,
+      "p95_mag": 6.476307392120361,
+      "variance": 2.3343653678894043,
+      "complexity": 0.6001461148262024
+    },
+    {
+      "frame": 41,
+      "mean_mag": 3.472092628479004,
+      "p95_mag": 6.528724670410156,
+      "variance": 2.3694136142730713,
+      "complexity": 0.615292489528656
+    },
+    {
+      "frame": 42,
+      "mean_mag": 3.488685131072998,
+      "p95_mag": 6.506065368652344,
+      "variance": 2.3275320529937744,
+      "complexity": 0.6182142496109009
+    },
+    {
+      "frame": 43,
+      "mean_mag": 3.485962390899658,
+      "p95_mag": 6.410904884338379,
+      "variance": 2.2189900875091553,
+      "complexity": 0.6103208661079407
+    },
+    {
+      "frame": 44,
+      "mean_mag": 3.464811086654663,
+      "p95_mag": 6.277345657348633,
+      "variance": 2.0692811012268066,
+      "complexity": 0.5941787362098694
+    },
+    {
+      "frame": 45,
+      "mean_mag": 3.439481735229492,
+      "p95_mag": 6.177460670471191,
+      "variance": 1.9284273386001587,
+      "complexity": 0.5768532752990723
+    },
+    {
+      "frame": 46,
+      "mean_mag": 3.405379295349121,
+      "p95_mag": 6.179953098297119,
+      "variance": 1.837835669517517,
+      "complexity": 0.5622631311416626
+    },
+    {
+      "frame": 47,
+      "mean_mag": 3.3603527545928955,
+      "p95_mag": 6.2494049072265625,
+      "variance": 1.7917041778564453,
+      "complexity": 0.5496626496315002
+    },
+    {
+      "frame": 48,
+      "mean_mag": 3.314073085784912,
+      "p95_mag": 6.303267955780029,
+      "variance": 1.7718255519866943,
+      "complexity": 0.5374424457550049
+    },
+    {
+      "frame": 49,
+      "mean_mag": 3.2883923053741455,
+      "p95_mag": 6.345511436462402,
+      "variance": 1.773979902267456,
+      "complexity": 0.5313602089881897
+    }
+  ],
+  "spatial_analysis": [
+    {
+      "frame_index": 12,
+      "n_selected_patches": 16,
+      "n_total_patches": 16,
+      "spatial_savings": 0.0,
+      "patches": [
+        {
+          "grid_x": 0,
+          "grid_y": 0,
+          "motion_ratio": 1.0,
+          "mean_motion": 2.953042507171631,
+          "max_motion": 3.727250337600708,
+          "selected": true
+        },
+        {
+          "grid_x": 1,
+          "grid_y": 0,
+          "motion_ratio": 0.6189793348312378,
+          "mean_motion": 2.128288984298706,
+          "max_motion": 3.3009979724884033,
+          "selected": true
+        },
+        {
+          "grid_x": 2,
+          "grid_y": 0,
+          "motion_ratio": 0.30106794834136963,
+          "mean_motion": 1.8507360219955444,
+          "max_motion": 2.793208122253418,
+          "selected": true
+        },
+        {
+          "grid_x": 3,
+          "grid_y": 0,
+          "motion_ratio": 0.9918291568756104,
+          "mean_motion": 2.5696494579315186,
+          "max_motion": 2.9981508255004883,
+          "selected": true
+        },
+        {
+          "grid_x": 0,
+          "grid_y": 1,
+          "motion_ratio": 0.9733729958534241,
+          "mean_motion": 2.705117702484131,
+          "max_motion": 3.5121233463287354,
+          "selected": true
+        },
+        {
+          "grid_x": 1,
+          "grid_y": 1,
+          "motion_ratio": 0.005626433528959751,
+          "mean_motion": 1.217347264289856,
+          "max_motion": 11.969707489013672,
+          "selected": true
+        },
+        {
+          "grid_x": 2,
+          "grid_y": 1,
+          "motion_ratio": 0.0017201835289597511,
+          "mean_motion": 1.1781140565872192,
+          "max_motion": 11.968537330627441,
+          "selected": true
+        },
+        {
+          "grid_x": 3,
+          "grid_y": 1,
+          "motion_ratio": 0.8423523306846619,
+          "mean_motion": 2.441455841064453,
+          "max_motion": 3.280379295349121,
+          "selected": true
+        },
+        {
+          "grid_x": 0,
+          "grid_y": 2,
+          "motion_ratio": 0.9297950267791748,
+          "mean_motion": 2.6415481567382813,
+          "max_motion": 3.377589225769043,
+          "selected": true
+        },
+        {
+          "grid_x": 1,
+          "grid_y": 2,
+          "motion_ratio": 0.10973337292671204,
+          "mean_motion": 2.406128406524658,
+          "max_motion": 13.329331398010254,
+          "selected": true
+        },
+        {
+          "grid_x": 2,
+          "grid_y": 2,
+          "motion_ratio": 0.18710578978061676,
+          "mean_motion": 3.078514337539673,
+          "max_motion": 11.96568775177002,
+          "selected": true
+        },
+        {
+          "grid_x": 3,
+          "grid_y": 2,
+          "motion_ratio": 0.7966600060462952,
+          "mean_motion": 2.5091731548309326,
+          "max_motion": 3.7218594551086426,
+          "selected": true
+        },
+        {
+          "grid_x": 0,
+          "grid_y": 3,
+          "motion_ratio": 0.9892129898071289,
+          "mean_motion": 2.8652210235595703,
+          "max_motion": 3.756622076034546,
+          "selected": true
+        },
+        {
+          "grid_x": 1,
+          "grid_y": 3,
+          "motion_ratio": 0.3143276870250702,
+          "mean_motion": 3.7604904174804688,
+          "max_motion": 11.493335723876953,
+          "selected": true
+        },
+        {
+          "grid_x": 2,
+          "grid_y": 3,
+          "motion_ratio": 0.5837872624397278,
+          "mean_motion": 5.052464008331299,
+          "max_motion": 12.522703170776367,
+          "selected": true
+        },
+        {
+          "grid_x": 3,
+          "grid_y": 3,
+          "motion_ratio": 0.8862528800964355,
+          "mean_motion": 3.285691261291504,
+          "max_motion": 5.386974334716797,
+          "selected": true
+        }
+      ]
+    },
+    {
+      "frame_index": 43,
+      "n_selected_patches": 16,
+      "n_total_patches": 16,
+      "spatial_savings": 0.0,
+      "patches": [
+        {
+          "grid_x": 0,
+          "grid_y": 0,
+          "motion_ratio": 1.0,
+          "mean_motion": 4.04401159286499,
+          "max_motion": 5.341753005981445,
+          "selected": true
+        },
+        {
+          "grid_x": 1,
+          "grid_y": 0,
+          "motion_ratio": 0.7979142665863037,
+          "mean_motion": 2.611647367477417,
+          "max_motion": 5.229031562805176,
+          "selected": true
+        },
+        {
+          "grid_x": 2,
+          "grid_y": 0,
+          "motion_ratio": 0.8188073635101318,
+          "mean_motion": 2.367722272872925,
+          "max_motion": 3.2413766384124756,
+          "selected": true
+        },
+        {
+          "grid_x": 3,
+          "grid_y": 0,
+          "motion_ratio": 1.0,
+          "mean_motion": 3.442174196243286,
+          "max_motion": 4.392707347869873,
+          "selected": true
+        },
+        {
+          "grid_x": 0,
+          "grid_y": 1,
+          "motion_ratio": 1.0,
+          "mean_motion": 3.81022047996521,
+          "max_motion": 5.13778018951416,
+          "selected": true
+        },
+        {
+          "grid_x": 1,
+          "grid_y": 1,
+          "motion_ratio": 0.4207998812198639,
+          "mean_motion": 1.8758156299591064,
+          "max_motion": 5.390810012817383,
+          "selected": true
+        },
+        {
+          "grid_x": 2,
+          "grid_y": 1,
+          "motion_ratio": 0.5135105848312378,
+          "mean_motion": 2.2012717723846436,
+          "max_motion": 5.575247764587402,
+          "selected": true
+        },
+        {
+          "grid_x": 3,
+          "grid_y": 1,
+          "motion_ratio": 0.997670590877533,
+          "mean_motion": 3.044719696044922,
+          "max_motion": 4.041001796722412,
+          "selected": true
+        },
+        {
+          "grid_x": 0,
+          "grid_y": 2,
+          "motion_ratio": 1.0,
+          "mean_motion": 3.6943628787994385,
+          "max_motion": 4.695176601409912,
+          "selected": true
+        },
+        {
+          "grid_x": 1,
+          "grid_y": 2,
+          "motion_ratio": 0.5798810124397278,
+          "mean_motion": 2.4834558963775635,
+          "max_motion": 7.168611526489258,
+          "selected": true
+        },
+        {
+          "grid_x": 2,
+          "grid_y": 2,
+          "motion_ratio": 0.8977924585342407,
+          "mean_motion": 3.868961811065674,
+          "max_motion": 7.098050117492676,
+          "selected": true
+        },
+        {
+          "grid_x": 3,
+          "grid_y": 2,
+          "motion_ratio": 0.9998924732208252,
+          "mean_motion": 3.4423716068267822,
+          "max_motion": 5.194719314575195,
+          "selected": true
+        },
+        {
+          "grid_x": 0,
+          "grid_y": 3,
+          "motion_ratio": 1.0,
+          "mean_motion": 3.8463685512542725,
+          "max_motion": 4.991842269897461,
+          "selected": true
+        },
+        {
+          "grid_x": 1,
+          "grid_y": 3,
+          "motion_ratio": 0.9901089668273926,
+          "mean_motion": 4.708665370941162,
+          "max_motion": 10.003316879272461,
+          "selected": true
+        },
+        {
+          "grid_x": 2,
+          "grid_y": 3,
+          "motion_ratio": 0.9959145784378052,
+          "mean_motion": 5.117805480957031,
+          "max_motion": 8.677607536315918,
+          "selected": true
+        },
+        {
+          "grid_x": 3,
+          "grid_y": 3,
+          "motion_ratio": 1.0,
+          "mean_motion": 5.215812683105469,
+          "max_motion": 6.800375938415527,
+          "selected": true
+        }
+      ]
+    },
+    {
+      "frame_index": 44,
+      "n_selected_patches": 16,
+      "n_total_patches": 16,
+      "spatial_savings": 0.0,
+      "patches": [
+        {
+          "grid_x": 0,
+          "grid_y": 0,
+          "motion_ratio": 1.0,
+          "mean_motion": 4.076620578765869,
+          "max_motion": 5.215666770935059,
+          "selected": true
+        },
+        {
+          "grid_x": 1,
+          "grid_y": 0,
+          "motion_ratio": 0.8290567398071289,
+          "mean_motion": 2.6684296131134033,
+          "max_motion": 4.918724060058594,
+          "selected": true
+        },
+        {
+          "grid_x": 2,
+          "grid_y": 0,
+          "motion_ratio": 0.8489463925361633,
+          "mean_motion": 2.4328362941741943,
+          "max_motion": 3.35408616065979,
+          "selected": true
+        },
+        {
+          "grid_x": 3,
+          "grid_y": 0,
+          "motion_ratio": 1.0,
+          "mean_motion": 3.457045555114746,
+          "max_motion": 4.433590888977051,
+          "selected": true
+        },
+        {
+          "grid_x": 0,
+          "grid_y": 1,
+          "motion_ratio": 1.0,
+          "mean_motion": 3.817052125930786,
+          "max_motion": 4.968637466430664,
+          "selected": true
+        },
+        {
+          "grid_x": 1,
+          "grid_y": 1,
+          "motion_ratio": 0.4344179928302765,
+          "mean_motion": 1.9045665264129639,
+          "max_motion": 5.7148332595825195,
+          "selected": true
+        },
+        {
+          "grid_x": 2,
+          "grid_y": 1,
+          "motion_ratio": 0.5269854068756104,
+          "mean_motion": 2.229783058166504,
+          "max_motion": 5.754178047180176,
+          "selected": true
+        },
+        {
+          "grid_x": 3,
+          "grid_y": 1,
+          "motion_ratio": 0.9988173842430115,
+          "mean_motion": 3.051205635070801,
+          "max_motion": 4.0510125160217285,
+          "selected": true
+        },
+        {
+          "grid_x": 0,
+          "grid_y": 2,
+          "motion_ratio": 1.0,
+          "mean_motion": 3.6909265518188477,
+          "max_motion": 4.687712669372559,
+          "selected": true
+        },
+        {
+          "grid_x": 1,
+          "grid_y": 2,
+          "motion_ratio": 0.5805261135101318,
+          "mean_motion": 2.5186707973480225,
+          "max_motion": 7.109914302825928,
+          "selected": true
+        },
+        {
+          "grid_x": 2,
+          "grid_y": 2,
+          "motion_ratio": 0.8837084174156189,
+          "mean_motion": 3.7120909690856934,
+          "max_motion": 6.9567484855651855,
+          "selected": true
+        },
+        {
+          "grid_x": 3,
+          "grid_y": 2,
+          "motion_ratio": 1.0,
+          "mean_motion": 3.418461799621582,
+          "max_motion": 5.038260459899902,
+          "selected": true
+        },
+        {
+          "grid_x": 0,
+          "grid_y": 3,
+          "motion_ratio": 1.0,
+          "mean_motion": 3.8320274353027344,
+          "max_motion": 4.983211994171143,
+          "selected": true
+        },
+        {
+          "grid_x": 1,
+          "grid_y": 3,
+          "motion_ratio": 0.985916018486023,
+          "mean_motion": 4.699766159057617,
+          "max_motion": 9.762673377990723,
+          "selected": true
+        },
+        {
+          "grid_x": 2,
+          "grid_y": 3,
+          "motion_ratio": 0.9916141033172607,
+          "mean_motion": 4.856931209564209,
+          "max_motion": 8.250375747680664,
+          "selected": true
+        },
+        {
+          "grid_x": 3,
+          "grid_y": 3,
+          "motion_ratio": 1.0,
+          "mean_motion": 5.070545673370361,
+          "max_motion": 6.605163097381592,
+          "selected": true
+        }
+      ]
+    }
+  ],
+  "per_frame_crops": [
+    {
+      "frame_index": 12,
+      "orig_w": 1024,
+      "orig_h": 436,
+      "crop_x": 0,
+      "crop_y": 0,
+      "crop_w": 1024,
+      "crop_h": 436,
+      "was_cropped": false,
+      "estimated_tokens_full": 592,
+      "estimated_tokens_crop": 592
+    },
+    {
+      "frame_index": 43,
+      "orig_w": 1024,
+      "orig_h": 436,
+      "crop_x": 0,
+      "crop_y": 0,
+      "crop_w": 1024,
+      "crop_h": 436,
+      "was_cropped": false,
+      "estimated_tokens_full": 592,
+      "estimated_tokens_crop": 592
+    },
+    {
+      "frame_index": 44,
+      "orig_w": 1024,
+      "orig_h": 436,
+      "crop_x": 0,
+      "crop_y": 0,
+      "crop_w": 1024,
+      "crop_h": 436,
+      "was_cropped": false,
+      "estimated_tokens_full": 592,
+      "estimated_tokens_crop": 592
+    }
+  ],
+  "inference": {
+    "generated_text": "The video frames depict a close-up view of a hand holding a lit cigarette. The hand is positioned in the foreground, with the fingers gripping the cigarette firmly. The cigarette is lit, with the flame visible at the tip. The background is blurred, suggesting a shallow depth of field, which keeps the focus on the hand and the cigarette. The lighting is dim, creating a moody and intimate atmosphere. The hand appears to be stationary, with no visible motion or action taking place. The overall scene conveys a sense of stillness and contemplation.",
+    "n_tokens": 112,
+    "encode_time_ms": 304.0,
+    "generation_time_ms": 595.0
+  },
+  "metrics": {
+    "motion_coverage": 0.08772626707416446,
+    "shannon_entropy": 4.20100405945231,
+    "temporal_reduction": 0.94,
+    "avg_spatial_savings": 0.0,
+    "total_tokens_full": 1776,
+    "total_tokens_cropped": 1776,
+    "total_token_savings_pct": 0.0,
+    "n_frames_cropped": 0,
+    "n_frames_total_selected": 3
+  },
+  "timing": {
+    "flow_analysis_ms": 839.0,
+    "frame_selection_ms": 0.0,
+    "encode_ms": 304.0,
+    "generation_ms": 595.0,
+    "total_ms": 2786.0
+  },
+  "params": {
+    "sintel_dir": "/data/Fall25/multimodalRAG/VLM/Qwen2.5-VL/MPI-Sintel",
+    "video_name": "shaman_3",
+    "min_frames": 3,
+    "max_frames": 24,
+    "base_frames": 8,
+    "motion_threshold": 2.0,
+    "motion_percentile": 0.949999988079071,
+    "patch_grid": 4,
+    "spatial_threshold": 0.05000000074505806,
+    "crop_padding": 16,
+    "min_crop_dim": 112
+  }
+}

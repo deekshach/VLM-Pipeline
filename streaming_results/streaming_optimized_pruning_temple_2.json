@@ -1,0 +1,617 @@
+{
+  "mode": "streaming_optimized",
+  "video_name": "temple_2",
+  "n_frames_total": 50,
+  "n_frames_selected": 10,
+  "global_complexity": 0.4244733154773712,
+  "streaming": {
+    "fps": 4.0,
+    "video_duration_s": 12.25,
+    "online_selection": {
+      "method": "cumulative_motion",
+      "cumulative_threshold": 15.0,
+      "max_selected_frames": 10,
+      "decisions": [
+        {
+          "frame_index": 1,
+          "arrival_time_s": 0.0,
+          "p95_magnitude": 0.0,
+          "cumulative_motion": 0.0,
+          "selected": true,
+          "selection_latency_ms": 0.0
+        },
+        {
+          "frame_index": 2,
+          "arrival_time_s": 0.25,
+          "p95_magnitude": 13.474517822265625,
+          "cumulative_motion": 13.474517822265625,
+          "selected": false,
+          "selection_latency_ms": 17.0
+        },
+        {
+          "frame_index": 3,
+          "arrival_time_s": 0.5,
+          "p95_magnitude": 13.370970726013184,
+          "cumulative_motion": 26.845489501953125,
+          "selected": true,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 4,
+          "arrival_time_s": 0.75,
+          "p95_magnitude": 13.278270721435547,
+          "cumulative_motion": 13.278270721435547,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 5,
+          "arrival_time_s": 1.0,
+          "p95_magnitude": 13.232566833496094,
+          "cumulative_motion": 26.51083755493164,
+          "selected": true,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 6,
+          "arrival_time_s": 1.25,
+          "p95_magnitude": 13.23912239074707,
+          "cumulative_motion": 13.23912239074707,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 7,
+          "arrival_time_s": 1.5,
+          "p95_magnitude": 13.25369930267334,
+          "cumulative_motion": 26.492820739746094,
+          "selected": true,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 8,
+          "arrival_time_s": 1.75,
+          "p95_magnitude": 13.272392272949219,
+          "cumulative_motion": 13.272392272949219,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 9,
+          "arrival_time_s": 2.0,
+          "p95_magnitude": 13.029191017150879,
+          "cumulative_motion": 26.30158233642578,
+          "selected": true,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 10,
+          "arrival_time_s": 2.25,
+          "p95_magnitude": 13.156505584716797,
+          "cumulative_motion": 13.156505584716797,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 11,
+          "arrival_time_s": 2.5,
+          "p95_magnitude": 13.230621337890625,
+          "cumulative_motion": 26.387126922607422,
+          "selected": true,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 12,
+          "arrival_time_s": 2.75,
+          "p95_magnitude": 13.306501388549805,
+          "cumulative_motion": 13.306501388549805,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 13,
+          "arrival_time_s": 3.0,
+          "p95_magnitude": 13.431866645812988,
+          "cumulative_motion": 26.73836898803711,
+          "selected": true,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 14,
+          "arrival_time_s": 3.25,
+          "p95_magnitude": 13.868863105773926,
+          "cumulative_motion": 13.868863105773926,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 15,
+          "arrival_time_s": 3.5,
+          "p95_magnitude": 13.846647262573242,
+          "cumulative_motion": 27.715511322021484,
+          "selected": true,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 16,
+          "arrival_time_s": 3.75,
+          "p95_magnitude": 21.81537628173828,
+          "cumulative_motion": 21.81537628173828,
+          "selected": true,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 17,
+          "arrival_time_s": 4.0,
+          "p95_magnitude": 16.264183044433594,
+          "cumulative_motion": 16.264183044433594,
+          "selected": true,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 18,
+          "arrival_time_s": 4.25,
+          "p95_magnitude": 33.70561599731445,
+          "cumulative_motion": 33.70561599731445,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 19,
+          "arrival_time_s": 4.5,
+          "p95_magnitude": 47.883201599121094,
+          "cumulative_motion": 81.58882141113281,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 20,
+          "arrival_time_s": 4.75,
+          "p95_magnitude": 90.61840057373047,
+          "cumulative_motion": 172.20721435546875,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 21,
+          "arrival_time_s": 5.0,
+          "p95_magnitude": 52.365535736083984,
+          "cumulative_motion": 224.57275390625,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 22,
+          "arrival_time_s": 5.25,
+          "p95_magnitude": 71.93327331542969,
+          "cumulative_motion": 296.50604248046875,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 23,
+          "arrival_time_s": 5.5,
+          "p95_magnitude": 78.56877136230469,
+          "cumulative_motion": 375.0748291015625,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 24,
+          "arrival_time_s": 5.75,
+          "p95_magnitude": 97.55429077148438,
+          "cumulative_motion": 472.6291198730469,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 25,
+          "arrival_time_s": 6.0,
+          "p95_magnitude": 128.97970581054688,
+          "cumulative_motion": 601.6088256835938,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 26,
+          "arrival_time_s": 6.25,
+          "p95_magnitude": 150.10765075683594,
+          "cumulative_motion": 751.7164916992188,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 27,
+          "arrival_time_s": 6.5,
+          "p95_magnitude": 92.09822082519531,
+          "cumulative_motion": 843.814697265625,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 28,
+          "arrival_time_s": 6.75,
+          "p95_magnitude": 78.77315521240234,
+          "cumulative_motion": 922.5878295898438,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 29,
+          "arrival_time_s": 7.0,
+          "p95_magnitude": 86.18021392822266,
+          "cumulative_motion": 1008.76806640625,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 30,
+          "arrival_time_s": 7.25,
+          "p95_magnitude": 133.85699462890625,
+          "cumulative_motion": 1142.625,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 31,
+          "arrival_time_s": 7.5,
+          "p95_magnitude": 13.471384048461914,
+          "cumulative_motion": 1156.096435546875,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 32,
+          "arrival_time_s": 7.75,
+          "p95_magnitude": 12.332693099975586,
+          "cumulative_motion": 1168.4290771484375,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 33,
+          "arrival_time_s": 8.0,
+          "p95_magnitude": 12.330585479736328,
+          "cumulative_motion": 1180.7596435546875,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 34,
+          "arrival_time_s": 8.25,
+          "p95_magnitude": 12.369839668273926,
+          "cumulative_motion": 1193.1295166015625,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 35,
+          "arrival_time_s": 8.5,
+          "p95_magnitude": 12.391636848449707,
+          "cumulative_motion": 1205.5211181640625,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 36,
+          "arrival_time_s": 8.75,
+          "p95_magnitude": 12.253677368164063,
+          "cumulative_motion": 1217.7747802734375,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 37,
+          "arrival_time_s": 9.0,
+          "p95_magnitude": 12.091023445129395,
+          "cumulative_motion": 1229.8658447265625,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 38,
+          "arrival_time_s": 9.25,
+          "p95_magnitude": 11.976072311401367,
+          "cumulative_motion": 1241.8419189453125,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 39,
+          "arrival_time_s": 9.5,
+          "p95_magnitude": 11.90607738494873,
+          "cumulative_motion": 1253.748046875,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 40,
+          "arrival_time_s": 9.75,
+          "p95_magnitude": 11.835941314697266,
+          "cumulative_motion": 1265.583984375,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 41,
+          "arrival_time_s": 10.0,
+          "p95_magnitude": 11.754687309265137,
+          "cumulative_motion": 1277.338623046875,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 42,
+          "arrival_time_s": 10.25,
+          "p95_magnitude": 11.668816566467285,
+          "cumulative_motion": 1289.0074462890625,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 43,
+          "arrival_time_s": 10.5,
+          "p95_magnitude": 11.562339782714844,
+          "cumulative_motion": 1300.56982421875,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 44,
+          "arrival_time_s": 10.75,
+          "p95_magnitude": 11.463946342468262,
+          "cumulative_motion": 1312.0338134765625,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 45,
+          "arrival_time_s": 11.0,
+          "p95_magnitude": 11.359087944030762,
+          "cumulative_motion": 1323.3929443359375,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 46,
+          "arrival_time_s": 11.25,
+          "p95_magnitude": 11.244763374328613,
+          "cumulative_motion": 1334.6376953125,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 47,
+          "arrival_time_s": 11.5,
+          "p95_magnitude": 11.119555473327637,
+          "cumulative_motion": 1345.7572021484375,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 48,
+          "arrival_time_s": 11.75,
+          "p95_magnitude": 11.000313758850098,
+          "cumulative_motion": 1356.757568359375,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 49,
+          "arrival_time_s": 12.0,
+          "p95_magnitude": 10.87738037109375,
+          "cumulative_motion": 1367.635009765625,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 50,
+          "arrival_time_s": 12.25,
+          "p95_magnitude": 10.741654396057129,
+          "cumulative_motion": 1378.376708984375,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        }
+      ]
+    }
+  },
+  "selected_frames": [
+    {
+      "index": 1,
+      "weight": 0.0
+    },
+    {
+      "index": 3,
+      "weight": 13.370970726013184
+    },
+    {
+      "index": 5,
+      "weight": 13.232566833496094
+    },
+    {
+      "index": 7,
+      "weight": 13.25369930267334
+    },
+    {
+      "index": 9,
+      "weight": 13.029191017150879
+    },
+    {
+      "index": 11,
+      "weight": 13.230621337890625
+    },
+    {
+      "index": 13,
+      "weight": 13.431866645812988
+    },
+    {
+      "index": 15,
+      "weight": 13.846647262573242
+    },
+    {
+      "index": 16,
+      "weight": 21.81537628173828
+    },
+    {
+      "index": 17,
+      "weight": 16.264183044433594
+    }
+  ],
+  "inference": {
+    "generated_text": "The scene opens with a panoramic view of a dilapidated castle at sunset. The sky is painted with hues of orange and pink, casting a warm glow over the crumbling stone structures. The castle's walls are weathered and broken, with some sections missing entirely. A tall, narrow tower stands prominently in the center, its top adorned with a pointed roof. The ground is littered with debris, including broken stones and scattered rubble. The overall atmosphere is one of desolation and abandonment.\n\nA dragon, with a light brown and beige coloration, is perched on the edge of a stone structure, its wings spread wide. The dragon's eyes are closed, and its mouth is slightly open, as if it is breathing heavily. The dragon's",
+    "n_tokens": 150,
+    "encode_time_ms": 1726.0,
+    "generation_time_ms": 2374.0
+  },
+  "metrics": {
+    "motion_coverage": 0.10314108656831268,
+    "shannon_entropy": 4.226076096654999,
+    "temporal_reduction": 0.8,
+    "total_tokens_encoded": 5920,
+    "total_tokens_cached": 0,
+    "encoder_savings_pct": 0.0,
+    "total_encode_time_ms": 645.0,
+    "estimated_full_encode_time_ms": 1610.0,
+    "encode_speedup": 2.496124029159546
+  },
+  "per_frame_cache": [
+    {
+      "frame_index": 1,
+      "is_keyframe": true,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 161.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 3,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 56.0,
+      "splice_time_ms": 1.0
+    },
+    {
+      "frame_index": 5,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 54.0,
+      "splice_time_ms": 1.0
+    },
+    {
+      "frame_index": 7,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 54.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 9,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 53.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 11,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 54.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 13,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 53.0,
+      "splice_time_ms": 1.0
+    },
+    {
+      "frame_index": 15,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 53.0,
+      "splice_time_ms": 1.0
+    },
+    {
+      "frame_index": 16,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 54.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 17,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 53.0,
+      "splice_time_ms": 1.0
+    }
+  ],
+  "pruning": {
+    "enabled": true,
+    "n_visual_tokens_initial": 3787,
+    "n_visual_tokens_after_round1": 1960,
+    "n_visual_tokens_after_round2": 1372,
+    "n_tokens_pruned_round1": 1827,
+    "n_tokens_pruned_round2": 588,
+    "pruning_overhead_ms": 5.0,
+    "total_reduction_pct": 63.77079482439927
+  },
+  "prefill_pruning": {
+    "enabled": true,
+    "n_tokens_pruned": 2133,
+    "overhead_ms": 14.0,
+    "config": {
+      "keep_ratio": 0.6000000238418579
+    }
+  },
+  "timing": {
+    "selection_ms": 759.0,
+    "encode_ms": 1726.0,
+    "generation_ms": 2374.0,
+    "pruning_overhead_ms": 5.0,
+    "prefill_pruning_overhead_ms": 14.0,
+    "total_ms": 7616.0
+  },
+  "params": {
+    "sintel_dir": "/data/Fall25/multimodalRAG/VLM/Qwen2.5-VL/MPI-Sintel",
+    "video_name": "temple_2",
+    "fps": 4.0,
+    "cumulative_threshold": 15.0,
+    "max_selected_frames": 10,
+    "patch_grid": 4,
+    "spatial_threshold": 0.05000000074505806,
+    "patch_reuse_motion": 0.0,
+    "enable_pruning": true,
+    "enable_prefill_pruning": true
+  }
+}

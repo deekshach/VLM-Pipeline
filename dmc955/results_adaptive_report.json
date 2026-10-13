@@ -1,0 +1,80 @@
+{
+  "alley_1": {
+    "n_frames": 3,
+    "encode_ms": 305.0,
+    "generation_ms": 676.0,
+    "total_ms": 2820.0,
+    "flow_analysis_ms": 784.0,
+    "n_tokens_generated": 127,
+    "entropy": 5.663,
+    "generated_text": "The scene depicts a person walking on a textured, wooden surface that appears to be part of a bridge or a similar structure. The surface is made up of wooden planks arranged in a grid pattern, with some planks having a darker, more weathered appearance. The person is wearing a white shirt and dark shorts, and their legs are visible as they walk. The motion is smooth and continuous, suggesting a steady pace. The lighting in the scene is natural, likely from sunlight, casting shadows on the ground. The overall atmosphere is calm and serene, with the focus on the walking motion and the texture of the wooden surface.",
+    "bleu4_vs_baseline": 0.0694,
+    "rouge_l_vs_baseline": 0.2764,
+    "cosine_sim_vs_baseline": 0.7409
+  },
+  "sleeping_1": {
+    "n_frames": 3,
+    "encode_ms": 304.0,
+    "generation_ms": 774.0,
+    "total_ms": 2923.0,
+    "flow_analysis_ms": 806.0,
+    "n_tokens_generated": 146,
+    "entropy": 5.821,
+    "generated_text": "The video frames depict a close-up view of a person's legs and feet, specifically focusing on the lower part of the body. The individual is wearing white socks and high-heeled shoes, with the shoes appearing to be of a classic design, possibly with a slight heel. The socks are pulled up to the ankles, and the shoes have a glossy finish, reflecting light. The background is dark, which contrasts with the lighter colors of the socks and shoes, making them stand out prominently. The overall scene suggests a formal or elegant setting, possibly a dance or a performance. The motion appears to be minimal, with the legs and feet being the primary focus, and there is no significant movement or action captured in these frames.",
+    "bleu4_vs_baseline": 0.1191,
+    "rouge_l_vs_baseline": 0.2907,
+    "cosine_sim_vs_baseline": 0.8336
+  },
+  "bamboo_1": {
+    "n_frames": 3,
+    "encode_ms": 306.0,
+    "generation_ms": 678.0,
+    "total_ms": 2807.0,
+    "flow_analysis_ms": 777.0,
+    "n_tokens_generated": 128,
+    "entropy": 5.665,
+    "generated_text": "The video frames depict a dense, vibrant field of green bamboo stalks with small, orange flowers. The bamboo stalks are tall and slender, with smooth, cylindrical shapes, and they are densely packed together, creating a lush, verdant landscape. The flowers are small and bright orange, adding a splash of color to the predominantly green foliage. The bamboo stalks are arranged in a somewhat random pattern, with some stalks slightly bent or leaning, giving the scene a natural, organic feel. The overall impression is one of a thriving, healthy bamboo forest, with the bamboo stalks and flowers creating a dynamic and visually engaging scene.",
+    "bleu4_vs_baseline": 0.1626,
+    "rouge_l_vs_baseline": 0.3084,
+    "cosine_sim_vs_baseline": 0.7235
+  },
+  "cave_2": {
+    "n_frames": 11,
+    "encode_ms": 1006.0,
+    "generation_ms": 701.0,
+    "total_ms": 3623.0,
+    "flow_analysis_ms": 776.0,
+    "n_tokens_generated": 125,
+    "entropy": 5.812,
+    "generated_text": "The video frames depict a dynamic and chaotic scene of numerous objects, likely paper or cloth, floating and swirling in a dark, possibly underwater environment. The objects are of various shapes and sizes, with some appearing to be elongated and others more rounded. They are predominantly dark in color, with some parts illuminated by a blue or purple light, giving them a glowing appearance. The objects are in constant motion, with some appearing to be caught in a vortex or whirlpool, creating a sense of turbulence and fluidity. The overall atmosphere is one of movement and energy, with the objects constantly shifting and interacting with each other.",
+    "bleu4_vs_baseline": 0.1273,
+    "rouge_l_vs_baseline": 0.2929,
+    "cosine_sim_vs_baseline": 0.6692
+  },
+  "ambush_5": {
+    "n_frames": 11,
+    "encode_ms": 1008.0,
+    "generation_ms": 840.0,
+    "total_ms": 3750.0,
+    "flow_analysis_ms": 757.0,
+    "n_tokens_generated": 150,
+    "entropy": 5.982,
+    "generated_text": "The video frames depict a highly detailed and textured environment, likely a digital or virtual landscape. The scene is composed of numerous small, irregularly shaped rocks or boulders, which are densely packed together. These rocks have a rough, uneven surface with varying shades of brown and gray, giving them a natural, earthy appearance. The texture of the rocks appears to be detailed, with visible cracks and crevices, suggesting a rugged and untamed terrain.\n\nThe lighting in the scene is soft and diffused, casting gentle shadows that enhance the three-dimensional quality of the rocks. The overall color palette is muted, with a dominance of earthy tones, which contributes to a sense of realism and immersion in the environment.\n\nThere is no visible motion or",
+    "bleu4_vs_baseline": 0.1149,
+    "rouge_l_vs_baseline": 0.254,
+    "cosine_sim_vs_baseline": 0.7734
+  },
+  "market_5": {
+    "n_frames": 11,
+    "encode_ms": 1000.0,
+    "generation_ms": 841.0,
+    "total_ms": 3740.0,
+    "flow_analysis_ms": 760.0,
+    "n_tokens_generated": 150,
+    "entropy": 5.967,
+    "generated_text": "The video frames depict a chaotic and dynamic scene, likely from a video game or a simulation. The environment appears to be a dark, industrial or warehouse-like setting with numerous metal beams and structures. The ground is covered with debris, including pieces of metal, wood, and other materials that seem to be in constant motion, suggesting a recent explosion or a collapse.\n\nKey visual elements include:\n- **Debris and Debris Movement**: The ground is littered with various pieces of debris, including metal and wood, which are in constant motion, indicating they are being propelled by an unseen force. The debris appears to be swirling and clumping together, creating a sense of turbulence.\n- **Metal Beams and Structures**: The background features numerous metal beams and",
+    "bleu4_vs_baseline": 0.2647,
+    "rouge_l_vs_baseline": 0.4194,
+    "cosine_sim_vs_baseline": 0.7748
+  }
+}

@@ -1,0 +1,405 @@
+#!/usr/bin/env bash
+# profile.sh — microarchitectural profiling harness for the VANILLA VLM (baseline_vlm.cpp).
+#
+# Layers (macro -> micro):
+#   gpustate  : pre-flight — clocks, persistence, who else is on the GPU
+#   kernels   : top GPU kernels by time, from an existing nsys report (instant)
+#   nsys      : GPU timeline, production config (graphs ON, flash attn ON)
+#   perf      : CPU microarchitecture — IPC, cache misses, hotspots
+#   ncu       : per-kernel counters + roofline, one report per phase (SLOW)
+#
+# EVERYTHING RUNS IN THE PRODUCTION CONFIGURATION. CUDA graphs and flash
+# attention stay ON throughout. There is no "profiling mode" that changes the
+# workload — see the CUDA GRAPHS note above do_nsys for why that is now possible.
+#
+# Workload is IDENTICAL to bench_vanilla.sh (same video/frames/n_predict/seed/greedy)
+# so profiler output cross-references directly against the benchmark numbers.
+#
+# Usage:
+#   bash profile.sh build
+#   bash profile.sh gpustate       # check clocks/contention BEFORE measuring
+#   bash profile.sh nsys           # then: bash profile.sh kernels
+#   bash profile.sh kernels
+#   bash profile.sh perf
+#   bash profile.sh ncu            # all 5 phases; ncu vit_gemm for just one
+#   bash profile.sh all
+#
+# Env overrides:
+#   FA=off      bash profile.sh ncu    profile the flash-off regime the pruning
+#                                      variants actually run in
+#   REGION=decode bash profile.sh perf scope CPU counters to one phase; one of
+#                                      all|inference|encode|decode (default: inference)
+#   WARMUP=2    bash profile.sh nsys   in-process warmup iterations before the
+#                                      measured one (default: 1)
+
+set -uo pipefail
+
+# ----------------------------------------------------------------------------
+# Profilers: PINNED, not taken from PATH.
+# /usr/bin/nsys and /usr/bin/ncu are the CUDA 11.8-era 2022.4 / 2022.3 builds.
+# This is an Ada card (sm_89, CC 8.9) on a 580 driver; profile with the 2024
+# tools shipped in the 12.6 toolkit instead. (/opt/nvidia/nsight-systems/2024.5.4
+# exists but is ARM-only — that's the Jetson cross-profiling install.)
+# ----------------------------------------------------------------------------
+NSYS="${NSYS:-/usr/local/cuda-12.6/bin/nsys}"
+NCU="${NCU:-/usr/local/cuda-12.6/bin/ncu}"
+
+# ----------------------------------------------------------------------------
+# Fixed workload — keep constant so runs are comparable across profilers AND
+# against bench_vanilla.sh.
+# ----------------------------------------------------------------------------
+ROOT="/data/spring26/CPP"
+BIN="$ROOT/llama.cpp/build/bin/llama-baseline-vlm"
+source "$(dirname "${BASH_SOURCE[0]}")/model_config.sh"   # single source of truth for weights
+SINTEL="$ROOT/modelsRepo/MPI_bkp/MPI-Sintel"
+VIDEO="alley_1"
+FRAMES=8
+NPREDICT=128
+NGL=99
+NCTX=16384
+SEED=42
+FA="${FA:-on}"
+# Which code region perf counters cover. See "REGION SCOPING" above do_perf.
+REGION="${REGION:-inference}"
+# In-process warmup iterations. See the WARMUP note above do_gpustate.
+WARMUP="${WARMUP:-1}"
+
+ARGS=(-m "$MODEL" --mmproj "$MMPROJ" --sintel-dir "$SINTEL" --video "$VIDEO" \
+      --base-frames "$FRAMES" -ngl "$NGL" -c "$NCTX" -n "$NPREDICT" \
+      --temp 0 --seed "$SEED" -fa "$FA" --no-flow-analysis \
+      --warmup-iters "$WARMUP" --ignore-eos)   # fixed-length generation; see bench_serving.sh
+
+# --no-flow-analysis matters here specifically: with it on, ~20% of the CPU profile
+# was std::sort inside build_motion_profile, which is reporting-only work the vanilla
+# inference path never touches. Leaving it in would make `perf` mostly noise.
+
+OUTDIR="$ROOT/llama.cpp/dmc955/profiling_results"
+mkdir -p "$OUTDIR"
+
+# ---------------------------------------------------------------------------
+# Pre-flight.
+#
+# WARMUP. The SM clock idles far below its maximum, so the first kernels of a
+# cold run execute while the clock is still ramping. A warmup *process* barely
+# helps: the GPU falls back to idle while the next process loads 4.5 GB of GGUF.
+# What works is warming up INSIDE the measured process — --warmup-iters runs
+# inference N extra times first (resetting KV cache, sampler and chat history
+# each time, so the work is identical), leaving clocks ramped, the CUDA context
+# hot, the allocator settled and the CUDA graphs already captured. The measured
+# iteration then runs in steady state.
+#
+# CLOCKS. Warmup mitigates ramping; it does not stop the clock drifting during a
+# long run. Locking is the real fix and needs root.
+#
+# CONTENTION. This is also the display GPU — Xorg and the desktop must stay. That
+# is fine: an idle desktop uses almost no SM time. What does distort a run is
+# ACTIVE GPU work (video playback, WebGL, heavy scrolling), so the check below
+# samples real utilisation rather than just listing processes.
+# ---------------------------------------------------------------------------
+do_gpustate() {
+    echo "== GPU pre-flight =="
+    nvidia-smi --query-gpu=persistence_mode,clocks.current.sm,clocks.max.sm,clocks.current.memory,power.limit,temperature.gpu,memory.used \
+        --format=csv
+    echo
+
+    # Sample real utilisation for 3 s instead of assuming the desktop is a problem.
+    echo "-- Sampling GPU utilisation for 3 s (desktop should be near idle) ..."
+    local samples=() u sum=0 max=0 n=0
+    for _ in $(seq 30); do
+        u="$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits 2>/dev/null | head -1)"
+        [[ -z "$u" ]] && continue
+        samples+=("$u"); sum=$(( sum + u )); n=$(( n + 1 ))
+        (( u > max )) && max=$u
+        sleep 0.1
+    done
+    local mean=0
+    (( n > 0 )) && mean=$(( sum / n ))
+    echo "   mean ${mean}%  peak ${max}%  over $n samples"
+    if (( mean > 5 || max > 30 )); then
+        echo "!! Something is actively using the GPU. Close video/WebGL/GL apps before"
+        echo "   measuring — an idle desktop is fine, an animating one is not."
+    else
+        echo "   Idle desktop, negligible contention. Nothing to do."
+    fi
+    echo
+
+    local cur max_clk
+    cur="$(nvidia-smi --query-gpu=clocks.current.sm --format=csv,noheader,nounits | head -1)"
+    max_clk="$(nvidia-smi --query-gpu=clocks.max.sm --format=csv,noheader,nounits | head -1)"
+    local pm; pm="$(nvidia-smi --query-gpu=persistence_mode --format=csv,noheader | head -1)"
+    if [[ -n "$cur" && -n "$max_clk" && "$cur" -lt $(( max_clk * 80 / 100 )) ]]; then
+        echo "-- SM clock idles at $cur MHz of $max_clk MHz (persistence: $pm)."
+        echo "   --warmup-iters $WARMUP already ramps the clock before the measured"
+        echo "   iteration, which covers most of this. To remove clock drift entirely:"
+        echo
+        echo "     sudo nvidia-smi -pm 1              # persistence mode"
+        echo "     sudo nvidia-smi -lgc 2100,2100     # pin SM clock BELOW the $max_clk boost"
+        echo "     sudo nvidia-smi -rgc               # release afterwards"
+        echo
+        echo "   Pin below the boost ceiling: locking at max invites thermal throttling"
+        echo "   mid-run, which reintroduces the variance you are removing."
+    else
+        echo "-- SM clock is near maximum; DVFS variance should be small."
+    fi
+}
+
+# Short version, printed before a measurement run.
+gpu_health_warn() {
+    local cur max_clk
+    cur="$(nvidia-smi --query-gpu=clocks.current.sm --format=csv,noheader,nounits 2>/dev/null | head -1)"
+    max_clk="$(nvidia-smi --query-gpu=clocks.max.sm --format=csv,noheader,nounits 2>/dev/null | head -1)"
+    if [[ -n "$cur" && -n "$max_clk" && "$cur" -lt $(( max_clk * 80 / 100 )) ]]; then
+        echo "   (clocks unlocked: $cur/$max_clk MHz, warmup-iters=$WARMUP — see 'profile.sh gpustate')"
+    fi
+}
+
+check_gpu() {
+    nvidia-smi >/dev/null 2>&1 || { echo "!! nvidia-smi broken — bash fix_gpu.sh"; exit 1; }
+    [[ -x "$BIN" ]] || { echo "!! Missing $BIN — bash profile.sh build"; exit 1; }
+}
+
+do_build() {
+    echo "== Building llama-baseline-vlm ..."
+    # NB: `cmake` on PATH is a broken pip shim (ModuleNotFoundError: cmake).
+    /usr/bin/cmake --build "$ROOT/llama.cpp/build" --target llama-baseline-vlm -j || {
+        echo "!! Build failed. If the target is missing, reconfigure first:"
+        echo "   /usr/bin/cmake -S $ROOT/llama.cpp -B $ROOT/llama.cpp/build"; exit 1; }
+    echo "OK: $BIN"
+}
+
+# ---------------------------------------------------------------------------
+# CUDA GRAPHS: no longer a trade-off.
+#
+# Historically you had to set GGML_CUDA_DISABLE_GRAPHS=1 to profile, because a
+# graph launch hides the kernels inside it and nsys could only see the graph.
+# That disabled a real production optimisation and inflated wall time, so the
+# profile described a machine you never actually ship.
+#
+# nsys 2024.4.2 supports --cuda-graph-trace=node, which traces the individual
+# kernel nodes INSIDE a graph. Verified on this workload: with graphs ON and
+# node tracing, attribution is identical to the graphs-OFF run — same kernels,
+# same instance counts (25,804 / 1,992 / 528 / 256 / 4,320), 1.307 s vs 1.312 s
+# total GPU kernel time. ncu likewise defaults to --graph-profiling node.
+#
+# So: graphs stay ON everywhere. One timeline, production-accurate AND
+# attributable. Node tracing costs a little more overhead than graph-level
+# tracing, which is the right trade here.
+# ---------------------------------------------------------------------------
+do_nsys() {
+    check_gpu
+    gpu_health_warn
+    echo "== nsys timeline — production config (CUDA graphs ON, fa=$FA) =="
+    "$NSYS" profile -t cuda,nvtx,osrt --cuda-graph-trace=node \
+        -o "$OUTDIR/base_timeline" --force-overwrite=true --stats=false \
+        "$BIN" "${ARGS[@]}" > "$OUTDIR/nsys_run.log" 2>&1
+    echo "-- Report: $OUTDIR/base_timeline.nsys-rep"
+    echo "-- NOTE: nsys adds tracing overhead. Never quote wall-clock from this run;"
+    echo "         latency numbers come from bench_vanilla.sh with no profiler attached."
+    do_kernels
+}
+
+do_kernels() {
+    local rep="${1:-$OUTDIR/base_timeline.nsys-rep}"
+    [[ -f "$rep" ]] || { echo "!! No report at $rep — run: bash profile.sh nsys"; exit 1; }
+    echo
+    echo "-- Top GPU kernels by total time ($(basename "$rep")):"
+    "$NSYS" stats --report cuda_gpu_kern_sum "$rep" 2>/dev/null | head -28
+}
+
+# ---------------------------------------------------------------------------
+# CPU counters.
+#
+# Requires kernel.perf_event_paranoid <= 2. It defaults to 4 on this box, which
+# denies even user-space profiling; `sudo sysctl -w kernel.perf_event_paranoid=1`
+# IS whitelisted for this account. That setting does NOT survive a reboot — re-run
+# it after every boot, or ask an admin to persist it in /etc/sysctl.conf.
+#
+# The i9-14900K is hybrid: cpu_core (P) = CPUs 0-15, cpu_atom (E) = 16-31 (verified
+# via /sys/devices/cpu_*/cpus). Two consequences:
+#   1. taskset to the P-cores, so the workload doesn't migrate onto E-cores mid-run
+#      and hand you counters from two different microarchitectures.
+#   2. Name every event cpu_core/.../ explicitly. Plain `perf stat -d -d -d` on a
+#      hybrid CPU schedules each event on BOTH PMUs and half the rows come back
+#      "<not counted>", which is noise, not data.
+# ---------------------------------------------------------------------------
+
+# IPC, branch prediction, and the full cache hierarchy — the standard first look.
+PERF_EVENTS="cpu_core/cycles/,cpu_core/instructions/\
+,cpu_core/branches/,cpu_core/branch-misses/\
+,cpu_core/cache-references/,cpu_core/cache-misses/\
+,cpu_core/L1-dcache-loads/,cpu_core/L1-dcache-load-misses/\
+,cpu_core/LLC-loads/,cpu_core/LLC-load-misses/\
+,cpu_core/dTLB-loads/,cpu_core/dTLB-load-misses/"
+
+# ---------------------------------------------------------------------------
+# REGION SCOPING
+#
+# perf measures a whole process, which is the wrong scope here: model load
+# (~4.5 GB of GGUF), the warmup decode, PNG decode, image resize, JSON writing
+# and teardown would all be counted alongside the VLM. Those are not the thing
+# under study and they are not representative of anything worth optimising.
+#
+# perf's --control interface fixes this properly. We start perf with events
+# DISABLED (--delay=-1) and let the workload switch them on and off around the
+# region of interest, over a pair of FIFOs. Counters accumulate ONLY inside the
+# region; everything else is invisible.
+#
+#   REGION=inference   image load -> tokenize -> ViT -> prefill -> decode  (default)
+#   REGION=encode      ViT encode + LLM prefill only  (what pruning changes)
+#   REGION=decode      the autoregressive loop only   (memory-bound phase)
+#   REGION=all         whole process, the old behaviour
+#
+# The FIFOs are per-invocation and removed on exit. If the binary predates
+# --perf-region it simply ignores the flag and the FIFOs go unused, so perf
+# would measure nothing — hence the explicit capability check below.
+# ---------------------------------------------------------------------------
+
+perf_supports_region() {
+    "$BIN" --help 2>&1 | grep -q -- "--perf-region"
+}
+
+# Run "$BIN ${ARGS[@]}" under a region-gated perf.
+#   $1 = perf subcommand line, as an array name (stat or record args)
+# Sets up the FIFOs, exports them, waits for perf, tears down.
+run_perf_gated() {
+    local -n _perfargs="$1"
+    local fifodir; fifodir="$(mktemp -d "$OUTDIR/.perfctl.XXXXXX")"
+    local ctl="$fifodir/ctl" ack="$fifodir/ack"
+    mkfifo "$ctl" "$ack"
+
+    # --delay=-1 starts with events disabled; the workload enables them.
+    # taskset pins the workload to the P-cores; perf still counts PER-PROCESS.
+    # (perf's own -C/--cpu would count every process on those cores — wrong on a
+    # shared machine.)
+    LLAMA_PERF_CTL_FIFO="$ctl" LLAMA_PERF_ACK_FIFO="$ack" \
+        taskset -c 0-15 perf "${_perfargs[@]}" --delay=-1 --control "fifo:$ctl,$ack" \
+        -- "$BIN" "${ARGS[@]}" --perf-region "$REGION"
+    local rc=$?
+
+    rm -rf "$fifodir"
+    return $rc
+}
+
+do_perf() {
+    local paranoid; paranoid="$(cat /proc/sys/kernel/perf_event_paranoid 2>/dev/null)"
+    if [[ "${paranoid:-4}" -gt 2 ]]; then
+        echo "!! perf_event_paranoid=$paranoid — perf counters are denied to non-root."
+        echo "   Fix (whitelisted for this account, resets on reboot):"
+        echo "     sudo sysctl -w kernel.perf_event_paranoid=1"
+        return 1
+    fi
+    check_gpu
+
+    case "$REGION" in
+        all|inference|encode|decode) ;;
+        *) echo "!! REGION must be all|inference|encode|decode (got '$REGION')"; return 1 ;;
+    esac
+    if ! perf_supports_region; then
+        echo "!! $BIN has no --perf-region — rebuild it: bash profile.sh build"
+        return 1
+    fi
+
+    echo "== perf (CPU microarchitecture), P-cores 0-15, fa=$FA, region=$REGION =="
+    echo "   Counters cover ONLY the '$REGION' region — model load, warmup, image"
+    echo "   decode and teardown are excluded."
+    echo "   NOTE: 'seconds time elapsed' below is still the WHOLE process. Only the"
+    echo "         counters are gated. For region wall-clock use bench_vanilla.sh."
+
+    echo "-- Counters ..."
+    local -a statargs=(stat -e "$PERF_EVENTS" -o "$OUTDIR/perf_stat.txt")
+    run_perf_gated statargs > /dev/null
+    grep -E "cpu_core|seconds" "$OUTDIR/perf_stat.txt" | sed 's/^/   /'
+    echo "-- Full counters: $OUTDIR/perf_stat.txt"
+
+    echo "-- Hotspots (perf record -g) ..."
+    local -a recargs=(record -g --call-graph dwarf -F 999 -o "$OUTDIR/perf.data")
+    run_perf_gated recargs > /dev/null 2>&1
+    perf report -i "$OUTDIR/perf.data" --stdio --no-children 2>/dev/null \
+        | grep -vE "^#|^$" | head -25 | tee "$OUTDIR/perf_report.txt"
+    echo "-- Full report: perf report -i $OUTDIR/perf.data"
+}
+
+# ---------------------------------------------------------------------------
+# Per-kernel microarchitecture. Targets are the ACTUAL hot kernels measured on
+# this workload (alley_1, 8 frames, fa=on), not a guessed regex.
+#
+# Targets are the ACTUAL hot kernels of the pinned 7B BF16 build, verified
+# phase-exclusive against the nsys trace (stream 17 = vision tower, stream 15 =
+# LLM; encode vs decode windows counted separately). BF16 uses a completely
+# different kernel family from q8_0 — do not reuse quantized-build names here.
+#
+#   target         phase     kernel                                    exclusivity
+#   vit_gemm       ViT       cutlass_80_tensorop_bf16_s16816gemm_bf16   2496 ViT / 0 LLM
+#   vit_attn       ViT       flash_attn_ext_f16<(int)80                  832 ViT / 0 LLM
+#   prefill_gemm   prefill   mul_mat_f<                                 5211 LLM / 0 decode
+#   prefill_attn   prefill   flash_attn_ext_f16<(int)128                2268 LLM / 0 decode
+#   decode_gemv    decode    mul_mat_vec_f                            43273 decode / 0 encode
+#   decode_attn    decode    flash_attn_ext_vec                        7168 decode / 0 encode
+#
+# decode_gemv is 92.8% of decode GPU time — start there.
+#
+# ncu replays each kernel ~8x for --set full, so keep NCU_COUNT small.
+NCU_COUNT="${NCU_COUNT:-3}"
+# Metric set. Tier your passes: survey wide and cheap first, then go deep on the
+# one or two kernels that turned out to matter.
+#   basic    145 metrics  SpeedOfLight + Occupancy + LaunchStats   -- is it compute or memory bound?
+#   detailed 460 metrics  + Roofline, MemoryWorkload, SourceCounters
+#   full     614 metrics  + WarpStateStats, SchedulerStats, InstructionStats
+# ncu replays each kernel once per pass, so cost scales with the metric count.
+NCU_SET="${NCU_SET:-full}"
+
+ncu_one() {
+    local name="$1" pat="$2"
+    echo "-- ncu [$name]  pattern: $pat  (x$NCU_COUNT launches, --set $NCU_SET)"
+    # --graph-profiling node profiles kernel nodes inside CUDA graphs, so graphs
+    # stay ON here too. (It is the default; stated explicitly so it survives edits.)
+    "$NCU" --set "$NCU_SET" --graph-profiling node --kernel-name-base demangled \
+        -k "regex:$pat" -c "$NCU_COUNT" \
+        --target-processes all \
+        -o "$OUTDIR/ncu_$name" --force-overwrite \
+        "$BIN" "${ARGS[@]}" > "$OUTDIR/ncu_$name.log" 2>&1
+    if grep -q "ERR_NVGPUCTRPERM" "$OUTDIR/ncu_$name.log" 2>/dev/null; then
+        echo "   !! GPU counter permission denied — needs NVreg_RestrictProfilingToAdminUsers=0"
+        return 1
+    fi
+    grep -E "Memory Throughput|Compute \(SM\) Throughput|Duration|Achieved Occupancy|DRAM Throughput" \
+        "$OUTDIR/ncu_$name.log" 2>/dev/null | head -8 | sed 's/^/      /'
+    echo "   report: $OUTDIR/ncu_$name.ncu-rep"
+}
+
+do_ncu() {
+    check_gpu
+    echo "== ncu per-phase kernel microarchitecture + roofline (SLOW), fa=$FA =="
+    local only="${1:-}"
+    # These names are unambiguous by phase: mul_mat_vec_q only appears in decode
+    # (batch-1 GEMV), cutlass/ampere GEMM only in the ViT, flash_attn_ext_vec only
+    # in decode. flash_attn_ext_f16 appears in both ViT (head_dim 80) and LLM
+    # prefill (head_dim 128) — read the template args in the report to tell them apart.
+    local -a names=(vit_gemm vit_attn prefill_gemm prefill_attn decode_gemv decode_attn)
+    local -a pats=(
+        "cutlass_80_tensorop_bf16_s16816gemm_bf16"
+        "flash_attn_ext_f16<\\(int\\)80"
+        "mul_mat_f<"
+        "flash_attn_ext_f16<\\(int\\)128"
+        "mul_mat_vec_f"
+        "flash_attn_ext_vec")
+    for i in "${!names[@]}"; do
+        [[ -n "$only" && "$only" != "${names[$i]}" ]] && continue
+        ncu_one "${names[$i]}" "${pats[$i]}"
+    done
+    echo
+    echo "-- Open any report in the Nsight Compute GUI. Read, in order:"
+    echo "   Speed-Of-Light (compute vs memory bound) -> Roofline -> Occupancy"
+    echo "   (what limits it) -> Warp State (which stall reason dominates)."
+}
+
+case "${1:-all}" in
+    build)     do_build ;;
+    nsys)      do_nsys ;;
+    kernels)   do_kernels "${2:-}" ;;
+    perf)      do_perf ;;
+    ncu)       do_ncu "${2:-}" ;;
+    gpustate)  do_gpustate ;;
+    all)       do_build; do_gpustate; do_nsys; do_perf; do_ncu ;;
+    *) echo "Usage: bash profile.sh [build|gpustate|nsys|kernels|perf|ncu|all]"; exit 1 ;;
+esac

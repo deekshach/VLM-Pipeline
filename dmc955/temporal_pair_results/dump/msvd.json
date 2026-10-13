@@ -1,0 +1,271 @@
+{
+  "mode": "video",
+  "align": 28,
+  "base_frames": 7,
+  "frame_step": 0,
+  "video_fps": 2.0,
+  "tokens_per_second": 2,
+  "n_predict": 8,
+  "requests": [
+    {
+      "video": "-4wsuPCjDBc_5_15",
+      "round": 0,
+      "n_frames": 7,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 911,
+      "load_ms": 28.621000289916992,
+      "tokenize_ms": 10.272000312805176,
+      "vit_ms": 182.4459991455078,
+      "prefill_ms": 165.70999145507813,
+      "decode_ms": 132.24400329589844,
+      "total_ms": 530.6380004882813,
+      "group_encode_ms": [
+        116.37000274658203,
+        22.441999435424805,
+        22.5,
+        21.134000778198242
+      ],
+      "n_tokens": 8,
+      "text": "The video shows a chipmunk inside"
+    },
+    {
+      "video": "-7KMZQEsJW4_205_208",
+      "round": 0,
+      "n_frames": 7,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 423,
+      "load_ms": 12.817000389099121,
+      "tokenize_ms": 3.4000000953674316,
+      "vit_ms": 51.959999084472656,
+      "prefill_ms": 122.52400207519531,
+      "decode_ms": 130.88699340820313,
+      "total_ms": 325.23199462890625,
+      "group_encode_ms": [
+        16.22800064086914,
+        12.059000015258789,
+        11.946999549865723,
+        11.72599983215332
+      ],
+      "n_tokens": 8,
+      "text": "The video begins with a close-up of"
+    },
+    {
+      "video": "-8y1Q0rA3n8_108_115",
+      "round": 0,
+      "n_frames": 7,
+      "n_groups": 4,
+      "grid": [
+        46,
+        26
+      ],
+      "n_visual_tokens": 4784,
+      "n_prompt_tokens": 4811,
+      "load_ms": 143.4080047607422,
+      "tokenize_ms": 53.31399917602539,
+      "vit_ms": 698.6939697265625,
+      "prefill_ms": 640.906982421875,
+      "decode_ms": 135.18499755859375,
+      "total_ms": 1728.0689697265625,
+      "group_encode_ms": [
+        199.1750030517578,
+        168.23500061035156,
+        163.97300720214844,
+        167.31100463867188
+      ],
+      "n_tokens": 8,
+      "text": "The scene takes place outdoors, likely in"
+    },
+    {
+      "video": "-8y1Q0rA3n8_95_102",
+      "round": 0,
+      "n_frames": 7,
+      "n_groups": 4,
+      "grid": [
+        46,
+        26
+      ],
+      "n_visual_tokens": 4784,
+      "n_prompt_tokens": 4811,
+      "load_ms": 146.16799926757813,
+      "tokenize_ms": 49.68000030517578,
+      "vit_ms": 673.9559936523438,
+      "prefill_ms": 648.2679443359375,
+      "decode_ms": 135.01300048828125,
+      "total_ms": 1710.8929443359375,
+      "group_encode_ms": [
+        169.593994140625,
+        170.78700256347656,
+        166.30999755859375,
+        167.26499938964844
+      ],
+      "n_tokens": 8,
+      "text": "The video frames depict a martial arts training"
+    },
+    {
+      "video": "-9CUm-2cui8_39_44",
+      "round": 0,
+      "n_frames": 7,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1223,
+      "load_ms": 37.35900115966797,
+      "tokenize_ms": 8.722999572753906,
+      "vit_ms": 116.85399627685547,
+      "prefill_ms": 203.86700439453125,
+      "decode_ms": 133.2050018310547,
+      "total_ms": 511.7040100097656,
+      "group_encode_ms": [
+        30.667999267578125,
+        29.5310001373291,
+        28.43400001525879,
+        28.22100067138672
+      ],
+      "n_tokens": 8,
+      "text": "The video begins with a close-up shot"
+    },
+    {
+      "video": "-AwoiGR6c8M_10_14",
+      "round": 0,
+      "n_frames": 7,
+      "n_groups": 4,
+      "grid": [
+        31,
+        17
+      ],
+      "n_visual_tokens": 2108,
+      "n_prompt_tokens": 2135,
+      "load_ms": 63.69599914550781,
+      "tokenize_ms": 21.336999893188477,
+      "vit_ms": 208.29400634765625,
+      "prefill_ms": 341.39801025390625,
+      "decode_ms": 133.28799438476563,
+      "total_ms": 789.2440185546875,
+      "group_encode_ms": [
+        55.935001373291016,
+        50.86899948120117,
+        51.577999114990234,
+        49.9119987487793
+      ],
+      "n_tokens": 8,
+      "text": "The scene takes place in a warmly lit"
+    },
+    {
+      "video": "-Cv5LsqKUXc_17_25",
+      "round": 0,
+      "n_frames": 7,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1223,
+      "load_ms": 34.27399826049805,
+      "tokenize_ms": 10.83899974822998,
+      "vit_ms": 118.1520004272461,
+      "prefill_ms": 204.01300048828125,
+      "decode_ms": 131.07899475097656,
+      "total_ms": 509.87200927734375,
+      "group_encode_ms": [
+        32.22200012207031,
+        29.270999908447266,
+        28.64299964904785,
+        28.016000747680664
+      ],
+      "n_tokens": 8,
+      "text": "The video sequence begins with a close-up"
+    },
+    {
+      "video": "-Cv5LsqKUXc_71_76",
+      "round": 0,
+      "n_frames": 7,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1223,
+      "load_ms": 35.4900016784668,
+      "tokenize_ms": 8.628999710083008,
+      "vit_ms": 111.50700378417969,
+      "prefill_ms": 203.95399475097656,
+      "decode_ms": 131.1020050048828,
+      "total_ms": 499.4289855957031,
+      "group_encode_ms": [
+        27.90999984741211,
+        28.003000259399414,
+        27.930999755859375,
+        27.663000106811523
+      ],
+      "n_tokens": 8,
+      "text": "The video shows a close-up of a"
+    },
+    {
+      "video": "-DKuLXYoY3g_14_20",
+      "round": 0,
+      "n_frames": 7,
+      "n_groups": 4,
+      "grid": [
+        14,
+        8
+      ],
+      "n_visual_tokens": 448,
+      "n_prompt_tokens": 475,
+      "load_ms": 13.871999740600586,
+      "tokenize_ms": 3.750999927520752,
+      "vit_ms": 53.36399841308594,
+      "prefill_ms": 123.50299835205078,
+      "decode_ms": 130.60899353027344,
+      "total_ms": 328.24200439453125,
+      "group_encode_ms": [
+        15.857000350952148,
+        12.62399959564209,
+        12.5,
+        12.383000373840332
+      ],
+      "n_tokens": 8,
+      "text": "The video shows a young child playing with"
+    },
+    {
+      "video": "-DRy7rBg0IQ_31_37",
+      "round": 0,
+      "n_frames": 7,
+      "n_groups": 4,
+      "grid": [
+        14,
+        11
+      ],
+      "n_visual_tokens": 616,
+      "n_prompt_tokens": 643,
+      "load_ms": 18.077999114990234,
+      "tokenize_ms": 4.894000053405762,
+      "vit_ms": 66.4260025024414,
+      "prefill_ms": 135.44700622558594,
+      "decode_ms": 131.37899780273438,
+      "total_ms": 360.78900146484375,
+      "group_encode_ms": [
+        19.148000717163086,
+        15.946999549865723,
+        15.652999877929688,
+        15.678000450134277
+      ],
+      "n_tokens": 8,
+      "text": "The video frames depict a swimming pool scene"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "mode": "pairs",
+  "align": 28,
+  "base_frames": 8,
+  "frame_step": 0,
+  "video_fps": 2.0,
+  "tokens_per_second": 2,
+  "n_predict": 48,
+  "requests": [
+    {
+      "video": "alley_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 101.56400299072266,
+      "tokenize_ms": 17.461000442504883,
+      "vit_ms": 230.5139923095703,
+      "prefill_ms": 409.1759948730469,
+      "decode_ms": 812.948974609375,
+      "total_ms": 1596.988037109375,
+      "group_encode_ms": [
+        55.941001892089844,
+        58.0099983215332,
+        57.678001403808594,
+        58.8849983215332
+      ],
+      "n_tokens": 48,
+      "text": "A young woman with red hair is the central figure in this scene. She is wearing a gray tank top and is holding a red apple in her right hand. She is standing in front of a stone building with a red roof. The building"
+    },
+    {
+      "video": "market_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2401,
+      "load_ms": 100.75499725341797,
+      "tokenize_ms": 16.783000946044922,
+      "vit_ms": 230.79200744628906,
+      "prefill_ms": 412.88800048828125,
+      "decode_ms": 810.2230224609375,
+      "total_ms": 1596.383056640625,
+      "group_encode_ms": [
+        54.82699966430664,
+        58.459999084472656,
+        57.39899826049805,
+        60.10599899291992
+      ],
+      "n_tokens": 48,
+      "text": "A woman with red hair, wearing a white top and� brown pants, is seen in a warehouse-like setting. She is walking away from the camera,发表了 a few steps. The warehouse is filled with various objects, including a stack of"
+    }
+  ]
+}

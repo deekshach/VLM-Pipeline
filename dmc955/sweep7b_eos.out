@@ -1,0 +1,67 @@
+date:      2026-08-31T16:04:41-04:00
+gpu:       NVIDIA GeForce RTX 4090
+driver:    580.173.02
+git:       b55dcdef5
+videos:    alley_1,alley_2,ambush_2,ambush_4,ambush_5,ambush_6,ambush_7,bamboo_1,bamboo_2,bandage_1,bandage_2,cave_2,cave_4,market_2,market_5,market_6,mountain_1,shaman_2,shaman_3,sleeping_1,sleeping_2,temple_2,temple_3
+model:     /data/spring26/CPP/modelsRepo/Qwen2.5VL/Qwen2.5-VL-7B-Instruct-BF16.gguf
+mmproj:    /data/spring26/CPP/modelsRepo/Qwen2.5VL/mmproj-BF16.gguf
+rounds:    21   n_predict: 128   fa: on
+sampling:  constant-rate 2.0 fps, source assumed 8.0 fps
+
+== Serving 23 videos x 21 rounds from one loaded model ...
+
+=== Edge serving, per-stage latency ===
+    23 videos x 21 rounds = 483 requests (1982.0 s), one loaded model
+    round 0 excluded as warmup -> 460 measured requests
+    frames/request 8, n_predict 128
+    values are mean +/- 95% CI over 20 rounds
+
+video                    ViT        prefill   resid     TTFT         decode  tok   tok/s
+----------------------------------------------------------------------------------------
+alley_1         813.5±5.2      845.7±4.9      283.1   1959.5  2196.4±20.0    128    58.3
+alley_2         815.5±6.0      846.9±4.3      283.6   1963.1  2192.4±17.1    128    58.4
+ambush_2        312.0±2.7      305.9±1.9      106.9    741.6  2152.0±23.2    128    59.5
+ambush_4        500.2±3.2      501.1±3.6      171.6   1189.8  2161.2±16.0    128    59.2
+ambush_5        812.7±4.6      844.1±4.4      283.0   1957.0  2196.8±20.4    128    58.3
+ambush_6        311.9±2.8      306.6±3.2      107.2    742.6  2155.1±24.9    128    59.4
+ambush_7        817.2±7.2      850.0±7.0      284.2   1968.6  2201.8±21.7    128    58.2
+bamboo_1        816.7±6.9      848.5±6.0      284.5   1966.9  2201.8±25.9    128    58.2
+bamboo_2        816.9±7.3      849.9±7.2      284.5   1968.4  2196.6±20.8    128    58.3
+bandage_1       813.0±4.5      844.2±4.3      282.2   1956.5  2188.4±14.4    128    58.5
+bandage_2       811.2±4.2      842.8±3.1      282.2   1953.4  2189.2±17.1    128    58.5
+cave_2          813.7±5.3      844.6±4.9      282.9   1958.4  2198.6±20.1    128    58.2
+cave_4          820.4±10.0     850.6±9.7      285.5   1973.7  2198.8±25.1    128    58.2
+market_2        812.5±5.5      844.5±5.4      283.2   1957.3  2190.7±20.1    128    58.5
+market_5        814.0±6.4      846.5±5.9      283.2   1960.9  2195.1±22.4    128    58.3
+market_6        629.6±7.8      640.1±7.9      217.2   1504.0  2176.1±32.1    128    58.9
+mountain_1      814.6±6.9      846.7±7.0      283.8   1962.3  2196.1±24.9    128    58.3
+shaman_2        815.5±6.4      847.4±6.2      283.6   1963.5  2194.4±23.4    128    58.4
+shaman_3        818.2±9.6      850.2±9.8      284.6   1970.3  2207.6±39.0    128    58.1
+sleeping_1      815.4±6.6      847.3±7.0      282.8   1962.7  2208.4±35.5    128    58.0
+sleeping_2      817.2±8.6      848.2±7.5      284.6   1967.3  2199.9±24.2    128    58.2
+temple_2        812.5±3.6      844.3±3.9      282.3   1956.2  2190.3±14.2    128    58.4
+temple_3        814.0±4.7      845.8±4.8      282.9   1959.7  2190.6±14.7    128    58.4
+----------------------------------------------------------------------------------------
+ALL             749.5±14.1     775.7±15.2     260.4   1802.8  2190.3±4.6            58.5
+
+--- Stage share of a 4101 ms request (pooled, n=460) ---
+  ViT encode       749.5 ms   18.3%
+  LLM prefill      775.7 ms   18.9%
+  residual         260.4 ms    6.3%
+  LLM decode      2190.3 ms   53.4%
+
+--- Cold start (request 0, 'alley_1') vs its 20 warm runs ---
+  request  cold    4455 ms   warm    4276 ms   +4.2%
+  encode   cold    2056 ms   warm    1942 ms   +5.9%
+
+--- Steady-state request latency (n=460) ---
+  mean 4101 +/- 38 ms   median 4254   p95 4408   p99 4539   max 4667
+
+--- Drift: first half vs second half of the measured run ---
+  4078 ms -> 4125 ms  (+1.2%)
+
+--- GPU during the run (7933 samples) ---
+  SM clock  median 2670 MHz   first half 2670   second half 2670
+  temp      start 44 C   max 78 C   end 68 C
+  power     median 353 W   max 444 W
+

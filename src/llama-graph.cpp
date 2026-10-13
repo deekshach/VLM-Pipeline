@@ -1707,7 +1707,9 @@ ggml_tensor * llm_graph_context::build_attn_mha(
          ggml_tensor * sinks,
          ggml_tensor * v_mla,
                float   kq_scale,
-                 int   il) const {
+                 int   il,
+         ggml_tensor * kq_drop_mask,
+         ggml_tensor ** out_kq_soft) const {
     const bool v_trans = v->nb[1] > v->nb[2];
 
     // split the batch into streams if needed
@@ -1797,9 +1799,22 @@ ggml_tensor * llm_graph_context::build_attn_mha(
             cb(kq, "kq_plus_kq_b", il);
         }
 
-        kq = ggml_soft_max_ext(ctx0, kq, kq_mask, kq_scale, hparams.f_max_alibi_bias);
+        // Pyramid KV Prefill: if a drop mask is provided, combine it with the KQ mask
+        // The drop mask has -INF at positions to drop and 0 elsewhere (additive)
+        ggml_tensor * effective_mask = kq_mask;
+        if (kq_drop_mask) {
+            effective_mask = ggml_add(ctx0, kq_mask, kq_drop_mask);
+            cb(effective_mask, "kq_mask_pyramid", il);
+        }
+
+        kq = ggml_soft_max_ext(ctx0, kq, effective_mask, kq_scale, hparams.f_max_alibi_bias);
         ggml_soft_max_add_sinks(kq, sinks);
         cb(kq, "kq_soft_max", il);
+
+        // Pyramid: capture softmax output for scout layer scoring
+        if (out_kq_soft) {
+            *out_kq_soft = kq;
+        }
 
         if (!v_trans) {
             // note: avoid this branch
@@ -1949,7 +1964,9 @@ ggml_tensor * llm_graph_context::build_attn(
         ggml_tensor * sinks,
         ggml_tensor * v_mla, // TODO: remove
             float     kq_scale,
-            int       il) const {
+            int       il,
+        ggml_tensor * kq_drop_mask,
+        ggml_tensor ** out_kq_soft) const {
     GGML_ASSERT(v_mla == nullptr);
 
     // these nodes are added to the graph together so that they are not reordered
@@ -1976,7 +1993,7 @@ ggml_tensor * llm_graph_context::build_attn(
     ggml_tensor * k = mctx_cur->get_k(ctx0, il);
     ggml_tensor * v = mctx_cur->get_v(ctx0, il);
 
-    ggml_tensor * cur = build_attn_mha(q, k, v, kq_b, kq_mask, sinks, v_mla, kq_scale, il);
+    ggml_tensor * cur = build_attn_mha(q, k, v, kq_b, kq_mask, sinks, v_mla, kq_scale, il, kq_drop_mask, out_kq_soft);
     cb(cur, "kqv_out", il);
 
     if (wo) {

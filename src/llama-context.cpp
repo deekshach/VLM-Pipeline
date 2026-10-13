@@ -582,6 +582,10 @@ const llama_cparams & llama_context::get_cparams() const {
     return cparams;
 }
 
+llama_cparams & llama_context::get_cparams_mut() {
+    return cparams;
+}
+
 ggml_backend_sched_t llama_context::get_sched() const {
     return sched.get();
 }
@@ -3086,6 +3090,24 @@ void llama_set_n_threads(llama_context * ctx, int32_t n_threads, int32_t n_threa
     ctx->set_n_threads(n_threads, n_threads_batch);
 }
 
+void llama_set_pyramid_params(
+        llama_context * ctx,
+        int   clie_layer,
+        float pvc_min,
+        int   visual_start,
+        int   n_visual,
+        int   tokens_per_frame,
+        bool  protect_frame0) {
+    auto & cp = ctx->get_cparams_mut();
+    cp.pyramid_enabled          = true;
+    cp.pyramid_clie_layer       = clie_layer;
+    cp.pyramid_pvc_min          = pvc_min;
+    cp.pyramid_visual_start     = visual_start;
+    cp.pyramid_n_visual         = n_visual;
+    cp.pyramid_tokens_per_frame = tokens_per_frame;
+    cp.pyramid_protect_frame0   = protect_frame0;
+}
+
 int32_t llama_n_threads(llama_context * ctx) {
     return ctx->n_threads();
 }
@@ -3252,6 +3274,60 @@ bool llama_memory_seq_rm(
     }
 
     return mem->seq_rm(seq_id, p0, p1);
+}
+
+bool llama_memory_seq_rm_pos_ext(
+        llama_memory_t mem,
+          llama_seq_id seq_id,
+             llama_pos pos,
+             llama_pos ext_x,
+             llama_pos ext_y) {
+    if (!mem) {
+        return false;
+    }
+
+    return mem->seq_rm_pos_ext(seq_id, pos, ext_x, ext_y);
+}
+
+void llama_memory_defragment(llama_memory_t mem, llama_context * ctx) {
+    if (!mem) {
+        return;
+    }
+    mem->defragment(ctx);
+}
+
+const struct ggml_tensor * llama_memory_k_tensor(llama_memory_t mem, int32_t il) {
+    if (!mem) {
+        return nullptr;
+    }
+    return mem->get_k_tensor(il);
+}
+
+const struct ggml_tensor * llama_memory_v_tensor(llama_memory_t mem, int32_t il) {
+    if (!mem) {
+        return nullptr;
+    }
+    return mem->get_v_tensor(il);
+}
+
+bool llama_memory_v_trans(llama_memory_t mem) {
+    if (!mem) {
+        return false;
+    }
+    return mem->get_v_trans();
+}
+
+bool llama_memory_reserve_cells(
+        llama_memory_t   mem,
+          llama_seq_id   seq_id,
+               int32_t   n_tokens,
+       const llama_pos * pos,
+                  bool   is_pos_2d,
+               int32_t * out_cell_indices) {
+    if (!mem) {
+        return false;
+    }
+    return mem->reserve_cells(seq_id, n_tokens, pos, is_pos_2d, out_cell_indices);
 }
 
 void llama_memory_seq_cp(

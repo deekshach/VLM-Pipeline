@@ -1,0 +1,64 @@
+date:      2026-08-31T13:41:37-04:00
+gpu:       NVIDIA GeForce RTX 4090
+driver:    580.173.02
+git:       b55dcdef5
+videos:    alley_1,alley_2,ambush_2,ambush_4,ambush_5,ambush_6,ambush_7,bamboo_1,bamboo_2,bandage_1,bandage_2,cave_2,cave_4,market_2,market_5,market_6,mountain_1,shaman_2,shaman_3,sleeping_1,sleeping_2,temple_2,temple_3
+rounds:    21   frames: 8   n_predict: 128   fa: on
+
+== Serving 23 videos x 21 rounds from one loaded model ...
+
+=== Edge serving, per-stage latency ===
+    23 videos x 21 rounds = 483 requests (726.1 s), one loaded model
+    round 0 excluded as warmup -> 460 measured requests
+    frames/request 8, n_predict 128
+    values are mean +/- 95% CI over 20 rounds
+
+video                    ViT        prefill   resid     TTFT         decode  tok   tok/s
+----------------------------------------------------------------------------------------
+alley_1         376.3±1.0      232.1±1.2       89.2    703.2   679.4±2.3     121   178.1
+alley_2         376.9±1.2      231.3±0.7       89.5    703.3   717.9±2.0     128   178.3
+ambush_2        376.7±1.7      231.2±0.5       90.0    703.4   719.3±2.2     128   178.0
+ambush_4        377.6±2.4      232.0±1.0       90.0    705.1   717.9±2.2     128   178.3
+ambush_5        377.6±2.2      231.8±1.1       89.8    704.8   717.8±2.1     128   178.3
+ambush_6        376.6±1.0      231.7±1.2       89.7    703.5   718.0±2.5     128   178.3
+ambush_7        376.5±0.5      231.6±1.3       89.8    703.4   718.5±2.2     128   178.1
+bamboo_1        376.8±1.3      231.2±0.6       90.1    703.7   719.3±2.1     128   178.0
+bamboo_2        377.0±1.8      231.7±0.5       89.2    703.5   717.8±2.3     128   178.3
+bandage_1       377.2±1.7      231.2±0.5       89.7    703.6   711.5±2.4     127   178.5
+bandage_2       376.7±1.3      231.7±0.9       89.8    703.9   720.5±4.1     128   177.7
+cave_2          376.8±1.6      231.8±0.8       89.6    703.8   717.5±3.1     128   178.4
+cave_4          376.8±1.1      231.0±0.7       90.2    703.6   684.9±2.1     122   178.1
+market_2        377.2±1.4      231.5±0.5       89.3    703.7   719.5±3.8     128   177.9
+market_5        376.9±1.2      231.4±0.6       89.7    703.5   716.8±1.1     128   178.6
+market_6        376.9±1.1      231.6±0.6       89.3    703.5   717.9±1.3     128   178.3
+mountain_1      377.9±3.2      231.8±1.0       89.8    705.1   673.2±1.3     120   178.3
+shaman_2        376.5±0.9      231.1±0.7       90.0    703.2   718.1±1.0     128   178.2
+shaman_3        376.2±0.5      230.9±0.6       89.8    702.5   716.9±0.5     128   178.5
+sleeping_1      376.2±0.6      231.3±0.6       89.5    702.7   717.9±0.6     128   178.3
+sleeping_2      376.1±0.5      231.1±0.7       89.4    702.1   716.0±0.5     128   178.8
+temple_2        376.3±0.6      231.3±0.6       89.2    702.5   716.6±0.6     128   178.6
+temple_3        376.2±0.8      231.2±0.7       89.8    702.9   716.8±0.4     128   178.6
+----------------------------------------------------------------------------------------
+ALL             376.8±0.3      231.5±0.2       89.7    703.5   712.6±1.3           178.3
+
+--- Stage share of a 1494 ms request (pooled, n=460) ---
+  ViT encode       376.8 ms   25.2%
+  LLM prefill      231.5 ms   15.5%
+  residual          89.7 ms    6.0%
+  LLM decode       712.6 ms   47.7%
+
+--- Cold start (request 0, 'alley_1') vs its 20 warm runs ---
+  request  cold    1545 ms   warm    1461 ms   +5.8%
+  encode   cold     751 ms   warm     698 ms   +7.7%
+
+--- Steady-state request latency (n=460) ---
+  mean 1494 +/- 1 ms   median 1495   p95 1506   p99 1542   max 1546
+
+--- Drift: first half vs second half of the measured run ---
+  1495 ms -> 1493 ms  (-0.1%)
+
+--- GPU during the run (2908 samples) ---
+  SM clock  median 2670 MHz   first half 2670   second half 2670
+  temp      start 38 C   max 77 C   end 68 C
+  power     median 344 W   max 374 W
+

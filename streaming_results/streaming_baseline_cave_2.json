@@ -1,0 +1,278 @@
+{
+  "mode": "streaming_baseline",
+  "video_name": "cave_2",
+  "n_frames_total": 50,
+  "n_frames_selected": 16,
+  "global_complexity": 0.6505635380744934,
+  "streaming": {
+    "fps": 4.0,
+    "video_duration_s": 12.25,
+    "online_selection": {
+      "method": "uniform",
+      "baseline_uniform_count": 16
+    }
+  },
+  "selected_frames": [
+    {
+      "index": 1,
+      "weight": 1.0
+    },
+    {
+      "index": 4,
+      "weight": 1.0
+    },
+    {
+      "index": 8,
+      "weight": 1.0
+    },
+    {
+      "index": 11,
+      "weight": 1.0
+    },
+    {
+      "index": 14,
+      "weight": 1.0
+    },
+    {
+      "index": 17,
+      "weight": 1.0
+    },
+    {
+      "index": 21,
+      "weight": 1.0
+    },
+    {
+      "index": 24,
+      "weight": 1.0
+    },
+    {
+      "index": 27,
+      "weight": 1.0
+    },
+    {
+      "index": 30,
+      "weight": 1.0
+    },
+    {
+      "index": 34,
+      "weight": 1.0
+    },
+    {
+      "index": 37,
+      "weight": 1.0
+    },
+    {
+      "index": 40,
+      "weight": 1.0
+    },
+    {
+      "index": 43,
+      "weight": 1.0
+    },
+    {
+      "index": 47,
+      "weight": 1.0
+    },
+    {
+      "index": 50,
+      "weight": 1.0
+    }
+  ],
+  "inference": {
+    "generated_text": "The scene is set in a dark, cavernous environment, likely a cave or a similar subterranean location. The lighting is dim, with a bluish tint, casting shadows and creating a sense of mystery and danger. The environment is rocky and rugged, with large boulders and uneven terrain. The ground is covered in a layer of what appears to be dirt or dust, adding to the overall sense of desolation.\n\nIn the foreground, a female character with red hair is engaged in a physical struggle with a large, serpentine creature. The creature has a long, sinuous body with a scaly texture and a pair of prominent horns on its head. Its mouth is open, revealing sharp teeth and a red tongue, and it",
+    "n_tokens": 150,
+    "encode_time_ms": 2461.0,
+    "generation_time_ms": 2480.0
+  },
+  "metrics": {
+    "motion_coverage": 0.30858284630460503,
+    "shannon_entropy": 4.176270520124003,
+    "temporal_reduction": 0.6799999999999999,
+    "total_tokens_encoded": 9472,
+    "total_tokens_cached": 0,
+    "encoder_savings_pct": 0.0,
+    "total_encode_time_ms": 1074.0,
+    "estimated_full_encode_time_ms": 2576.0,
+    "encode_speedup": 2.398510217666626
+  },
+  "per_frame_cache": [
+    {
+      "frame_index": 1,
+      "is_keyframe": true,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 161.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 2,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 62.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 3,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 62.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 4,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 60.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 5,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 6,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 7,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 60.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 8,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 9,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 10,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 11,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 60.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 12,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 60.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 13,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 14,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 15,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    },
+    {
+      "frame_index": 16,
+      "is_keyframe": false,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 61.0,
+      "splice_time_ms": 0.0
+    }
+  ],
+  "pruning": {
+    "enabled": false
+  },
+  "prefill_pruning": {
+    "enabled": false
+  },
+  "timing": {
+    "selection_ms": 0.0,
+    "encode_ms": 2461.0,
+    "generation_ms": 2480.0,
+    "total_ms": 7790.0
+  },
+  "params": {
+    "sintel_dir": "/data/Fall25/multimodalRAG/VLM/Qwen2.5-VL/MPI-Sintel",
+    "video_name": "cave_2",
+    "fps": 4.0,
+    "baseline_uniform_count": 16
+  }
+}

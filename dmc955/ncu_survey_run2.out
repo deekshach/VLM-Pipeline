@@ -1,0 +1,46 @@
+=== ViT (stream 17) — targets cover ~91% of stage GPU time ===
+  SKIP vit__cutlass_s16816gemm_bf16__29pct (exists)
+  SKIP vit__ampere_s1688gemm_128x64__17pct (exists)
+  SKIP vit__flash_attn_hd80__16pct (exists)
+  SKIP vit__k_bin_bcast_add__9pct (exists)
+  SKIP vit__convert_unary_bf16_to_f32__7pct (exists)
+  SKIP vit__convert_unary_f32_to_bf16__6pct (exists)
+  SKIP vit__silu_gated__4pct (exists)
+  SKIP vit__rope_vision__4pct (exists)
+=== Prefill GEMMs (stream 15, stable — drift ~0%, sample anywhere) ~75% ===
+  SKIP prefill__ampere_s1688gemm_64x128__26pct (exists)
+  prefill__mul_mat_f__17pct                      ok (46s)
+  SKIP prefill__cutlass_s16816gemm_relu__15pct (exists)
+  SKIP prefill__ampere_s1688gemm_128x64__12pct (exists)
+  SKIP prefill__ampere_s1688gemm_128x128__5pct (exists)
+=== Prefill attention — CURVE, not a point (drifts +229% across the phase) ===
+  prefill_attn__hd128__ctxdepth_s60              ok (21s)
+  prefill_attn__hd128__ctxdepth_s320             ok (20s)
+  prefill_attn__hd128__ctxdepth_s640             ok (20s)
+  prefill_attn__hd128__ctxdepth_s900             ok (21s)
+=== Decode (~96% of stage) ===
+  SKIP decode__mul_mat_vec_f__shapes_3584_512_18944 (exists)
+  SKIP decode__mul_mat_vec_f__shape_152064_lmhead (exists)
+  SKIP decode__flash_attn_vec__5pct (exists)
+
+=== done. reports in ncu_2026-09-02_7B-BF16/ ===
+     2.9 MB  ncu_2026-09-02_7B-BF16/decode__flash_attn_vec__5pct.ncu-rep
+     6.0 MB  ncu_2026-09-02_7B-BF16/decode__mul_mat_vec_f__shape_152064_lmhead.ncu-rep
+    10.8 MB  ncu_2026-09-02_7B-BF16/decode__mul_mat_vec_f__shapes_3584_512_18944.ncu-rep
+     8.4 MB  ncu_2026-09-02_7B-BF16/prefill__ampere_s1688gemm_128x128__5pct.ncu-rep
+     9.3 MB  ncu_2026-09-02_7B-BF16/prefill__ampere_s1688gemm_128x64__12pct.ncu-rep
+     9.4 MB  ncu_2026-09-02_7B-BF16/prefill__ampere_s1688gemm_64x128__26pct.ncu-rep
+     4.6 MB  ncu_2026-09-02_7B-BF16/prefill_attn__hd128__ctxdepth_s320.ncu-rep
+     4.5 MB  ncu_2026-09-02_7B-BF16/prefill_attn__hd128__ctxdepth_s60.ncu-rep
+     2.6 MB  ncu_2026-09-02_7B-BF16/prefill_attn__hd128__ctxdepth_s640.ncu-rep
+     4.6 MB  ncu_2026-09-02_7B-BF16/prefill_attn__hd128__ctxdepth_s900.ncu-rep
+    10.8 MB  ncu_2026-09-02_7B-BF16/prefill__cutlass_s16816gemm_relu__15pct.ncu-rep
+     2.9 MB  ncu_2026-09-02_7B-BF16/prefill__mul_mat_f__17pct.ncu-rep
+     8.6 MB  ncu_2026-09-02_7B-BF16/vit__ampere_s1688gemm_128x64__17pct.ncu-rep
+     1.0 MB  ncu_2026-09-02_7B-BF16/vit__convert_unary_bf16_to_f32__7pct.ncu-rep
+     1.0 MB  ncu_2026-09-02_7B-BF16/vit__convert_unary_f32_to_bf16__6pct.ncu-rep
+     8.8 MB  ncu_2026-09-02_7B-BF16/vit__cutlass_s16816gemm_bf16__29pct.ncu-rep
+    18.4 MB  ncu_2026-09-02_7B-BF16/vit__flash_attn_hd80__16pct.ncu-rep
+     1.4 MB  ncu_2026-09-02_7B-BF16/vit__k_bin_bcast_add__9pct.ncu-rep
+     1.3 MB  ncu_2026-09-02_7B-BF16/vit__rope_vision__4pct.ncu-rep
+     1.2 MB  ncu_2026-09-02_7B-BF16/vit__silu_gated__4pct.ncu-rep

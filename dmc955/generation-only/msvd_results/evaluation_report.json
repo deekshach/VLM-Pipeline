@@ -1,0 +1,65 @@
+{
+  "n_videos": 20,
+  "accuracy": {
+    "baseline": {
+      "BLEU-1": 0.6363636363602334,
+      "BLEU-2": 0.4619430690222797,
+      "BLEU-3": 0.33108018932721295,
+      "BLEU-4": 0.25587142079980474,
+      "METEOR": 0.3506909681534444,
+      "ROUGE-L": 0.521938888313154,
+      "CIDEr": 0.5123089676797539
+    },
+    "emma": {
+      "BLEU-1": 0.5999999999972727,
+      "BLEU-2": 0.4711687595733411,
+      "BLEU-3": 0.37277197379795607,
+      "BLEU-4": 0.28005339671202506,
+      "METEOR": 0.3654993865076532,
+      "ROUGE-L": 0.5505295604725945,
+      "CIDEr": 0.5143203056248375
+    }
+  },
+  "latency": {
+    "encode_time_ms": {
+      "baseline": 405.75,
+      "emma": 228.8,
+      "speedup": 1.773382867132867
+    },
+    "prefill_time_ms": {
+      "baseline": 738.85,
+      "emma": 467.65,
+      "speedup": 1.5799208810007486
+    },
+    "eviction_time_ms": {
+      "baseline": 0.0,
+      "emma": 12.2,
+      "speedup": 0.0
+    },
+    "generation_time_ms": {
+      "baseline": 178.25,
+      "emma": 194.35,
+      "speedup": 0.9171597633136095
+    },
+    "total_time_ms": {
+      "baseline": 966.35,
+      "emma": 703.6,
+      "speedup": 1.3734366117111996
+    }
+  },
+  "token_reduction": {
+    "baseline_avg_visual_tokens": 2194.0,
+    "emma_avg_visual_tokens": 685.75,
+    "baseline_avg_kept": 2194.0,
+    "emma_avg_kept": 136.8,
+    "kv_reduction_pct": 93.76481312670921
+  },
+  "frame_distribution": {
+    "3": 3,
+    "4": 11,
+    "6": 4,
+    "8": 2
+  },
+  "avg_emma_frames": 4.65,
+  "avg_complexity": 0.32856620475649834
+}

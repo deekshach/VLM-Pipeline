@@ -1,0 +1,1831 @@
+{
+  "mode": "video",
+  "align": 0,
+  "base_frames": 8,
+  "frame_step": 0,
+  "video_fps": 2.0,
+  "tokens_per_second": 2,
+  "n_predict": 128,
+  "requests": [
+    {
+      "video": "-4wsuPCjDBc_5_15",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 906,
+      "load_ms": 15.565999984741211,
+      "tokenize_ms": 17.01099967956543,
+      "vit_ms": 91.26200103759766,
+      "prefill_ms": 162.50599670410156,
+      "decode_ms": 280.0880126953125,
+      "total_ms": 566.4749755859375,
+      "group_encode_ms": [
+        24.135000228881836,
+        22.781999588012695,
+        22.400999069213867,
+        21.944000244140625
+      ],
+      "n_tokens": 18,
+      "text": "A chipmunk is sitting on a tiled floor, eating a piece of food."
+    },
+    {
+      "video": "-7KMZQEsJW4_205_208",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 418,
+      "load_ms": 7.063000202178955,
+      "tokenize_ms": 7.744999885559082,
+      "vit_ms": 58.06300354003906,
+      "prefill_ms": 125.6209945678711,
+      "decode_ms": 357.95001220703125,
+      "total_ms": 556.4910278320313,
+      "group_encode_ms": [
+        18.430999755859375,
+        12.560999870300293,
+        12.753000259399414,
+        14.317999839782715
+      ],
+      "n_tokens": 22,
+      "text": "A person is holding a sunflower head and standing in a field with a tarp covering the ground."
+    },
+    {
+      "video": "-8y1Q0rA3n8_108_115",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        46,
+        26
+      ],
+      "n_visual_tokens": 4784,
+      "n_prompt_tokens": 4806,
+      "load_ms": 126.02300262451172,
+      "tokenize_ms": 193.81500244140625,
+      "vit_ms": 1088.921875,
+      "prefill_ms": 899.3089599609375,
+      "decode_ms": 384.2139892578125,
+      "total_ms": 2692.428955078125,
+      "group_encode_ms": [
+        315.8869934082031,
+        257.72900390625,
+        252.75599670410156,
+        262.54998779296875
+      ],
+      "n_tokens": 23,
+      "text": "A man in a blue shirt and tie is swinging a sword to break a bottle placed on a wooden block."
+    },
+    {
+      "video": "-8y1Q0rA3n8_95_102",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        46,
+        26
+      ],
+      "n_visual_tokens": 4784,
+      "n_prompt_tokens": 4806,
+      "load_ms": 125.94300079345703,
+      "tokenize_ms": 187.5,
+      "vit_ms": 1022.8480224609375,
+      "prefill_ms": 904.2060546875,
+      "decode_ms": 332.47198486328125,
+      "total_ms": 2573.18798828125,
+      "group_encode_ms": [
+        257.9100036621094,
+        252.7310028076172,
+        258.6449890136719,
+        253.56199645996094
+      ],
+      "n_tokens": 20,
+      "text": "A person is practicing martial arts by kicking a padded target, which is mounted on a stand."
+    },
+    {
+      "video": "-9CUm-2cui8_39_44",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1218,
+      "load_ms": 32.19900131225586,
+      "tokenize_ms": 43.45600128173828,
+      "vit_ms": 169.1820068359375,
+      "prefill_ms": 232.927001953125,
+      "decode_ms": 221.3679962158203,
+      "total_ms": 699.3070068359375,
+      "group_encode_ms": [
+        50.981998443603516,
+        40.224998474121094,
+        39.18299865722656,
+        38.79199981689453
+      ],
+      "n_tokens": 14,
+      "text": "A person is boiling okra in a pot on the stove."
+    },
+    {
+      "video": "-AwoiGR6c8M_10_14",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        31,
+        17
+      ],
+      "n_visual_tokens": 2108,
+      "n_prompt_tokens": 2130,
+      "load_ms": 54.46900177001953,
+      "tokenize_ms": 76.0780029296875,
+      "vit_ms": 323.8739929199219,
+      "prefill_ms": 422.8550109863281,
+      "decode_ms": 326.0899963378906,
+      "total_ms": 1203.510009765625,
+      "group_encode_ms": [
+        93.30799865722656,
+        77.35099792480469,
+        77.21299743652344,
+        76.00199890136719
+      ],
+      "n_tokens": 20,
+      "text": "A young boy is playing the piano in a cozy room with a window and a chair nearby."
+    },
+    {
+      "video": "-Cv5LsqKUXc_17_25",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1218,
+      "load_ms": 23.701000213623047,
+      "tokenize_ms": 43.893001556396484,
+      "vit_ms": 166.90199279785156,
+      "prefill_ms": 231.468994140625,
+      "decode_ms": 389.7049865722656,
+      "total_ms": 855.8599853515625,
+      "group_encode_ms": [
+        50.07600021362305,
+        36.80500030517578,
+        40.89099884033203,
+        39.130001068115234
+      ],
+      "n_tokens": 24,
+      "text": "A person is cutting a strawberry in half with a knife on a green surface, then holding the two halves together."
+    },
+    {
+      "video": "-Cv5LsqKUXc_71_76",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1218,
+      "load_ms": 29.325000762939453,
+      "tokenize_ms": 42.98699951171875,
+      "vit_ms": 159.86399841308594,
+      "prefill_ms": 234.51698303222656,
+      "decode_ms": 373.02398681640625,
+      "total_ms": 839.9959716796875,
+      "group_encode_ms": [
+        40.68000030517578,
+        39.91699981689453,
+        40.35900115966797,
+        38.90800094604492
+      ],
+      "n_tokens": 23,
+      "text": "A person is sifting flour into a metal baking pan and then into a black bowl on a wooden table."
+    },
+    {
+      "video": "-DKuLXYoY3g_14_20",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        14,
+        8
+      ],
+      "n_visual_tokens": 448,
+      "n_prompt_tokens": 470,
+      "load_ms": 12.182999610900879,
+      "tokenize_ms": 16.964000701904297,
+      "vit_ms": 73.83799743652344,
+      "prefill_ms": 129.78399658203125,
+      "decode_ms": 373.67999267578125,
+      "total_ms": 606.5230102539063,
+      "group_encode_ms": [
+        27.66200065612793,
+        15.574999809265137,
+        15.232999801635742,
+        15.368000030517578
+      ],
+      "n_tokens": 23,
+      "text": "A young boy in a blue shirt and green shorts is dribbling a basketball on a gymnasium floor."
+    },
+    {
+      "video": "-DRy7rBg0IQ_31_37",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        14,
+        11
+      ],
+      "n_visual_tokens": 616,
+      "n_prompt_tokens": 638,
+      "load_ms": 14.477999687194824,
+      "tokenize_ms": 22.756999969482422,
+      "vit_ms": 88.92200469970703,
+      "prefill_ms": 146.17300415039063,
+      "decode_ms": 337.3900146484375,
+      "total_ms": 609.7979736328125,
+      "group_encode_ms": [
+        30.187000274658203,
+        19.474000930786133,
+        19.584999084472656,
+        19.676000595092773
+      ],
+      "n_tokens": 21,
+      "text": "A swimmer is performing a backstroke start in a pool, with other swimmers observing nearby."
+    },
+    {
+      "video": "-FugkxLmGO4_5_16",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 418,
+      "load_ms": 11.057999610900879,
+      "tokenize_ms": 14.859999656677246,
+      "vit_ms": 70.67900085449219,
+      "prefill_ms": 127.6520004272461,
+      "decode_ms": 390.1730041503906,
+      "total_ms": 614.5009765625,
+      "group_encode_ms": [
+        27.198999404907227,
+        14.607000350952148,
+        14.402999877929688,
+        14.470000267028809
+      ],
+      "n_tokens": 24,
+      "text": "A large dog is standing in a small cage, looking down at a smaller dog that is lying on the floor."
+    },
+    {
+      "video": "-Ms9tsWmhyU_80_95",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 418,
+      "load_ms": 9.958999633789063,
+      "tokenize_ms": 15.180999755859375,
+      "vit_ms": 58.20499801635742,
+      "prefill_ms": 127.88899230957031,
+      "decode_ms": 255.2449951171875,
+      "total_ms": 466.5570068359375,
+      "group_encode_ms": [
+        14.413999557495117,
+        14.262999534606934,
+        14.765000343322754,
+        14.762999534606934
+      ],
+      "n_tokens": 16,
+      "text": "A woman is playing a flute in a room with a white tiled wall."
+    },
+    {
+      "video": "-YI0cxuNcq8_262_272",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 418,
+      "load_ms": 10.508000373840332,
+      "tokenize_ms": 15.394000053405762,
+      "vit_ms": 57.80099868774414,
+      "prefill_ms": 127.73700714111328,
+      "decode_ms": 238.36199951171875,
+      "total_ms": 449.8840026855469,
+      "group_encode_ms": [
+        14.571999549865723,
+        14.524999618530273,
+        14.472999572753906,
+        14.230999946594238
+      ],
+      "n_tokens": 15,
+      "text": "A woman is doing sit-ups on a blue mat in a room."
+    },
+    {
+      "video": "-_aaMGK6GGw_57_61",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 418,
+      "load_ms": 9.050999641418457,
+      "tokenize_ms": 15.097999572753906,
+      "vit_ms": 57.509002685546875,
+      "prefill_ms": 127.82899475097656,
+      "decode_ms": 271.6669921875,
+      "total_ms": 481.2330017089844,
+      "group_encode_ms": [
+        14.414999961853027,
+        14.25100040435791,
+        14.602999687194824,
+        14.239999771118164
+      ],
+      "n_tokens": 17,
+      "text": "A young boy is being comforted by an older man in a living room."
+    },
+    {
+      "video": "-_hbPLsZvvo_172_179",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1218,
+      "load_ms": 33.25899887084961,
+      "tokenize_ms": 42.54999923706055,
+      "vit_ms": 175.66900634765625,
+      "prefill_ms": 232.66400146484375,
+      "decode_ms": 322.36199951171875,
+      "total_ms": 806.7349853515625,
+      "group_encode_ms": [
+        56.52899932861328,
+        39.900001525878906,
+        39.16400146484375,
+        40.07600021362305
+      ],
+      "n_tokens": 20,
+      "text": "A person is adding salt to a bowl of chopped vegetables and butter, preparing ingredients for cooking."
+    },
+    {
+      "video": "-_hbPLsZvvo_18_25",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1218,
+      "load_ms": 29.860000610351563,
+      "tokenize_ms": 42.452999114990234,
+      "vit_ms": 155.97900390625,
+      "prefill_ms": 231.41600036621094,
+      "decode_ms": 406.67999267578125,
+      "total_ms": 866.677001953125,
+      "group_encode_ms": [
+        39.61399841308594,
+        38.13100051879883,
+        39.803001403808594,
+        38.430999755859375
+      ],
+      "n_tokens": 25,
+      "text": "A person is cutting a cucumber into slices on a wooden cutting board and then transferring the slices into a glass measuring cup."
+    },
+    {
+      "video": "-_hbPLsZvvo_19_25",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1218,
+      "load_ms": 30.045000076293945,
+      "tokenize_ms": 42.72200012207031,
+      "vit_ms": 154.9759979248047,
+      "prefill_ms": 232.00399780273438,
+      "decode_ms": 254.572998046875,
+      "total_ms": 714.5999755859375,
+      "group_encode_ms": [
+        38.66899871826172,
+        38.46500015258789,
+        38.72999954223633,
+        39.11199951171875
+      ],
+      "n_tokens": 16,
+      "text": "A person is cutting a cucumber into slices and placing them into a bowl."
+    },
+    {
+      "video": "-_hbPLsZvvo_19_26",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1218,
+      "load_ms": 30.510000228881836,
+      "tokenize_ms": 42.65800094604492,
+      "vit_ms": 159.53500366210938,
+      "prefill_ms": 232.68800354003906,
+      "decode_ms": 254.46299743652344,
+      "total_ms": 720.1500244140625,
+      "group_encode_ms": [
+        39.902000427246094,
+        41.14500045776367,
+        39.016998291015625,
+        39.47100067138672
+      ],
+      "n_tokens": 16,
+      "text": "A person is cutting a cucumber into slices and placing them into a bowl."
+    },
+    {
+      "video": "-_hbPLsZvvo_211_219",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1218,
+      "load_ms": 31.354000091552734,
+      "tokenize_ms": 42.624000549316406,
+      "vit_ms": 158.2779998779297,
+      "prefill_ms": 231.885986328125,
+      "decode_ms": 272.6940002441406,
+      "total_ms": 737.1110229492188,
+      "group_encode_ms": [
+        38.79899978637695,
+        40.20600128173828,
+        40.11199951171875,
+        39.1609992980957
+      ],
+      "n_tokens": 17,
+      "text": "A person is pouring a yellow liquid mixture into a hot pan using chopsticks."
+    },
+    {
+      "video": "-_hbPLsZvvo_269_275",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1218,
+      "load_ms": 31.641000747680664,
+      "tokenize_ms": 43.183998107910156,
+      "vit_ms": 164.7760009765625,
+      "prefill_ms": 233.4709930419922,
+      "decode_ms": 390.33099365234375,
+      "total_ms": 863.6929931640625,
+      "group_encode_ms": [
+        41.14899826049805,
+        42.020999908447266,
+        40.52899932861328,
+        41.07699966430664
+      ],
+      "n_tokens": 24,
+      "text": "A piece of food is being dipped into a bowl of batter using chopsticks, then placed on a wire rack."
+    },
+    {
+      "video": "-_hbPLsZvvo_288_305",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1218,
+      "load_ms": 32.86000061035156,
+      "tokenize_ms": 42.82099914550781,
+      "vit_ms": 162.03201293945313,
+      "prefill_ms": 232.60000610351563,
+      "decode_ms": 305.7720031738281,
+      "total_ms": 776.3779907226563,
+      "group_encode_ms": [
+        41.21699905395508,
+        40.1150016784668,
+        40.06100082397461,
+        40.638999938964844
+      ],
+      "n_tokens": 19,
+      "text": "A person is preparing food in a kitchen, wrapping a piece of food in plastic wrap."
+    },
+    {
+      "video": "-_hbPLsZvvo_323_328",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1218,
+      "load_ms": 31.823999404907227,
+      "tokenize_ms": 43.02199935913086,
+      "vit_ms": 159.13999938964844,
+      "prefill_ms": 232.40599060058594,
+      "decode_ms": 458.2959899902344,
+      "total_ms": 924.968017578125,
+      "group_encode_ms": [
+        39.564998626708984,
+        39.14799880981445,
+        39.48500061035156,
+        40.94200134277344
+      ],
+      "n_tokens": 28,
+      "text": "A person is using chopsticks to place a piece of sushi into a black tray, surrounded by other sushi pieces and a decorative element."
+    },
+    {
+      "video": "-_hbPLsZvvo_43_55",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1218,
+      "load_ms": 30.70599937438965,
+      "tokenize_ms": 43.540000915527344,
+      "vit_ms": 158.70401000976563,
+      "prefill_ms": 232.5959930419922,
+      "decode_ms": 322.4119873046875,
+      "total_ms": 788.2479858398438,
+      "group_encode_ms": [
+        39.73500061035156,
+        39.11399841308594,
+        40.6619987487793,
+        39.19300079345703
+      ],
+      "n_tokens": 20,
+      "text": "A person is using a knife to cut a carrot into small pieces on a wooden cutting board."
+    },
+    {
+      "video": "-_hbPLsZvvo_49_55",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1218,
+      "load_ms": 30.2189998626709,
+      "tokenize_ms": 42.986000061035156,
+      "vit_ms": 155.27499389648438,
+      "prefill_ms": 232.65000915527344,
+      "decode_ms": 238.9149932861328,
+      "total_ms": 700.3270263671875,
+      "group_encode_ms": [
+        38.09299850463867,
+        39.071998596191406,
+        38.27199935913086,
+        39.8380012512207
+      ],
+      "n_tokens": 15,
+      "text": "A person is cutting vegetables on a wooden cutting board in a kitchen."
+    },
+    {
+      "video": "-_hbPLsZvvo_5_8",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1218,
+      "load_ms": 29.35300064086914,
+      "tokenize_ms": 43.016998291015625,
+      "vit_ms": 158.33700561523438,
+      "prefill_ms": 233.24899291992188,
+      "decode_ms": 458.114990234375,
+      "total_ms": 922.3820190429688,
+      "group_encode_ms": [
+        37.4900016784668,
+        39.10599899291992,
+        40.909000396728516,
+        40.832000732421875
+      ],
+      "n_tokens": 28,
+      "text": "A woman is standing in a kitchen with a dog, preparing to make a well-balanced bento using a cute bento box."
+    },
+    {
+      "video": "-bjOB4zS0uE_100_105",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        46,
+        26
+      ],
+      "n_visual_tokens": 4784,
+      "n_prompt_tokens": 4806,
+      "load_ms": 111.2040023803711,
+      "tokenize_ms": 186.7969970703125,
+      "vit_ms": 1047.698974609375,
+      "prefill_ms": 902.2749633789063,
+      "decode_ms": 504.4230041503906,
+      "total_ms": 2752.5830078125,
+      "group_encode_ms": [
+        277.1059875488281,
+        252.4709930419922,
+        259.614990234375,
+        258.5069885253906
+      ],
+      "n_tokens": 30,
+      "text": "A person is holding a glass of what appears to be a frothy beverage, possibly a milkshake or smoothie, in a kitchen setting."
+    },
+    {
+      "video": "-dm-ds5rRaM_44_52",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        16,
+        12
+      ],
+      "n_visual_tokens": 768,
+      "n_prompt_tokens": 790,
+      "load_ms": 19.979999542236328,
+      "tokenize_ms": 27.490999221801758,
+      "vit_ms": 99.9990005493164,
+      "prefill_ms": 163.87298583984375,
+      "decode_ms": 369.79998779296875,
+      "total_ms": 681.2210083007813,
+      "group_encode_ms": [
+        32.77399826049805,
+        22.41699981689453,
+        22.097999572753906,
+        22.709999084472656
+      ],
+      "n_tokens": 23,
+      "text": "A group of sprinters are racing on a track, with one runner in the lead and others closely following."
+    },
+    {
+      "video": "-joBOHlg5J0_72_80",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        31,
+        17
+      ],
+      "n_visual_tokens": 2108,
+      "n_prompt_tokens": 2130,
+      "load_ms": 56.150001525878906,
+      "tokenize_ms": 74.45600128173828,
+      "vit_ms": 313.5830078125,
+      "prefill_ms": 421.1529846191406,
+      "decode_ms": 374.9750061035156,
+      "total_ms": 1240.532958984375,
+      "group_encode_ms": [
+        86.62300109863281,
+        75.24299621582031,
+        75.1240005493164,
+        76.59300231933594
+      ],
+      "n_tokens": 23,
+      "text": "A woman is applying foundation to her face using a stippling technique, as indicated by the on-screen text."
+    },
+    {
+      "video": "-mAoVOhKy0c_4_9",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 906,
+      "load_ms": 22.90399932861328,
+      "tokenize_ms": 32.00699996948242,
+      "vit_ms": 123.91999816894531,
+      "prefill_ms": 172.26300048828125,
+      "decode_ms": 236.69500732421875,
+      "total_ms": 587.8679809570313,
+      "group_encode_ms": [
+        40.770999908447266,
+        27.173999786376953,
+        27.371000289916992,
+        28.604000091552734
+      ],
+      "n_tokens": 15,
+      "text": "A yellow train is crossing a bridge with Mount Fuji in the background."
+    },
+    {
+      "video": "-pUwIypksfE_13_23",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 906,
+      "load_ms": 23.599000930786133,
+      "tokenize_ms": 31.648000717163086,
+      "vit_ms": 106.77499389648438,
+      "prefill_ms": 171.8040008544922,
+      "decode_ms": 320.1839904785156,
+      "total_ms": 654.0889892578125,
+      "group_encode_ms": [
+        27.018999099731445,
+        27.555999755859375,
+        26.125999450683594,
+        26.073999404907227
+      ],
+      "n_tokens": 20,
+      "text": "Two pandas are interacting with a tiered cake in their enclosure, possibly celebrating a special occasion."
+    },
+    {
+      "video": "-rkErLY0rRc_26_35",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 418,
+      "load_ms": 9.51200008392334,
+      "tokenize_ms": 14.661999702453613,
+      "vit_ms": 68.97599792480469,
+      "prefill_ms": 127.46300506591797,
+      "decode_ms": 355.5719909667969,
+      "total_ms": 576.2579956054688,
+      "group_encode_ms": [
+        25.709999084472656,
+        14.145000457763672,
+        14.343999862670898,
+        14.777000427246094
+      ],
+      "n_tokens": 22,
+      "text": "A woman in a white dress is smiling and looking at the camera while standing in front of a bush."
+    },
+    {
+      "video": "-rkErLY0rRc_63_67",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 418,
+      "load_ms": 8.850000381469727,
+      "tokenize_ms": 15.053000450134277,
+      "vit_ms": 57.51199722290039,
+      "prefill_ms": 127.38799285888672,
+      "decode_ms": 254.9320068359375,
+      "total_ms": 463.8070068359375,
+      "group_encode_ms": [
+        14.317000389099121,
+        14.295999526977539,
+        14.545000076293945,
+        14.354000091552734
+      ],
+      "n_tokens": 16,
+      "text": "A woman in a dress is standing outside, holding a trophy and smiling."
+    },
+    {
+      "video": "-rvjK0lE3z4_33_43",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 418,
+      "load_ms": 11.479000091552734,
+      "tokenize_ms": 15.010000228881836,
+      "vit_ms": 57.625,
+      "prefill_ms": 127.67399597167969,
+      "decode_ms": 237.66400146484375,
+      "total_ms": 449.52301025390625,
+      "group_encode_ms": [
+        14.491000175476074,
+        14.282999992370605,
+        14.345999717712402,
+        14.505000114440918
+      ],
+      "n_tokens": 15,
+      "text": "A person is cutting a piece of bread on a wooden cutting board."
+    },
+    {
+      "video": "-s4-6QTT7HE_235_241",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        26,
+        17
+      ],
+      "n_visual_tokens": 1768,
+      "n_prompt_tokens": 1790,
+      "load_ms": 32.32400131225586,
+      "tokenize_ms": 61.77000045776367,
+      "vit_ms": 265.4230041503906,
+      "prefill_ms": 318.23602294921875,
+      "decode_ms": 256.0559997558594,
+      "total_ms": 934.0369873046875,
+      "group_encode_ms": [
+        73.9209976196289,
+        63.880001068115234,
+        61.98099899291992,
+        65.64099884033203
+      ],
+      "n_tokens": 16,
+      "text": "A group of dancers in traditional Indian attire perform a synchronized dance routine outdoors."
+    },
+    {
+      "video": "-t-ZWaJeH-o_0_15",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        19,
+        13
+      ],
+      "n_visual_tokens": 988,
+      "n_prompt_tokens": 1010,
+      "load_ms": 29.333999633789063,
+      "tokenize_ms": 35.27899932861328,
+      "vit_ms": 136.52200317382813,
+      "prefill_ms": 177.94699096679688,
+      "decode_ms": 372.1510009765625,
+      "total_ms": 751.3070068359375,
+      "group_encode_ms": [
+        44.457000732421875,
+        30.559999465942383,
+        31.275999069213867,
+        30.229000091552734
+      ],
+      "n_tokens": 23,
+      "text": "Two women are singing karaoke together in a room with a window and an air conditioning unit in the background."
+    },
+    {
+      "video": "-uT_1VDvXok_8_15",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 418,
+      "load_ms": 10.621000289916992,
+      "tokenize_ms": 14.78600025177002,
+      "vit_ms": 72.0719985961914,
+      "prefill_ms": 128.06199645996094,
+      "decode_ms": 305.0740051269531,
+      "total_ms": 530.6900024414063,
+      "group_encode_ms": [
+        28.767000198364258,
+        14.329000473022461,
+        14.515000343322754,
+        14.461000442504883
+      ],
+      "n_tokens": 19,
+      "text": "A baby white rhino is standing next to its mother in a pen filled with hay."
+    },
+    {
+      "video": "-vKO3uSG6Do_3_14",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        26,
+        17
+      ],
+      "n_visual_tokens": 1768,
+      "n_prompt_tokens": 1790,
+      "load_ms": 19.6560001373291,
+      "tokenize_ms": 62.124000549316406,
+      "vit_ms": 258.551025390625,
+      "prefill_ms": 318.4960021972656,
+      "decode_ms": 239.44900512695313,
+      "total_ms": 898.5330200195313,
+      "group_encode_ms": [
+        74.7229995727539,
+        62.07699966430664,
+        61.071998596191406,
+        60.67900085449219
+      ],
+      "n_tokens": 15,
+      "text": "Three animated characters are dancing and singing together, each holding a microphone."
+    },
+    {
+      "video": "-vg3vR86fu0_1_6",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1218,
+      "load_ms": 31.413999557495117,
+      "tokenize_ms": 43.367000579833984,
+      "vit_ms": 172.010009765625,
+      "prefill_ms": 233.8000030517578,
+      "decode_ms": 423.5790100097656,
+      "total_ms": 904.416015625,
+      "group_encode_ms": [
+        49.553001403808594,
+        41.018001556396484,
+        39.808998107910156,
+        41.630001068115234
+      ],
+      "n_tokens": 26,
+      "text": "A cyclist is riding on a dirt road, passing a parked vehicle, with a hillside and some structures in the background."
+    },
+    {
+      "video": "-wa0umYJVGg_100_115",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 418,
+      "load_ms": 10.54699993133545,
+      "tokenize_ms": 14.97700023651123,
+      "vit_ms": 73.12899780273438,
+      "prefill_ms": 128.3520050048828,
+      "decode_ms": 206.01800537109375,
+      "total_ms": 433.1050109863281,
+      "group_encode_ms": [
+        28.277999877929688,
+        14.96500015258789,
+        15.265000343322754,
+        14.621000289916992
+      ],
+      "n_tokens": 13,
+      "text": "A woman is cooking eggs in a pot on the stove."
+    },
+    {
+      "video": "-wa0umYJVGg_117_123",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 418,
+      "load_ms": 10.888999938964844,
+      "tokenize_ms": 15.489999771118164,
+      "vit_ms": 59.055999755859375,
+      "prefill_ms": 128.39601135253906,
+      "decode_ms": 289.0889892578125,
+      "total_ms": 502.99200439453125,
+      "group_encode_ms": [
+        15.255999565124512,
+        14.619000434875488,
+        14.51099967956543,
+        14.670000076293945
+      ],
+      "n_tokens": 18,
+      "text": "A person is peeling a hard-boiled egg in a bowl of ice water."
+    },
+    {
+      "video": "-wa0umYJVGg_139_157",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 418,
+      "load_ms": 9.861000061035156,
+      "tokenize_ms": 15.420999526977539,
+      "vit_ms": 58.88100051879883,
+      "prefill_ms": 128.07199096679688,
+      "decode_ms": 322.5889892578125,
+      "total_ms": 534.9010009765625,
+      "group_encode_ms": [
+        14.498000144958496,
+        14.496000289916992,
+        14.920000076293945,
+        14.967000007629395
+      ],
+      "n_tokens": 20,
+      "text": "A person is using a knife to cut a piece of green onion on a wooden cutting board."
+    },
+    {
+      "video": "-wa0umYJVGg_168_176",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 418,
+      "load_ms": 11.479999542236328,
+      "tokenize_ms": 14.977999687194824,
+      "vit_ms": 59.2869987487793,
+      "prefill_ms": 128.27200317382813,
+      "decode_ms": 288.7909851074219,
+      "total_ms": 502.88800048828125,
+      "group_encode_ms": [
+        15.190999984741211,
+        15.145000457763672,
+        14.545999526977539,
+        14.404999732971191
+      ],
+      "n_tokens": 18,
+      "text": "A person is using chopsticks to stir a pot of boiling water containing green vegetables."
+    },
+    {
+      "video": "-wa0umYJVGg_23_41",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 418,
+      "load_ms": 11.21500015258789,
+      "tokenize_ms": 14.895000457763672,
+      "vit_ms": 57.99399948120117,
+      "prefill_ms": 127.52900695800781,
+      "decode_ms": 288.6059875488281,
+      "total_ms": 500.3179931640625,
+      "group_encode_ms": [
+        14.569000244140625,
+        14.482999801635742,
+        14.63700008392334,
+        14.305000305175781
+      ],
+      "n_tokens": 18,
+      "text": "A person is using tongs to place raw meat into a pot on the stove."
+    },
+    {
+      "video": "-wa0umYJVGg_271_276",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 418,
+      "load_ms": 10.585000038146973,
+      "tokenize_ms": 15.055000305175781,
+      "vit_ms": 59.65299987792969,
+      "prefill_ms": 128.4720001220703,
+      "decode_ms": 238.80599975585938,
+      "total_ms": 452.65399169921875,
+      "group_encode_ms": [
+        15.053000450134277,
+        14.928000450134277,
+        14.607000350952148,
+        15.0649995803833
+      ],
+      "n_tokens": 15,
+      "text": "A person is cutting meat on a green cutting board with a knife."
+    },
+    {
+      "video": "-wa0umYJVGg_286_290",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 418,
+      "load_ms": 10.399999618530273,
+      "tokenize_ms": 14.812999725341797,
+      "vit_ms": 57.21299743652344,
+      "prefill_ms": 127.63099670410156,
+      "decode_ms": 204.06300354003906,
+      "total_ms": 414.19500732421875,
+      "group_encode_ms": [
+        14.557999610900879,
+        14.170000076293945,
+        14.232999801635742,
+        14.251999855041504
+      ],
+      "n_tokens": 13,
+      "text": "A person is stirring noodles in a pot of boiling water."
+    },
+    {
+      "video": "-zOrV-5vh1A_69_76",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        46,
+        26
+      ],
+      "n_visual_tokens": 4784,
+      "n_prompt_tokens": 4806,
+      "load_ms": 88.38899993896484,
+      "tokenize_ms": 183.7030029296875,
+      "vit_ms": 1035.25,
+      "prefill_ms": 895.095947265625,
+      "decode_ms": 262.1619873046875,
+      "total_ms": 2464.806884765625,
+      "group_encode_ms": [
+        271.1780090332031,
+        250.7480010986328,
+        259.6910095214844,
+        253.63299560546875
+      ],
+      "n_tokens": 16,
+      "text": "Colorful confetti is falling on a street, creating a festive atmosphere."
+    },
+    {
+      "video": "00jrXRMlZOY_0_10",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 906,
+      "load_ms": 22.04800033569336,
+      "tokenize_ms": 31.74799919128418,
+      "vit_ms": 121.218994140625,
+      "prefill_ms": 171.79800415039063,
+      "decode_ms": 270.6709899902344,
+      "total_ms": 617.5709838867188,
+      "group_encode_ms": [
+        40.362998962402344,
+        27.38800048828125,
+        26.643999099731445,
+        26.823999404907227
+      ],
+      "n_tokens": 17,
+      "text": "A person is gently touching a turtle on a wooden surface in a garden setting."
+    },
+    {
+      "video": "02Z-kuB3IaM_2_13",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 418,
+      "load_ms": 10.821999549865723,
+      "tokenize_ms": 14.850000381469727,
+      "vit_ms": 70.84300231933594,
+      "prefill_ms": 127.71499633789063,
+      "decode_ms": 305.04400634765625,
+      "total_ms": 529.35400390625,
+      "group_encode_ms": [
+        27.538000106811523,
+        14.53600025177002,
+        14.322999954223633,
+        14.446000099182129
+      ],
+      "n_tokens": 19,
+      "text": "A black bear is walking through a forest, moving from left to right across the frame."
+    },
+    {
+      "video": "04Gt01vatkk_248_265",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 906,
+      "load_ms": 22.968000411987305,
+      "tokenize_ms": 31.541000366210938,
+      "vit_ms": 120.13200378417969,
+      "prefill_ms": 171.86000061035156,
+      "decode_ms": 236.79800415039063,
+      "total_ms": 583.3690185546875,
+      "group_encode_ms": [
+        39.22200012207031,
+        27.093000411987305,
+        26.634000778198242,
+        27.183000564575195
+      ],
+      "n_tokens": 15,
+      "text": "A woman is cutting an onion on a cutting board in a kitchen."
+    },
+    {
+      "video": "04Gt01vatkk_308_321",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 906,
+      "load_ms": 24.093000411987305,
+      "tokenize_ms": 32.20600128173828,
+      "vit_ms": 110.24700927734375,
+      "prefill_ms": 172.42901611328125,
+      "decode_ms": 304.8420104980469,
+      "total_ms": 643.8900146484375,
+      "group_encode_ms": [
+        27.2450008392334,
+        27.80900001525879,
+        27.756999969482422,
+        27.43600082397461
+      ],
+      "n_tokens": 19,
+      "text": "A woman in a red shirt is chopping green vegetables on a cutting board in a kitchen."
+    },
+    {
+      "video": "eyhzdC936uk_15_27",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 418,
+      "load_ms": 8.335000038146973,
+      "tokenize_ms": 15.232000350952148,
+      "vit_ms": 73.01100158691406,
+      "prefill_ms": 128.23800659179688,
+      "decode_ms": 254.38999938964844,
+      "total_ms": 479.2879943847656,
+      "group_encode_ms": [
+        29.26799964904785,
+        14.5,
+        14.618000030517578,
+        14.625
+      ],
+      "n_tokens": 16,
+      "text": "A man is playing with a small dog by giving it a high-five."
+    },
+    {
+      "video": "fw8qvK67jYY_50_97",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        11
+      ],
+      "n_visual_tokens": 748,
+      "n_prompt_tokens": 770,
+      "load_ms": 16.31100082397461,
+      "tokenize_ms": 27.520000457763672,
+      "vit_ms": 101.04100036621094,
+      "prefill_ms": 162.1999969482422,
+      "decode_ms": 338.2409973144531,
+      "total_ms": 645.3939819335938,
+      "group_encode_ms": [
+        34.22200012207031,
+        22.400999069213867,
+        22.312000274658203,
+        22.106000900268555
+      ],
+      "n_tokens": 21,
+      "text": "A person is using a citrus juicer to extract juice from a lemon on a wooden cutting board."
+    },
+    {
+      "video": "gtixLEvO2Us_0_6",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        19,
+        13
+      ],
+      "n_visual_tokens": 988,
+      "n_prompt_tokens": 1010,
+      "load_ms": 17.21500015258789,
+      "tokenize_ms": 35.595001220703125,
+      "vit_ms": 140.55999755859375,
+      "prefill_ms": 179.0900115966797,
+      "decode_ms": 459.0989990234375,
+      "total_ms": 831.6370239257813,
+      "group_encode_ms": [
+        43.39099884033203,
+        33.92100143432617,
+        32.145999908447266,
+        31.101999282836914
+      ],
+      "n_tokens": 28,
+      "text": "A woman is sitting on a bench, smiling and gesturing with her hands, in front of a sign that reads \"music inter.\""
+    },
+    {
+      "video": "hoinj6vyQ2g_8_16",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        17
+      ],
+      "n_visual_tokens": 1564,
+      "n_prompt_tokens": 1586,
+      "load_ms": 41.59199905395508,
+      "tokenize_ms": 55.8120002746582,
+      "vit_ms": 230.70098876953125,
+      "prefill_ms": 300.4209899902344,
+      "decode_ms": 442.41900634765625,
+      "total_ms": 1071.197998046875,
+      "group_encode_ms": [
+        66.50900268554688,
+        57.14400100708008,
+        53.6870002746582,
+        53.361000061035156
+      ],
+      "n_tokens": 27,
+      "text": "A man is sitting in a chair and playing an acoustic guitar in a room with a desk and a computer monitor in the background."
+    },
+    {
+      "video": "j4dMnAPZu70_12_17",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 418,
+      "load_ms": 5.875999927520752,
+      "tokenize_ms": 15.060999870300293,
+      "vit_ms": 75.33799743652344,
+      "prefill_ms": 128.35800170898438,
+      "decode_ms": 255.85899353027344,
+      "total_ms": 480.5769958496094,
+      "group_encode_ms": [
+        30.965999603271484,
+        14.720999717712402,
+        14.62600040435791,
+        15.024999618530273
+      ],
+      "n_tokens": 16,
+      "text": "A panda cub is playing in the snow, rolling around and enjoying itself."
+    },
+    {
+      "video": "kBMsuhDvg88_45_64",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1218,
+      "load_ms": 31.76799964904785,
+      "tokenize_ms": 42.5,
+      "vit_ms": 169.47799682617188,
+      "prefill_ms": 233.39199829101563,
+      "decode_ms": 390.5639953613281,
+      "total_ms": 867.9619750976563,
+      "group_encode_ms": [
+        50.7239990234375,
+        39.268001556396484,
+        39.387001037597656,
+        40.0989990234375
+      ],
+      "n_tokens": 24,
+      "text": "A group of people are forming a human pyramid in a park, with some individuals standing on the shoulders of others."
+    },
+    {
+      "video": "kWLNZzuo3do_77_83",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1218,
+      "load_ms": 23.485000610351563,
+      "tokenize_ms": 43.34600067138672,
+      "vit_ms": 165.92100524902344,
+      "prefill_ms": 233.08799743652344,
+      "decode_ms": 356.6709899902344,
+      "total_ms": 822.8829956054688,
+      "group_encode_ms": [
+        40.55699920654297,
+        42.319000244140625,
+        41.03799819946289,
+        42.00699996948242
+      ],
+      "n_tokens": 22,
+      "text": "A person is cutting mushrooms on a green cutting board and then placing them into a pot of boiling water."
+    },
+    {
+      "video": "lcu-DwrnYY8_2_5",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 906,
+      "load_ms": 21.05500030517578,
+      "tokenize_ms": 32.486000061035156,
+      "vit_ms": 122.68600463867188,
+      "prefill_ms": 172.1060028076172,
+      "decode_ms": 321.6099853515625,
+      "total_ms": 670.0260009765625,
+      "group_encode_ms": [
+        38.92900085449219,
+        28.99799919128418,
+        26.867000579833984,
+        27.892000198364258
+      ],
+      "n_tokens": 20,
+      "text": "A person is diving into an indoor swimming pool, creating a splash as they enter the water."
+    },
+    {
+      "video": "mOZkcBcWR8o_6_12",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        6
+      ],
+      "n_visual_tokens": 264,
+      "n_prompt_tokens": 286,
+      "load_ms": 6.326000213623047,
+      "tokenize_ms": 10.489999771118164,
+      "vit_ms": 57.70800018310547,
+      "prefill_ms": 122.54399871826172,
+      "decode_ms": 238.50900268554688,
+      "total_ms": 435.6510009765625,
+      "group_encode_ms": [
+        23.131000518798828,
+        11.496999740600586,
+        11.623000144958496,
+        11.456999778747559
+      ],
+      "n_tokens": 15,
+      "text": "A young girl is pushing a shopping cart through a grocery store aisle."
+    },
+    {
+      "video": "nZSFn51l3hc_480_485",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        46,
+        26
+      ],
+      "n_visual_tokens": 4784,
+      "n_prompt_tokens": 4806,
+      "load_ms": 101.27999877929688,
+      "tokenize_ms": 187.19700622558594,
+      "vit_ms": 1034.864013671875,
+      "prefill_ms": 901.989990234375,
+      "decode_ms": 314.71600341796875,
+      "total_ms": 2540.27099609375,
+      "group_encode_ms": [
+        277.89300537109375,
+        254.4929962158203,
+        249.2550048828125,
+        253.22300720214844
+      ],
+      "n_tokens": 19,
+      "text": "A person is cutting a large piece of raw meat on a cutting board with a knife."
+    },
+    {
+      "video": "oSnYUfCGiCA_7_17",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        26,
+        17
+      ],
+      "n_visual_tokens": 1768,
+      "n_prompt_tokens": 1790,
+      "load_ms": 32.388999938964844,
+      "tokenize_ms": 62.50699996948242,
+      "vit_ms": 263.0010070800781,
+      "prefill_ms": 318.0469970703125,
+      "decode_ms": 206.24400329589844,
+      "total_ms": 882.4669799804688,
+      "group_encode_ms": [
+        76.08899688720703,
+        63.19200134277344,
+        62.3489990234375,
+        61.37099838256836
+      ],
+      "n_tokens": 13,
+      "text": "A person is applying makeup to their eyebrow using a brush."
+    },
+    {
+      "video": "pdrBPJYfTC8_33_39",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 906,
+      "load_ms": 19.54400062561035,
+      "tokenize_ms": 32.178001403808594,
+      "vit_ms": 126.89399719238281,
+      "prefill_ms": 172.73199462890625,
+      "decode_ms": 541.5009765625,
+      "total_ms": 892.9199829101563,
+      "group_encode_ms": [
+        41.805999755859375,
+        28.11400032043457,
+        28.243000030517578,
+        28.731000900268555
+      ],
+      "n_tokens": 33,
+      "text": "The video shows a close-up of a mug with a cartoon character on it, which then pans out to reveal more mugs with different cartoon characters on them."
+    },
+    {
+      "video": "qPXynwa_2iM_15_25",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        6
+      ],
+      "n_visual_tokens": 264,
+      "n_prompt_tokens": 286,
+      "load_ms": 6.880000114440918,
+      "tokenize_ms": 10.645999908447266,
+      "vit_ms": 57.05900192260742,
+      "prefill_ms": 122.2760009765625,
+      "decode_ms": 272.739013671875,
+      "total_ms": 469.6809997558594,
+      "group_encode_ms": [
+        23.1200008392334,
+        11.397000312805176,
+        11.3149995803833,
+        11.22700023651123
+      ],
+      "n_tokens": 17,
+      "text": "A black dog is running through shallow water, creating splashes as it moves."
+    },
+    {
+      "video": "rlQ2kW-FvMk_66_79",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        17
+      ],
+      "n_visual_tokens": 1564,
+      "n_prompt_tokens": 1586,
+      "load_ms": 37.22800064086914,
+      "tokenize_ms": 55.861000061035156,
+      "vit_ms": 225.33900451660156,
+      "prefill_ms": 298.8330383300781,
+      "decode_ms": 306.35699462890625,
+      "total_ms": 923.89697265625,
+      "group_encode_ms": [
+        64.7030029296875,
+        52.801998138427734,
+        53.36600112915039,
+        54.46799850463867
+      ],
+      "n_tokens": 19,
+      "text": "A woman is performing a leg exercise with the assistance of a man in a gym setting."
+    },
+    {
+      "video": "sMscRb9TcQE_146_161",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        15
+      ],
+      "n_visual_tokens": 1380,
+      "n_prompt_tokens": 1402,
+      "load_ms": 28.55699920654297,
+      "tokenize_ms": 49.2130012512207,
+      "vit_ms": 195.08399963378906,
+      "prefill_ms": 252.2620086669922,
+      "decode_ms": 356.6780090332031,
+      "total_ms": 882.0609741210938,
+      "group_encode_ms": [
+        57.38100051879883,
+        44.95899963378906,
+        46.52199935913086,
+        46.22200012207031
+      ],
+      "n_tokens": 22,
+      "text": "A police officer is interacting with a woman in a living room, possibly during a comedic or staged scene."
+    },
+    {
+      "video": "tn1d5DmdMqY_15_28",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 418,
+      "load_ms": 10.958000183105469,
+      "tokenize_ms": 15.154000282287598,
+      "vit_ms": 72.26200103759766,
+      "prefill_ms": 128.4810028076172,
+      "decode_ms": 254.843994140625,
+      "total_ms": 481.7860107421875,
+      "group_encode_ms": [
+        28.20599937438965,
+        14.850000381469727,
+        14.588000297546387,
+        14.618000030517578
+      ],
+      "n_tokens": 16,
+      "text": "A man is playing an acoustic guitar in a room with wooden paneling."
+    },
+    {
+      "video": "v-9Gx0gJmfo_26_32",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        17,
+        13
+      ],
+      "n_visual_tokens": 884,
+      "n_prompt_tokens": 906,
+      "load_ms": 12.590999603271484,
+      "tokenize_ms": 32.42599868774414,
+      "vit_ms": 127.4639892578125,
+      "prefill_ms": 173.49600219726563,
+      "decode_ms": 371.6340026855469,
+      "total_ms": 717.7069702148438,
+      "group_encode_ms": [
+        42.50299835205078,
+        28.128999710083008,
+        29.14299964904785,
+        27.68899917602539
+      ],
+      "n_tokens": 23,
+      "text": "A person is swimming underwater, with bubbles rising around them, while a tree branch is visible in the background."
+    },
+    {
+      "video": "wn9rDTZj-m4_8_18",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        23,
+        13
+      ],
+      "n_visual_tokens": 1196,
+      "n_prompt_tokens": 1218,
+      "load_ms": 27.15999984741211,
+      "tokenize_ms": 42.70500183105469,
+      "vit_ms": 170.07400512695313,
+      "prefill_ms": 233.60598754882813,
+      "decode_ms": 289.02801513671875,
+      "total_ms": 762.8590087890625,
+      "group_encode_ms": [
+        51.4370002746582,
+        40.74399948120117,
+        38.44599914550781,
+        39.446998596191406
+      ],
+      "n_tokens": 18,
+      "text": "A young girl is playing the violin on a beach in Capitola, California."
+    },
+    {
+      "video": "xxHx6s_DbUo_173_177",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        22,
+        9
+      ],
+      "n_visual_tokens": 792,
+      "n_prompt_tokens": 814,
+      "load_ms": 12.814000129699707,
+      "tokenize_ms": 28.834999084472656,
+      "vit_ms": 115.49198913574219,
+      "prefill_ms": 168.10000610351563,
+      "decode_ms": 355.0050048828125,
+      "total_ms": 680.322998046875,
+      "group_encode_ms": [
+        40.81399917602539,
+        25.24799919128418,
+        24.395999908447266,
+        25.034000396728516
+      ],
+      "n_tokens": 22,
+      "text": "A person is performing a dance routine on a stage with a series of white chairs arranged in a line."
+    },
+    {
+      "video": "ywMLb2VfHbI_13_20",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        11,
+        9
+      ],
+      "n_visual_tokens": 396,
+      "n_prompt_tokens": 418,
+      "load_ms": 8.982999801635742,
+      "tokenize_ms": 15.218999862670898,
+      "vit_ms": 70.99800109863281,
+      "prefill_ms": 127.85900115966797,
+      "decode_ms": 187.3780059814453,
+      "total_ms": 410.5150146484375,
+      "group_encode_ms": [
+        28.0310001373291,
+        14.319999694824219,
+        14.369000434875488,
+        14.277999877929688
+      ],
+      "n_tokens": 12,
+      "text": "A hedgehog is running inside a green exercise wheel."
+    }
+  ]
+}

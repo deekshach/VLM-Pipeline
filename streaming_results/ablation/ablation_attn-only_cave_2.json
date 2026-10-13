@@ -1,0 +1,644 @@
+{
+  "mode": "streaming_optimized",
+  "video_name": "cave_2",
+  "n_frames_total": 50,
+  "n_frames_selected": 10,
+  "global_complexity": 0.6505635380744934,
+  "streaming": {
+    "fps": 4.0,
+    "video_duration_s": 12.25,
+    "online_selection": {
+      "method": "cumulative_motion",
+      "cumulative_threshold": 15.0,
+      "max_selected_frames": 10,
+      "decisions": [
+        {
+          "frame_index": 1,
+          "arrival_time_s": 0.0,
+          "p95_magnitude": 0.0,
+          "cumulative_motion": 0.0,
+          "selected": true,
+          "selection_latency_ms": 0.0
+        },
+        {
+          "frame_index": 2,
+          "arrival_time_s": 0.25,
+          "p95_magnitude": 27.595285415649414,
+          "cumulative_motion": 27.595285415649414,
+          "selected": true,
+          "selection_latency_ms": 17.0
+        },
+        {
+          "frame_index": 3,
+          "arrival_time_s": 0.5,
+          "p95_magnitude": 24.255008697509766,
+          "cumulative_motion": 24.255008697509766,
+          "selected": true,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 4,
+          "arrival_time_s": 0.75,
+          "p95_magnitude": 20.56242561340332,
+          "cumulative_motion": 20.56242561340332,
+          "selected": true,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 5,
+          "arrival_time_s": 1.0,
+          "p95_magnitude": 21.42010498046875,
+          "cumulative_motion": 21.42010498046875,
+          "selected": true,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 6,
+          "arrival_time_s": 1.25,
+          "p95_magnitude": 25.665634155273438,
+          "cumulative_motion": 25.665634155273438,
+          "selected": true,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 7,
+          "arrival_time_s": 1.5,
+          "p95_magnitude": 29.197479248046875,
+          "cumulative_motion": 29.197479248046875,
+          "selected": true,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 8,
+          "arrival_time_s": 1.75,
+          "p95_magnitude": 32.034915924072266,
+          "cumulative_motion": 32.034915924072266,
+          "selected": true,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 9,
+          "arrival_time_s": 2.0,
+          "p95_magnitude": 37.21772003173828,
+          "cumulative_motion": 37.21772003173828,
+          "selected": true,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 10,
+          "arrival_time_s": 2.25,
+          "p95_magnitude": 41.55304718017578,
+          "cumulative_motion": 41.55304718017578,
+          "selected": true,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 11,
+          "arrival_time_s": 2.5,
+          "p95_magnitude": 45.01546096801758,
+          "cumulative_motion": 45.01546096801758,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 12,
+          "arrival_time_s": 2.75,
+          "p95_magnitude": 46.478233337402344,
+          "cumulative_motion": 91.49369812011719,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 13,
+          "arrival_time_s": 3.0,
+          "p95_magnitude": 48.6075439453125,
+          "cumulative_motion": 140.1012420654297,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 14,
+          "arrival_time_s": 3.25,
+          "p95_magnitude": 54.86067581176758,
+          "cumulative_motion": 194.9619140625,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 15,
+          "arrival_time_s": 3.5,
+          "p95_magnitude": 62.18446350097656,
+          "cumulative_motion": 257.1463623046875,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 16,
+          "arrival_time_s": 3.75,
+          "p95_magnitude": 65.57373809814453,
+          "cumulative_motion": 322.7200927734375,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 17,
+          "arrival_time_s": 4.0,
+          "p95_magnitude": 69.26690673828125,
+          "cumulative_motion": 391.98699951171875,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 18,
+          "arrival_time_s": 4.25,
+          "p95_magnitude": 71.1874771118164,
+          "cumulative_motion": 463.1744689941406,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 19,
+          "arrival_time_s": 4.5,
+          "p95_magnitude": 74.76985168457031,
+          "cumulative_motion": 537.9443359375,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 20,
+          "arrival_time_s": 4.75,
+          "p95_magnitude": 84.66959381103516,
+          "cumulative_motion": 622.6139526367188,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 21,
+          "arrival_time_s": 5.0,
+          "p95_magnitude": 81.2704086303711,
+          "cumulative_motion": 703.8843383789063,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 22,
+          "arrival_time_s": 5.25,
+          "p95_magnitude": 82.0691909790039,
+          "cumulative_motion": 785.9535522460938,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 23,
+          "arrival_time_s": 5.5,
+          "p95_magnitude": 140.31857299804688,
+          "cumulative_motion": 926.2720947265625,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 24,
+          "arrival_time_s": 5.75,
+          "p95_magnitude": 189.39141845703125,
+          "cumulative_motion": 1115.66357421875,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 25,
+          "arrival_time_s": 6.0,
+          "p95_magnitude": 175.2817840576172,
+          "cumulative_motion": 1290.9453125,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 26,
+          "arrival_time_s": 6.25,
+          "p95_magnitude": 214.71290588378906,
+          "cumulative_motion": 1505.658203125,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 27,
+          "arrival_time_s": 6.5,
+          "p95_magnitude": 114.48794555664063,
+          "cumulative_motion": 1620.1461181640625,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 28,
+          "arrival_time_s": 6.75,
+          "p95_magnitude": 92.60863494873047,
+          "cumulative_motion": 1712.7547607421875,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 29,
+          "arrival_time_s": 7.0,
+          "p95_magnitude": 93.95256805419922,
+          "cumulative_motion": 1806.707275390625,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 30,
+          "arrival_time_s": 7.25,
+          "p95_magnitude": 99.76407623291016,
+          "cumulative_motion": 1906.4713134765625,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 31,
+          "arrival_time_s": 7.5,
+          "p95_magnitude": 172.63052368164063,
+          "cumulative_motion": 2079.101806640625,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 32,
+          "arrival_time_s": 7.75,
+          "p95_magnitude": 116.25550842285156,
+          "cumulative_motion": 2195.357421875,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 33,
+          "arrival_time_s": 8.0,
+          "p95_magnitude": 157.99374389648438,
+          "cumulative_motion": 2353.35107421875,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 34,
+          "arrival_time_s": 8.25,
+          "p95_magnitude": 95.71036529541016,
+          "cumulative_motion": 2449.0615234375,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 35,
+          "arrival_time_s": 8.5,
+          "p95_magnitude": 94.91432189941406,
+          "cumulative_motion": 2543.975830078125,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 36,
+          "arrival_time_s": 8.75,
+          "p95_magnitude": 92.29115295410156,
+          "cumulative_motion": 2636.26708984375,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 37,
+          "arrival_time_s": 9.0,
+          "p95_magnitude": 88.7620620727539,
+          "cumulative_motion": 2725.029052734375,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 38,
+          "arrival_time_s": 9.25,
+          "p95_magnitude": 80.54767608642578,
+          "cumulative_motion": 2805.57666015625,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 39,
+          "arrival_time_s": 9.5,
+          "p95_magnitude": 75.98727416992188,
+          "cumulative_motion": 2881.56396484375,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 40,
+          "arrival_time_s": 9.75,
+          "p95_magnitude": 64.04266357421875,
+          "cumulative_motion": 2945.606689453125,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 41,
+          "arrival_time_s": 10.0,
+          "p95_magnitude": 56.57041931152344,
+          "cumulative_motion": 3002.177001953125,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 42,
+          "arrival_time_s": 10.25,
+          "p95_magnitude": 49.823246002197266,
+          "cumulative_motion": 3052.000244140625,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 43,
+          "arrival_time_s": 10.5,
+          "p95_magnitude": 40.005638122558594,
+          "cumulative_motion": 3092.005859375,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 44,
+          "arrival_time_s": 10.75,
+          "p95_magnitude": 31.351490020751953,
+          "cumulative_motion": 3123.357421875,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 45,
+          "arrival_time_s": 11.0,
+          "p95_magnitude": 21.570261001586914,
+          "cumulative_motion": 3144.927734375,
+          "selected": false,
+          "selection_latency_ms": 17.0
+        },
+        {
+          "frame_index": 46,
+          "arrival_time_s": 11.25,
+          "p95_magnitude": 16.530933380126953,
+          "cumulative_motion": 3161.458740234375,
+          "selected": false,
+          "selection_latency_ms": 16.0
+        },
+        {
+          "frame_index": 47,
+          "arrival_time_s": 11.5,
+          "p95_magnitude": 13.756632804870605,
+          "cumulative_motion": 3175.21533203125,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 48,
+          "arrival_time_s": 11.75,
+          "p95_magnitude": 25.187034606933594,
+          "cumulative_motion": 3200.40234375,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 49,
+          "arrival_time_s": 12.0,
+          "p95_magnitude": 16.38693618774414,
+          "cumulative_motion": 3216.789306640625,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        },
+        {
+          "frame_index": 50,
+          "arrival_time_s": 12.25,
+          "p95_magnitude": 14.649558067321777,
+          "cumulative_motion": 3231.43896484375,
+          "selected": false,
+          "selection_latency_ms": 15.0
+        }
+      ]
+    }
+  },
+  "selected_frames": [
+    {
+      "index": 1,
+      "weight": 0.0
+    },
+    {
+      "index": 2,
+      "weight": 27.595285415649414
+    },
+    {
+      "index": 3,
+      "weight": 24.255008697509766
+    },
+    {
+      "index": 4,
+      "weight": 20.56242561340332
+    },
+    {
+      "index": 5,
+      "weight": 21.42010498046875
+    },
+    {
+      "index": 6,
+      "weight": 25.665634155273438
+    },
+    {
+      "index": 7,
+      "weight": 29.197479248046875
+    },
+    {
+      "index": 8,
+      "weight": 32.034915924072266
+    },
+    {
+      "index": 9,
+      "weight": 37.21772003173828
+    },
+    {
+      "index": 10,
+      "weight": 41.55304718017578
+    }
+  ],
+  "inference": {
+    "generated_text": "In this animated scene, we see a character, presumably a female, in a dynamic pose, running towards a large, menacing creature that appears to be a dragon. The dragon is in a combat stance, with its mouth open, ready to attack. The character is holding a weapon, possibly a spear or a staff, in her right hand, and she seems to be in motion, perhaps preparing to defend herself or attack the dragon. Her expression is one of determination and focus, and her body language suggests she is ready for the confrontation.\n\nThe environment is a dark, rocky terrain, possibly a cave or a mountainous area. The lighting is dim, with a bluish tint, adding to the sense of danger and suspense. The background is mostly",
+    "n_tokens": 150,
+    "encode_time_ms": 1727.0,
+    "generation_time_ms": 2400.0
+  },
+  "metrics": {
+    "motion_coverage": 0.08723067065367421,
+    "shannon_entropy": 4.194248602238506,
+    "temporal_reduction": 0.8,
+    "total_tokens_encoded": 5920,
+    "total_tokens_cached": 0,
+    "encoder_savings_pct": 0.0,
+    "total_encode_time_ms": 1191.0,
+    "estimated_full_encode_time_ms": 2370.0,
+    "encode_speedup": 1.989924430847168
+  },
+  "per_frame_cache": [
+    {
+      "frame_index": 1,
+      "is_keyframe": true,
+      "used_cache": false,
+      "is_full_encode": true,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 237.0,
+      "splice_time_ms": 0.0,
+      "n_tokens_pre_llm_pruned": 0,
+      "n_tokens_injected": 0
+    },
+    {
+      "frame_index": 2,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 108.0,
+      "splice_time_ms": 1.0,
+      "n_tokens_pre_llm_pruned": 296,
+      "n_tokens_injected": 296
+    },
+    {
+      "frame_index": 3,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 107.0,
+      "splice_time_ms": 0.0,
+      "n_tokens_pre_llm_pruned": 296,
+      "n_tokens_injected": 296
+    },
+    {
+      "frame_index": 4,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 105.0,
+      "splice_time_ms": 1.0,
+      "n_tokens_pre_llm_pruned": 296,
+      "n_tokens_injected": 296
+    },
+    {
+      "frame_index": 5,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 105.0,
+      "splice_time_ms": 1.0,
+      "n_tokens_pre_llm_pruned": 296,
+      "n_tokens_injected": 296
+    },
+    {
+      "frame_index": 6,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 105.0,
+      "splice_time_ms": 1.0,
+      "n_tokens_pre_llm_pruned": 296,
+      "n_tokens_injected": 296
+    },
+    {
+      "frame_index": 7,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 106.0,
+      "splice_time_ms": 0.0,
+      "n_tokens_pre_llm_pruned": 296,
+      "n_tokens_injected": 296
+    },
+    {
+      "frame_index": 8,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 106.0,
+      "splice_time_ms": 0.0,
+      "n_tokens_pre_llm_pruned": 296,
+      "n_tokens_injected": 296
+    },
+    {
+      "frame_index": 9,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 106.0,
+      "splice_time_ms": 0.0,
+      "n_tokens_pre_llm_pruned": 296,
+      "n_tokens_injected": 296
+    },
+    {
+      "frame_index": 10,
+      "is_keyframe": false,
+      "used_cache": true,
+      "is_full_encode": false,
+      "n_tokens_encoded": 592,
+      "n_tokens_cached": 0,
+      "encode_time_ms": 106.0,
+      "splice_time_ms": 1.0,
+      "n_tokens_pre_llm_pruned": 296,
+      "n_tokens_injected": 296
+    }
+  ],
+  "pruning": {
+    "enabled": false
+  },
+  "prefill_pruning": {
+    "enabled": false
+  },
+  "pre_llm_pruning": {
+    "enabled": true,
+    "strategy": "attn-only",
+    "keep_ratio": 0.5,
+    "weights": {
+      "motion": 0.30000001192092896,
+      "norm": 0.30000001192092896,
+      "attn": 0.4000000059604645
+    },
+    "total_tokens_before": 5328,
+    "total_tokens_injected": 2664,
+    "total_tokens_pruned": 2664,
+    "savings_pct": 50.0
+  },
+  "timing": {
+    "selection_ms": 762.0,
+    "encode_ms": 1727.0,
+    "generation_ms": 2400.0,
+    "pruning_overhead_ms": 0.0,
+    "prefill_pruning_overhead_ms": 0.0,
+    "total_ms": 7670.0
+  },
+  "params": {
+    "sintel_dir": "/data/Fall25/multimodalRAG/VLM/Qwen2.5-VL/MPI-Sintel",
+    "video_name": "cave_2",
+    "fps": 4.0,
+    "cumulative_threshold": 15.0,
+    "max_selected_frames": 10,
+    "patch_grid": 4,
+    "spatial_threshold": 0.05000000074505806,
+    "patch_reuse_motion": 0.0,
+    "enable_pruning": false,
+    "enable_prefill_pruning": false,
+    "enable_pre_llm_pruning": true,
+    "pre_llm_keep_ratio": 0.5,
+    "pre_llm_weight_motion": 0.30000001192092896,
+    "pre_llm_weight_norm": 0.30000001192092896,
+    "pre_llm_weight_attn": 0.4000000059604645
+  }
+}

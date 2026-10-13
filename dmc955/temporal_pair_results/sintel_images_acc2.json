@@ -1,0 +1,701 @@
+{
+  "mode": "images",
+  "align": 0,
+  "base_frames": 8,
+  "frame_step": 0,
+  "video_fps": 2.0,
+  "tokens_per_second": 2,
+  "n_predict": 128,
+  "requests": [
+    {
+      "video": "alley_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 61.106998443603516,
+      "tokenize_ms": 48.191001892089844,
+      "vit_ms": 540.2720336914063,
+      "prefill_ms": 824.7710571289063,
+      "decode_ms": 610.426025390625,
+      "total_ms": 2084.8701171875,
+      "group_encode_ms": [
+        160.88099670410156,
+        57.029998779296875,
+        53.61000061035156,
+        53.67399978637695,
+        53.599998474121094,
+        53.58599853515625,
+        53.87900161743164,
+        54.012001037597656
+      ],
+      "n_tokens": 37,
+      "text": "化进程中的女人将手中的苹果从右手上移至左手上。她的眼睛从苹果上移开，看向画面的右侧。她的头发在风中轻轻飘动。"
+    },
+    {
+      "video": "alley_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 55.382999420166016,
+      "tokenize_ms": 38.6510009765625,
+      "vit_ms": 435.68902587890625,
+      "prefill_ms": 816.136962890625,
+      "decode_ms": 1526.6829833984375,
+      "total_ms": 2872.675048828125,
+      "group_encode_ms": [
+        55.38999938964844,
+        53.72200012207031,
+        53.4640007019043,
+        55.40800094604492,
+        56.81700134277344,
+        53.97700119018555,
+        53.4630012512207,
+        53.448001861572266
+      ],
+      "n_tokens": 91,
+      "text": "A woman with red hair is climbing up the side of a building. She is wearing a white tank top and brown pants. The building has a wooden balcony and a window. There are also some wooden crates and a ladder on the ground. The scene is set in a narrow alleyway with a brick wall on one side and a wooden building on the other. The woman is moving upwards, using her hands and feet to grip the building's surface."
+    },
+    {
+      "video": "ambush_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 47.4379997253418,
+      "tokenize_ms": 39.3129997253418,
+      "vit_ms": 430.34503173828125,
+      "prefill_ms": 815.8909912109375,
+      "decode_ms": 694.9110107421875,
+      "total_ms": 2028.0009765625,
+      "group_encode_ms": [
+        53.46799850463867,
+        53.49300003051758,
+        53.45800018310547,
+        53.54199981689453,
+        53.65299987792969,
+        53.40700149536133,
+        56.255001068115234,
+        53.069000244140625
+      ],
+      "n_tokens": 42,
+      "text": "A young woman with brown hair and a brown coat stands in a snowy landscape. She is looking to the right with a concerned expression on her face. The background features a cloudy sky and snow-covered mountains."
+    },
+    {
+      "video": "ambush_4",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 51.39400100708008,
+      "tokenize_ms": 38.762001037597656,
+      "vit_ms": 429.8990478515625,
+      "prefill_ms": 825.89794921875,
+      "decode_ms": 1683.490966796875,
+      "total_ms": 3029.56396484375,
+      "group_encode_ms": [
+        53.63800048828125,
+        53.49599838256836,
+        53.750999450683594,
+        53.76100158691406,
+        53.707000732421875,
+        53.69200134277344,
+        53.77299880981445,
+        54.08100128173828
+      ],
+      "n_tokens": 100,
+      "text": "A man with red hair is seen in a snowy landscape, wearing a brown leather outfit. He is climbing a large, dark gray rock formation. The man is using his right hand to grip a large, dark gray boulder, while his left hand is extended forward, possibly for balance or to reach for something. The snow on the ground is white and appears to be untouched except for the area around the man and the rock formation. The overall atmosphere of the scene is cold and desolate."
+    },
+    {
+      "video": "ambush_5",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 51.94900131225586,
+      "tokenize_ms": 38.62900161743164,
+      "vit_ms": 427.635986328125,
+      "prefill_ms": 816.3599853515625,
+      "decode_ms": 2186.361083984375,
+      "total_ms": 3521.047119140625,
+      "group_encode_ms": [
+        53.55799865722656,
+        53.21799850463867,
+        53.45000076293945,
+        53.18600082397461,
+        53.3380012512207,
+        53.452999114990234,
+        53.797000885009766,
+        53.63600158691406
+      ],
+      "n_tokens": 128,
+      "text": "A man with a bald head and a shaved head is holding a knife to a woman's neck. The woman is holding a gun in her hand. The scene takes place in a snowy environment with a rocky terrain. The man is wearing a brown vest and the woman is wearing a brown jacket. The man's face is covered in a tattoo. The woman is looking at the man with a scared expression on her face. The man is looking at the woman with a serious expression on his face. The woman is holding the gun with both hands. The man is holding the knife with his right hand. The woman is holding the gun with her"
+    },
+    {
+      "video": "ambush_6",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 52.709999084472656,
+      "tokenize_ms": 38.7140007019043,
+      "vit_ms": 436.885986328125,
+      "prefill_ms": 825.5669555664063,
+      "decode_ms": 2201.2919921875,
+      "total_ms": 3555.301025390625,
+      "group_encode_ms": [
+        53.29100036621094,
+        55.71200180053711,
+        54.25,
+        53.34600067138672,
+        54.95600128173828,
+        54.457000732421875,
+        55.23899841308594,
+        55.6349983215332
+      ],
+      "n_tokens": 128,
+      "text": "The scene shows a man and a woman in a snowy landscape. The woman is holding a knife and appears to be in a fighting stance. The man is holding a spear and is also in a fighting stance. The woman is moving her arm forward, and the man is moving his arm backward. The key visual elements in the scene are the snowy landscape, the woman's knife, and the man's spear. The woman's hair is red, and the man's hair is brown. The woman is wearing a brown jacket, and the man is wearing a brown shirt. The woman's eyes are wide open, and the man's eyes are"
+    },
+    {
+      "video": "ambush_7",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 47.23699951171875,
+      "tokenize_ms": 38.775001525878906,
+      "vit_ms": 435.68499755859375,
+      "prefill_ms": 822.197021484375,
+      "decode_ms": 2200.4599609375,
+      "total_ms": 3544.4609375,
+      "group_encode_ms": [
+        53.70600128173828,
+        53.24300003051758,
+        55.94499969482422,
+        55.356998443603516,
+        53.37900161743164,
+        55.30699920654297,
+        53.70600128173828,
+        55.04199981689453
+      ],
+      "n_tokens": 128,
+      "text": "The image shows a close-up of a person's hand holding a wooden staff with a metal grip. The hand is positioned in the foreground, and the staff is held firmly in the hand. The background is a plain, gray surface, which could be a wall or a table. The hand appears to be gripping the staff with a firm grip, suggesting that the person is holding the staff in a steady position. The image does not show any motion or action, and the focus is on the hand and the staff. The style of the image is realistic, with a clear and sharp focus on the hand and the staff. The lighting is even"
+    },
+    {
+      "video": "bamboo_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 61.95000076293945,
+      "tokenize_ms": 38.83300018310547,
+      "vit_ms": 434.4840087890625,
+      "prefill_ms": 827.8419799804688,
+      "decode_ms": 138.52200317382813,
+      "total_ms": 1501.738037109375,
+      "group_encode_ms": [
+        55.334999084472656,
+        53.55500030517578,
+        53.999000549316406,
+        54.33000183105469,
+        53.667999267578125,
+        55.189998626708984,
+        54.68299865722656,
+        53.7239990234375
+      ],
+      "n_tokens": 9,
+      "text": "nobita is on a boulder."
+    },
+    {
+      "video": "bamboo_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 59.150001525878906,
+      "tokenize_ms": 38.904998779296875,
+      "vit_ms": 437.3999938964844,
+      "prefill_ms": 819.0760498046875,
+      "decode_ms": 2262.073974609375,
+      "total_ms": 3616.757080078125,
+      "group_encode_ms": [
+        53.665000915527344,
+        56.417999267578125,
+        55.83300018310547,
+        53.358001708984375,
+        54.82500076293945,
+        53.89099884033203,
+        54.369998931884766,
+        55.040000915527344
+      ],
+      "n_tokens": 128,
+      "text": "A woman with red hair is seen in a bamboo forest. She is wearing a white tank top and brown pants. She is holding a wooden stick in her right hand and is in the process of climbing a bamboo stalk. Her left hand is on the ground for support. The bamboo stalk she is climbing is green and has a brown 50% of its length. The woman is moving upwards, her body is slightly bent, and her left leg is extended forward. The background is filled with other bamboo stalks, creating a dense forest. The woman's motion is steady and deliberate as she carefully climbs the bamboo stalk. The scene is"
+    },
+    {
+      "video": "bandage_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 60.88999938964844,
+      "tokenize_ms": 40.481998443603516,
+      "vit_ms": 443.7710266113281,
+      "prefill_ms": 829.201904296875,
+      "decode_ms": 2121.258056640625,
+      "total_ms": 3495.7490234375,
+      "group_encode_ms": [
+        57.08700180053711,
+        56.75600051879883,
+        56.608001708984375,
+        55.137001037597656,
+        53.500999450683594,
+        55.01100158691406,
+        55.917999267578125,
+        53.75299835205078
+      ],
+      "n_tokens": 125,
+      "text": "A woman is tending to a dragon's wound. The dragon is lying on the ground, and the woman is holding the dragon's head with one hand and gently petting the dragon's head with the other. The dragon's mouth is open, and there is blood on the woman's hand. The scene takes place in a room with a wooden floor and a rug. The woman is wearing a tank top and a wristband. The dragon is a light brown color with a darker 1001. The woman is petting the dragon's head with a gentle motion. The scene is calm and peaceful."
+    },
+    {
+      "video": "bandage_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 58.39099884033203,
+      "tokenize_ms": 40.571998596191406,
+      "vit_ms": 437.3420104980469,
+      "prefill_ms": 818.008056640625,
+      "decode_ms": 2193.445068359375,
+      "total_ms": 3547.8720703125,
+      "group_encode_ms": [
+        55.29999923706055,
+        53.60900115966797,
+        53.430999755859375,
+        57.07099914550781,
+        53.17499923706055,
+        54.742000579833984,
+        55.194000244140625,
+        54.81999969482422
+      ],
+      "n_tokens": 128,
+      "text": "A young woman with red hair is holding a small dragon in her hands. The dragon is brown and has a small horn on its head. The woman is wearing a white tank top and has a tattoo on her left arm. The background is a wooden structure with a rope and a piece of fabric. The woman is looking at the dragon with a smile on her face. The dragon is looking up at the woman with its mouth open. The woman's hands are gently holding the dragon's head. The dragon's eyes are open and it appears to be in a relaxed state. The woman's expression suggests a sense of joy and contentment."
+    },
+    {
+      "video": "cave_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 52.784000396728516,
+      "tokenize_ms": 38.902000427246094,
+      "vit_ms": 435.5530090332031,
+      "prefill_ms": 824.2540283203125,
+      "decode_ms": 2188.132080078125,
+      "total_ms": 3539.7509765625,
+      "group_encode_ms": [
+        53.909000396728516,
+        55.05699920654297,
+        54.007999420166016,
+        53.520999908447266,
+        55.15700149536133,
+        53.24399948120117,
+        56.444000244140625,
+        54.2130012512207
+      ],
+      "n_tokens": 128,
+      "text": "A woman with red hair is engaged in a fierce battle with a large, menacing dragon in a dark, rocky environment. The woman is wielding a sword and is in the process of striking the dragon with it. The dragon, with its wings spread wide, is in the air, seemingly attempting to attack the woman. The scene is filled with tension and action, as the woman and the dragon engage in a struggle for dominance. The dark, rocky environment adds to the sense of danger and peril. The woman's red hair and the dragon's wings are the most prominent visual elements in the scene. The woman's sword is a key object in"
+    },
+    {
+      "video": "cave_4",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 56.270999908447266,
+      "tokenize_ms": 39.948001861572266,
+      "vit_ms": 433.0439758300781,
+      "prefill_ms": 823.3319702148438,
+      "decode_ms": 2002.156005859375,
+      "total_ms": 3354.85400390625,
+      "group_encode_ms": [
+        53.42399978637695,
+        53.1349983215332,
+        54.88399887084961,
+        53.816001892089844,
+        53.284000396728516,
+        54.981998443603516,
+        53.606998443603516,
+        55.9119987487793
+      ],
+      "n_tokens": 118,
+      "text": "A woman with red hair is depicted in a dynamic scene, wielding a spear and facing a large, brown dragon. The dragon is in a crouched position, with its wings spread wide and its mouth agape, revealing sharp teeth. The woman is in a crouched position as well, holding the spear with both hands, ready to strike. The scene is set in a rocky, cave-like environment, with jagged rocks and boulders surrounding the woman and the dragon. The overall atmosphere is tense and action-packed, suggesting a battle between the woman and the dragon."
+    },
+    {
+      "video": "market_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 55.29999923706055,
+      "tokenize_ms": 39.40399932861328,
+      "vit_ms": 433.7919921875,
+      "prefill_ms": 825.6099853515625,
+      "decode_ms": 2190.9970703125,
+      "total_ms": 3545.215087890625,
+      "group_encode_ms": [
+        53.792999267578125,
+        53.345001220703125,
+        55.323001861572266,
+        53.53900146484375,
+        53.40399932861328,
+        55.33399963378906,
+        53.77299880981445,
+        55.28099822998047
+      ],
+      "n_tokens": 128,
+      "text": "a scene from a video game, set in a dimly lit alleyway with a rustic and somewhat dilapidated appearance. The alley is narrow and flanked by buildings on both sides, with a wooden structure on the left side and a more industrial-looking building on the right. The ground is made of cobblestones, and there are various objects scattered around, including a wooden cart, a barrel, and a crate. The lighting in the scene is dim, with shadows cast by the buildings and objects, creating a moody atmosphere. The overall color palette is muted, with shades of brown, gray, and black dominating the scene."
+    },
+    {
+      "video": "market_5",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 54.36600112915039,
+      "tokenize_ms": 38.56800079345703,
+      "vit_ms": 434.4270324707031,
+      "prefill_ms": 821.9409790039063,
+      "decode_ms": 1787.20703125,
+      "total_ms": 3136.639892578125,
+      "group_encode_ms": [
+        55.22700119018555,
+        54.21200180053711,
+        53.06999969482422,
+        54.492000579833984,
+        53.37900161743164,
+        53.47100067138672,
+        55.362998962402344,
+        55.2130012512207
+      ],
+      "n_tokens": 105,
+      "text": "A woman with red hair is seen in the middle of a jump, with her body in an arched position. She is wearing a white tank top, brown pants, and black boots. She is also wearing a brown belt with a silver buckle. The scene is set in a dimly lit room with a wooden floor and a wooden crate in the background. The woman's motion is captured mid-air, with her arms extended and her legs bent at the knees. The overall scene suggests a sense of action and movement."
+    },
+    {
+      "video": "market_6",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 57.558998107910156,
+      "tokenize_ms": 40.44200134277344,
+      "vit_ms": 431.11102294921875,
+      "prefill_ms": 815.76904296875,
+      "decode_ms": 2179.56103515625,
+      "total_ms": 3524.576904296875,
+      "group_encode_ms": [
+        53.5099983215332,
+        53.082000732421875,
+        53.32400131225586,
+        55.30799865722656,
+        53.85499954223633,
+        53.56700134277344,
+        54.06700134277344,
+        54.39799880981445
+      ],
+      "n_tokens": 128,
+      "text": "A woman with red hair is climbing up a wooden cart. She is wearing a white tank top and brown pants. The cart is on a cobblestone street and there are two large wooden barrels next to it. In the background, there is a building with a brown roof and a wooden fence. The woman is moving her arms and legs to climb up the cart. The cart is tilted to the side and there is a white bird on top of it. The woman is looking up at the bird. The cart is made of wood and has two wheels. The woman is climbing up the cart from the left side. The cart is in"
+    },
+    {
+      "video": "mountain_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 53.30099868774414,
+      "tokenize_ms": 38.808998107910156,
+      "vit_ms": 431.71600341796875,
+      "prefill_ms": 818.7030029296875,
+      "decode_ms": 1275.635986328125,
+      "total_ms": 2618.278076171875,
+      "group_encode_ms": [
+        53.59000015258789,
+        53.55699920654297,
+        55.0620002746582,
+        53.37799835205078,
+        53.37699890136719,
+        55.316001892089844,
+        54.04399871826172,
+        53.391998291015625
+      ],
+      "n_tokens": 76,
+      "text": "A breathtaking view of a snow-covered mountain range. The mountains are jagged and rocky, with patches of snow scattered across their surfaces. The sky above is a mix of gray and white, suggesting an overcast day. The camera pans to the right, revealing the vast expanse of the mountain range. The scene is serene and majestic, capturing the raw beauty of nature."
+    },
+    {
+      "video": "shaman_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 56.12200164794922,
+      "tokenize_ms": 39.37799835205078,
+      "vit_ms": 431.0299987792969,
+      "prefill_ms": 815.9029541015625,
+      "decode_ms": 2177.907958984375,
+      "total_ms": 3520.470947265625,
+      "group_encode_ms": [
+        53.33399963378906,
+        55.20399856567383,
+        54.624000549316406,
+        53.20199966430664,
+        53.362998962402344,
+        53.38399887084961,
+        55.03799819946289,
+        52.88100051879883
+      ],
+      "n_tokens": 128,
+      "text": "A man with a long, bushy beard and a red and black face paint is the central focus of the scene. He is wearing a brown hat with a black band and has a long, thin, silver object in his nose. The man is looking down and to the left, his expression serious. \n\nIn the background, a woman with red hair is visible. She is wearing a white tank top and has a black and white tattoo on her arm. She is looking at the man with a concerned expression. \n\nThe setting appears to be a dimly lit room with a patterned wall in the background. The overall atmosphere of the"
+    },
+    {
+      "video": "shaman_3",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 58.24700164794922,
+      "tokenize_ms": 39.176998138427734,
+      "vit_ms": 429.635009765625,
+      "prefill_ms": 820.197998046875,
+      "decode_ms": 187.20899963378906,
+      "total_ms": 1534.56103515625,
+      "group_encode_ms": [
+        53.70800018310547,
+        53.54499816894531,
+        53.4900016784668,
+        53.42399978637695,
+        53.459999084472656,
+        54.91400146484375,
+        53.6349983215332,
+        53.45899963378906
+      ],
+      "n_tokens": 12,
+      "text": "C points at the metal disc with his right hand."
+    },
+    {
+      "video": "sleeping_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 58.50299835205078,
+      "tokenize_ms": 38.64500045776367,
+      "vit_ms": 431.1120300292969,
+      "prefill_ms": 819.1060180664063,
+      "decode_ms": 37.21900177001953,
+      "total_ms": 1384.6939697265625,
+      "group_encode_ms": [
+        55.38199996948242,
+        53.356998443603516,
+        53.64400100708008,
+        55.277000427246094,
+        53.39400100708008,
+        53.55400085449219,
+        53.20800018310547,
+        53.29600143432617
+      ],
+      "n_tokens": 3,
+      "text": "重拍"
+    },
+    {
+      "video": "sleeping_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 59.805999755859375,
+      "tokenize_ms": 38.77399826049805,
+      "vit_ms": 431.02197265625,
+      "prefill_ms": 822.2230224609375,
+      "decode_ms": 1922.447021484375,
+      "total_ms": 3274.3798828125,
+      "group_encode_ms": [
+        53.66400146484375,
+        53.40299987792969,
+        53.39699935913086,
+        53.42599868774414,
+        53.388999938964844,
+        55.222999572753906,
+        53.340999603271484,
+        55.17900085449219
+      ],
+      "n_tokens": 114,
+      "text": "A person is lying on a bed in a dimly lit room. The bed is covered with a brown blanket and a pillow. The person is wearing a brown shirt and is barefoot. The room has a stone wall and a wooden floor. There is a wooden post with a rope tied to it in the background. The person is lying still, and there is no visible motion in the scene. The key visual elements are the person, the bed, the blanket, the pillow, the stone wall, the wooden floor, the wooden post, and the rope."
+    },
+    {
+      "video": "temple_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 50.37699890136719,
+      "tokenize_ms": 38.93600082397461,
+      "vit_ms": 432.09002685546875,
+      "prefill_ms": 817.375,
+      "decode_ms": 2176.18994140625,
+      "total_ms": 3515.06298828125,
+      "group_encode_ms": [
+        53.4630012512207,
+        53.17499923706055,
+        55.3650016784668,
+        53.51300048828125,
+        54.507999420166016,
+        53.33700180053711,
+        55.321998596191406,
+        53.40700149536133
+      ],
+      "n_tokens": 128,
+      "text": "A woman with red hair is standing on a rooftop, looking at a dragon. The dragon is flying in the sky, with its wings spread wide. The woman is wearing a brown outfit and is standing on a stone platform. The dragon is a large, brown creature with a long tail and a small head. The sky is a mix of orange and yellow, indicating that it is either sunrise or sunset. The woman is looking up at the dragon, and the dragon is flying towards the woman. The woman is standing on a stone platform, and the dragon is flying in the sky. The woman is looking up at the dragon, and the"
+    },
+    {
+      "video": "temple_3",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 8,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 4736,
+      "n_prompt_tokens": 4777,
+      "load_ms": 48.40399932861328,
+      "tokenize_ms": 38.71699905395508,
+      "vit_ms": 435.83697509765625,
+      "prefill_ms": 815.06201171875,
+      "decode_ms": 2173.89111328125,
+      "total_ms": 3512.009033203125,
+      "group_encode_ms": [
+        54.858001708984375,
+        55.2239990234375,
+        53.26900100708008,
+        56.750999450683594,
+        53.375999450683594,
+        53.46799850463867,
+        55.09600067138672,
+        53.79499816894531
+      ],
+      "n_tokens": 128,
+      "text": "A young woman with red hair is the central focus in this scene. She is wearing a gray tank top and has a surprised or concerned expression on her face. Her eyes are wide and her mouth is slightly open, suggesting she is reacting to something unexpected. She is looking up at a large, dark, and menacing creature that is partially visible in the frame. The creature's head and part of its body are in the upper right corner, while its large, clawed hand is reaching down towards the woman. The background is a cloudy sky, which adds to the overall sense of unease and tension in the scene. The motion pattern suggests"
+    }
+  ]
+}

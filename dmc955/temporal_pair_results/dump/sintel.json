@@ -1,0 +1,609 @@
+{
+  "mode": "video",
+  "align": 28,
+  "base_frames": 8,
+  "frame_step": 0,
+  "video_fps": 2.0,
+  "tokens_per_second": 2,
+  "n_predict": 8,
+  "requests": [
+    {
+      "video": "alley_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 105.68699645996094,
+      "tokenize_ms": 26.358999252319336,
+      "vit_ms": 347.52398681640625,
+      "prefill_ms": 373.46600341796875,
+      "decode_ms": 136.80599975585938,
+      "total_ms": 1018.5269775390625,
+      "group_encode_ms": [
+        170.375,
+        59.09199905395508,
+        58.53099822998047,
+        59.5260009765625
+      ],
+      "n_tokens": 8,
+      "text": "The scene depicts a character with brown,"
+    },
+    {
+      "video": "alley_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 102.06400299072266,
+      "tokenize_ms": 16.649999618530273,
+      "vit_ms": 233.62599182128906,
+      "prefill_ms": 362.33099365234375,
+      "decode_ms": 131.46200561523438,
+      "total_ms": 872.2589721679688,
+      "group_encode_ms": [
+        57.16999816894531,
+        59.62099838256836,
+        57.96500015258789,
+        58.869998931884766
+      ],
+      "n_tokens": 8,
+      "text": "The scene depicts a character in a narrow"
+    },
+    {
+      "video": "ambush_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 94.06300354003906,
+      "tokenize_ms": 17.31800079345703,
+      "vit_ms": 232.16400146484375,
+      "prefill_ms": 362.4989929199219,
+      "decode_ms": 132.71299743652344,
+      "total_ms": 864.2969970703125,
+      "group_encode_ms": [
+        56.46099853515625,
+        57.24700164794922,
+        58.2130012512207,
+        60.24300003051758
+      ],
+      "n_tokens": 8,
+      "text": "The video frames depict a dynamic and intense"
+    },
+    {
+      "video": "ambush_4",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 97.47599792480469,
+      "tokenize_ms": 16.775999069213867,
+      "vit_ms": 230.47299194335938,
+      "prefill_ms": 359.2039794921875,
+      "decode_ms": 133.71400451660156,
+      "total_ms": 864.6859741210938,
+      "group_encode_ms": [
+        56.59199905395508,
+        56.84000015258789,
+        58.05400085449219,
+        58.98699951171875
+      ],
+      "n_tokens": 8,
+      "text": "The scene depicted in the video frames appears"
+    },
+    {
+      "video": "ambush_5",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 98.11299896240234,
+      "tokenize_ms": 16.86400032043457,
+      "vit_ms": 232.71099853515625,
+      "prefill_ms": 359.8180236816406,
+      "decode_ms": 131.8090057373047,
+      "total_ms": 865.2349853515625,
+      "group_encode_ms": [
+        56.2130012512207,
+        58.62099838256836,
+        59.178001403808594,
+        58.69900131225586
+      ],
+      "n_tokens": 8,
+      "text": "The scene in the video frames appears to"
+    },
+    {
+      "video": "ambush_6",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 98.65599822998047,
+      "tokenize_ms": 16.801000595092773,
+      "vit_ms": 230.88800048828125,
+      "prefill_ms": 359.07098388671875,
+      "decode_ms": 133.22300720214844,
+      "total_ms": 864.2080078125,
+      "group_encode_ms": [
+        55.06700134277344,
+        56.94599914550781,
+        59.80699920654297,
+        59.06800079345703
+      ],
+      "n_tokens": 8,
+      "text": "The scene in the video frames appears to"
+    },
+    {
+      "video": "ambush_7",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 92.28600311279297,
+      "tokenize_ms": 17.25,
+      "vit_ms": 229.38400268554688,
+      "prefill_ms": 358.6230163574219,
+      "decode_ms": 133.83399963378906,
+      "total_ms": 857.0640258789063,
+      "group_encode_ms": [
+        55.9010009765625,
+        55.92900085449219,
+        58.23899841308594,
+        59.314998626708984
+      ],
+      "n_tokens": 8,
+      "text": "The image depicts a close-up of a"
+    },
+    {
+      "video": "bamboo_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 107.2750015258789,
+      "tokenize_ms": 16.757999420166016,
+      "vit_ms": 229.27000427246094,
+      "prefill_ms": 360.6739807128906,
+      "decode_ms": 133.29800415039063,
+      "total_ms": 872.7559814453125,
+      "group_encode_ms": [
+        55.499000549316406,
+        56.74599838256836,
+        58.130001068115234,
+        58.89500045776367
+      ],
+      "n_tokens": 8,
+      "text": "The scene depicts a lush, dense forest"
+    },
+    {
+      "video": "bamboo_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 105.12300109863281,
+      "tokenize_ms": 16.791000366210938,
+      "vit_ms": 228.66400146484375,
+      "prefill_ms": 358.7349853515625,
+      "decode_ms": 134.56900024414063,
+      "total_ms": 868.9959716796875,
+      "group_encode_ms": [
+        55.178001403808594,
+        56.87200164794922,
+        57.814998626708984,
+        58.79899978637695
+      ],
+      "n_tokens": 8,
+      "text": "The scene is an animated襄竹林"
+    },
+    {
+      "video": "bandage_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 106.90499877929688,
+      "tokenize_ms": 17.243999481201172,
+      "vit_ms": 229.06399536132813,
+      "prefill_ms": 359.3009948730469,
+      "decode_ms": 133.75799560546875,
+      "total_ms": 871.948974609375,
+      "group_encode_ms": [
+        55.00199890136719,
+        56.720001220703125,
+        58.327999114990234,
+        59.013999938964844
+      ],
+      "n_tokens": 8,
+      "text": "The image depicts a scene from a video"
+    },
+    {
+      "video": "bandage_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 103.46700286865234,
+      "tokenize_ms": 16.85300064086914,
+      "vit_ms": 231.33799743652344,
+      "prefill_ms": 358.45001220703125,
+      "decode_ms": 133.32899475097656,
+      "total_ms": 868.5070190429688,
+      "group_encode_ms": [
+        55.974998474121094,
+        58.54999923706055,
+        57.904998779296875,
+        58.90800094604492
+      ],
+      "n_tokens": 8,
+      "text": "The scene in the video frames appears to"
+    },
+    {
+      "video": "cave_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 98.55799865722656,
+      "tokenize_ms": 16.764999389648438,
+      "vit_ms": 228.96299743652344,
+      "prefill_ms": 359.9840087890625,
+      "decode_ms": 134.10299682617188,
+      "total_ms": 864.2449951171875,
+      "group_encode_ms": [
+        55.21799850463867,
+        56.99599838256836,
+        58.047000885009766,
+        58.70199966430664
+      ],
+      "n_tokens": 8,
+      "text": "The scene depicts a dramatic and intense Moments"
+    },
+    {
+      "video": "cave_4",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 101.23100280761719,
+      "tokenize_ms": 16.631999969482422,
+      "vit_ms": 229.4580078125,
+      "prefill_ms": 359.9209899902344,
+      "decode_ms": 133.28599548339844,
+      "total_ms": 865.6640014648438,
+      "group_encode_ms": [
+        55.41400146484375,
+        56.9119987487793,
+        58.07699966430664,
+        59.05500030517578
+      ],
+      "n_tokens": 8,
+      "text": "The scene depicts a dynamic and intense moment"
+    },
+    {
+      "video": "market_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 101.50599670410156,
+      "tokenize_ms": 16.8700008392334,
+      "vit_ms": 229.885986328125,
+      "prefill_ms": 358.7939758300781,
+      "decode_ms": 133.38099670410156,
+      "total_ms": 865.2139892578125,
+      "group_encode_ms": [
+        55.60499954223633,
+        56.45000076293945,
+        58.305999755859375,
+        59.525001525878906
+      ],
+      "n_tokens": 8,
+      "text": "The scene appears to be set in a"
+    },
+    {
+      "video": "market_5",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 98.84700012207031,
+      "tokenize_ms": 17.006000518798828,
+      "vit_ms": 232.45501708984375,
+      "prefill_ms": 359.5920104980469,
+      "decode_ms": 133.40899658203125,
+      "total_ms": 866.9110107421875,
+      "group_encode_ms": [
+        56.35300064086914,
+        57.196998596191406,
+        58.93000030517578,
+        59.974998474121094
+      ],
+      "n_tokens": 8,
+      "text": "The scene in the video frames appears to"
+    },
+    {
+      "video": "market_6",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 102.0469970703125,
+      "tokenize_ms": 17.0,
+      "vit_ms": 233.62100219726563,
+      "prefill_ms": 361.5670166015625,
+      "decode_ms": 136.69700622558594,
+      "total_ms": 877.0809936523438,
+      "group_encode_ms": [
+        56.01300048828125,
+        57.5099983215332,
+        61.143001556396484,
+        58.95500183105469
+      ],
+      "n_tokens": 8,
+      "text": "The scene in the video frames depicts a"
+    },
+    {
+      "video": "mountain_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 100.84300231933594,
+      "tokenize_ms": 16.87700080871582,
+      "vit_ms": 237.0570068359375,
+      "prefill_ms": 360.0249938964844,
+      "decode_ms": 133.43699645996094,
+      "total_ms": 873.406005859375,
+      "group_encode_ms": [
+        58.130001068115234,
+        59.994998931884766,
+        58.99700164794922,
+        59.935001373291016
+      ],
+      "n_tokens": 8,
+      "text": "The image shows a雄奇壮观的"
+    },
+    {
+      "video": "shaman_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 104.23200225830078,
+      "tokenize_ms": 17.12700080871582,
+      "vit_ms": 230.18899536132813,
+      "prefill_ms": 360.94000244140625,
+      "decode_ms": 133.47500610351563,
+      "total_ms": 871.2869873046875,
+      "group_encode_ms": [
+        55.369998931884766,
+        57.43899917602539,
+        58.2400016784668,
+        59.13999938964844
+      ],
+      "n_tokens": 8,
+      "text": "The image appears to be a still from"
+    },
+    {
+      "video": "shaman_3",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 105.98400115966797,
+      "tokenize_ms": 17.327999114990234,
+      "vit_ms": 234.24600219726563,
+      "prefill_ms": 360.38897705078125,
+      "decode_ms": 133.3820037841797,
+      "total_ms": 876.4619750976563,
+      "group_encode_ms": [
+        55.305999755859375,
+        58.5629997253418,
+        59.47700119018555,
+        60.900001525878906
+      ],
+      "n_tokens": 8,
+      "text": "The image shows a close-up of a"
+    },
+    {
+      "video": "sleeping_1",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 101.44599914550781,
+      "tokenize_ms": 16.920000076293945,
+      "vit_ms": 233.56201171875,
+      "prefill_ms": 364.5589904785156,
+      "decode_ms": 137.1199951171875,
+      "total_ms": 878.8729858398438,
+      "group_encode_ms": [
+        55.676998138427734,
+        57.83599853515625,
+        58.191001892089844,
+        61.858001708984375
+      ],
+      "n_tokens": 8,
+      "text": "The scene in the video frames depicts an"
+    },
+    {
+      "video": "sleeping_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 106.78700256347656,
+      "tokenize_ms": 16.858999252319336,
+      "vit_ms": 231.46701049804688,
+      "prefill_ms": 359.70098876953125,
+      "decode_ms": 133.2830047607422,
+      "total_ms": 873.02197265625,
+      "group_encode_ms": [
+        55.130001068115234,
+        57.06700134277344,
+        58.49800109863281,
+        60.77199935913086
+      ],
+      "n_tokens": 8,
+      "text": "The scene depicted in the video frames appears"
+    },
+    {
+      "video": "temple_2",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 96.41500091552734,
+      "tokenize_ms": 16.750999450683594,
+      "vit_ms": 228.677001953125,
+      "prefill_ms": 360.06500244140625,
+      "decode_ms": 134.0290069580078,
+      "total_ms": 861.4879760742188,
+      "group_encode_ms": [
+        55.15399932861328,
+        56.73699951171875,
+        57.92300033569336,
+        58.862998962402344
+      ],
+      "n_tokens": 8,
+      "text": "The scene captures aessimoite爱美"
+    },
+    {
+      "video": "temple_3",
+      "round": 0,
+      "n_frames": 8,
+      "n_groups": 4,
+      "grid": [
+        37,
+        16
+      ],
+      "n_visual_tokens": 2368,
+      "n_prompt_tokens": 2395,
+      "load_ms": 94.56400299072266,
+      "tokenize_ms": 16.80500030517578,
+      "vit_ms": 233.23501586914063,
+      "prefill_ms": 360.9930114746094,
+      "decode_ms": 133.2899932861328,
+      "total_ms": 864.375,
+      "group_encode_ms": [
+        57.125,
+        57.88600158691406,
+        58.79199981689453,
+        59.43199920654297
+      ],
+      "n_tokens": 8,
+      "text": "The scene appears to be朵充满�"
+    }
+  ]
+}

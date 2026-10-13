@@ -1,0 +1,17 @@
+== ncu per-phase kernel microarchitecture + roofline (SLOW), fa=on ==
+-- ncu [vit_gemm]  pattern: cutlass_80_tensorop_bf16_s16816gemm_bf16  (x3 launches, --set full)
+   report: /data/spring26/CPP/llama.cpp/dmc955/profiling_results/ncu_vit_gemm.ncu-rep
+-- ncu [vit_attn]  pattern: flash_attn_ext_f16<\(int\)80  (x3 launches, --set full)
+   report: /data/spring26/CPP/llama.cpp/dmc955/profiling_results/ncu_vit_attn.ncu-rep
+-- ncu [prefill_gemm]  pattern: mul_mat_f<  (x3 launches, --set full)
+   report: /data/spring26/CPP/llama.cpp/dmc955/profiling_results/ncu_prefill_gemm.ncu-rep
+-- ncu [prefill_attn]  pattern: flash_attn_ext_f16<\(int\)128  (x3 launches, --set full)
+   report: /data/spring26/CPP/llama.cpp/dmc955/profiling_results/ncu_prefill_attn.ncu-rep
+-- ncu [decode_gemv]  pattern: mul_mat_vec_f  (x3 launches, --set full)
+   report: /data/spring26/CPP/llama.cpp/dmc955/profiling_results/ncu_decode_gemv.ncu-rep
+-- ncu [decode_attn]  pattern: flash_attn_ext_vec  (x3 launches, --set full)
+   report: /data/spring26/CPP/llama.cpp/dmc955/profiling_results/ncu_decode_attn.ncu-rep
+
+-- Open any report in the Nsight Compute GUI. Read, in order:
+   Speed-Of-Light (compute vs memory bound) -> Roofline -> Occupancy
+   (what limits it) -> Warp State (which stall reason dominates).

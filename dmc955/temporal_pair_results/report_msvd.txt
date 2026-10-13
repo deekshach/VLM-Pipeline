@@ -1,0 +1,29 @@
+
+== msvd: latency per request, ms (mean over measured requests; fixed 128-token generation)
+mode        n  vis tok     ViT  prefill   decode   stages vs images    ViT prefill decode
+images     70     2332   252.4    493.7   2141.3   2887.4       +0%    +0%     +0%    +0%
+pairs      70     1166   132.5    253.0   2121.8   2507.3      -13%   -47%    -49%    -1%
+video      70     1166   133.5    206.2   2128.6   2468.4      -15%   -47%    -58%    -1%
+
+== msvd: generated text (natural stopping), two runs per mode
+mode     run    n  words  hit 128-token cap  non-ASCII text
+images     1   70   11.2                 1%             17%
+images     2   70   11.2                 6%             29%
+pairs      1   70   14.0                10%             70%
+pairs      2   70    9.9                 1%             56%
+video      1   70   16.5                 1%             13%
+video      2   70   18.1                 1%             16%
+
+== msvd: captions vs human references, 70 videos
+mode     run   CIDEr  BLEU-4  ROUGE-L
+images     1   0.514   0.271    0.587
+images     2   0.549   0.220    0.543
+pairs      1   0.514   0.228    0.570
+pairs      2   0.513   0.306    0.628
+video      1   0.275   0.249    0.548
+video      2   0.333   0.220    0.543
+
+mode      CIDEr (mean of runs)    difference to images [95% interval]
+images                   0.532                                       
+pairs                    0.514                -0.021 [-0.148, +0.102]
+video                    0.304                -0.229 [-0.353, -0.116]

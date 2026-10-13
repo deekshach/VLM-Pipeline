@@ -1,0 +1,6593 @@
+{
+  "policy": "window",
+  "align": 112,
+  "base_frames": 8,
+  "frame_step": 0,
+  "n_predict": 128,
+  "diff_threshold": 24.0,
+  "halo": 0,
+  "cost_model": true,
+  "verify": false,
+  "cuda_graphs_env_disabled": false,
+  "calibration": [
+    {
+      "w": 1,
+      "h": 1,
+      "windows": 1,
+      "tokens": 16,
+      "prep_ms": 0.07633333333333332,
+      "first_ms": 115.089,
+      "steady_ms": 5.155,
+      "encode_ms": [
+        115.089,
+        5.3,
+        5.155
+      ]
+    },
+    {
+      "w": 2,
+      "h": 1,
+      "windows": 2,
+      "tokens": 32,
+      "prep_ms": 0.09733333333333334,
+      "first_ms": 10.291,
+      "steady_ms": 6.118,
+      "encode_ms": [
+        10.291,
+        6.118,
+        6.225
+      ]
+    },
+    {
+      "w": 3,
+      "h": 1,
+      "windows": 3,
+      "tokens": 48,
+      "prep_ms": 0.14400000000000002,
+      "first_ms": 10.269,
+      "steady_ms": 6.944,
+      "encode_ms": [
+        10.269,
+        7.202,
+        6.944
+      ]
+    },
+    {
+      "w": 4,
+      "h": 1,
+      "windows": 4,
+      "tokens": 64,
+      "prep_ms": 0.23433333333333337,
+      "first_ms": 11.556,
+      "steady_ms": 7.857,
+      "encode_ms": [
+        11.556,
+        7.936,
+        7.857
+      ]
+    },
+    {
+      "w": 5,
+      "h": 1,
+      "windows": 5,
+      "tokens": 80,
+      "prep_ms": 0.24066666666666667,
+      "first_ms": 12.336,
+      "steady_ms": 9.745,
+      "encode_ms": [
+        12.336,
+        9.805,
+        9.745
+      ]
+    },
+    {
+      "w": 6,
+      "h": 1,
+      "windows": 6,
+      "tokens": 96,
+      "prep_ms": 0.292,
+      "first_ms": 13.548,
+      "steady_ms": 10.245,
+      "encode_ms": [
+        13.548,
+        10.245,
+        10.339
+      ]
+    },
+    {
+      "w": 7,
+      "h": 1,
+      "windows": 7,
+      "tokens": 112,
+      "prep_ms": 0.34566666666666673,
+      "first_ms": 15.767,
+      "steady_ms": 11.954,
+      "encode_ms": [
+        15.767,
+        12.013,
+        11.954
+      ]
+    },
+    {
+      "w": 8,
+      "h": 1,
+      "windows": 8,
+      "tokens": 128,
+      "prep_ms": 0.39066666666666666,
+      "first_ms": 16.276,
+      "steady_ms": 12.985,
+      "encode_ms": [
+        16.276,
+        13.214,
+        12.985
+      ]
+    },
+    {
+      "w": 9,
+      "h": 1,
+      "windows": 9,
+      "tokens": 144,
+      "prep_ms": 0.4263333333333333,
+      "first_ms": 18.03,
+      "steady_ms": 13.998,
+      "encode_ms": [
+        18.03,
+        14.182,
+        13.998
+      ]
+    },
+    {
+      "w": 1,
+      "h": 2,
+      "windows": 2,
+      "tokens": 32,
+      "prep_ms": 0.09900000000000002,
+      "first_ms": 9.131,
+      "steady_ms": 5.883,
+      "encode_ms": [
+        9.131,
+        6.142,
+        5.883
+      ]
+    },
+    {
+      "w": 2,
+      "h": 2,
+      "windows": 4,
+      "tokens": 64,
+      "prep_ms": 0.18766666666666665,
+      "first_ms": 10.658,
+      "steady_ms": 7.726,
+      "encode_ms": [
+        10.658,
+        7.726,
+        7.839
+      ]
+    },
+    {
+      "w": 3,
+      "h": 2,
+      "windows": 6,
+      "tokens": 96,
+      "prep_ms": 0.28800000000000003,
+      "first_ms": 12.69,
+      "steady_ms": 10.382,
+      "encode_ms": [
+        12.69,
+        10.455,
+        10.382
+      ]
+    },
+    {
+      "w": 4,
+      "h": 2,
+      "windows": 8,
+      "tokens": 128,
+      "prep_ms": 0.4123333333333333,
+      "first_ms": 16.231,
+      "steady_ms": 12.89,
+      "encode_ms": [
+        16.231,
+        13.005,
+        12.89
+      ]
+    },
+    {
+      "w": 5,
+      "h": 2,
+      "windows": 10,
+      "tokens": 160,
+      "prep_ms": 0.5026666666666667,
+      "first_ms": 19.384,
+      "steady_ms": 15.203,
+      "encode_ms": [
+        19.384,
+        15.4,
+        15.203
+      ]
+    },
+    {
+      "w": 6,
+      "h": 2,
+      "windows": 12,
+      "tokens": 192,
+      "prep_ms": 0.5763333333333334,
+      "first_ms": 20.216,
+      "steady_ms": 16.444,
+      "encode_ms": [
+        20.216,
+        16.601,
+        16.444
+      ]
+    },
+    {
+      "w": 7,
+      "h": 2,
+      "windows": 14,
+      "tokens": 224,
+      "prep_ms": 0.6873333333333332,
+      "first_ms": 23.531,
+      "steady_ms": 19.847,
+      "encode_ms": [
+        23.531,
+        19.971,
+        19.847
+      ]
+    },
+    {
+      "w": 8,
+      "h": 2,
+      "windows": 16,
+      "tokens": 256,
+      "prep_ms": 0.7773333333333333,
+      "first_ms": 26.699,
+      "steady_ms": 22.342,
+      "encode_ms": [
+        26.699,
+        22.862,
+        22.342
+      ]
+    },
+    {
+      "w": 9,
+      "h": 2,
+      "windows": 18,
+      "tokens": 288,
+      "prep_ms": 0.9046666666666666,
+      "first_ms": 28.428,
+      "steady_ms": 23.856,
+      "encode_ms": [
+        28.428,
+        24.197,
+        23.856
+      ]
+    },
+    {
+      "w": 1,
+      "h": 3,
+      "windows": 3,
+      "tokens": 48,
+      "prep_ms": 0.14633333333333334,
+      "first_ms": 10.23,
+      "steady_ms": 6.915,
+      "encode_ms": [
+        10.23,
+        7.199,
+        6.915
+      ]
+    },
+    {
+      "w": 2,
+      "h": 3,
+      "windows": 6,
+      "tokens": 96,
+      "prep_ms": 0.271,
+      "first_ms": 12.997,
+      "steady_ms": 10.085,
+      "encode_ms": [
+        12.997,
+        10.379,
+        10.085
+      ]
+    },
+    {
+      "w": 3,
+      "h": 3,
+      "windows": 9,
+      "tokens": 144,
+      "prep_ms": 0.421,
+      "first_ms": 16.932,
+      "steady_ms": 13.947,
+      "encode_ms": [
+        16.932,
+        14.057,
+        13.947
+      ]
+    },
+    {
+      "w": 4,
+      "h": 3,
+      "windows": 12,
+      "tokens": 192,
+      "prep_ms": 0.574,
+      "first_ms": 19.336,
+      "steady_ms": 16.492,
+      "encode_ms": [
+        19.336,
+        16.699,
+        16.492
+      ]
+    },
+    {
+      "w": 5,
+      "h": 3,
+      "windows": 15,
+      "tokens": 240,
+      "prep_ms": 0.7376666666666667,
+      "first_ms": 24.902,
+      "steady_ms": 21.739,
+      "encode_ms": [
+        24.902,
+        21.867,
+        21.739
+      ]
+    },
+    {
+      "w": 6,
+      "h": 3,
+      "windows": 18,
+      "tokens": 288,
+      "prep_ms": 0.9323333333333332,
+      "first_ms": 26.821,
+      "steady_ms": 23.915,
+      "encode_ms": [
+        26.821,
+        24.255,
+        23.915
+      ]
+    },
+    {
+      "w": 7,
+      "h": 3,
+      "windows": 21,
+      "tokens": 336,
+      "prep_ms": 1.16,
+      "first_ms": 35.59,
+      "steady_ms": 29.644,
+      "encode_ms": [
+        35.59,
+        29.997,
+        29.644
+      ]
+    },
+    {
+      "w": 8,
+      "h": 3,
+      "windows": 24,
+      "tokens": 384,
+      "prep_ms": 1.389,
+      "first_ms": 38.351,
+      "steady_ms": 32.268,
+      "encode_ms": [
+        38.351,
+        32.742,
+        32.268
+      ]
+    },
+    {
+      "w": 9,
+      "h": 3,
+      "windows": 27,
+      "tokens": 432,
+      "prep_ms": 1.5153333333333332,
+      "first_ms": 44.193,
+      "steady_ms": 38.861,
+      "encode_ms": [
+        44.193,
+        39.218,
+        38.861
+      ]
+    },
+    {
+      "w": 1,
+      "h": 4,
+      "windows": 4,
+      "tokens": 64,
+      "prep_ms": 0.206,
+      "first_ms": 11.076,
+      "steady_ms": 7.725,
+      "encode_ms": [
+        11.076,
+        7.786,
+        7.725
+      ]
+    },
+    {
+      "w": 2,
+      "h": 4,
+      "windows": 8,
+      "tokens": 128,
+      "prep_ms": 0.39566666666666667,
+      "first_ms": 16.161,
+      "steady_ms": 12.858,
+      "encode_ms": [
+        16.161,
+        13.277,
+        12.858
+      ]
+    },
+    {
+      "w": 3,
+      "h": 4,
+      "windows": 12,
+      "tokens": 192,
+      "prep_ms": 0.626,
+      "first_ms": 19.698,
+      "steady_ms": 16.521,
+      "encode_ms": [
+        19.698,
+        16.864,
+        16.521
+      ]
+    },
+    {
+      "w": 4,
+      "h": 4,
+      "windows": 16,
+      "tokens": 256,
+      "prep_ms": 0.8233333333333333,
+      "first_ms": 26.102,
+      "steady_ms": 22.394,
+      "encode_ms": [
+        26.102,
+        23.016,
+        22.394
+      ]
+    },
+    {
+      "w": 5,
+      "h": 4,
+      "windows": 20,
+      "tokens": 320,
+      "prep_ms": 1.013,
+      "first_ms": 32.542,
+      "steady_ms": 28.398,
+      "encode_ms": [
+        32.542,
+        28.78,
+        28.398
+      ]
+    },
+    {
+      "w": 6,
+      "h": 4,
+      "windows": 24,
+      "tokens": 384,
+      "prep_ms": 1.2366666666666666,
+      "first_ms": 35.406,
+      "steady_ms": 32.013,
+      "encode_ms": [
+        35.406,
+        32.547,
+        32.013
+      ]
+    },
+    {
+      "w": 7,
+      "h": 4,
+      "windows": 28,
+      "tokens": 448,
+      "prep_ms": 1.5066666666666666,
+      "first_ms": 47.197,
+      "steady_ms": 39.549,
+      "encode_ms": [
+        47.197,
+        40.198,
+        39.549
+      ]
+    },
+    {
+      "w": 8,
+      "h": 4,
+      "windows": 32,
+      "tokens": 512,
+      "prep_ms": 1.7573333333333334,
+      "first_ms": 55.559,
+      "steady_ms": 45.874,
+      "encode_ms": [
+        55.559,
+        46.329,
+        45.874
+      ]
+    },
+    {
+      "w": 9,
+      "h": 4,
+      "windows": 36,
+      "tokens": 576,
+      "prep_ms": 2.0413333333333337,
+      "first_ms": 65.223,
+      "steady_ms": 58.979,
+      "encode_ms": [
+        65.223,
+        59.668,
+        58.979
+      ]
+    }
+  ],
+  "calibration_ms": 2367.022,
+  "requests": [
+    {
+      "video": "alley_1",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 87.6760025024414,
+      "tokenize_ms": 16.111000061035156,
+      "analysis_ms": 0.8710000514984131,
+      "vit_ms": 419.406982421875,
+      "prefill_ms": 796.3500366210938,
+      "decode_ms": 2144.51904296875,
+      "total_ms": 3470.779052734375,
+      "n_tokens": 128,
+      "text": "A young woman with red hair is standing in front of a stone building. She is wearing a tank top and has a tattoo on her left arm. She is holding an apple in her right hand and is looking at it. The building behind her has a window and a door. There is a wooden structure to the left of the building. The scene is set in a sunny day. The woman's hair is slightly tousled, and she appears to be in a contemplative mood. The apple she is holding is red and shiny, suggesting it is fresh. The wooden structure to the left of the building is made of rough, weathered",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.9379997253418,
+          "prefill_ms": 76.7040023803711
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11900000274181366,
+          "prep_ms": 0.0,
+          "encode_ms": 52.965999603271484,
+          "prefill_ms": 77.78500366210938
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12800000607967377,
+          "prep_ms": 0.0,
+          "encode_ms": 51.814998626708984,
+          "prefill_ms": 79.11799621582031
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 51.92399978637695,
+          "prefill_ms": 79.98699951171875
+        },
+        {
+          "action": "full",
+          "n_dirty": 34,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 0.0,
+          "encode_ms": 55.27299880981445,
+          "prefill_ms": 81.08699798583984
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11999999731779099,
+          "prep_ms": 0.0,
+          "encode_ms": 52.10900115966797,
+          "prefill_ms": 84.11900329589844
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 51.564998626708984,
+          "prefill_ms": 82.99700164794922
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12800000607967377,
+          "prep_ms": 0.0,
+          "encode_ms": 51.81700134277344,
+          "prefill_ms": 84.45500183105469
+        }
+      ]
+    },
+    {
+      "video": "alley_2",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 91.06700134277344,
+      "tokenize_ms": 16.827999114990234,
+      "analysis_ms": 0.8629999756813049,
+      "vit_ms": 413.8420104980469,
+      "prefill_ms": 793.1788940429688,
+      "decode_ms": 2143.673095703125,
+      "total_ms": 3465.31396484375,
+      "n_tokens": 128,
+      "text": "A woman with red hair is climbing up a building. She is wearing a white tank top and brown pants. The building has a wooden structure and a brick wall. There are windows on the building. The woman is using her hands and feet to climb up the building. She is moving upwards. The scene is in an alleyway. There are other buildings in the background. The woman is the main focus of the scene. The building she is climbing is the second most prominent object. The windows on the building are the third most prominent object. The woman's hair is the fourth most prominent object. The wooden structure of the building is the",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.928001403808594,
+          "prefill_ms": 76.86499786376953
+        },
+        {
+          "action": "full",
+          "n_dirty": 22,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11699999868869781,
+          "prep_ms": 0.0,
+          "encode_ms": 51.87200164794922,
+          "prefill_ms": 77.85399627685547
+        },
+        {
+          "action": "full",
+          "n_dirty": 25,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.13099999725818634,
+          "prep_ms": 0.0,
+          "encode_ms": 51.875999450683594,
+          "prefill_ms": 78.62300109863281
+        },
+        {
+          "action": "full",
+          "n_dirty": 25,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.507999420166016,
+          "prefill_ms": 79.61399841308594
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11599999666213989,
+          "prep_ms": 0.0,
+          "encode_ms": 51.64400100708008,
+          "prefill_ms": 81.22799682617188
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11800000071525574,
+          "prep_ms": 0.0,
+          "encode_ms": 51.60599899291992,
+          "prefill_ms": 82.31900024414063
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12999999523162842,
+          "prep_ms": 0.0,
+          "encode_ms": 51.8120002746582,
+          "prefill_ms": 83.11299896240234
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 0.0,
+          "encode_ms": 51.59600067138672,
+          "prefill_ms": 83.80799865722656
+        }
+      ]
+    },
+    {
+      "video": "ambush_2",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 82.22100067138672,
+      "tokenize_ms": 16.788999557495117,
+      "analysis_ms": 0.8619999885559082,
+      "vit_ms": 416.0220031738281,
+      "prefill_ms": 793.7410278320313,
+      "decode_ms": 2133.39697265625,
+      "total_ms": 3448.94091796875,
+      "n_tokens": 128,
+      "text": "A young man with red hair stands in a snowy landscape, his gaze directed off to the side. The sky above him is a cloudy gray, suggesting an overcast day. The man is wearing a brown tunic and a brown cape, and he has a determined look on his face. His right hand is raised, palm out, as if he is about to perform a gesture or spell. The scene is peaceful, with no other people or objects in the frame. The man's stance and the cloudy sky create a sense of anticipation, as if something important is about to happen. The scene is a still image, so there are no",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 52.095001220703125,
+          "prefill_ms": 76.61399841308594
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11900000274181366,
+          "prep_ms": 0.0,
+          "encode_ms": 51.75299835205078,
+          "prefill_ms": 77.78199768066406
+        },
+        {
+          "action": "full",
+          "n_dirty": 31,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12800000607967377,
+          "prep_ms": 0.0,
+          "encode_ms": 52.000999450683594,
+          "prefill_ms": 79.17900085449219
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12300000339746475,
+          "prep_ms": 0.0,
+          "encode_ms": 51.733001708984375,
+          "prefill_ms": 79.97799682617188
+        },
+        {
+          "action": "full",
+          "n_dirty": 29,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11999999731779099,
+          "prep_ms": 0.0,
+          "encode_ms": 52.0890007019043,
+          "prefill_ms": 80.81099700927734
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11800000071525574,
+          "prep_ms": 0.0,
+          "encode_ms": 51.95100021362305,
+          "prefill_ms": 82.02400207519531
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 51.99800109863281,
+          "prefill_ms": 83.12999725341797
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 52.402000427246094,
+          "prefill_ms": 84.37899780273438
+        }
+      ]
+    },
+    {
+      "video": "ambush_4",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 85.00900268554688,
+      "tokenize_ms": 16.222999572753906,
+      "analysis_ms": 0.8730000257492065,
+      "vit_ms": 415.156982421875,
+      "prefill_ms": 793.4249877929688,
+      "decode_ms": 2131.94189453125,
+      "total_ms": 3448.54296875,
+      "n_tokens": 128,
+      "text": "A young man with red hair is crouching on a snowy ground. He is wearing a brown leather jacket and brown pants. His left hand is on the ground, and he is looking up at a large, dark, and jagged rock formation. The rock formation is covered in snow and ice, and it appears to be part of a larger mountain or cliff. The sky is overcast, and the overall atmosphere is cold and desolate. The man's posture suggests that he is cautiously approaching the rock formation, possibly to investigate or climb it. The scene is tense and suspenseful, with the man's actions and the imposing rock",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 52.25600051879883,
+          "prefill_ms": 76.49199676513672
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12099999934434891,
+          "prep_ms": 0.0,
+          "encode_ms": 51.590999603271484,
+          "prefill_ms": 77.6760025024414
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12999999523162842,
+          "prep_ms": 0.0,
+          "encode_ms": 52.018001556396484,
+          "prefill_ms": 78.71099853515625
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 0.0,
+          "encode_ms": 51.816001892089844,
+          "prefill_ms": 79.92500305175781
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11999999731779099,
+          "prep_ms": 0.0,
+          "encode_ms": 51.803001403808594,
+          "prefill_ms": 81.30500030517578
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11800000071525574,
+          "prep_ms": 0.0,
+          "encode_ms": 51.8390007019043,
+          "prefill_ms": 82.28399658203125
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12999999523162842,
+          "prep_ms": 0.0,
+          "encode_ms": 51.75400161743164,
+          "prefill_ms": 83.20600128173828
+        },
+        {
+          "action": "full",
+          "n_dirty": 34,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12800000607967377,
+          "prep_ms": 0.0,
+          "encode_ms": 52.08000183105469,
+          "prefill_ms": 84.05899810791016
+        }
+      ]
+    },
+    {
+      "video": "ambush_5",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 83.0,
+      "tokenize_ms": 16.25,
+      "analysis_ms": 0.8460000157356262,
+      "vit_ms": 414.2799987792969,
+      "prefill_ms": 793.9240112304688,
+      "decode_ms": 2153.75390625,
+      "total_ms": 3467.782958984375,
+      "n_tokens": 128,
+      "text": "Kratos and Atreus are in a snowy mountain. Kratos is holding a weapon and Atreus is holding a stick. Kratos is looking at Atreus and Atreus is looking at Kratos. Kratos is moving the weapon towards Atreus. Atreus is moving the stick towards Kratos. Kratos is moving the weapon away from Atreus. Atreus is moving the stick away from Kratos. Kratos is looking at Atreus. Atreus is looking at Kratos. Kratos is moving the weapon towards Atreus. Atreus is moving the stick towards",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.94300079345703,
+          "prefill_ms": 76.5780029296875
+        },
+        {
+          "action": "crop",
+          "n_dirty": 25,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.11699999868869781,
+          "prep_ms": 1.694000005722046,
+          "encode_ms": 49.48099899291992,
+          "prefill_ms": 78.08300018310547
+        },
+        {
+          "action": "full",
+          "n_dirty": 28,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12800000607967377,
+          "prep_ms": 0.0,
+          "encode_ms": 54.62799835205078,
+          "prefill_ms": 78.97100067138672
+        },
+        {
+          "action": "full",
+          "n_dirty": 28,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 0.0,
+          "encode_ms": 51.36800003051758,
+          "prefill_ms": 79.9530029296875
+        },
+        {
+          "action": "full",
+          "n_dirty": 28,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 0.0,
+          "encode_ms": 51.37900161743164,
+          "prefill_ms": 81.15899658203125
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 0.0,
+          "encode_ms": 51.27199935913086,
+          "prefill_ms": 82.28900146484375
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12399999797344208,
+          "prep_ms": 0.0,
+          "encode_ms": 51.25299835205078,
+          "prefill_ms": 82.86699676513672
+        },
+        {
+          "action": "crop",
+          "n_dirty": 30,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.125,
+          "prep_ms": 1.63100004196167,
+          "encode_ms": 49.63100051879883,
+          "prefill_ms": 84.1729965209961
+        }
+      ]
+    },
+    {
+      "video": "ambush_6",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 84.91899871826172,
+      "tokenize_ms": 16.16900062561035,
+      "analysis_ms": 0.874000072479248,
+      "vit_ms": 415.1880187988281,
+      "prefill_ms": 793.450927734375,
+      "decode_ms": 2146.72705078125,
+      "total_ms": 3463.23193359375,
+      "n_tokens": 128,
+      "text": "� the man B-21001-11012-1-1001-1-1001-1-1001-1-1001-1-1001-1-1001-1-1001-1-1001-1-1001-1-1001-1-1001-1-1001-1-1001-1-1001-1-1001-1-1001",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 55.43199920654297,
+          "prefill_ms": 76.61900329589844
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12300000339746475,
+          "prep_ms": 0.0,
+          "encode_ms": 51.555999755859375,
+          "prefill_ms": 77.71800231933594
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 0.0,
+          "encode_ms": 51.21099853515625,
+          "prefill_ms": 78.53099822998047
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 0.0,
+          "encode_ms": 51.387001037597656,
+          "prefill_ms": 79.68499755859375
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.15199999511241913,
+          "prep_ms": 0.0,
+          "encode_ms": 51.45500183105469,
+          "prefill_ms": 81.24800109863281
+        },
+        {
+          "action": "full",
+          "n_dirty": 31,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12399999797344208,
+          "prep_ms": 0.0,
+          "encode_ms": 51.448001861572266,
+          "prefill_ms": 82.18699645996094
+        },
+        {
+          "action": "full",
+          "n_dirty": 34,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11999999731779099,
+          "prep_ms": 0.0,
+          "encode_ms": 51.45800018310547,
+          "prefill_ms": 83.19100189208984
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11800000071525574,
+          "prep_ms": 0.0,
+          "encode_ms": 51.24100112915039,
+          "prefill_ms": 84.00599670410156
+        }
+      ]
+    },
+    {
+      "video": "ambush_7",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 81.16500091552734,
+      "tokenize_ms": 16.982999801635742,
+      "analysis_ms": 0.8769999742507935,
+      "vit_ms": 376.6470031738281,
+      "prefill_ms": 794.0020751953125,
+      "decode_ms": 2140.05810546875,
+      "total_ms": 3415.242919921875,
+      "n_tokens": 128,
+      "text": "The scene shows a close-up of a hand holding a staff with a metal grip. The hand is positioned in the upper left corner of the frame, and the staff extends diagonally across the image. The metal grip is ornate and detailed, with a circular design featuring a bird or animal in the center. The background is a textured surface, possibly a wall or a piece of fabric, with a speckled pattern. The hand appears to be in motion, gripping the staff firmly. The motion pattern suggests a steady, controlled movement, as if the person is holding the staff in place or preparing to use it. The key visual elements",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 52.18600082397461,
+          "prefill_ms": 76.80000305175781
+        },
+        {
+          "action": "crop",
+          "n_dirty": 12,
+          "crop": [
+            28,
+            16
+          ],
+          "tokens_encoded": 448,
+          "tokens_updated": 448,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 1.5950000286102295,
+          "encode_ms": 43.183998107910156,
+          "prefill_ms": 78.23999786376953
+        },
+        {
+          "action": "crop",
+          "n_dirty": 19,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 1.63100004196167,
+          "encode_ms": 50.80699920654297,
+          "prefill_ms": 78.69499969482422
+        },
+        {
+          "action": "crop",
+          "n_dirty": 13,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.11800000071525574,
+          "prep_ms": 1.7059999704360962,
+          "encode_ms": 46.20000076293945,
+          "prefill_ms": 79.84600067138672
+        },
+        {
+          "action": "crop",
+          "n_dirty": 11,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.11900000274181366,
+          "prep_ms": 1.687999963760376,
+          "encode_ms": 45.94900131225586,
+          "prefill_ms": 81.38099670410156
+        },
+        {
+          "action": "crop",
+          "n_dirty": 24,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 1.6759999990463257,
+          "encode_ms": 46.6510009765625,
+          "prefill_ms": 82.31700134277344
+        },
+        {
+          "action": "full",
+          "n_dirty": 28,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 0.0,
+          "encode_ms": 54.775001525878906,
+          "prefill_ms": 83.2969970703125
+        },
+        {
+          "action": "crop",
+          "n_dirty": 12,
+          "crop": [
+            24,
+            12
+          ],
+          "tokens_encoded": 288,
+          "tokens_updated": 288,
+          "analysis_ms": 0.1340000033378601,
+          "prep_ms": 0.9860000014305115,
+          "encode_ms": 27.613000869750977,
+          "prefill_ms": 83.5739974975586
+        }
+      ]
+    },
+    {
+      "video": "bamboo_1",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 97.35600280761719,
+      "tokenize_ms": 17.01799964904785,
+      "analysis_ms": 0.8399999737739563,
+      "vit_ms": 416.6280212402344,
+      "prefill_ms": 802.9639892578125,
+      "decode_ms": 2265.25,
+      "total_ms": 3606.0009765625,
+      "n_tokens": 128,
+      "text": "ABLE TUMBLEWEED DENSER SQUEEZE TENSILE-STRONGschemas\ntightly in the grass. The TUMBLEWEED DENSER SQUEEZE TENSILE-STRONG schemas are also tightly in the grass. The TUMBLEWEED DENSER SQUEEZE TENSILE-STRONG schemas are also tightly in the grass. The TUMBLEWEED DENSER SQUEEZE TENSILE-STRONG schemas are also tightly in the grass. The TUMBLEWEED DENSER SQUEEZE TENSILE-STRONG schemas",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 55.50899887084961,
+          "prefill_ms": 76.7509994506836
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11900000274181366,
+          "prep_ms": 0.0,
+          "encode_ms": 51.13999938964844,
+          "prefill_ms": 78.05799865722656
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12099999934434891,
+          "prep_ms": 0.0,
+          "encode_ms": 51.374000549316406,
+          "prefill_ms": 78.98999786376953
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 0.0,
+          "encode_ms": 51.15299987792969,
+          "prefill_ms": 79.93900299072266
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11800000071525574,
+          "prep_ms": 0.0,
+          "encode_ms": 51.415000915527344,
+          "prefill_ms": 81.37200164794922
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11999999731779099,
+          "prep_ms": 0.0,
+          "encode_ms": 51.44300079345703,
+          "prefill_ms": 81.90599822998047
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 0.0,
+          "encode_ms": 51.8380012512207,
+          "prefill_ms": 82.88300323486328
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12099999934434891,
+          "prep_ms": 0.0,
+          "encode_ms": 52.75600051879883,
+          "prefill_ms": 89.23799896240234
+        }
+      ]
+    },
+    {
+      "video": "bamboo_2",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 90.2959976196289,
+      "tokenize_ms": 16.24799919128418,
+      "analysis_ms": 0.8489999771118164,
+      "vit_ms": 410.8760070800781,
+      "prefill_ms": 795.9659423828125,
+      "decode_ms": 2156.577880859375,
+      "total_ms": 3476.780029296875,
+      "n_tokens": 128,
+      "text": "A young woman with red hair is seen in a bamboo forest. She is wearing a white tank top and brown pants. In the first frame, she is standing on a fallen bamboo, holding a stick in her right hand. In the second frame, she is still standing on the fallen bamboo, but her right hand is now holding a different object, possibly a tool or a weapon. In the third frame, she is still standing on the fallen bamboo, but her right hand is now holding a third object, which appears to be a small animal, possibly a bird or a small mammal. The woman's movements are slow and deliberate,",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.4640007019043,
+          "prefill_ms": 78.99700164794922
+        },
+        {
+          "action": "full",
+          "n_dirty": 21,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12399999797344208,
+          "prep_ms": 0.0,
+          "encode_ms": 51.26599884033203,
+          "prefill_ms": 78.23799896240234
+        },
+        {
+          "action": "full",
+          "n_dirty": 21,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12399999797344208,
+          "prep_ms": 0.0,
+          "encode_ms": 51.198001861572266,
+          "prefill_ms": 78.62799835205078
+        },
+        {
+          "action": "full",
+          "n_dirty": 28,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12300000339746475,
+          "prep_ms": 0.0,
+          "encode_ms": 51.362998962402344,
+          "prefill_ms": 79.70099639892578
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12099999934434891,
+          "prep_ms": 0.0,
+          "encode_ms": 51.777000427246094,
+          "prefill_ms": 81.2969970703125
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11599999666213989,
+          "prep_ms": 0.0,
+          "encode_ms": 51.22600173950195,
+          "prefill_ms": 81.97100067138672
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11599999666213989,
+          "prep_ms": 0.0,
+          "encode_ms": 51.28300094604492,
+          "prefill_ms": 82.99600219726563
+        },
+        {
+          "action": "full",
+          "n_dirty": 31,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.29899978637695,
+          "prefill_ms": 84.2249984741211
+        }
+      ]
+    },
+    {
+      "video": "bandage_1",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 93.36699676513672,
+      "tokenize_ms": 16.80500030517578,
+      "analysis_ms": 0.8790000677108765,
+      "vit_ms": 426.29901123046875,
+      "prefill_ms": 834.0240478515625,
+      "decode_ms": 2160.02294921875,
+      "total_ms": 3537.156982421875,
+      "n_tokens": 128,
+      "text": "C strokes the dragon's head with her right hand. The dragon-eyes a little. The dragon's mouth an open. The dragon an open. The dragon's tongue is in the mouth. The dragon's mouth is moving. The dragon's head is moving. The dragon-eyes a little. The dragon-eyes a little. The dragon-eyes a little. The dragon-eyes a little. The dragon-eyes a little. The dragon-eyes a little. The dragon-eyes a little. The dragon-eyes a little. The dragon-eyes a little. The dragon-eyes a little. The dragon-eyes a",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 53.78799819946289,
+          "prefill_ms": 83.71299743652344
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 56.5099983215332,
+          "prefill_ms": 82.52899932861328
+        },
+        {
+          "action": "crop",
+          "n_dirty": 29,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 1.7549999952316284,
+          "encode_ms": 56.632999420166016,
+          "prefill_ms": 85.06400299072266
+        },
+        {
+          "action": "crop",
+          "n_dirty": 26,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.13500000536441803,
+          "prep_ms": 1.8279999494552612,
+          "encode_ms": 48.78799819946289,
+          "prefill_ms": 84.61100006103516
+        },
+        {
+          "action": "full",
+          "n_dirty": 28,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12300000339746475,
+          "prep_ms": 0.0,
+          "encode_ms": 56.766998291015625,
+          "prefill_ms": 83.38600158691406
+        },
+        {
+          "action": "crop",
+          "n_dirty": 21,
+          "crop": [
+            28,
+            16
+          ],
+          "tokens_encoded": 448,
+          "tokens_updated": 448,
+          "analysis_ms": 0.11999999731779099,
+          "prep_ms": 1.524999976158142,
+          "encode_ms": 45.94300079345703,
+          "prefill_ms": 85.34400177001953
+        },
+        {
+          "action": "crop",
+          "n_dirty": 23,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.11900000274181366,
+          "prep_ms": 1.7300000190734863,
+          "encode_ms": 52.430999755859375,
+          "prefill_ms": 87.55899810791016
+        },
+        {
+          "action": "crop",
+          "n_dirty": 21,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.1289999932050705,
+          "prep_ms": 1.7339999675750732,
+          "encode_ms": 46.867000579833984,
+          "prefill_ms": 86.64800262451172
+        }
+      ]
+    },
+    {
+      "video": "bandage_2",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 91.25800323486328,
+      "tokenize_ms": 17.05699920654297,
+      "analysis_ms": 0.8740000128746033,
+      "vit_ms": 437.7149963378906,
+      "prefill_ms": 834.593994140625,
+      "decode_ms": 2137.862060546875,
+      "total_ms": 3525.199951171875,
+      "n_tokens": 128,
+      "text": "The image shows a close-up of a person holding a small, brown, scaly creature with a large head and a small body. The creature has a long, pointed snout and a pair of small, black eyes. The person is wearing a brown leather glove on their left hand and a gray shirt. The background is blurred, but it appears to be a wooden structure, possibly a ship or a house. The person is looking at the creature with a smile on their face. The creature is looking up at the person with its mouth open. The image is in color and the lighting is natural. The style of the image is realistic",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 55.30699920654297,
+          "prefill_ms": 79.4229965209961
+        },
+        {
+          "action": "full",
+          "n_dirty": 21,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12099999934434891,
+          "prep_ms": 0.0,
+          "encode_ms": 54.08700180053711,
+          "prefill_ms": 80.17900085449219
+        },
+        {
+          "action": "crop",
+          "n_dirty": 23,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.11999999731779099,
+          "prep_ms": 1.7369999885559082,
+          "encode_ms": 50.0620002746582,
+          "prefill_ms": 82.98600006103516
+        },
+        {
+          "action": "full",
+          "n_dirty": 25,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 59.441001892089844,
+          "prefill_ms": 84.38300323486328
+        },
+        {
+          "action": "crop",
+          "n_dirty": 25,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.1289999932050705,
+          "prep_ms": 1.8450000286102295,
+          "encode_ms": 54.55099868774414,
+          "prefill_ms": 85.85800170898438
+        },
+        {
+          "action": "full",
+          "n_dirty": 24,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.1289999932050705,
+          "prep_ms": 0.0,
+          "encode_ms": 57.18000030517578,
+          "prefill_ms": 88.91300201416016
+        },
+        {
+          "action": "full",
+          "n_dirty": 19,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.1289999932050705,
+          "prep_ms": 0.0,
+          "encode_ms": 54.96699905395508,
+          "prefill_ms": 91.302001953125
+        },
+        {
+          "action": "crop",
+          "n_dirty": 20,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.11900000274181366,
+          "prep_ms": 1.7130000591278076,
+          "encode_ms": 46.82500076293945,
+          "prefill_ms": 85.07099914550781
+        }
+      ]
+    },
+    {
+      "video": "cave_2",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 83.33599853515625,
+      "tokenize_ms": 16.06999969482422,
+      "analysis_ms": 0.847000002861023,
+      "vit_ms": 416.15399169921875,
+      "prefill_ms": 794.1060791015625,
+      "decode_ms": 2149.0458984375,
+      "total_ms": 3465.31591796875,
+      "n_tokens": 128,
+      "text": "A woman with red hair is engaged in a fierce battle with a dragon in a dark, cave-like setting. She is holding a large, curved sword in her right hand, and her stance suggests she is in the middle of a powerful swing. The dragon, with its wings spread wide, is facing the woman, its mouth open in a fierce growl. The scene is filled with tension and action, as the woman and the dragon are locked in a struggle for survival. The background is dark and foreboding, with the cave's rocky walls and the dragon's shadowy form adding to the overall atmosphere of danger and suspense. The",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 52.34700012207031,
+          "prefill_ms": 76.64900207519531
+        },
+        {
+          "action": "full",
+          "n_dirty": 28,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 0.0,
+          "encode_ms": 51.71099853515625,
+          "prefill_ms": 77.92900085449219
+        },
+        {
+          "action": "full",
+          "n_dirty": 31,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 0.0,
+          "encode_ms": 52.14500045776367,
+          "prefill_ms": 79.04000091552734
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 51.97999954223633,
+          "prefill_ms": 79.91400146484375
+        },
+        {
+          "action": "full",
+          "n_dirty": 28,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 51.84600067138672,
+          "prefill_ms": 81.18599700927734
+        },
+        {
+          "action": "full",
+          "n_dirty": 31,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 0.0,
+          "encode_ms": 51.96900177001953,
+          "prefill_ms": 82.36699676513672
+        },
+        {
+          "action": "full",
+          "n_dirty": 34,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11400000005960464,
+          "prep_ms": 0.0,
+          "encode_ms": 52.268001556396484,
+          "prefill_ms": 82.88800048828125
+        },
+        {
+          "action": "full",
+          "n_dirty": 24,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11599999666213989,
+          "prep_ms": 0.0,
+          "encode_ms": 51.88800048828125,
+          "prefill_ms": 84.19599914550781
+        }
+      ]
+    },
+    {
+      "video": "cave_4",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 86.63099670410156,
+      "tokenize_ms": 16.290000915527344,
+      "analysis_ms": 0.8819999694824219,
+      "vit_ms": 415.2640380859375,
+      "prefill_ms": 796.1380004882813,
+      "decode_ms": 2144.27294921875,
+      "total_ms": 3465.325927734375,
+      "n_tokens": 128,
+      "text": "A woman with red hair is seen in a dimly lit cave, holding a spear. She is facing a large, gray, dragon-like creature with a long tail and sharp teeth. The dragon is lying on the ground, and the woman appears to be in a defensive stance, possibly preparing to attack or defend herself. The scene is tense, and the woman's expression suggests she is focused and determined. The lighting in the cave is low, casting shadows and creating a dramatic atmosphere. The dragon's scales are a mix of gray and brown, and its eyes are a deep, piercing color. The woman's outfit is simple and practical,",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 52.189998626708984,
+          "prefill_ms": 79.21600341796875
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 52.007999420166016,
+          "prefill_ms": 77.60299682617188
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11900000274181366,
+          "prep_ms": 0.0,
+          "encode_ms": 51.74399948120117,
+          "prefill_ms": 78.62300109863281
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.762001037597656,
+          "prefill_ms": 80.08499908447266
+        },
+        {
+          "action": "full",
+          "n_dirty": 29,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 51.891998291015625,
+          "prefill_ms": 81.18699645996094
+        },
+        {
+          "action": "full",
+          "n_dirty": 27,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.14900000393390656,
+          "prep_ms": 0.0,
+          "encode_ms": 51.97999954223633,
+          "prefill_ms": 82.4020004272461
+        },
+        {
+          "action": "full",
+          "n_dirty": 24,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11699999868869781,
+          "prep_ms": 0.0,
+          "encode_ms": 51.82400131225586,
+          "prefill_ms": 82.88099670410156
+        },
+        {
+          "action": "full",
+          "n_dirty": 29,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11800000071525574,
+          "prep_ms": 0.0,
+          "encode_ms": 51.86399841308594,
+          "prefill_ms": 83.88400268554688
+        }
+      ]
+    },
+    {
+      "video": "market_2",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 88.3239974975586,
+      "tokenize_ms": 16.71299934387207,
+      "analysis_ms": 0.8680000305175781,
+      "vit_ms": 402.73199462890625,
+      "prefill_ms": 794.2740478515625,
+      "decode_ms": 2161.3349609375,
+      "total_ms": 3469.927978515625,
+      "n_tokens": 128,
+      "text": "A woman with red hair is standing in an alleyway, her back to the viewer. She is wearing a white tank top, brown shorts, and white boots. Her arms are outstretched to her sides, and she appears to be in motion, possibly walking or running. The alleyway is narrow and has a rustic feel, with wooden barrels and crates scattered around. In the background, there are two men. One man is standing near a stack of pumpkins, and the other is near a wooden crate. The man near the pumpkins is wearing a green jacket and a red tie. The man near the crate is wearing a",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 52.02000045776367,
+          "prefill_ms": 77.09100341796875
+        },
+        {
+          "action": "crop",
+          "n_dirty": 28,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.12800000607967377,
+          "prep_ms": 1.7380000352859497,
+          "encode_ms": 46.71099853515625,
+          "prefill_ms": 77.99800109863281
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12099999934434891,
+          "prep_ms": 0.0,
+          "encode_ms": 51.84299850463867,
+          "prefill_ms": 78.91000366210938
+        },
+        {
+          "action": "full",
+          "n_dirty": 34,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 52.10100173950195,
+          "prefill_ms": 79.71299743652344
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12999999523162842,
+          "prep_ms": 0.0,
+          "encode_ms": 52.26300048828125,
+          "prefill_ms": 81.3759994506836
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12800000607967377,
+          "prep_ms": 0.0,
+          "encode_ms": 52.112998962402344,
+          "prefill_ms": 81.86100006103516
+        },
+        {
+          "action": "full",
+          "n_dirty": 26,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11599999666213989,
+          "prep_ms": 0.0,
+          "encode_ms": 52.02399826049805,
+          "prefill_ms": 82.81999969482422
+        },
+        {
+          "action": "crop",
+          "n_dirty": 24,
+          "crop": [
+            28,
+            16
+          ],
+          "tokens_encoded": 448,
+          "tokens_updated": 448,
+          "analysis_ms": 0.11800000071525574,
+          "prep_ms": 1.3730000257492065,
+          "encode_ms": 40.54600143432617,
+          "prefill_ms": 84.40799713134766
+        }
+      ]
+    },
+    {
+      "video": "market_5",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 83.44200134277344,
+      "tokenize_ms": 16.184999465942383,
+      "analysis_ms": 0.8560000061988831,
+      "vit_ms": 416.5600280761719,
+      "prefill_ms": 793.0939331054688,
+      "decode_ms": 2144.98291015625,
+      "total_ms": 3460.926025390625,
+      "n_tokens": 128,
+      "text": "A woman with red hair is seen in an alleyway, leaping from a wooden crate. She is wearing a white tank top and brown pants, and has a determined expression on her face. Her arms are outstretched as she jumps, and her legs are bent at the knees. The alleyway is narrow and has a worn, industrial look, with a wooden awning above and a building in the background. The scene is lit by natural light, and the woman's shadow is cast on the ground. The motion of the woman's jump is captured in mid-air, creating a sense of movement and action. The key visual elements",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 52.323001861572266,
+          "prefill_ms": 76.89199829101563
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 0.0,
+          "encode_ms": 52.222999572753906,
+          "prefill_ms": 77.6969985961914
+        },
+        {
+          "action": "full",
+          "n_dirty": 34,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11599999666213989,
+          "prep_ms": 0.0,
+          "encode_ms": 51.939998626708984,
+          "prefill_ms": 79.05899810791016
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 0.0,
+          "encode_ms": 51.83000183105469,
+          "prefill_ms": 79.9749984741211
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12999999523162842,
+          "prep_ms": 0.0,
+          "encode_ms": 52.04399871826172,
+          "prefill_ms": 81.24099731445313
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12300000339746475,
+          "prep_ms": 0.0,
+          "encode_ms": 52.10900115966797,
+          "prefill_ms": 82.21600341796875
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11999999731779099,
+          "prep_ms": 0.0,
+          "encode_ms": 52.22800064086914,
+          "prefill_ms": 82.53099822998047
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11900000274181366,
+          "prep_ms": 0.0,
+          "encode_ms": 51.862998962402344,
+          "prefill_ms": 83.55000305175781
+        }
+      ]
+    },
+    {
+      "video": "market_6",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 87.26300048828125,
+      "tokenize_ms": 16.266000747680664,
+      "analysis_ms": 0.8610000610351563,
+      "vit_ms": 416.7770080566406,
+      "prefill_ms": 794.001953125,
+      "decode_ms": 2144.285888671875,
+      "total_ms": 3465.382080078125,
+      "n_tokens": 128,
+      "text": "a medieval or fantasy setting with a stone-paved ground and wooden buildings. A large, brown, four-legged animal with a long tail and a pair of horns is in the foreground, possibly a dragon or a similar creature. The animal is on all fours and appears to be in motion, possibly walking or running. In the background, there are two people and a wooden cart. One of the people is wearing a white top and brown pants, and the other is wearing a brown top and brown pants. The cart has a purple and green cloth on top and a wooden structure with a large wheel. The scene also features a bird, possibly",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 52.43000030517578,
+          "prefill_ms": 77.23600006103516
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.13300000131130219,
+          "prep_ms": 0.0,
+          "encode_ms": 52.382999420166016,
+          "prefill_ms": 77.81500244140625
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12099999934434891,
+          "prep_ms": 0.0,
+          "encode_ms": 52.10100173950195,
+          "prefill_ms": 78.9739990234375
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 51.91299819946289,
+          "prefill_ms": 79.84300231933594
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 0.0,
+          "encode_ms": 51.803001403808594,
+          "prefill_ms": 81.0270004272461
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 0.0,
+          "encode_ms": 52.25400161743164,
+          "prefill_ms": 81.78900146484375
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11400000005960464,
+          "prep_ms": 0.0,
+          "encode_ms": 51.93199920654297,
+          "prefill_ms": 83.09700012207031
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11400000005960464,
+          "prep_ms": 0.0,
+          "encode_ms": 51.96099853515625,
+          "prefill_ms": 84.01000213623047
+        }
+      ]
+    },
+    {
+      "video": "mountain_1",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 83.56800079345703,
+      "tokenize_ms": 16.232999801635742,
+      "analysis_ms": 0.8519999980926514,
+      "vit_ms": 415.78900146484375,
+      "prefill_ms": 793.9869995117188,
+      "decode_ms": 2132.583984375,
+      "total_ms": 3448.823974609375,
+      "n_tokens": 128,
+      "text": "The video clip shows a mountainous landscape with snow-covered peaks and rocky terrain. The camera pans across the scene, revealing the rugged and jagged nature of the mountains. The snow on the peaks appears to be unevenly distributed, with some areas more covered than others. The rocky terrain is visible in the foreground, with some areas appearing to be more eroded than others. The overall scene is one of a harsh and remote environment, with the mountains appearing to be in a state of constant change due to the weather and the elements. The video does not show any motion patterns or key visual elements other than the natural beauty of the mountain landscape",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 52.33399963378906,
+          "prefill_ms": 76.36299896240234
+        },
+        {
+          "action": "full",
+          "n_dirty": 28,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.76599884033203,
+          "prefill_ms": 77.96600341796875
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12099999934434891,
+          "prep_ms": 0.0,
+          "encode_ms": 51.89899826049805,
+          "prefill_ms": 79.13999938964844
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12300000339746475,
+          "prep_ms": 0.0,
+          "encode_ms": 51.9370002746582,
+          "prefill_ms": 79.88300323486328
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12300000339746475,
+          "prep_ms": 0.0,
+          "encode_ms": 51.98699951171875,
+          "prefill_ms": 81.25399780273438
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12399999797344208,
+          "prep_ms": 0.0,
+          "encode_ms": 51.96699905395508,
+          "prefill_ms": 82.19400024414063
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11699999868869781,
+          "prep_ms": 0.0,
+          "encode_ms": 51.94900131225586,
+          "prefill_ms": 83.24600219726563
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11900000274181366,
+          "prep_ms": 0.0,
+          "encode_ms": 51.95000076293945,
+          "prefill_ms": 83.86000061035156
+        }
+      ]
+    },
+    {
+      "video": "shaman_2",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 86.06999969482422,
+      "tokenize_ms": 16.158000946044922,
+      "analysis_ms": 0.8320000171661377,
+      "vit_ms": 295.5159912109375,
+      "prefill_ms": 793.85107421875,
+      "decode_ms": 2176.177978515625,
+      "total_ms": 3372.72705078125,
+      "n_tokens": 128,
+      "text": "A man with a long, gray beard and mustache is the central figure in this scene. He is wearing a brown hat and has two metal darts embedded in his nose. The man is looking down, and his expression is neutral. In the background, a woman with red hair is visible. She is wearing a white tank top and has a tattoo on her left arm. The scene appears to be set in a dimly lit room with a patterned wall. The overall atmosphere is somewhat dark and mysterious. The woman's gaze is directed towards the man, suggesting a possible interaction between them. The darts in the man's nose",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 52.08399963378906,
+          "prefill_ms": 76.69300079345703
+        },
+        {
+          "action": "crop",
+          "n_dirty": 8,
+          "crop": [
+            20,
+            12
+          ],
+          "tokens_encoded": 240,
+          "tokens_updated": 240,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 0.7760000228881836,
+          "encode_ms": 22.58099937438965,
+          "prefill_ms": 77.63600158691406
+        },
+        {
+          "action": "crop",
+          "n_dirty": 8,
+          "crop": [
+            20,
+            12
+          ],
+          "tokens_encoded": 240,
+          "tokens_updated": 240,
+          "analysis_ms": 0.11299999803304672,
+          "prep_ms": 0.7710000276565552,
+          "encode_ms": 22.42099952697754,
+          "prefill_ms": 78.85600280761719
+        },
+        {
+          "action": "crop",
+          "n_dirty": 11,
+          "crop": [
+            24,
+            16
+          ],
+          "tokens_encoded": 384,
+          "tokens_updated": 384,
+          "analysis_ms": 0.11599999666213989,
+          "prep_ms": 1.1690000295639038,
+          "encode_ms": 33.22800064086914,
+          "prefill_ms": 79.97899627685547
+        },
+        {
+          "action": "crop",
+          "n_dirty": 9,
+          "crop": [
+            24,
+            16
+          ],
+          "tokens_encoded": 384,
+          "tokens_updated": 384,
+          "analysis_ms": 0.12300000339746475,
+          "prep_ms": 1.1820000410079956,
+          "encode_ms": 33.10499954223633,
+          "prefill_ms": 81.0780029296875
+        },
+        {
+          "action": "crop",
+          "n_dirty": 9,
+          "crop": [
+            28,
+            16
+          ],
+          "tokens_encoded": 448,
+          "tokens_updated": 448,
+          "analysis_ms": 0.12300000339746475,
+          "prep_ms": 1.3580000400543213,
+          "encode_ms": 40.52799987792969,
+          "prefill_ms": 82.49199676513672
+        },
+        {
+          "action": "crop",
+          "n_dirty": 7,
+          "crop": [
+            32,
+            12
+          ],
+          "tokens_encoded": 384,
+          "tokens_updated": 384,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 1.156999945640564,
+          "encode_ms": 33.15599822998047,
+          "prefill_ms": 82.98300170898438
+        },
+        {
+          "action": "full",
+          "n_dirty": 9,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11599999666213989,
+          "prep_ms": 0.0,
+          "encode_ms": 52.0,
+          "prefill_ms": 84.0719985961914
+        }
+      ]
+    },
+    {
+      "video": "shaman_3",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 90.44599914550781,
+      "tokenize_ms": 16.121999740600586,
+      "analysis_ms": 0.8580000400543213,
+      "vit_ms": 357.64801025390625,
+      "prefill_ms": 818.3048706054688,
+      "decode_ms": 2139.81201171875,
+      "total_ms": 3428.197998046875,
+      "n_tokens": 128,
+      "text": "C looks at the medallion on the table. C points at the medallion with the index and middle finger of the right hand. C removes the right hand from the medallion. C looks at the medallion. C points at the medallion with the index and middle  fingers of the right hand. C removes the right hand from the medallion. C looks at the medallion. C points at the medallion with the index and middle  fingers of the right hand. C removes the right hand from the medallion. C looks at the medallion. C points at the",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 52.02899932861328,
+          "prefill_ms": 76.49700164794922
+        },
+        {
+          "action": "crop",
+          "n_dirty": 12,
+          "crop": [
+            28,
+            16
+          ],
+          "tokens_encoded": 448,
+          "tokens_updated": 448,
+          "analysis_ms": 0.12399999797344208,
+          "prep_ms": 1.36899995803833,
+          "encode_ms": 40.56700134277344,
+          "prefill_ms": 78.30500030517578
+        },
+        {
+          "action": "crop",
+          "n_dirty": 13,
+          "crop": [
+            20,
+            16
+          ],
+          "tokens_encoded": 320,
+          "tokens_updated": 320,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 1.0130000114440918,
+          "encode_ms": 29.309999465942383,
+          "prefill_ms": 79.03399658203125
+        },
+        {
+          "action": "crop",
+          "n_dirty": 17,
+          "crop": [
+            28,
+            16
+          ],
+          "tokens_encoded": 448,
+          "tokens_updated": 448,
+          "analysis_ms": 0.11999999731779099,
+          "prep_ms": 1.3960000276565552,
+          "encode_ms": 40.650001525878906,
+          "prefill_ms": 81.41999816894531
+        },
+        {
+          "action": "crop",
+          "n_dirty": 16,
+          "crop": [
+            28,
+            16
+          ],
+          "tokens_encoded": 448,
+          "tokens_updated": 448,
+          "analysis_ms": 0.125,
+          "prep_ms": 1.4470000267028809,
+          "encode_ms": 40.66299819946289,
+          "prefill_ms": 81.51200103759766
+        },
+        {
+          "action": "crop",
+          "n_dirty": 17,
+          "crop": [
+            28,
+            16
+          ],
+          "tokens_encoded": 448,
+          "tokens_updated": 448,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 1.3669999837875366,
+          "encode_ms": 40.551998138427734,
+          "prefill_ms": 92.16100311279297
+        },
+        {
+          "action": "crop",
+          "n_dirty": 20,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.12300000339746475,
+          "prep_ms": 1.9190000295639038,
+          "encode_ms": 54.00400161743164,
+          "prefill_ms": 90.85800170898438
+        },
+        {
+          "action": "crop",
+          "n_dirty": 21,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.11800000071525574,
+          "prep_ms": 1.8609999418258667,
+          "encode_ms": 49.500999450683594,
+          "prefill_ms": 83.86599731445313
+        }
+      ]
+    },
+    {
+      "video": "sleeping_1",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 86.12699890136719,
+      "tokenize_ms": 16.070999145507813,
+      "analysis_ms": 0.8730000257492065,
+      "vit_ms": 407.2969970703125,
+      "prefill_ms": 782.6439819335938,
+      "decode_ms": 2103.14697265625,
+      "total_ms": 3401.887939453125,
+      "n_tokens": 128,
+      "text": "A young woman with red hair is lying on a bed, her head resting on a large, scaly, horned creature. The creature appears to be a dragon or a similar mythical beast. The woman is wearing a white tank top and brown leather pants. The scene is set in a dimly lit room with a stone wall in the background. The woman's expression is serene, and she seems to be in a state of rest or perhaps deep sleep. The dragon's head is resting on the woman's chest, and its eyes are closed, suggesting a sense of peace and tranquility. The overall scene is one of tranquility and",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.444000244140625,
+          "prefill_ms": 75.74700164794922
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.12099838256836,
+          "prefill_ms": 76.77200317382813
+        },
+        {
+          "action": "crop",
+          "n_dirty": 26,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.11900000274181366,
+          "prep_ms": 1.5980000495910645,
+          "encode_ms": 46.066001892089844,
+          "prefill_ms": 77.96299743652344
+        },
+        {
+          "action": "full",
+          "n_dirty": 26,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12099999934434891,
+          "prep_ms": 0.0,
+          "encode_ms": 51.75699996948242,
+          "prefill_ms": 78.91999816894531
+        },
+        {
+          "action": "full",
+          "n_dirty": 25,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12399999797344208,
+          "prep_ms": 0.0,
+          "encode_ms": 51.29100036621094,
+          "prefill_ms": 79.83599853515625
+        },
+        {
+          "action": "full",
+          "n_dirty": 28,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12399999797344208,
+          "prep_ms": 0.0,
+          "encode_ms": 51.244998931884766,
+          "prefill_ms": 80.50700378417969
+        },
+        {
+          "action": "full",
+          "n_dirty": 27,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.14499999582767487,
+          "prep_ms": 0.0,
+          "encode_ms": 51.441001892089844,
+          "prefill_ms": 82.11699676513672
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 0.0,
+          "encode_ms": 51.33399963378906,
+          "prefill_ms": 83.00599670410156
+        }
+      ]
+    },
+    {
+      "video": "sleeping_2",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 91.76100158691406,
+      "tokenize_ms": 16.1560001373291,
+      "analysis_ms": 0.8480000495910645,
+      "vit_ms": 410.33099365234375,
+      "prefill_ms": 781.93798828125,
+      "decode_ms": 2103.4599609375,
+      "total_ms": 3410.343994140625,
+      "n_tokens": 128,
+      "text": "The image shows a person lying on a bed in a room with a stone wall. The person is wearing a brown  tunic and is covered with a brown blanket. The bed has a brown mattress and a brown pillow. There is a wooden post in the room. The person's head is on the pillow and their feet are on the floor. The person is not moving. The room is dimly lit. The person is not interacting with the objects in the room. The person is not in motion. The person is not performing any action. The person is not speaking. The person is not gesturing. The person is not looking",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.902000427246094,
+          "prefill_ms": 75.53099822998047
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.04999923706055,
+          "prefill_ms": 76.89099884033203
+        },
+        {
+          "action": "full",
+          "n_dirty": 34,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11800000071525574,
+          "prep_ms": 0.0,
+          "encode_ms": 50.99300003051758,
+          "prefill_ms": 77.68399810791016
+        },
+        {
+          "action": "full",
+          "n_dirty": 34,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 0.0,
+          "encode_ms": 51.05799865722656,
+          "prefill_ms": 78.6969985961914
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 0.0,
+          "encode_ms": 51.49399948120117,
+          "prefill_ms": 80.04199981689453
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 0.0,
+          "encode_ms": 51.20399856567383,
+          "prefill_ms": 80.9209976196289
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 0.0,
+          "encode_ms": 51.2400016784668,
+          "prefill_ms": 82.08599853515625
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11999999731779099,
+          "prep_ms": 0.0,
+          "encode_ms": 51.38999938964844,
+          "prefill_ms": 82.53099822998047
+        }
+      ]
+    },
+    {
+      "video": "temple_2",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 81.58699798583984,
+      "tokenize_ms": 16.143999099731445,
+      "analysis_ms": 0.8419999480247498,
+      "vit_ms": 409.5379943847656,
+      "prefill_ms": 780.4719848632813,
+      "decode_ms": 2102.830078125,
+      "total_ms": 3397.15087890625,
+      "n_tokens": 128,
+      "text": "a woman with red hair, wearing a brown dress and black boots, standing on a rooftop of a dilapidated building. The sky is a mix of orange and red hues, suggesting either a sunrise or sunset. The woman is positioned on the left side of the image, while the right side features a large, partially intact building with a tall, dark-colored tower. The rooftop where the woman is standing is scattered with debris, including broken bricks and wooden planks. There are no other people or animals visible in the image. The woman's posture and the setting suggest a moment of solitude or contemplation. The overall atmosphere of the scene",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.35200119018555,
+          "prefill_ms": 75.39700317382813
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 51.07699966430664,
+          "prefill_ms": 76.44000244140625
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11800000071525574,
+          "prep_ms": 0.0,
+          "encode_ms": 51.0989990234375,
+          "prefill_ms": 77.4489974975586
+        },
+        {
+          "action": "full",
+          "n_dirty": 34,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.15299987792969,
+          "prefill_ms": 78.51000213623047
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.57600021362305,
+          "prefill_ms": 79.72799682617188
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 0.0,
+          "encode_ms": 51.11199951171875,
+          "prefill_ms": 80.93399810791016
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.1120000034570694,
+          "prep_ms": 0.0,
+          "encode_ms": 51.145999908447266,
+          "prefill_ms": 81.81999969482422
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11299999803304672,
+          "prep_ms": 0.0,
+          "encode_ms": 51.02299880981445,
+          "prefill_ms": 82.88099670410156
+        }
+      ]
+    },
+    {
+      "video": "temple_3",
+      "round": 0,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 78.79399871826172,
+      "tokenize_ms": 16.384000778198242,
+      "analysis_ms": 0.8849999904632568,
+      "vit_ms": 392.760009765625,
+      "prefill_ms": 782.4169921875,
+      "decode_ms": 2102.030029296875,
+      "total_ms": 3378.784912109375,
+      "n_tokens": 128,
+      "text": "A young woman with red hair is the central figure in this scene. She is wearing a white tank top and has a surprised expression on her face. Her mouth is open, and her eyes are wide, suggesting a moment of shock or surprise. The woman is positioned in the foreground, with her back to the viewer, and she is looking up at a large, dark object that is out of frame. The background is a cloudy sky, which adds to the overall sense of mystery and intrigue. The scene is captured in a still image, so there is no motion to describe. The woman's expression and the large object in the sky suggest",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.374000549316406,
+          "prefill_ms": 75.82599639892578
+        },
+        {
+          "action": "crop",
+          "n_dirty": 17,
+          "crop": [
+            32,
+            12
+          ],
+          "tokens_encoded": 384,
+          "tokens_updated": 384,
+          "analysis_ms": 0.125,
+          "prep_ms": 1.1859999895095825,
+          "encode_ms": 32.68600082397461,
+          "prefill_ms": 77.0199966430664
+        },
+        {
+          "action": "full",
+          "n_dirty": 14,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12099999934434891,
+          "prep_ms": 0.0,
+          "encode_ms": 51.21099853515625,
+          "prefill_ms": 77.64800262451172
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11999999731779099,
+          "prep_ms": 0.0,
+          "encode_ms": 51.0989990234375,
+          "prefill_ms": 78.65599822998047
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.15399999916553497,
+          "prep_ms": 0.0,
+          "encode_ms": 51.15800094604492,
+          "prefill_ms": 80.01599884033203
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.13099999725818634,
+          "prep_ms": 0.0,
+          "encode_ms": 51.56999969482422,
+          "prefill_ms": 80.94400024414063
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11599999666213989,
+          "prep_ms": 0.0,
+          "encode_ms": 51.20800018310547,
+          "prefill_ms": 81.92400360107422
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11800000071525574,
+          "prep_ms": 0.0,
+          "encode_ms": 51.268001556396484,
+          "prefill_ms": 82.81099700927734
+        }
+      ]
+    },
+    {
+      "video": "alley_1",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 86.53800201416016,
+      "tokenize_ms": 16.143999099731445,
+      "analysis_ms": 0.8710000514984131,
+      "vit_ms": 410.2190246582031,
+      "prefill_ms": 780.85595703125,
+      "decode_ms": 2102.033935546875,
+      "total_ms": 3402.382080078125,
+      "n_tokens": 128,
+      "text": "A young woman with short, wavy brown hair is the main focus of the scene. She is wearing a gray tank top and has a tattoo on her left arm. She is holding an apple in her right hand and appears to be looking at it. The background features a stone building with a wooden roof and a window. The woman is standing in front of the building, and the scene is set in a courtyard. The overall atmosphere is calm and serene. The woman's motion is subtle, as she is simply holding the apple and looking at it. The key visual elements in the scene are the woman, the apple, the stone building",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.323001861572266,
+          "prefill_ms": 75.59500122070313
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12300000339746475,
+          "prep_ms": 0.0,
+          "encode_ms": 51.12799835205078,
+          "prefill_ms": 76.51599884033203
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11800000071525574,
+          "prep_ms": 0.0,
+          "encode_ms": 51.284000396728516,
+          "prefill_ms": 77.45700073242188
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 0.0,
+          "encode_ms": 51.09600067138672,
+          "prefill_ms": 78.4260025024414
+        },
+        {
+          "action": "full",
+          "n_dirty": 34,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.42300033569336,
+          "prefill_ms": 79.677001953125
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.15299999713897705,
+          "prep_ms": 0.0,
+          "encode_ms": 51.38600158691406,
+          "prefill_ms": 80.99199676513672
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11599999666213989,
+          "prep_ms": 0.0,
+          "encode_ms": 51.48699951171875,
+          "prefill_ms": 81.92900085449219
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11400000005960464,
+          "prep_ms": 0.0,
+          "encode_ms": 51.09199905395508,
+          "prefill_ms": 82.75700378417969
+        }
+      ]
+    },
+    {
+      "video": "alley_2",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 86.62999725341797,
+      "tokenize_ms": 16.152000427246094,
+      "analysis_ms": 0.8500000238418579,
+      "vit_ms": 410.26300048828125,
+      "prefill_ms": 781.5499877929688,
+      "decode_ms": 2102.552001953125,
+      "total_ms": 3403.81298828125,
+      "n_tokens": 128,
+      "text": "A young woman with red hair is seen in an alleyway, climbing up a wooden structure. She is wearing a white tank top and brown pants, and her hair is styled in a short, spiky cut. The alleyway is lined with buildings on both sides, and there are various objects scattered around, including a wooden ladder and a stack of wooden planks. The woman is using the wooden structure to help her climb, and she appears to be in the process of scaling the building. The scene is set in an urban environment, and the woman's actions suggest that she is either exploring the area or trying to reach a specific",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.43600082397461,
+          "prefill_ms": 75.65399932861328
+        },
+        {
+          "action": "full",
+          "n_dirty": 22,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 51.095001220703125,
+          "prefill_ms": 76.79100036621094
+        },
+        {
+          "action": "full",
+          "n_dirty": 25,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11699999868869781,
+          "prep_ms": 0.0,
+          "encode_ms": 51.58300018310547,
+          "prefill_ms": 77.87899780273438
+        },
+        {
+          "action": "full",
+          "n_dirty": 25,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12300000339746475,
+          "prep_ms": 0.0,
+          "encode_ms": 51.08000183105469,
+          "prefill_ms": 78.95899963378906
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 0.0,
+          "encode_ms": 51.224998474121094,
+          "prefill_ms": 80.08799743652344
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12399999797344208,
+          "prep_ms": 0.0,
+          "encode_ms": 51.277000427246094,
+          "prefill_ms": 80.6780014038086
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11699999868869781,
+          "prep_ms": 0.0,
+          "encode_ms": 51.33000183105469,
+          "prefill_ms": 81.46600341796875
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11599999666213989,
+          "prep_ms": 0.0,
+          "encode_ms": 51.23699951171875,
+          "prefill_ms": 82.53600311279297
+        }
+      ]
+    },
+    {
+      "video": "ambush_2",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 78.1510009765625,
+      "tokenize_ms": 16.2189998626709,
+      "analysis_ms": 0.8449999690055847,
+      "vit_ms": 409.2449951171875,
+      "prefill_ms": 781.8260498046875,
+      "decode_ms": 2101.837890625,
+      "total_ms": 3393.902099609375,
+      "n_tokens": 128,
+      "text": "A young boy with red hair is standing in a snowy landscape. He is wearing a brown leather jacket and has a serious expression on his face. The background features a cloudy sky and a few snow-covered mountains. The boy appears to be looking off to the side, possibly at something or someone not visible in the frame. The overall scene suggests a cold, wintry setting. The boy's serious expression and the snowy environment create a sense of anticipation or tension. The key visual elements in the scene are the boy's red hair, the brown leather jacket, the cloudy sky, and the snow-covered mountains. The motion pattern of the boy is",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.38800048828125,
+          "prefill_ms": 75.41400146484375
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.25600051879883,
+          "prefill_ms": 76.61900329589844
+        },
+        {
+          "action": "full",
+          "n_dirty": 31,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11699999868869781,
+          "prep_ms": 0.0,
+          "encode_ms": 51.08399963378906,
+          "prefill_ms": 77.53900146484375
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12399999797344208,
+          "prep_ms": 0.0,
+          "encode_ms": 51.11199951171875,
+          "prefill_ms": 78.83899688720703
+        },
+        {
+          "action": "full",
+          "n_dirty": 29,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.0629997253418,
+          "prefill_ms": 79.89800262451172
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 0.0,
+          "encode_ms": 51.08100128173828,
+          "prefill_ms": 80.98799896240234
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11699999868869781,
+          "prep_ms": 0.0,
+          "encode_ms": 51.207000732421875,
+          "prefill_ms": 81.9729995727539
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 0.0,
+          "encode_ms": 51.05400085449219,
+          "prefill_ms": 83.0770034790039
+        }
+      ]
+    },
+    {
+      "video": "ambush_4",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 81.6969985961914,
+      "tokenize_ms": 16.22599983215332,
+      "analysis_ms": 0.8489999175071716,
+      "vit_ms": 410.59100341796875,
+      "prefill_ms": 782.1709594726563,
+      "decode_ms": 2102.576904296875,
+      "total_ms": 3399.864990234375,
+      "n_tokens": 128,
+      "text": "a character with red hair, wearing a brown outfit, and holding a staff. The character is in a snowy environment with a rocky, mountainous landscape in the background. The character is in a crouching or kneeling position, with their head slightly tilted downward, and their gaze directed at the ground. The staff is held in their right hand, and the character's left hand is resting on the ground. The overall scene has a cold and desolate atmosphere, with the character appearing to be in a moment of contemplation or rest. The lighting is dim, suggesting either early morning or late evening. The character is the central focus of",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.301998138427734,
+          "prefill_ms": 75.7699966430664
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12399999797344208,
+          "prep_ms": 0.0,
+          "encode_ms": 51.082000732421875,
+          "prefill_ms": 76.78900146484375
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11999999731779099,
+          "prep_ms": 0.0,
+          "encode_ms": 51.290000915527344,
+          "prefill_ms": 77.84400177001953
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.30099868774414,
+          "prefill_ms": 78.94400024414063
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.30400085449219,
+          "prefill_ms": 79.95800018310547
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.30099868774414,
+          "prefill_ms": 80.62100219726563
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11299999803304672,
+          "prep_ms": 0.0,
+          "encode_ms": 51.78099822998047,
+          "prefill_ms": 81.68299865722656
+        },
+        {
+          "action": "full",
+          "n_dirty": 34,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11699999868869781,
+          "prep_ms": 0.0,
+          "encode_ms": 51.22999954223633,
+          "prefill_ms": 83.04499816894531
+        }
+      ]
+    },
+    {
+      "video": "ambush_5",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 82.68800354003906,
+      "tokenize_ms": 16.099000930786133,
+      "analysis_ms": 0.8410000205039978,
+      "vit_ms": 402.8960266113281,
+      "prefill_ms": 781.9529418945313,
+      "decode_ms": 2102.408935546875,
+      "total_ms": 3392.5810546875,
+      "n_tokens": 128,
+      "text": "A bald man with a tattooed face and a mustache is holding a young boy by the hair. The boy is holding a stick in his hand. The scene takes place in a snowy landscape with a rocky cliff in the background. The man's face is turned towards the boy, and he appears to be in the process of pulling the boy's hair. The boy's face is turned away from the man, and he appears to be struggling. The man's hand is wrapped around the boy's hair, and the boy's face is contorted in pain. The stick in the boy's hand is pointing towards the man's face.",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.39899826049805,
+          "prefill_ms": 75.41600036621094
+        },
+        {
+          "action": "crop",
+          "n_dirty": 25,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.125,
+          "prep_ms": 1.6759999990463257,
+          "encode_ms": 45.95500183105469,
+          "prefill_ms": 76.91600036621094
+        },
+        {
+          "action": "full",
+          "n_dirty": 28,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11900000274181366,
+          "prep_ms": 0.0,
+          "encode_ms": 51.25899887084961,
+          "prefill_ms": 77.7490005493164
+        },
+        {
+          "action": "full",
+          "n_dirty": 28,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 0.0,
+          "encode_ms": 51.05699920654297,
+          "prefill_ms": 78.48600006103516
+        },
+        {
+          "action": "full",
+          "n_dirty": 28,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.099998474121094,
+          "prefill_ms": 79.8280029296875
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12399999797344208,
+          "prep_ms": 0.0,
+          "encode_ms": 51.55799865722656,
+          "prefill_ms": 80.95099639892578
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.1120000034570694,
+          "prep_ms": 0.0,
+          "encode_ms": 51.327999114990234,
+          "prefill_ms": 81.9749984741211
+        },
+        {
+          "action": "crop",
+          "n_dirty": 30,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.11400000005960464,
+          "prep_ms": 1.562999963760376,
+          "encode_ms": 46.000999450683594,
+          "prefill_ms": 83.1760025024414
+        }
+      ]
+    },
+    {
+      "video": "ambush_6",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 83.53600311279297,
+      "tokenize_ms": 16.09000015258789,
+      "analysis_ms": 0.8460000157356262,
+      "vit_ms": 410.7560119628906,
+      "prefill_ms": 781.677978515625,
+      "decode_ms": 2102.5869140625,
+      "total_ms": 3401.291015625,
+      "n_tokens": 128,
+      "text": "A man with a shaved head and a tattooed head is standing on a rocky surface. He is holding a spear in his right hand. A woman with red hair is crouching on the ground in front of him. She is holding a knife in her right hand. The woman is looking at the man with a serious expression. The man is looking at the woman with a serious expression. The background is a rocky landscape with a large rock formation. The sky is clear and blue. The woman's hair is red and styled in a long braid. The man's hair is shaved. The woman's knife is sharp and silver.",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.39799880981445,
+          "prefill_ms": 75.33200073242188
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 51.27799987792969,
+          "prefill_ms": 76.76599884033203
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11599999666213989,
+          "prep_ms": 0.0,
+          "encode_ms": 51.1870002746582,
+          "prefill_ms": 77.93299865722656
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 0.0,
+          "encode_ms": 51.16899871826172,
+          "prefill_ms": 78.81500244140625
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 0.0,
+          "encode_ms": 51.7130012512207,
+          "prefill_ms": 79.75199890136719
+        },
+        {
+          "action": "full",
+          "n_dirty": 31,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.36600112915039,
+          "prefill_ms": 80.7020034790039
+        },
+        {
+          "action": "full",
+          "n_dirty": 34,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 0.0,
+          "encode_ms": 51.44499969482422,
+          "prefill_ms": 82.02200317382813
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 0.0,
+          "encode_ms": 51.20000076293945,
+          "prefill_ms": 82.97599792480469
+        }
+      ]
+    },
+    {
+      "video": "ambush_7",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 77.11699676513672,
+      "tokenize_ms": 16.143999099731445,
+      "analysis_ms": 0.8919999599456787,
+      "vit_ms": 360.2220153808594,
+      "prefill_ms": 783.0499877929688,
+      "decode_ms": 2101.782958984375,
+      "total_ms": 3344.37890625,
+      "n_tokens": 128,
+      "text": "The video starts with a close-up of a hand holding a wooden staff. The hand is positioned in the center of the frame, with the staff extending diagonally from the top left to the bottom right. The hand is gripping the staff firmly, and the fingers are visible. The background is a dark, starry sky, which contrasts with the bright, white stars scattered across it. The stars are of various sizes and brightness, creating a sense of depth and vastness. The hand and staff are the main focus of the video, and the stars in the background provide a sense of scale and wonder. The video captures a still moment,",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.54899978637695,
+          "prefill_ms": 76.05999755859375
+        },
+        {
+          "action": "crop",
+          "n_dirty": 12,
+          "crop": [
+            28,
+            16
+          ],
+          "tokens_encoded": 448,
+          "tokens_updated": 448,
+          "analysis_ms": 0.12800000607967377,
+          "prep_ms": 1.534999966621399,
+          "encode_ms": 39.94499969482422,
+          "prefill_ms": 76.98200225830078
+        },
+        {
+          "action": "crop",
+          "n_dirty": 19,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.1459999978542328,
+          "prep_ms": 1.565000057220459,
+          "encode_ms": 45.895999908447266,
+          "prefill_ms": 77.61199951171875
+        },
+        {
+          "action": "crop",
+          "n_dirty": 13,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 1.6319999694824219,
+          "encode_ms": 45.9640007019043,
+          "prefill_ms": 78.89700317382813
+        },
+        {
+          "action": "crop",
+          "n_dirty": 11,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.12999999523162842,
+          "prep_ms": 1.6330000162124634,
+          "encode_ms": 45.834999084472656,
+          "prefill_ms": 80.23300170898438
+        },
+        {
+          "action": "crop",
+          "n_dirty": 24,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 1.74399995803833,
+          "encode_ms": 45.91899871826172,
+          "prefill_ms": 80.96199798583984
+        },
+        {
+          "action": "full",
+          "n_dirty": 28,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12099999934434891,
+          "prep_ms": 0.0,
+          "encode_ms": 51.244998931884766,
+          "prefill_ms": 81.90599822998047
+        },
+        {
+          "action": "crop",
+          "n_dirty": 12,
+          "crop": [
+            24,
+            12
+          ],
+          "tokens_encoded": 288,
+          "tokens_updated": 288,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 0.9259999990463257,
+          "encode_ms": 24.833999633789063,
+          "prefill_ms": 82.87300109863281
+        }
+      ]
+    },
+    {
+      "video": "bamboo_1",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 92.50700378417969,
+      "tokenize_ms": 16.114999771118164,
+      "analysis_ms": 0.843999981880188,
+      "vit_ms": 410.17596435546875,
+      "prefill_ms": 781.7819213867188,
+      "decode_ms": 2101.968017578125,
+      "total_ms": 3409.23388671875,
+      "n_tokens": 128,
+      "text": "a woman in a tropical or jungle-like environment, surrounded by tall bamboo stalks, greenery, and rocks. She is wearing a brown top and black pants, and is in a crouched or low position, possibly in the process of crawling or moving through the environment. The scene is set in a natural, outdoor setting with a mix of green and earthy tones. The woman's position and the surrounding environment suggest she might be exploring or navigating through the area. The presence of a butterfly in the scene adds a sense of life and movement to the otherwise still environment. The lighting in the scene is natural, possibly from the sun",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.63199996948242,
+          "prefill_ms": 75.4469985961914
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 0.0,
+          "encode_ms": 51.222999572753906,
+          "prefill_ms": 76.70899963378906
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11900000274181366,
+          "prep_ms": 0.0,
+          "encode_ms": 51.143001556396484,
+          "prefill_ms": 77.75499725341797
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 0.0,
+          "encode_ms": 51.0620002746582,
+          "prefill_ms": 78.74299621582031
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 0.0,
+          "encode_ms": 51.46799850463867,
+          "prefill_ms": 79.99500274658203
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 0.0,
+          "encode_ms": 51.16600036621094,
+          "prefill_ms": 81.06600189208984
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11299999803304672,
+          "prep_ms": 0.0,
+          "encode_ms": 51.292999267578125,
+          "prefill_ms": 82.14199829101563
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11599999666213989,
+          "prep_ms": 0.0,
+          "encode_ms": 51.18899917602539,
+          "prefill_ms": 82.41300201416016
+        }
+      ]
+    },
+    {
+      "video": "bamboo_2",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 89.55899810791016,
+      "tokenize_ms": 16.07900047302246,
+      "analysis_ms": 0.8480000495910645,
+      "vit_ms": 410.3759765625,
+      "prefill_ms": 781.3460083007813,
+      "decode_ms": 2102.135986328125,
+      "total_ms": 3406.10400390625,
+      "n_tokens": 128,
+      "text": "A woman with red hair is crouching in a bamboo forest. She is wearing a white tank top and brown pants. She is holding a staff in her right hand and a bow in her left hand. The bamboo forest is lush and green, with many tall bamboo stalks. The woman is looking to the right. A butterfly is flying in the air near the woman. The scene is peaceful and serene. The woman appears to be exploring the forest. The butterfly adds a touch of color and life to the scene. The bamboo forest provides a natural and beautiful backdrop for the woman's exploration. The woman's posture and the way she",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.308998107910156,
+          "prefill_ms": 75.35900115966797
+        },
+        {
+          "action": "full",
+          "n_dirty": 21,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12800000607967377,
+          "prep_ms": 0.0,
+          "encode_ms": 51.20899963378906,
+          "prefill_ms": 76.68399810791016
+        },
+        {
+          "action": "full",
+          "n_dirty": 21,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11800000071525574,
+          "prep_ms": 0.0,
+          "encode_ms": 51.22200012207031,
+          "prefill_ms": 77.52899932861328
+        },
+        {
+          "action": "full",
+          "n_dirty": 28,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 0.0,
+          "encode_ms": 51.64799880981445,
+          "prefill_ms": 78.46900177001953
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.15999984741211,
+          "prefill_ms": 79.97899627685547
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 0.0,
+          "encode_ms": 51.39699935913086,
+          "prefill_ms": 81.09500122070313
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11400000005960464,
+          "prep_ms": 0.0,
+          "encode_ms": 51.255001068115234,
+          "prefill_ms": 81.86100006103516
+        },
+        {
+          "action": "full",
+          "n_dirty": 31,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 0.0,
+          "encode_ms": 51.17599868774414,
+          "prefill_ms": 82.8759994506836
+        }
+      ]
+    },
+    {
+      "video": "bandage_1",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 88.4489974975586,
+      "tokenize_ms": 16.155000686645508,
+      "analysis_ms": 0.921999990940094,
+      "vit_ms": 389.0509948730469,
+      "prefill_ms": 782.7359619140625,
+      "decode_ms": 2102.300048828125,
+      "total_ms": 3385.132080078125,
+      "n_tokens": 128,
+      "text": "A woman is holding a dragon's head in her hands. The dragon has a red mark on its neck. The woman is wearing a white tank top and a brown belt. The dragon is brown with a gray underbelly. The dragon's mouth is open and it is looking up at the woman. The woman is looking down at the dragon. The dragon's eyes are open and it is looking up at the woman. The woman's hands are on the dragon's head. The dragon's mouth is open and it is looking up at the woman. The woman is holding the dragon's head with both hands. The dragon's mouth is",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.31100082397461,
+          "prefill_ms": 75.56700134277344
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12800000607967377,
+          "prep_ms": 0.0,
+          "encode_ms": 51.1150016784668,
+          "prefill_ms": 77.16200256347656
+        },
+        {
+          "action": "crop",
+          "n_dirty": 29,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.11699999868869781,
+          "prep_ms": 1.5770000219345093,
+          "encode_ms": 46.04199981689453,
+          "prefill_ms": 78.09100341796875
+        },
+        {
+          "action": "crop",
+          "n_dirty": 26,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.12099999934434891,
+          "prep_ms": 1.5870000123977661,
+          "encode_ms": 45.981998443603516,
+          "prefill_ms": 78.8740005493164
+        },
+        {
+          "action": "full",
+          "n_dirty": 28,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.250999450683594,
+          "prefill_ms": 80.052001953125
+        },
+        {
+          "action": "crop",
+          "n_dirty": 21,
+          "crop": [
+            28,
+            16
+          ],
+          "tokens_encoded": 448,
+          "tokens_updated": 448,
+          "analysis_ms": 0.1860000044107437,
+          "prep_ms": 1.7940000295639038,
+          "encode_ms": 42.28900146484375,
+          "prefill_ms": 80.61799621582031
+        },
+        {
+          "action": "crop",
+          "n_dirty": 23,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.12099999934434891,
+          "prep_ms": 1.805999994277954,
+          "encode_ms": 46.12900161743164,
+          "prefill_ms": 81.56099700927734
+        },
+        {
+          "action": "crop",
+          "n_dirty": 21,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.12399999797344208,
+          "prep_ms": 1.7239999771118164,
+          "encode_ms": 46.444000244140625,
+          "prefill_ms": 82.69999694824219
+        }
+      ]
+    },
+    {
+      "video": "bandage_2",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 87.5770034790039,
+      "tokenize_ms": 16.08300018310547,
+      "analysis_ms": 0.8540000319480896,
+      "vit_ms": 399.4100036621094,
+      "prefill_ms": 781.8659057617188,
+      "decode_ms": 2102.156005859375,
+      "total_ms": 3393.64404296875,
+      "n_tokens": 128,
+      "text": "A young woman with red hair is holding a small, brown, dragon-like creature. The woman is wearing a gray tank top and has a tattoo on her left shoulder. She is looking at the dragon with a smile on her face. The dragon is also smiling and its mouth is open. The woman's hands are gently holding the dragon's head. The background is a wooden structure with a blue and white patterned fabric. The woman's hair is styled in a messy, shaggy manner. The dragon has a small, pointed tail. The woman's eyes are looking at the dragon. The dragon's eyes are looking at the woman",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.452999114990234,
+          "prefill_ms": 75.3740005493164
+        },
+        {
+          "action": "full",
+          "n_dirty": 21,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 51.4630012512207,
+          "prefill_ms": 76.72799682617188
+        },
+        {
+          "action": "crop",
+          "n_dirty": 23,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.11800000071525574,
+          "prep_ms": 1.590999960899353,
+          "encode_ms": 45.99800109863281,
+          "prefill_ms": 77.80799865722656
+        },
+        {
+          "action": "full",
+          "n_dirty": 25,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.20899963378906,
+          "prefill_ms": 78.4469985961914
+        },
+        {
+          "action": "crop",
+          "n_dirty": 25,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 1.7239999771118164,
+          "encode_ms": 46.02399826049805,
+          "prefill_ms": 80.28199768066406
+        },
+        {
+          "action": "full",
+          "n_dirty": 24,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 0.0,
+          "encode_ms": 51.35200119018555,
+          "prefill_ms": 80.85199737548828
+        },
+        {
+          "action": "full",
+          "n_dirty": 19,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11599999666213989,
+          "prep_ms": 0.0,
+          "encode_ms": 51.104000091552734,
+          "prefill_ms": 81.84700012207031
+        },
+        {
+          "action": "crop",
+          "n_dirty": 20,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 1.5880000591278076,
+          "encode_ms": 45.90399932861328,
+          "prefill_ms": 83.03399658203125
+        }
+      ]
+    },
+    {
+      "video": "cave_2",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 83.572998046875,
+      "tokenize_ms": 16.20599937438965,
+      "analysis_ms": 0.8460000157356262,
+      "vit_ms": 410.58203125,
+      "prefill_ms": 782.0499877929688,
+      "decode_ms": 2101.822021484375,
+      "total_ms": 3400.906982421875,
+      "n_tokens": 128,
+      "text": "A woman with red hair is engaged in a battle with a large dragon in a cave. She is holding a staff and is in the process of striking the dragon with it. The dragon is in the air, with its wings spread wide, and its mouth is open, showing sharp teeth. The woman is standing on a rocky surface, and the cave walls are made of dark  rock. The scene is dynamic, with the woman's staff and the dragon's wings creating a sense of motion. The overall color palette is dark, with shades of blue and gray dominating the scene. The woman's red hair and the dragon's white scales provide",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.36000061035156,
+          "prefill_ms": 75.71099853515625
+        },
+        {
+          "action": "full",
+          "n_dirty": 28,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 0.0,
+          "encode_ms": 51.055999755859375,
+          "prefill_ms": 77.00299835205078
+        },
+        {
+          "action": "full",
+          "n_dirty": 31,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12099999934434891,
+          "prep_ms": 0.0,
+          "encode_ms": 51.37799835205078,
+          "prefill_ms": 77.66400146484375
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 51.16600036621094,
+          "prefill_ms": 78.78700256347656
+        },
+        {
+          "action": "full",
+          "n_dirty": 28,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12399999797344208,
+          "prep_ms": 0.0,
+          "encode_ms": 51.16999816894531,
+          "prefill_ms": 80.19100189208984
+        },
+        {
+          "action": "full",
+          "n_dirty": 31,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.36800003051758,
+          "prefill_ms": 80.74500274658203
+        },
+        {
+          "action": "full",
+          "n_dirty": 34,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11400000005960464,
+          "prep_ms": 0.0,
+          "encode_ms": 51.2239990234375,
+          "prefill_ms": 81.62200164794922
+        },
+        {
+          "action": "full",
+          "n_dirty": 24,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11299999803304672,
+          "prep_ms": 0.0,
+          "encode_ms": 51.86000061035156,
+          "prefill_ms": 82.79399871826172
+        }
+      ]
+    },
+    {
+      "video": "cave_4",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 86.18099975585938,
+      "tokenize_ms": 16.174999237060547,
+      "analysis_ms": 0.8549999594688416,
+      "vit_ms": 410.1920166015625,
+      "prefill_ms": 781.8309936523438,
+      "decode_ms": 2102.3759765625,
+      "total_ms": 3403.47509765625,
+      "n_tokens": 128,
+      "text": "A young woman with red hair is depicted in a dynamic scene, engaged in a battle with a large, menacing dragon. The dragon, with its wings spread wide, is in the process of striking the woman with its tail. The woman is holding a sword in her right hand, which she is using to defend herself against the dragon's attack. Her left hand is raised, possibly to block or counter the dragon's strike. The dragon's wings are spread wide, and its mouth is open, revealing sharp teeth. The scene is set in a dark, rocky environment, adding to the intensity of the battle. The woman's stance and the",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.486000061035156,
+          "prefill_ms": 75.41799926757813
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 0.0,
+          "encode_ms": 51.119998931884766,
+          "prefill_ms": 76.70899963378906
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11999999731779099,
+          "prep_ms": 0.0,
+          "encode_ms": 51.25,
+          "prefill_ms": 77.75599670410156
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12099999934434891,
+          "prep_ms": 0.0,
+          "encode_ms": 50.972999572753906,
+          "prefill_ms": 78.78600311279297
+        },
+        {
+          "action": "full",
+          "n_dirty": 29,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 0.0,
+          "encode_ms": 51.37099838256836,
+          "prefill_ms": 79.9749984741211
+        },
+        {
+          "action": "full",
+          "n_dirty": 27,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.457000732421875,
+          "prefill_ms": 81.01799774169922
+        },
+        {
+          "action": "full",
+          "n_dirty": 24,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11800000071525574,
+          "prep_ms": 0.0,
+          "encode_ms": 51.402000427246094,
+          "prefill_ms": 81.93499755859375
+        },
+        {
+          "action": "full",
+          "n_dirty": 29,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11900000274181366,
+          "prep_ms": 0.0,
+          "encode_ms": 51.132999420166016,
+          "prefill_ms": 82.72899627685547
+        }
+      ]
+    },
+    {
+      "video": "market_2",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 85.34400177001953,
+      "tokenize_ms": 16.11199951171875,
+      "analysis_ms": 0.8370000123977661,
+      "vit_ms": 396.3500061035156,
+      "prefill_ms": 782.051025390625,
+      "decode_ms": 2101.971923828125,
+      "total_ms": 3388.412109375,
+      "n_tokens": 128,
+      "text": "A woman with red hair is standing in a market scene. She is wearing a white and brown top, brown pants, and white boots. She is facing away from the camera and appears to be looking at something in the distance. The market is filled with various items, including a barrel, a crate, and a pile of fruit. There are also other people in the scene, but they are not the focus of the image. The overall atmosphere of the scene is calm and peaceful. The woman's posture and the way she is looking at something in the distance suggest that she may be deep in thought or observing something of interest. The market",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.39099884033203,
+          "prefill_ms": 75.36199951171875
+        },
+        {
+          "action": "crop",
+          "n_dirty": 28,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 1.5809999704360962,
+          "encode_ms": 45.97200012207031,
+          "prefill_ms": 77.0780029296875
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11800000071525574,
+          "prep_ms": 0.0,
+          "encode_ms": 51.27399826049805,
+          "prefill_ms": 77.84100341796875
+        },
+        {
+          "action": "full",
+          "n_dirty": 34,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.23699951171875,
+          "prefill_ms": 78.93599700927734
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 51.242000579833984,
+          "prefill_ms": 79.63899993896484
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 0.0,
+          "encode_ms": 51.130001068115234,
+          "prefill_ms": 80.64700317382813
+        },
+        {
+          "action": "full",
+          "n_dirty": 26,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 0.0,
+          "encode_ms": 51.22800064086914,
+          "prefill_ms": 81.9540023803711
+        },
+        {
+          "action": "crop",
+          "n_dirty": 24,
+          "crop": [
+            28,
+            16
+          ],
+          "tokens_encoded": 448,
+          "tokens_updated": 448,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 1.3730000257492065,
+          "encode_ms": 39.922000885009766,
+          "prefill_ms": 83.11399841308594
+        }
+      ]
+    },
+    {
+      "video": "market_5",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 83.22000122070313,
+      "tokenize_ms": 16.156999588012695,
+      "analysis_ms": 0.8520000576972961,
+      "vit_ms": 409.3169860839844,
+      "prefill_ms": 781.7420654296875,
+      "decode_ms": 2102.406982421875,
+      "total_ms": 3399.48095703125,
+      "n_tokens": 128,
+      "text": "A woman with red hair is seen in the scene, wearing a white tank top and brown pants. She is in motion, with one leg extended and the other bent at the knee. Her arms are outstretched, and she appears to be in the middle of a jump or a dynamic pose. The background features a building with a brown roof and a window. The overall scene suggests a sense of movement and action. The woman's position and the dynamic pose suggest that she is the main subject of the scene. The building in the background provides a sense of location and context. The woman's clothing and the overall setting suggest a casual,",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.49599838256836,
+          "prefill_ms": 75.56800079345703
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 51.31999969482422,
+          "prefill_ms": 76.9990005493164
+        },
+        {
+          "action": "full",
+          "n_dirty": 34,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11999999731779099,
+          "prep_ms": 0.0,
+          "encode_ms": 51.073001861572266,
+          "prefill_ms": 77.57499694824219
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 0.0,
+          "encode_ms": 51.12200164794922,
+          "prefill_ms": 78.59600067138672
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12399999797344208,
+          "prep_ms": 0.0,
+          "encode_ms": 50.99599838256836,
+          "prefill_ms": 80.04900360107422
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.11800003051758,
+          "prefill_ms": 80.79299926757813
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 0.0,
+          "encode_ms": 51.097999572753906,
+          "prefill_ms": 81.78500366210938
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11900000274181366,
+          "prep_ms": 0.0,
+          "encode_ms": 51.09400177001953,
+          "prefill_ms": 82.822998046875
+        }
+      ]
+    },
+    {
+      "video": "market_6",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 86.58000183105469,
+      "tokenize_ms": 16.170000076293945,
+      "analysis_ms": 0.8429999947547913,
+      "vit_ms": 410.718017578125,
+      "prefill_ms": 780.9400634765625,
+      "decode_ms": 2101.845947265625,
+      "total_ms": 3402.902099609375,
+      "n_tokens": 128,
+      "text": "A woman with red hair is seen in the scene, climbing over a wooden cart. She is wearing a white tank top and brown pants. The cart is brown and has a large wheel. The scene takes place in an outdoor area with a stone ground. There are buildings in the background and a blue sky with clouds. The woman is moving from the left side of the scene to the right, climbing over the cart. The cart is stationary and there are no other people or animals in the scene. The woman appears to be in motion, with her body leaning forward as she climbs over the cart. The scene is well-lit, suggesting",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.39400100708008,
+          "prefill_ms": 75.79100036621094
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 0.0,
+          "encode_ms": 51.185001373291016,
+          "prefill_ms": 76.53399658203125
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11699999868869781,
+          "prep_ms": 0.0,
+          "encode_ms": 51.233001708984375,
+          "prefill_ms": 77.66899871826172
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.32600021362305,
+          "prefill_ms": 78.375
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.30699920654297,
+          "prefill_ms": 79.81500244140625
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 0.0,
+          "encode_ms": 51.96699905395508,
+          "prefill_ms": 80.88099670410156
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 0.0,
+          "encode_ms": 51.196998596191406,
+          "prefill_ms": 81.6500015258789
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11299999803304672,
+          "prep_ms": 0.0,
+          "encode_ms": 51.10900115966797,
+          "prefill_ms": 82.79000091552734
+        }
+      ]
+    },
+    {
+      "video": "mountain_1",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 83.93199920654297,
+      "tokenize_ms": 16.135000228881836,
+      "analysis_ms": 0.847000002861023,
+      "vit_ms": 409.8789978027344,
+      "prefill_ms": 780.7039794921875,
+      "decode_ms": 2102.79296875,
+      "total_ms": 3400.035888671875,
+      "n_tokens": 128,
+      "text": "The video begins with a wide shot of a snow-covered mountain range, showcasing the majestic peaks and valleys. The camera then pans to the right, revealing a valley with a river flowing through it. The river is partially frozen, with ice covering a portion of its surface. The camera continues to pan to the right, showing a person standing on a rocky outcrop overlooking the valley. The person appears to be gazing at the river and the surrounding landscape. The camera then zooms in on the person, providing a closer view of their face and attire. The person is wearing a winter coat and hat, and appears to be bundled up against",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.347999572753906,
+          "prefill_ms": 75.58899688720703
+        },
+        {
+          "action": "full",
+          "n_dirty": 28,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12300000339746475,
+          "prep_ms": 0.0,
+          "encode_ms": 51.069000244140625,
+          "prefill_ms": 76.69200134277344
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 0.0,
+          "encode_ms": 51.60300064086914,
+          "prefill_ms": 77.7969970703125
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 0.0,
+          "encode_ms": 51.097999572753906,
+          "prefill_ms": 78.80899810791016
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 51.097999572753906,
+          "prefill_ms": 79.58899688720703
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.1289999932050705,
+          "prep_ms": 0.0,
+          "encode_ms": 51.189998626708984,
+          "prefill_ms": 81.01100158691406
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11400000005960464,
+          "prep_ms": 0.0,
+          "encode_ms": 51.189998626708984,
+          "prefill_ms": 81.39399719238281
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11699999868869781,
+          "prep_ms": 0.0,
+          "encode_ms": 51.28300094604492,
+          "prefill_ms": 82.46099853515625
+        }
+      ]
+    },
+    {
+      "video": "shaman_2",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 86.56800079345703,
+      "tokenize_ms": 16.277000427246094,
+      "analysis_ms": 0.8319999575614929,
+      "vit_ms": 292.6319885253906,
+      "prefill_ms": 779.9690551757813,
+      "decode_ms": 2102.18994140625,
+      "total_ms": 3282.531005859375,
+      "n_tokens": 128,
+      "text": "The image shows a close-up of a man with a long, bushy beard and mustache, wearing a brown hat with a red headband. The man is looking down and to the left, with a serious expression on his face. He has two small, silver objects, possibly darts or arrows, stuck in his nose. The man is shirtless, and his skin is a light brown color. The background is dark, and there is a patterned wall behind him. The style of the image is realistic, with attention to detail in the man's facial features and the texture of his beard and mustache. The lighting is",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.308998107910156,
+          "prefill_ms": 75.375
+        },
+        {
+          "action": "crop",
+          "n_dirty": 8,
+          "crop": [
+            20,
+            12
+          ],
+          "tokens_encoded": 240,
+          "tokens_updated": 240,
+          "analysis_ms": 0.12800000607967377,
+          "prep_ms": 0.8119999766349792,
+          "encode_ms": 22.24799919128418,
+          "prefill_ms": 76.14700317382813
+        },
+        {
+          "action": "crop",
+          "n_dirty": 8,
+          "crop": [
+            20,
+            12
+          ],
+          "tokens_encoded": 240,
+          "tokens_updated": 240,
+          "analysis_ms": 0.11299999803304672,
+          "prep_ms": 0.7580000162124634,
+          "encode_ms": 22.07900047302246,
+          "prefill_ms": 77.63700103759766
+        },
+        {
+          "action": "crop",
+          "n_dirty": 11,
+          "crop": [
+            24,
+            16
+          ],
+          "tokens_encoded": 384,
+          "tokens_updated": 384,
+          "analysis_ms": 0.11400000005960464,
+          "prep_ms": 1.1549999713897705,
+          "encode_ms": 32.78499984741211,
+          "prefill_ms": 78.75900268554688
+        },
+        {
+          "action": "crop",
+          "n_dirty": 9,
+          "crop": [
+            24,
+            16
+          ],
+          "tokens_encoded": 384,
+          "tokens_updated": 384,
+          "analysis_ms": 0.12399999797344208,
+          "prep_ms": 1.1579999923706055,
+          "encode_ms": 33.5890007019043,
+          "prefill_ms": 80.09700012207031
+        },
+        {
+          "action": "crop",
+          "n_dirty": 9,
+          "crop": [
+            28,
+            16
+          ],
+          "tokens_encoded": 448,
+          "tokens_updated": 448,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 1.3700000047683716,
+          "encode_ms": 39.935001373291016,
+          "prefill_ms": 80.7020034790039
+        },
+        {
+          "action": "crop",
+          "n_dirty": 7,
+          "crop": [
+            32,
+            12
+          ],
+          "tokens_encoded": 384,
+          "tokens_updated": 384,
+          "analysis_ms": 0.11400000005960464,
+          "prep_ms": 1.156999945640564,
+          "encode_ms": 33.051998138427734,
+          "prefill_ms": 81.45500183105469
+        },
+        {
+          "action": "full",
+          "n_dirty": 9,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11699999868869781,
+          "prep_ms": 0.0,
+          "encode_ms": 51.224998474121094,
+          "prefill_ms": 82.39299774169922
+        }
+      ]
+    },
+    {
+      "video": "shaman_3",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 87.27100372314453,
+      "tokenize_ms": 16.084999084472656,
+      "analysis_ms": 0.8489999771118164,
+      "vit_ms": 342.37799072265625,
+      "prefill_ms": 782.7009887695313,
+      "decode_ms": 2102.26904296875,
+      "total_ms": 3336.445068359375,
+      "n_tokens": 128,
+      "text": "C presses the button on the object with his right index finger. The object is a round, metallic, and ornate object with a tree design in the center. C's right hand is wearing a brown leather glove. The object is placed on a brown surface. C's left hand is not visible in the frame. The background is out of focus. The scene is well-lit. C's right index finger is pressing the button on the object. The button is located in the center of the object. The object is stationary. C's right index finger is in contact with the button. The button is not moving. The object is",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.47999954223633,
+          "prefill_ms": 75.38600158691406
+        },
+        {
+          "action": "crop",
+          "n_dirty": 12,
+          "crop": [
+            28,
+            16
+          ],
+          "tokens_encoded": 448,
+          "tokens_updated": 448,
+          "analysis_ms": 0.12300000339746475,
+          "prep_ms": 1.4019999504089355,
+          "encode_ms": 39.94499969482422,
+          "prefill_ms": 76.59300231933594
+        },
+        {
+          "action": "crop",
+          "n_dirty": 13,
+          "crop": [
+            20,
+            16
+          ],
+          "tokens_encoded": 320,
+          "tokens_updated": 320,
+          "analysis_ms": 0.11999999731779099,
+          "prep_ms": 1.0509999990463257,
+          "encode_ms": 29.035999298095703,
+          "prefill_ms": 77.90499877929688
+        },
+        {
+          "action": "crop",
+          "n_dirty": 17,
+          "crop": [
+            28,
+            16
+          ],
+          "tokens_encoded": 448,
+          "tokens_updated": 448,
+          "analysis_ms": 0.12300000339746475,
+          "prep_ms": 1.402999997138977,
+          "encode_ms": 40.095001220703125,
+          "prefill_ms": 78.80500030517578
+        },
+        {
+          "action": "crop",
+          "n_dirty": 16,
+          "crop": [
+            28,
+            16
+          ],
+          "tokens_encoded": 448,
+          "tokens_updated": 448,
+          "analysis_ms": 0.12399999797344208,
+          "prep_ms": 1.3650000095367432,
+          "encode_ms": 40.111000061035156,
+          "prefill_ms": 80.21900177001953
+        },
+        {
+          "action": "crop",
+          "n_dirty": 17,
+          "crop": [
+            28,
+            16
+          ],
+          "tokens_encoded": 448,
+          "tokens_updated": 448,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 1.3760000467300415,
+          "encode_ms": 39.96699905395508,
+          "prefill_ms": 81.13800048828125
+        },
+        {
+          "action": "crop",
+          "n_dirty": 20,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.11599999666213989,
+          "prep_ms": 1.559000015258789,
+          "encode_ms": 45.98099899291992,
+          "prefill_ms": 82.05000305175781
+        },
+        {
+          "action": "crop",
+          "n_dirty": 21,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.11699999868869781,
+          "prep_ms": 1.5809999704360962,
+          "encode_ms": 46.0260009765625,
+          "prefill_ms": 83.00199890136719
+        }
+      ]
+    },
+    {
+      "video": "sleeping_1",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 86.38800048828125,
+      "tokenize_ms": 16.13800048828125,
+      "analysis_ms": 0.8480000495910645,
+      "vit_ms": 406.3429870605469,
+      "prefill_ms": 781.7069702148438,
+      "decode_ms": 2102.1259765625,
+      "total_ms": 3399.242919921875,
+      "n_tokens": 128,
+      "text": "A woman and a dragon are lying on a bed. The woman is wearing a white tank top and brown pants. The dragon is a light brown color with a darker brown head and a large, pointed horn on its forehead. The dragon's eyes are closed, and it appears to be resting. The woman is looking at the dragon with a gentle expression. The bed has a brown blanket and a red pillow. The scene is calm and peaceful. The dragon's horn is the most prominent feature in the image. The woman's hand is resting on the dragon's back. The dragon's head is slightly tilted towards the woman. The woman's",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.393001556396484,
+          "prefill_ms": 75.63600158691406
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 0.0,
+          "encode_ms": 51.17900085449219,
+          "prefill_ms": 77.01399993896484
+        },
+        {
+          "action": "crop",
+          "n_dirty": 26,
+          "crop": [
+            32,
+            16
+          ],
+          "tokens_encoded": 512,
+          "tokens_updated": 512,
+          "analysis_ms": 0.12099999934434891,
+          "prep_ms": 1.6009999513626099,
+          "encode_ms": 45.87900161743164,
+          "prefill_ms": 78.0780029296875
+        },
+        {
+          "action": "full",
+          "n_dirty": 26,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12200000137090683,
+          "prep_ms": 0.0,
+          "encode_ms": 51.18600082397461,
+          "prefill_ms": 78.86699676513672
+        },
+        {
+          "action": "full",
+          "n_dirty": 25,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.18299865722656,
+          "prefill_ms": 79.60399627685547
+        },
+        {
+          "action": "full",
+          "n_dirty": 28,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12300000339746475,
+          "prep_ms": 0.0,
+          "encode_ms": 51.08300018310547,
+          "prefill_ms": 80.677001953125
+        },
+        {
+          "action": "full",
+          "n_dirty": 27,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11400000005960464,
+          "prep_ms": 0.0,
+          "encode_ms": 51.709999084472656,
+          "prefill_ms": 81.84600067138672
+        },
+        {
+          "action": "full",
+          "n_dirty": 30,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11699999868869781,
+          "prep_ms": 0.0,
+          "encode_ms": 51.12900161743164,
+          "prefill_ms": 82.55500030517578
+        }
+      ]
+    },
+    {
+      "video": "sleeping_2",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 91.12300109863281,
+      "tokenize_ms": 16.20800018310547,
+      "analysis_ms": 0.875,
+      "vit_ms": 409.60198974609375,
+      "prefill_ms": 781.4469604492188,
+      "decode_ms": 2102.885986328125,
+      "total_ms": 3407.8701171875,
+      "n_tokens": 128,
+      "text": "a medieval or fantasy-themed setting, featuring a bed with a brown and red patterned blanket and a brown and red patterned pillow. There is a wooden post with a rope tied to it, and a wooden post with a rope tied to it is also present. A person is lying on the bed, and a dog is lying on the bed as well. The room has a stone wall and a wooden floor. There is a wooden post with a rope tied to it on the left side of the image, and a wooden post with a rope tied to it on the right side of the image. The room also contains a wooden post with",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.388999938964844,
+          "prefill_ms": 75.50700378417969
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 0.0,
+          "encode_ms": 51.11399841308594,
+          "prefill_ms": 76.91600036621094
+        },
+        {
+          "action": "full",
+          "n_dirty": 34,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11599999666213989,
+          "prep_ms": 0.0,
+          "encode_ms": 51.0,
+          "prefill_ms": 77.66200256347656
+        },
+        {
+          "action": "full",
+          "n_dirty": 34,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 51.516998291015625,
+          "prefill_ms": 78.75
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.14799880981445,
+          "prefill_ms": 80.05599975585938
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.073001861572266,
+          "prefill_ms": 80.81700134277344
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.14100000262260437,
+          "prep_ms": 0.0,
+          "encode_ms": 51.222999572753906,
+          "prefill_ms": 81.81600189208984
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 0.0,
+          "encode_ms": 51.13800048828125,
+          "prefill_ms": 82.48400115966797
+        }
+      ]
+    },
+    {
+      "video": "temple_2",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 81.35600280761719,
+      "tokenize_ms": 16.280000686645508,
+      "analysis_ms": 0.8730000257492065,
+      "vit_ms": 410.41705322265625,
+      "prefill_ms": 781.1409301757813,
+      "decode_ms": 2102.095947265625,
+      "total_ms": 3397.9619140625,
+      "n_tokens": 128,
+      "text": "a woman with red hair, wearing a white top and brown pants, is walking on a rooftop. She is moving towards the right side of the image. The rooftop is made of stone and has a few scattered objects, including a ladder and some boxes. In the background, there is a large, dark structure with a clock on it, which appears to be a significant landmark. The sky is painted with warm colors of orange and yellow, suggesting that the time is either sunrise or sunset. The overall atmosphere of the image is serene and peaceful. The woman is the only person in the image, and there are no other people visible. The",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.32699966430664,
+          "prefill_ms": 75.38500213623047
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.15299999713897705,
+          "prep_ms": 0.0,
+          "encode_ms": 51.60300064086914,
+          "prefill_ms": 76.44499969482422
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 0.0,
+          "encode_ms": 51.20199966430664,
+          "prefill_ms": 77.7040023803711
+        },
+        {
+          "action": "full",
+          "n_dirty": 34,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12300000339746475,
+          "prep_ms": 0.0,
+          "encode_ms": 51.21799850463867,
+          "prefill_ms": 78.47200012207031
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 51.22999954223633,
+          "prefill_ms": 80.08499908447266
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.125,
+          "prep_ms": 0.0,
+          "encode_ms": 51.20000076293945,
+          "prefill_ms": 80.89700317382813
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11400000005960464,
+          "prep_ms": 0.0,
+          "encode_ms": 51.1870002746582,
+          "prefill_ms": 81.78900146484375
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11599999666213989,
+          "prep_ms": 0.0,
+          "encode_ms": 51.45000076293945,
+          "prefill_ms": 82.90699768066406
+        }
+      ]
+    },
+    {
+      "video": "temple_3",
+      "round": 1,
+      "n_frames": 8,
+      "grid": [
+        36,
+        16
+      ],
+      "load_ms": 78.6709976196289,
+      "tokenize_ms": 16.26099967956543,
+      "analysis_ms": 0.8449999690055847,
+      "vit_ms": 392.0190124511719,
+      "prefill_ms": 782.1649169921875,
+      "decode_ms": 2102.1240234375,
+      "total_ms": 3377.656005859375,
+      "n_tokens": 128,
+      "text": "A young woman with short, reddish-brown hair is the central figure in this scene. She is wearing a tank top and has a concerned expression on her face. Her gaze is directed upwards, towards a large, dark object that is partially visible in the frame. The background is a cloudy sky, suggesting that the woman is outdoors. The object she is looking at could be a bird, a kite, or even a large piece of debris. The overall scene conveys a sense of curiosity and perhaps a little bit of unease. The woman's position and the direction of her gaze suggest that she is actively engaged with whatever is in",
+      "frames": [
+        {
+          "action": "key",
+          "n_dirty": 0,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.0,
+          "prep_ms": 0.0,
+          "encode_ms": 51.41699981689453,
+          "prefill_ms": 75.76399993896484
+        },
+        {
+          "action": "crop",
+          "n_dirty": 17,
+          "crop": [
+            32,
+            12
+          ],
+          "tokens_encoded": 384,
+          "tokens_updated": 384,
+          "analysis_ms": 0.12600000202655792,
+          "prep_ms": 1.1740000247955322,
+          "encode_ms": 32.68899917602539,
+          "prefill_ms": 77.01200103759766
+        },
+        {
+          "action": "full",
+          "n_dirty": 14,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11999999731779099,
+          "prep_ms": 0.0,
+          "encode_ms": 51.22800064086914,
+          "prefill_ms": 77.57099914550781
+        },
+        {
+          "action": "full",
+          "n_dirty": 32,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12300000339746475,
+          "prep_ms": 0.0,
+          "encode_ms": 51.05099868774414,
+          "prefill_ms": 78.6510009765625
+        },
+        {
+          "action": "full",
+          "n_dirty": 35,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12700000405311584,
+          "prep_ms": 0.0,
+          "encode_ms": 51.05400085449219,
+          "prefill_ms": 80.07099914550781
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.12099999934434891,
+          "prep_ms": 0.0,
+          "encode_ms": 51.167999267578125,
+          "prefill_ms": 80.96199798583984
+        },
+        {
+          "action": "full",
+          "n_dirty": 36,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11299999803304672,
+          "prep_ms": 0.0,
+          "encode_ms": 51.15299987792969,
+          "prefill_ms": 81.85800170898438
+        },
+        {
+          "action": "full",
+          "n_dirty": 33,
+          "crop": [
+            0,
+            0
+          ],
+          "tokens_encoded": 576,
+          "tokens_updated": 576,
+          "analysis_ms": 0.11500000208616257,
+          "prep_ms": 0.0,
+          "encode_ms": 51.084999084472656,
+          "prefill_ms": 82.86699676513672
+        }
+      ]
+    }
+  ]
+}

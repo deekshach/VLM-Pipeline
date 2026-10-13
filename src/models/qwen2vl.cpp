@@ -1,5 +1,17 @@
 #include "models.h"
 
+// Forward declarations for pyramid ops (defined in ggml.c)
+extern "C" {
+struct ggml_tensor * ggml_visual_attn_reduce(
+        struct ggml_context * ctx, struct ggml_tensor * kq_soft,
+        int visual_start, int n_visual, int n_layers, int clie_layer,
+        float pvc_min, int tokens_per_frame, int protect_frame0);
+struct ggml_tensor * ggml_pyramid_mask_gen(
+        struct ggml_context * ctx, struct ggml_tensor * base_mask,
+        struct ggml_tensor * scores_and_thresholds,
+        int visual_start, int n_visual, int layer_idx, int n_layers);
+}
+
 llm_build_qwen2vl::llm_build_qwen2vl(const llama_model & model, const llm_graph_params & params) : llm_graph_context(params) {
     const int64_t n_embd_head = hparams.n_embd_head_v;
 
@@ -20,6 +32,10 @@ llm_build_qwen2vl::llm_build_qwen2vl(const llama_model & model, const llm_graph_
     std::copy(std::begin(hparams.rope_sections), std::begin(hparams.rope_sections) + 4, sections);
 
     ggml_tensor * inp_out_ids = build_inp_out_ids();
+
+    // Pyramid KV Prefill state (Architecture B)
+    const bool pyramid_enabled = cparams.pyramid_enabled && cparams.pyramid_n_visual > 0 && n_tokens > 1;
+    ggml_tensor * pyramid_scores = nullptr;  // [n_visual + n_layers], computed after scout layer
 
     for (int il = 0; il < n_layer; ++il) {
         ggml_tensor * inpSA = inpL;
@@ -65,9 +81,46 @@ llm_build_qwen2vl::llm_build_qwen2vl(const llama_model & model, const llm_graph_
             cb(Kcur, "Kcur", il);
             cb(Vcur, "Vcur", il);
 
+            // Pyramid KV Prefill: determine per-layer behavior
+            ggml_tensor * drop_mask = nullptr;
+            ggml_tensor ** kq_soft_capture = nullptr;
+            ggml_tensor * kq_soft_out = nullptr;
+
+            if (pyramid_enabled) {
+                if (il == cparams.pyramid_clie_layer - 1) {
+                    // Scout layer: capture softmax output for scoring
+                    kq_soft_capture = &kq_soft_out;
+                } else if (il >= cparams.pyramid_clie_layer && pyramid_scores) {
+                    // Post-scout layer: generate and apply drop mask
+                    drop_mask = ggml_pyramid_mask_gen(ctx0,
+                        inp_attn->get_kq_mask(),
+                        pyramid_scores,
+                        cparams.pyramid_visual_start,
+                        cparams.pyramid_n_visual,
+                        il, n_layer);
+                }
+            }
+
             cur = build_attn(inp_attn,
                     model.layers[il].wo, model.layers[il].bo,
-                    Qcur, Kcur, Vcur, nullptr, nullptr, nullptr, 1.0f/sqrtf(float(n_embd_head)), il);
+                    Qcur, Kcur, Vcur, nullptr, nullptr, nullptr,
+                    1.0f/sqrtf(float(n_embd_head)), il,
+                    drop_mask, kq_soft_capture);
+
+            // After scout layer attention: insert VISUAL_ATTN_REDUCE
+            if (pyramid_enabled && il == cparams.pyramid_clie_layer - 1 && kq_soft_out) {
+                pyramid_scores = ggml_visual_attn_reduce(ctx0,
+                    kq_soft_out,
+                    cparams.pyramid_visual_start,
+                    cparams.pyramid_n_visual,
+                    n_layer,
+                    cparams.pyramid_clie_layer,
+                    cparams.pyramid_pvc_min,
+                    cparams.pyramid_tokens_per_frame,
+                    cparams.pyramid_protect_frame0 ? 1 : 0);
+                // Ensure reduce is computed before any mask_gen that depends on it
+                ggml_build_forward_expand(gf, pyramid_scores);
+            }
         }
         if (il == n_layer - 1 && inp_out_ids) {
             cur   = ggml_get_rows(ctx0,   cur, inp_out_ids);

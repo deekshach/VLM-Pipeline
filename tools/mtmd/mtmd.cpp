@@ -175,7 +175,7 @@ struct mtmd_context {
 
         clip_context_params ctx_clip_params {
             /* use_gpu           */ ctx_params.use_gpu,
-            /* flash_attn_type   */ CLIP_FLASH_ATTN_TYPE_AUTO,
+            /* flash_attn_type   */ ctx_params.cb_eval ? CLIP_FLASH_ATTN_TYPE_DISABLED : CLIP_FLASH_ATTN_TYPE_AUTO,
             /* image_min_tokens  */ ctx_params.image_min_tokens,
             /* image_max_tokens  */ ctx_params.image_max_tokens,
             /* warmup            */ ctx_params.warmup,
@@ -473,7 +473,18 @@ struct mtmd_tokenizer {
                     return 1;
                 }
                 const mtmd_bitmap * bitmap = bitmaps[i_bm++];
-                int32_t res = add_media(bitmap);
+                // MTMD_TEMPORAL_PAIR=1 consumes TWO bitmaps per marker, filling the
+                // Conv3d's two temporal slots with consecutive frames. The caller
+                // must therefore emit one marker per PAIR. An odd trailing frame is
+                // paired with itself, matching the reference's handling of a lone
+                // frame.
+                static const char * tp_env = getenv("MTMD_TEMPORAL_PAIR");
+                static const bool temporal_pair = tp_env && tp_env[0] && strcmp(tp_env, "0") != 0;
+                const mtmd_bitmap * bitmap_t1 = nullptr;
+                if (temporal_pair && !bitmap->is_audio) {
+                    bitmap_t1 = (i_bm < bitmaps.size()) ? bitmaps[i_bm++] : bitmap;
+                }
+                int32_t res = add_media(bitmap, bitmap_t1);
                 if (res != 0) {
                     return res;
                 }
@@ -544,7 +555,12 @@ struct mtmd_tokenizer {
         }
     }
 
-    int32_t add_media(const mtmd_bitmap * bitmap) {
+    // Temporal patching (Qwen2-VL family): the patch embedding is a Conv3d with
+    // temporal kernel 2, split by the converter into patch_embeddings_0 (t=0) and
+    // patch_embeddings_1 (t=1). bitmap_t1 supplies the frame for the t=1 slot; a
+    // null pointer reproduces the legacy behaviour of feeding the same frame to
+    // both slots, which is what the reference does for a still image.
+    int32_t add_media(const mtmd_bitmap * bitmap, const mtmd_bitmap * bitmap_t1 = nullptr) {
         if (!bitmap->is_audio) {
             // handle image
 
@@ -570,6 +586,30 @@ struct mtmd_tokenizer {
             if (!ok) {
                 LOG_ERR("Unable to preprocess image\n");
                 return 2;
+            }
+
+            // append the t=1 frame as a second entry of the same batch; clip
+            // routes entry[0] -> inp_raw and entry[1] -> inp_raw_1
+            bool temporal_paired = false;
+            if (bitmap_t1 != nullptr) {
+                clip_image_u8_ptr u8_t1(clip_image_u8_init());
+                u8_t1->nx = bitmap_t1->nx;
+                u8_t1->ny = bitmap_t1->ny;
+                u8_t1->buf.resize(bitmap_t1->data.size());
+                std::memcpy(u8_t1->buf.data(), bitmap_t1->data.data(), u8_t1->nx * u8_t1->ny * 3);
+
+                clip_image_f32_batch batch_t1;
+                if (!clip_image_preprocess(ctx->ctx_v, u8_t1.get(), &batch_t1)) {
+                    LOG_ERR("Unable to preprocess paired (t=1) image\n");
+                    return 2;
+                }
+                if (batch_f32.entries.size() != 1 || batch_t1.entries.size() != 1) {
+                    LOG_ERR("temporal pairing expects one entry per frame (got %zu and %zu)\n",
+                            batch_f32.entries.size(), batch_t1.entries.size());
+                    return 2;
+                }
+                batch_f32.entries.emplace_back(std::move(batch_t1.entries[0]));
+                temporal_paired = true;
             }
 
             // handle llava-uhd style preprocessing
@@ -635,9 +675,17 @@ struct mtmd_tokenizer {
                 }
 
             } else {
+                // A temporal pair is a single group: both frames fold into one
+                // Conv3d evaluation and yield ONE set of tokens, so count entry[0]
+                // only. Summing over entries would double the token count and
+                // defeat the entire point of pairing.
                 size_t n_tokens = 0;
-                for (const auto & entry : batch_f32.entries) {
-                    n_tokens += clip_n_output_tokens(ctx->ctx_v, entry.get());
+                if (temporal_paired) {
+                    n_tokens = clip_n_output_tokens(ctx->ctx_v, batch_f32.entries[0].get());
+                } else {
+                    for (const auto & entry : batch_f32.entries) {
+                        n_tokens += clip_n_output_tokens(ctx->ctx_v, entry.get());
+                    }
                 }
 
                 mtmd_image_tokens_ptr image_tokens(new mtmd_image_tokens);

@@ -1,0 +1,19 @@
+date:      2026-08-31T15:08:15-04:00
+gpu:       NVIDIA GeForce RTX 4090
+driver:    580.173.02
+git:       b55dcdef5
+videos:    alley_1,alley_2,ambush_2,ambush_4,ambush_5,ambush_6,ambush_7,bamboo_1,bamboo_2,bandage_1,bandage_2,cave_2,cave_4,market_2,market_5,market_6,mountain_1,shaman_2,shaman_3,sleeping_1,sleeping_2,temple_2,temple_3
+model:     /data/spring26/CPP/modelsRepo/Qwen2.5VL/Qwen2.5-VL-7B-Instruct-BF16.gguf
+mmproj:    /data/spring26/CPP/modelsRepo/Qwen2.5VL/mmproj-BF16.gguf
+rounds:    21   n_predict: 128   fa: on
+sampling:  constant-rate 2.0 fps, source assumed 8.0 fps
+
+== Serving 23 videos x 21 rounds from one loaded model ...
+Traceback (most recent call last):
+  File "/data/spring26/CPP/llama.cpp/dmc955/bench_serving_summarize.py", line 220, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/data/spring26/CPP/llama.cpp/dmc955/bench_serving_summarize.py", line 94, in main
+    j = json.load(open(jpath))
+                  ^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/data/spring26/CPP/llama.cpp/dmc955/serving_results/serve_7B-BF16_faon_fps2.0@src8.json'

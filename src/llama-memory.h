@@ -101,6 +101,18 @@ struct llama_memory_i {
     virtual void clear(bool data) = 0;
 
     virtual bool seq_rm  (llama_seq_id seq_id,                              llama_pos p0, llama_pos p1) = 0;
+
+    // Remove a single KV entry matching exact position and 2D spatial coordinates (M-RoPE).
+    // Returns true if found and removed. Default implementation returns false (not supported).
+    virtual bool seq_rm_pos_ext(llama_seq_id seq_id, llama_pos pos, llama_pos ext_x, llama_pos ext_y) {
+        GGML_UNUSED(seq_id); GGML_UNUSED(pos); GGML_UNUSED(ext_x); GGML_UNUSED(ext_y);
+        return false;
+    }
+
+    // compact the cache by moving occupied cells to fill gaps, reducing effective n_kv
+    // if lctx is provided, uses GPU-native defrag via ggml compute graph; otherwise CPU bulk transfer
+    virtual void defragment(llama_context * lctx = nullptr) { GGML_UNUSED(lctx); }
+
     virtual void seq_cp  (llama_seq_id seq_id_src, llama_seq_id seq_id_dst, llama_pos p0, llama_pos p1) = 0;
     virtual void seq_keep(llama_seq_id seq_id) = 0;
     virtual void seq_add (llama_seq_id seq_id,                              llama_pos p0, llama_pos p1, llama_pos shift) = 0;
@@ -108,6 +120,30 @@ struct llama_memory_i {
 
     virtual llama_pos seq_pos_min(llama_seq_id seq_id) const = 0;
     virtual llama_pos seq_pos_max(llama_seq_id seq_id) const = 0;
+
+    // Get the K cache tensor for a given model layer (for manual attention computation)
+    // Returns nullptr if not supported by this memory type
+    virtual const ggml_tensor * get_k_tensor(int32_t il) const { GGML_UNUSED(il); return nullptr; }
+
+    // Get the V cache tensor for a given model layer
+    // Returns nullptr if not supported by this memory type
+    virtual const ggml_tensor * get_v_tensor(int32_t il) const { GGML_UNUSED(il); return nullptr; }
+
+    // Returns true if the V cache is stored in transposed layout
+    virtual bool get_v_trans() const { return false; }
+
+    // Reserve KV cache cells with metadata (pos, seq_id, ext) WITHOUT running the transformer.
+    // This allocates cells and sets their positions/sequences but does not compute K/V values.
+    // The caller is responsible for filling in K/V data (e.g. via CUDA copy kernels).
+    // out_cell_indices: if non-null, filled with the allocated cell indices [n_tokens]
+    // Returns true on success, false if no slot available.
+    virtual bool reserve_cells(llama_seq_id seq_id, int32_t n_tokens,
+                               const llama_pos * pos, bool is_pos_2d,
+                               int32_t * out_cell_indices) {
+        GGML_UNUSED(seq_id); GGML_UNUSED(n_tokens); GGML_UNUSED(pos);
+        GGML_UNUSED(is_pos_2d); GGML_UNUSED(out_cell_indices);
+        return false;
+    }
 
     virtual std::map<ggml_backend_buffer_type_t, size_t> memory_breakdown() const = 0;
 
