@@ -47,8 +47,8 @@ cmake --build build --target llama-jetson-vlm jetson-gemm-tune jetson-vit-probe 
 
 ## 4. Repository state
 
-- Commit `d161e976` "jetson: Orin pipeline with switchable optimizations and engine switches" on `dmc955-vlm`,
-  **not pushed** (no GitHub credentials on the board). The user pushes: `cd ~/Desktop/Projects/VLM/VLM-Pipeline && git push origin dmc955-vlm`.
+- Commits `d161e976` and `8aabc1fd` on `dmc955-vlm`, pushed by the user. The board has no GitHub credentials;
+  the user pushes: `cd ~/Desktop/Projects/VLM/VLM-Pipeline && git push origin dmc955-vlm`.
 - Work after that commit (microarch scripts, this file) may be uncommitted; check `git status`.
 - `dmc955/` has **uncommitted local edits that must not be pushed**: the old-machine -> Jetson path rewrite in 49 files,
   and an older live-flow/anchor-first version of `dmc955/adaptive_sintel_vlm.cpp` + `dmc955/ofa_live_flow.h` +
@@ -152,16 +152,16 @@ Working sets vs the 4 MB L2 (computed):
   per GEMM output, ~370 MB per full-frame ViT layer; GEMMs get slightly slower (+30 ms: F32 output is twice the bytes).
 - GEMM table: the heuristic's split-K writes 9 partial F32 outputs (~66 MB, read back) for a 7.3 MB result; the tuned
   algorithm does not split. In the ViT the table removes split-K but is net neutral.
-- **Not yet measured with counters**: L2 hit rates / DRAM bytes / stalls per switch. Script ready:
-  `sudo bash jetson/scripts/run_microarch_ncu.sh`, then `python3 jetson/tools/ncu_compare.py jetson/experiments/profiles/microarch`.
-  It collects `lts__t_sectors.sum` and `lts__d_sectors_fill_sysmem.sum` (DRAM read bytes = x32); these metric names
-  were not verified (needs sudo) - if ncu rejects them, drop the `--metrics` part.
+- **Counters measured** (2026-10-15, `experiments/profiles/microarch/README.md`): batched windows cut a full-frame
+  windowed layer from 30.9 to 14.5 ms and DRAM reads from 1,871 to 808 MB (softmax 680 -> 9.4 MB, L2 hit 33% -> 50%);
+  crops cut DRAM per window ~40% (softmax L2 hit 33% -> 62% at 5x2); F32 out + bias -2.8 ms and -109 MB per layer
+  (GEMMs +13% slower); tuned down projection 6.7 -> 2.6 ms, tensor pipe 25% -> 65%, split-K 9 -> 2, DRAM 258 -> 217 MB.
+  Not yet measured: producer->consumer L2 reuse (`sudo NCU_CACHE=none bash jetson/scripts/run_microarch_ncu.sh`).
 
 ## 7. Open items / next steps
 
-- Run the ncu microarch script (sudo) and interpret: expected L2 hit up / DRAM bytes down for batched windows and
-  small crops; casts/adds gone with F32 out + bias; no split-K partials with the table.
-- Push commit `d161e976` (+ later work) to GitHub.
+- Optional: `sudo NCU_CACHE=none bash jetson/scripts/run_microarch_ncu.sh` for cross-kernel L2 reuse with crops.
+- Push new commits to GitHub (the user pushed up to `8aabc1fd`).
 - Window-cache threshold vs answer quality (needs repeated runs or a scored benchmark; generation is nondeterministic).
 - Remaining ViT cost after all switches: the 4 global layers' dense attention (flash attention for those only?),
   elementwise passes (input casts F32->BF16 still there; norms, RoPE, K/V copies), RoPE kernel efficiency.

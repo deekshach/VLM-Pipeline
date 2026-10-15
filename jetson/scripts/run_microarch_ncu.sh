@@ -11,15 +11,20 @@
 #
 # Besides the usual sections, two L2 counters: lts__t_sectors.sum (all L2 sector requests) and
 # lts__d_sectors_fill_sysmem.sum (sectors filled from DRAM, x 32 B = main-memory read traffic).
+#
+# NCU_CACHE=none keeps the caches warm between kernels (ncu's default flushes them before every
+# kernel, which hides producer -> consumer reuse in L2); output then goes to microarch_cache_none/.
 set -u
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO="$(cd "$HERE/../.." && pwd)"
 NCU="${NCU:-/usr/local/cuda-12.6/bin/ncu}"
 M=/home/nvidia/data/models/Qwen2.5VL
 FRAME=/home/nvidia/data/MPI-Sintel/training/clean/alley_1/frame_0001.png
+NCU_CACHE="${NCU_CACHE:-all}"
 OUT="$REPO/jetson/experiments/profiles/microarch"
+[ "$NCU_CACHE" != all ] && OUT="${OUT}_cache_$NCU_CACHE"
 mkdir -p "$OUT"
-SECTIONS=(--section SpeedOfLight --section LaunchStats --section Occupancy --section MemoryWorkloadAnalysis
+SECTIONS=(--cache-control "$NCU_CACHE" --section SpeedOfLight --section LaunchStats --section Occupancy --section MemoryWorkloadAnalysis
           --section WarpStateStats --metrics lts__t_sectors.sum,lts__d_sectors_fill_sysmem.sum)
 
 export_csv() {   # $1 = report basename

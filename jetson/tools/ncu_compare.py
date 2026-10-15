@@ -90,6 +90,12 @@ def main():
                       + ", ".join(f"{s} {v:.0f}%" for s, v in st) + " |")
             tot = {k: sum(o[k] for o in data[name].values()) for k in ("us", "dram_mb", "l2_req_mb")}
             print(f"| {cfg} | **all** | | **{tot['us']:.0f}** | **{tot['dram_mb']:.1f}** | **{tot['l2_req_mb']:.1f}** | | | | | |")
+            # A fixed launch window covers more layers when a switch removes kernels: without flash
+            # attention every layer has exactly one softmax, so report per layer as well.
+            n_layers = data[name].get("softmax", {}).get("n", 0)
+            if n_layers:
+                print(f"| {cfg} | **per layer** ({n_layers:.0f} layers) | | **{tot['us'] / n_layers:.0f}** | "
+                      f"**{tot['dram_mb'] / n_layers:.1f}** | **{tot['l2_req_mb'] / n_layers:.1f}** | | | | | |")
 
 
 if __name__ == "__main__":
