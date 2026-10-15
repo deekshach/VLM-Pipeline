@@ -11,7 +11,8 @@
 //   jetson-vit-probe <model.gguf> <mmproj.gguf> <frame.png> <shapes e.g. 9x4,5x2> [warm=2] [reps=5] [fa=on|off]
 //
 // Environment: PROBE_DUMP_PREFIX=<p> writes each shape's embeddings to <p>_<shape>.f32 (for comparing
-// switches); PROBE_CPU=1 runs the ViT on the CPU (F32-output reference). The engine switches
+// switches); PROBE_CPU=1 runs the ViT on the CPU (F32-output reference); PROBE_MARK_ALL=1 puts every timed
+// encode (not only the last) in the NVTX range, for averaging in nsys. The engine switches
 // (MTMD_VIT_WINDOW_BATCH, GGML_CUDA_JETSON_GEMM_*) apply as set in the environment.
 #include "llama.h"
 #include "mtmd.h"
@@ -75,6 +76,7 @@ int main(int argc, char ** argv) {
     const int warm = argc > 5 ? atoi(argv[5]) : 2;
     const int reps = argc > 6 ? atoi(argv[6]) : 5;
     const bool fa  = !(argc > 7 && strcmp(argv[7], "off") == 0);
+    const bool mark_all = getenv("PROBE_MARK_ALL") != nullptr;   // nsys: every timed encode in the range
 
     llama_backend_init();
     llama_model_params mp = llama_model_default_params();
@@ -127,7 +129,7 @@ int main(int argc, char ** argv) {
         std::vector<double> t;
         const std::string range = "vit_" + item;
         for (int i = 0; i < reps; i++) {
-            const bool mark = i == reps - 1;
+            const bool mark = i == reps - 1 || mark_all;
             if (mark) nvtxRangePushA(range.c_str());
             const double t0 = now_ms();
             if (mtmd_encode_chunk(vctx, img) != 0) return 1;

@@ -41,4 +41,10 @@ if (JETSON_NVTX3_DIR)
     target_link_libraries(jetson-vit-probe PRIVATE mtmd llama Threads::Threads)
     target_compile_features(jetson-vit-probe PRIVATE cxx_std_17)
     target_include_directories(jetson-vit-probe PRIVATE ${JETSON_NVTX3_DIR})
+
+    # LLM prefill of N image-sized tokens, last ubatch in its own NVTX range
+    add_executable(jetson-prefill-probe tools/prefill_probe.cpp)
+    target_link_libraries(jetson-prefill-probe PRIVATE llama Threads::Threads)
+    target_compile_features(jetson-prefill-probe PRIVATE cxx_std_17)
+    target_include_directories(jetson-prefill-probe PRIVATE ${JETSON_NVTX3_DIR})
 endif()
