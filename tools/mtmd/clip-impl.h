@@ -6,6 +6,7 @@
 
 #include <climits>
 #include <cstdarg>
+#include <cstdlib>
 #include <cinttypes>
 #include <string>
 #include <map>
@@ -582,3 +583,15 @@ void clip_debug_encode(clip_ctx * ctx, int h, int w, float fill_value);
 //
 
 projector_type clip_get_projector_type(const struct clip_ctx * ctx);
+
+// Jetson study switch (default off): run Qwen2.5-VL's windowed-attention layers as a batch of
+// independent 112 px windows (64 patches each) instead of dense attention over all patches under a
+// block-diagonal mask. Only used when the image is a whole number of windows (e.g. resized to a
+// multiple of 112 px); otherwise the dense path runs. MTMD_VIT_WINDOW_BATCH=1 enables it.
+static inline bool clip_vit_window_batch_enabled() {
+    static const bool enabled = [] {
+        const char * v = std::getenv("MTMD_VIT_WINDOW_BATCH");
+        return v != nullptr && std::atoi(v) != 0;
+    }();
+    return enabled;
+}

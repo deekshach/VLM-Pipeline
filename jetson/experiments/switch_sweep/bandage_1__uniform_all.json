@@ -1,0 +1,563 @@
+{
+  "mode": "baseline",
+  "video_name": "bandage_1",
+  "n_flow_files": 49,
+  "n_frames_total": 50,
+  "global_complexity": 0.10814311355352402,
+  "n_frames_selected": 8,
+  "selected_frames": [
+    {
+      "index": 1,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 8,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 15,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 22,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 29,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 36,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 43,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 50,
+      "weight": 1.0,
+      "complexity": 0.0
+    }
+  ],
+  "motion_profile": [
+    {
+      "frame": 1,
+      "mean_mag": 3.8572614192962646,
+      "p95_mag": 12.138568878173828,
+      "variance": 22.09107208251953,
+      "complexity": 0.2811952233314514
+    },
+    {
+      "frame": 2,
+      "mean_mag": 5.532231330871582,
+      "p95_mag": 20.695789337158203,
+      "variance": 49.83243942260742,
+      "complexity": 0.5048525929450989
+    },
+    {
+      "frame": 3,
+      "mean_mag": 7.496875762939453,
+      "p95_mag": 30.733156204223633,
+      "variance": 98.1775894165039,
+      "complexity": 0.7804552912712097
+    },
+    {
+      "frame": 4,
+      "mean_mag": 5.4632158279418945,
+      "p95_mag": 16.669471740722656,
+      "variance": 35.54985809326172,
+      "complexity": 0.4288412630558014
+    },
+    {
+      "frame": 5,
+      "mean_mag": 4.266139984130859,
+      "p95_mag": 11.69632339477539,
+      "variance": 20.07212257385254,
+      "complexity": 0.29612186551094055
+    },
+    {
+      "frame": 6,
+      "mean_mag": 3.908806800842285,
+      "p95_mag": 9.782235145568848,
+      "variance": 20.322505950927734,
+      "complexity": 0.32132625579833984
+    },
+    {
+      "frame": 7,
+      "mean_mag": 3.668666362762451,
+      "p95_mag": 10.177504539489746,
+      "variance": 19.296964645385742,
+      "complexity": 0.2865675985813141
+    },
+    {
+      "frame": 8,
+      "mean_mag": 3.625753164291382,
+      "p95_mag": 10.74205493927002,
+      "variance": 21.579875946044922,
+      "complexity": 0.2967604994773865
+    },
+    {
+      "frame": 9,
+      "mean_mag": 3.9916164875030518,
+      "p95_mag": 11.75158405303955,
+      "variance": 45.097190856933594,
+      "complexity": 0.5426502823829651
+    },
+    {
+      "frame": 10,
+      "mean_mag": 4.685896873474121,
+      "p95_mag": 12.99803352355957,
+      "variance": 24.349735260009766,
+      "complexity": 0.35856640338897705
+    },
+    {
+      "frame": 11,
+      "mean_mag": 5.473998546600342,
+      "p95_mag": 14.156449317932129,
+      "variance": 29.924619674682617,
+      "complexity": 0.42985156178474426
+    },
+    {
+      "frame": 12,
+      "mean_mag": 6.268758773803711,
+      "p95_mag": 15.356966972351074,
+      "variance": 37.3231315612793,
+      "complexity": 0.5571318864822388
+    },
+    {
+      "frame": 13,
+      "mean_mag": 6.6568217277526855,
+      "p95_mag": 17.12605857849121,
+      "variance": 44.37394714355469,
+      "complexity": 0.6061276793479919
+    },
+    {
+      "frame": 14,
+      "mean_mag": 6.794925689697266,
+      "p95_mag": 19.33031463623047,
+      "variance": 51.360713958740234,
+      "complexity": 0.5786157846450806
+    },
+    {
+      "frame": 15,
+      "mean_mag": 7.041294574737549,
+      "p95_mag": 24.052597045898438,
+      "variance": 68.24504852294922,
+      "complexity": 0.6468493342399597
+    },
+    {
+      "frame": 16,
+      "mean_mag": 7.56187629699707,
+      "p95_mag": 29.241214752197266,
+      "variance": 99.20771789550781,
+      "complexity": 0.7907047867774963
+    },
+    {
+      "frame": 17,
+      "mean_mag": 7.147095203399658,
+      "p95_mag": 28.490331649780273,
+      "variance": 97.7760009765625,
+      "complexity": 0.7601746320724487
+    },
+    {
+      "frame": 18,
+      "mean_mag": 5.779434680938721,
+      "p95_mag": 22.01643180847168,
+      "variance": 59.65484619140625,
+      "complexity": 0.5393218994140625
+    },
+    {
+      "frame": 19,
+      "mean_mag": 4.872437953948975,
+      "p95_mag": 18.13887596130371,
+      "variance": 39.37783432006836,
+      "complexity": 0.4010513722896576
+    },
+    {
+      "frame": 20,
+      "mean_mag": 4.6942219734191895,
+      "p95_mag": 19.737852096557617,
+      "variance": 42.18037796020508,
+      "complexity": 0.4005686342716217
+    },
+    {
+      "frame": 21,
+      "mean_mag": 3.814516544342041,
+      "p95_mag": 13.819744110107422,
+      "variance": 21.07171058654785,
+      "complexity": 0.26425766944885254
+    },
+    {
+      "frame": 22,
+      "mean_mag": 2.9767305850982666,
+      "p95_mag": 10.031400680541992,
+      "variance": 13.194435119628906,
+      "complexity": 0.1665666401386261
+    },
+    {
+      "frame": 23,
+      "mean_mag": 2.870368242263794,
+      "p95_mag": 9.75079345703125,
+      "variance": 12.200779914855957,
+      "complexity": 0.15676453709602356
+    },
+    {
+      "frame": 24,
+      "mean_mag": 2.9086015224456787,
+      "p95_mag": 9.770686149597168,
+      "variance": 12.693721771240234,
+      "complexity": 0.16650481522083282
+    },
+    {
+      "frame": 25,
+      "mean_mag": 2.8833320140838623,
+      "p95_mag": 9.683174133300781,
+      "variance": 13.142857551574707,
+      "complexity": 0.17378167808055878
+    },
+    {
+      "frame": 26,
+      "mean_mag": 2.621202230453491,
+      "p95_mag": 8.842729568481445,
+      "variance": 11.606725692749023,
+      "complexity": 0.14782966673374176
+    },
+    {
+      "frame": 27,
+      "mean_mag": 2.287928581237793,
+      "p95_mag": 8.023484230041504,
+      "variance": 9.299988746643066,
+      "complexity": 0.11022039502859116
+    },
+    {
+      "frame": 28,
+      "mean_mag": 2.0819783210754395,
+      "p95_mag": 7.912130832672119,
+      "variance": 7.507418155670166,
+      "complexity": 0.08872013539075851
+    },
+    {
+      "frame": 29,
+      "mean_mag": 1.9258456230163574,
+      "p95_mag": 7.651846885681152,
+      "variance": 6.6381754875183105,
+      "complexity": 0.0659010112285614
+    },
+    {
+      "frame": 30,
+      "mean_mag": 1.8109707832336426,
+      "p95_mag": 7.492321014404297,
+      "variance": 5.918374061584473,
+      "complexity": 0.053007788956165314
+    },
+    {
+      "frame": 31,
+      "mean_mag": 1.7293670177459717,
+      "p95_mag": 7.325082778930664,
+      "variance": 5.510495662689209,
+      "complexity": 0.046026263386011124
+    },
+    {
+      "frame": 32,
+      "mean_mag": 1.6823235750198364,
+      "p95_mag": 7.151900768280029,
+      "variance": 5.210755348205566,
+      "complexity": 0.041452303528785706
+    },
+    {
+      "frame": 33,
+      "mean_mag": 1.6458126306533813,
+      "p95_mag": 6.996280193328857,
+      "variance": 5.046329498291016,
+      "complexity": 0.03758007287979126
+    },
+    {
+      "frame": 34,
+      "mean_mag": 1.6495052576065063,
+      "p95_mag": 6.869665622711182,
+      "variance": 5.145473957061768,
+      "complexity": 0.03653310611844063
+    },
+    {
+      "frame": 35,
+      "mean_mag": 1.6179723739624023,
+      "p95_mag": 6.792961120605469,
+      "variance": 5.077004432678223,
+      "complexity": 0.03445906564593315
+    },
+    {
+      "frame": 36,
+      "mean_mag": 1.6231162548065186,
+      "p95_mag": 6.912193298339844,
+      "variance": 5.278982162475586,
+      "complexity": 0.03407217934727669
+    },
+    {
+      "frame": 37,
+      "mean_mag": 1.7437015771865845,
+      "p95_mag": 7.047439098358154,
+      "variance": 5.97260046005249,
+      "complexity": 0.04992932081222534
+    },
+    {
+      "frame": 38,
+      "mean_mag": 1.834903359413147,
+      "p95_mag": 7.273596286773682,
+      "variance": 6.536365509033203,
+      "complexity": 0.06369128823280334
+    },
+    {
+      "frame": 39,
+      "mean_mag": 1.8637018203735352,
+      "p95_mag": 7.024601459503174,
+      "variance": 6.596671104431152,
+      "complexity": 0.06802812963724136
+    },
+    {
+      "frame": 40,
+      "mean_mag": 1.8477846384048462,
+      "p95_mag": 6.615286350250244,
+      "variance": 6.339299201965332,
+      "complexity": 0.0640832930803299
+    },
+    {
+      "frame": 41,
+      "mean_mag": 1.8437082767486572,
+      "p95_mag": 6.55070686340332,
+      "variance": 6.231599807739258,
+      "complexity": 0.06262457370758057
+    },
+    {
+      "frame": 42,
+      "mean_mag": 1.8814599514007568,
+      "p95_mag": 6.811114311218262,
+      "variance": 6.9835429191589355,
+      "complexity": 0.07822976261377335
+    },
+    {
+      "frame": 43,
+      "mean_mag": 1.9103785753250122,
+      "p95_mag": 7.080103397369385,
+      "variance": 7.500441551208496,
+      "complexity": 0.06601529568433762
+    },
+    {
+      "frame": 44,
+      "mean_mag": 2.0102956295013428,
+      "p95_mag": 7.904762268066406,
+      "variance": 8.802584648132324,
+      "complexity": 0.08153075724840164
+    },
+    {
+      "frame": 45,
+      "mean_mag": 2.1566002368927,
+      "p95_mag": 9.015168190002441,
+      "variance": 10.96738338470459,
+      "complexity": 0.10459917038679123
+    },
+    {
+      "frame": 46,
+      "mean_mag": 2.3287978172302246,
+      "p95_mag": 10.442992210388184,
+      "variance": 14.30803394317627,
+      "complexity": 0.1342475712299347
+    },
+    {
+      "frame": 47,
+      "mean_mag": 2.4496634006500244,
+      "p95_mag": 11.617040634155273,
+      "variance": 17.57040786743164,
+      "complexity": 0.1590675711631775
+    },
+    {
+      "frame": 48,
+      "mean_mag": 2.4059040546417236,
+      "p95_mag": 11.906965255737305,
+      "variance": 17.315326690673828,
+      "complexity": 0.15150657296180725
+    },
+    {
+      "frame": 49,
+      "mean_mag": 2.2578988075256348,
+      "p95_mag": 11.50184440612793,
+      "variance": 14.39711856842041,
+      "complexity": 0.12706823647022247
+    }
+  ],
+  "spatial_analysis": [],
+  "inference": {
+    "generated_text": "A woman is sitting on the ground with",
+    "n_tokens": 8,
+    "encode_time_ms": 7464.0,
+    "generation_time_ms": 639.0
+  },
+  "metrics": {
+    "motion_coverage": 0.13082930406349821,
+    "shannon_entropy": 3.6849568262622827,
+    "temporal_reduction": 0.84,
+    "avg_spatial_savings": 0.0
+  },
+  "timing": {
+    "flow_analysis_ms": 208.0,
+    "frame_selection_ms": 0.0,
+    "encode_ms": 7464.0,
+    "generation_ms": 639.0,
+    "ttft_ms": 7698.0,
+    "total_ms": 18562.0,
+    "breakdown": {
+      "analysis_ms": 208.0,
+      "flow_ms": 208.0,
+      "rest_image_load_ms": 202.0,
+      "rest_tokenize_ms": 32.0,
+      "rest": {
+        "vit_ms": 3408.204833984375,
+        "prefill_img_ms": 3314.597900390625,
+        "prefill_txt_ms": 730.1539916992188,
+        "n_images": 8,
+        "tokens_encoded": 4608,
+        "n_full": 8,
+        "n_crop": 0,
+        "n_skip": 0,
+        "wc_diff_ms": 1.559999942779541,
+        "wc_prep_ms": 0.0
+      },
+      "vit_flash_attn": "off",
+      "window_cache": {
+        "frames": [
+          {
+            "action": "key",
+            "n_dirty": 0,
+            "crop": [
+              0,
+              0
+            ],
+            "tokens_encoded": 576,
+            "diff_ms": 0.0,
+            "prep_ms": 0.0,
+            "encode_ms": 572.4550170898438
+          },
+          {
+            "action": "full",
+            "n_dirty": 30,
+            "crop": [
+              0,
+              0
+            ],
+            "tokens_encoded": 576,
+            "diff_ms": 0.2240000069141388,
+            "prep_ms": 0.0,
+            "encode_ms": 407.2049865722656
+          },
+          {
+            "action": "full",
+            "n_dirty": 29,
+            "crop": [
+              0,
+              0
+            ],
+            "tokens_encoded": 576,
+            "diff_ms": 0.22300000488758087,
+            "prep_ms": 0.0,
+            "encode_ms": 405.0769958496094
+          },
+          {
+            "action": "full",
+            "n_dirty": 26,
+            "crop": [
+              0,
+              0
+            ],
+            "tokens_encoded": 576,
+            "diff_ms": 0.22499999403953552,
+            "prep_ms": 0.0,
+            "encode_ms": 404.89898681640625
+          },
+          {
+            "action": "full",
+            "n_dirty": 27,
+            "crop": [
+              0,
+              0
+            ],
+            "tokens_encoded": 576,
+            "diff_ms": 0.2240000069141388,
+            "prep_ms": 0.0,
+            "encode_ms": 404.656005859375
+          },
+          {
+            "action": "full",
+            "n_dirty": 21,
+            "crop": [
+              0,
+              0
+            ],
+            "tokens_encoded": 576,
+            "diff_ms": 0.22100000083446503,
+            "prep_ms": 0.0,
+            "encode_ms": 404.7179870605469
+          },
+          {
+            "action": "full",
+            "n_dirty": 22,
+            "crop": [
+              0,
+              0
+            ],
+            "tokens_encoded": 576,
+            "diff_ms": 0.22100000083446503,
+            "prep_ms": 0.0,
+            "encode_ms": 404.5769958496094
+          },
+          {
+            "action": "full",
+            "n_dirty": 21,
+            "crop": [
+              0,
+              0
+            ],
+            "tokens_encoded": 576,
+            "diff_ms": 0.22200000286102295,
+            "prep_ms": 0.0,
+            "encode_ms": 404.6180114746094
+          }
+        ],
+        "calibration_ms": 0.0
+      }
+    }
+  },
+  "params": {
+    "sintel_dir": "/home/nvidia/data/MPI-Sintel",
+    "video_name": "bandage_1",
+    "min_frames": 3,
+    "max_frames": 24,
+    "base_frames": 8,
+    "motion_threshold": 2.0,
+    "motion_percentile": 0.949999988079071,
+    "patch_grid": 4,
+    "spatial_threshold": 0.05000000074505806
+  },
+  "switches": {
+    "selection": "uniform",
+    "flow": "none",
+    "anchor_first": false,
+    "window_align": true,
+    "window_cache": true,
+    "wc_threshold": 24.0,
+    "wc_halo": 0,
+    "wc_rekey_frac": 0.75,
+    "wc_cost_model": false,
+    "vit_flash_attn": "off",
+    "vit_window_batch": true,
+    "gemm_f32_out": true,
+    "gemm_bias_fuse": true,
+    "gemm_table": "/home/nvidia/Desktop/Projects/VLM/VLM-Pipeline/jetson/gemm/table_orin.txt"
+  }
+}

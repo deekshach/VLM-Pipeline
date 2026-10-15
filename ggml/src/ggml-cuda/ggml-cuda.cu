@@ -49,6 +49,7 @@
 #include "ggml-cuda/mean.cuh"
 #include "ggml-cuda/tsembd.cuh"
 #include "ggml-cuda/topk-moe.cuh"
+#include "ggml-cuda/jetson-gemm.cuh"
 #include "ggml-cuda/unary.cuh"
 #include "ggml-cuda/upscale.cuh"
 #include "ggml-cuda/wkv.cuh"
@@ -1267,6 +1268,22 @@ static void ggml_cuda_op_mul_mat_cublas(
         }
         const nv_bfloat16 * src1_ptr = src1->type == GGML_TYPE_BF16 ? (const nv_bfloat16 *) src1_ddf_i : src1_as_bf16.get();
         const nv_bfloat16 * src0_ptr = (const nv_bfloat16 *)src0_dd_i;
+
+        // Jetson study switches (jetson-gemm.cuh): cuBLASLt, F32 output and/or a tuned algorithm
+        const auto & jsw = ggml_cuda_jetson_gemm_get_switches();
+        if (jsw.any()) {
+            if (jsw.f32_out) {
+                ggml_cuda_jetson_gemm_bf16(ctx, stream, row_diff, src1_ncols, ne10, src0_ptr, src1_ptr,
+                                           dst_dd_i, true, ldc, nullptr);
+            } else {
+                ggml_cuda_pool_alloc<nv_bfloat16> dst_bf16(ctx.pool(id), row_diff*src1_ncols);
+                ggml_cuda_jetson_gemm_bf16(ctx, stream, row_diff, src1_ncols, ne10, src0_ptr, src1_ptr,
+                                           dst_bf16.get(), false, row_diff, nullptr);
+                ggml_get_to_fp32_cuda(GGML_TYPE_BF16)(dst_bf16.get(), dst_dd_i, row_diff*src1_ncols, stream);
+            }
+            return;
+        }
+
         ggml_cuda_pool_alloc<nv_bfloat16> dst_bf16(ctx.pool(id), row_diff*src1_ncols);
 
         const float alpha_f32 = 1.0f;
@@ -3635,6 +3652,18 @@ static void ggml_cuda_graph_evaluate_and_capture(ggml_backend_cuda_context * cud
                             ggml_cuda_op_fused_add(*cuda_ctx, &fused_add_node, n_fuse);
                             i += n_fuse - 1;
 
+                            continue;
+                        }
+                    }
+
+                    // Jetson study switch (GGML_CUDA_JETSON_GEMM_BIAS): BF16 GEMM + bias ADD as one cuBLASLt call
+                    if (node->op == GGML_OP_MUL_MAT && ggml_cuda_jetson_gemm_get_switches().bias_fuse &&
+                        !ggml_backend_buft_is_cuda_split(node->src[0]->buffer->buft)) {
+                        const ggml_op mm_add_ops[2] = { GGML_OP_MUL_MAT, GGML_OP_ADD };
+                        const int     mm_add_out[1] = { i + 1 };
+                        if (ggml_can_fuse_subgraph(cgraph, i, 2, mm_add_ops, mm_add_out, 1) &&
+                            ggml_cuda_jetson_gemm_try_fuse_bias(*cuda_ctx, node, cgraph->nodes[i + 1])) {
+                            i += 1;
                             continue;
                         }
                     }

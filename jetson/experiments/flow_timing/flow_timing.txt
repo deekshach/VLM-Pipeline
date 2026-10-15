@@ -1,0 +1,15 @@
+10 pairs of 1024x436 px
+CPU Farneback (msvd_prepare params), 12 threads      median    137.3 ms/pair   min    136.5
+CPU DIS ultrafast, 12 threads                        median      2.9 ms/pair   min      2.9
+CPU DIS medium, 12 threads                           median     23.0 ms/pair   min     22.9
+CPU Farneback (msvd_prepare params), 1 threads       median    139.3 ms/pair   min    138.9
+CPU DIS ultrafast, 1 threads                         median      8.2 ms/pair   min      8.1
+CPU DIS medium, 1 threads                            median     79.0 ms/pair   min     78.3
+OFA (VPI) quality=low grid=4 incl. prep+readback     median     12.0 ms/pair   min      8.9
+OFA (VPI) quality=low grid=1 incl. prep+readback     median     49.3 ms/pair   min     47.3
+OFA (VPI) quality=medium grid=4 incl. prep+readback  median     15.9 ms/pair   min     15.7
+OFA (VPI) quality=medium grid=1 incl. prep+readback  median     45.4 ms/pair   min     44.0
+OFA (VPI) quality=high grid=4 incl. prep+readback    median     18.4 ms/pair   min     18.2
+OFA (VPI) quality=high grid=1 incl. prep+readback    median     42.2 ms/pair   min     41.2
+OFA (VPI) quality=low grid=4, flow only              median      7.1 ms/pair   min      7.0
+OFA (VPI) quality=high grid=4, flow only             median     12.2 ms/pair   min     11.9

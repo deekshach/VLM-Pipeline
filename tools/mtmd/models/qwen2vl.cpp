@@ -53,6 +53,15 @@ ggml_cgraph * clip_graph_qwen2vl::build() {
             n_embd, n_patches_x * n_patches_y, batch_size);
     }
 
+    // Batched windows (Jetson study switch, see clip_vit_window_batch_enabled): when the image is a
+    // whole number of attention windows, the windowed layers attend within each window as a batch
+    // of independent sequences, so neither the dense mask nor the masked-out scores exist.
+    const int  win_merged   = (hparams.attn_window_size > 0 ? hparams.attn_window_size : 112) / patch_size / 2;
+    const bool window_batch = use_window_attn && proj_type == PROJECTOR_TYPE_QWEN25VL && clip_vit_window_batch_enabled() &&
+                              (n_patches_x / 2) % win_merged == 0 && (n_patches_y / 2) % win_merged == 0;
+    const int  win_patches  = win_merged * win_merged * 4;   // patches per window (64 for 112 px)
+    const int  n_windows    = n_patches / win_patches;
+
     ggml_tensor * inpL           = inp;
     ggml_tensor * window_mask    = nullptr;
     ggml_tensor * window_idx     = nullptr;
@@ -73,13 +82,15 @@ ggml_cgraph * clip_graph_qwen2vl::build() {
         ggml_set_name(inv_window_idx, "inv_window_idx");
         ggml_set_input(inv_window_idx);
         // mask for window attention
-        window_mask = ggml_new_tensor_2d(ctx0, GGML_TYPE_F32, n_pos, n_pos);
-        ggml_set_name(window_mask, "window_mask");
-        ggml_set_input(window_mask);
+        if (!window_batch) {
+            window_mask = ggml_new_tensor_2d(ctx0, GGML_TYPE_F32, n_pos, n_pos);
+            ggml_set_name(window_mask, "window_mask");
+            ggml_set_input(window_mask);
 
-        // if flash attn is used, we need to pad the mask and cast to f16
-        if (flash_attn_type == CLIP_FLASH_ATTN_TYPE_ENABLED) {
-            window_mask = ggml_cast(ctx0, window_mask, GGML_TYPE_F16);
+            // if flash attn is used, we need to pad the mask and cast to f16
+            if (flash_attn_type == CLIP_FLASH_ATTN_TYPE_ENABLED) {
+                window_mask = ggml_cast(ctx0, window_mask, GGML_TYPE_F16);
+            }
         }
 
         // inpL shape: [n_embd, n_patches_x * n_patches_y, batch_size]
@@ -129,6 +140,14 @@ ggml_cgraph * clip_graph_qwen2vl::build() {
             cb(Kcur, "Kcur_rope", il);
 
             ggml_tensor * attn_mask = full_attn ? nullptr : window_mask;
+
+            if (!full_attn && window_batch) {
+                // [d_head, n_head, n_patches] -> [d_head, n_head, win_patches, n_windows]
+                Qcur = ggml_reshape_4d(ctx0, Qcur, d_head, n_head, win_patches, n_windows);
+                Kcur = ggml_reshape_4d(ctx0, Kcur, d_head, n_head, win_patches, n_windows);
+                Vcur = ggml_reshape_4d(ctx0, Vcur, d_head, n_head, win_patches, n_windows);
+                attn_mask = nullptr;
+            }
 
             cur = build_attn(layer.o_w, layer.o_b,
                 Qcur, Kcur, Vcur, attn_mask, kq_scale, il);

@@ -1,0 +1,10 @@
+image chunk: 592 tokens, n_embd 3584, frames/round 8
+round 0 | solo: vit 4502 ms (563/frame)  prefill 4867 ms (608/frame)  serial sum 9369 ms
+        | concurrent: wall 9147 ms  (vit thread 8092 ms, 1011/frame; prefill thread 9138 ms, 1142/frame)
+        | speedup vs serial 1.024x   saved 223 ms   ideal(max) 4867 ms
+round 1 | solo: vit 4484 ms (560/frame)  prefill 5148 ms (643/frame)  serial sum 9631 ms
+        | concurrent: wall 9754 ms  (vit thread 8578 ms, 1072/frame; prefill thread 9745 ms, 1218/frame)
+        | speedup vs serial 0.987x   saved -122 ms   ideal(max) 5148 ms
+round 2 | solo: vit 4695 ms (587/frame)  prefill 5202 ms (650/frame)  serial sum 9898 ms
+        | concurrent: wall 9739 ms  (vit thread 8603 ms, 1075/frame; prefill thread 9732 ms, 1216/frame)
+        | speedup vs serial 1.016x   saved 159 ms   ideal(max) 5202 ms

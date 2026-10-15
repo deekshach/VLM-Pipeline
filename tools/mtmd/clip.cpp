@@ -628,7 +628,7 @@ ggml_tensor * clip_graph::build_attn(
         ggml_tensor * v = ggml_permute(ctx0, v_cur, 1, 2, 0, 3);
         v = ggml_cont(ctx0, v);
 
-        const auto n_tokens = q->ne[1];
+        const auto n_tokens = q->ne[1] * q->ne[3]; // ne[3] > 1: a batch of attention windows
         const auto n_head   = q->ne[2];
 
         ggml_tensor * kq = ggml_mul_mat(ctx0, k, q);
@@ -3739,9 +3739,15 @@ bool clip_image_batch_encode(clip_ctx * ctx, const int n_threads, const clip_ima
                 if (use_window_attn) {
                     const int attn_window_size = hparams.attn_window_size > 0 ? hparams.attn_window_size : 112;
                     const int grid_window = attn_window_size / patch_size / merge_ratio;
+                    // batched windows (see clip_vit_window_batch_enabled): the graph has no mask input
+                    const bool window_batch = clip_vit_window_batch_enabled() && ctx->model.proj_type == PROJECTOR_TYPE_QWEN25VL &&
+                                              pw % grid_window == 0 && ph % grid_window == 0;
                     int dst = 0;
                     // [num_vision_tokens, num_vision_tokens] attention mask tensor
-                    std::vector<float> mask(pow(ipw * iph, 2), std::numeric_limits<float>::lowest());
+                    std::vector<float> mask;
+                    if (!window_batch) {
+                        mask.assign((size_t)ipw * iph * ipw * iph, std::numeric_limits<float>::lowest());
+                    }
                     int mask_row = 0;
 
                     for (int y = 0; y < ph; y += grid_window) {
@@ -3761,7 +3767,7 @@ bool clip_image_batch_encode(clip_ctx * ctx, const int n_threads, const clip_ima
                                 }
                             }
 
-                            for (int r=0; r < win_h * win_w * merge_ratio * merge_ratio; r++) {
+                            for (int r=0; !window_batch && r < win_h * win_w * merge_ratio * merge_ratio; r++) {
                                 int row_offset = mask_row * (ipw * iph);
                                 std::fill(
                                     mask.begin() + row_offset + (dst_0 * merge_ratio * merge_ratio),
@@ -3774,7 +3780,9 @@ bool clip_image_batch_encode(clip_ctx * ctx, const int n_threads, const clip_ima
 
                     set_input_i32("window_idx",     idx);
                     set_input_i32("inv_window_idx", inv_idx);
-                    set_input_f32("window_mask",    mask);
+                    if (!window_batch) {
+                        set_input_f32("window_mask", mask);
+                    }
                 } else {
                     for (int i = 0; i < ph * pw; i++) {
                         idx[i] = i;

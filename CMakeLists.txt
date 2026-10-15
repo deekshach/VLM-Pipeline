@@ -215,6 +215,7 @@ if (LLAMA_BUILD_COMMON AND LLAMA_BUILD_TOOLS)
 endif()
 
 add_subdirectory(dmc955)
+add_subdirectory(jetson)
 
 # Automatically add all files from the 'licenses' directory
 file(GLOB EXTRA_LICENSES "${CMAKE_SOURCE_DIR}/licenses/LICENSE-*")

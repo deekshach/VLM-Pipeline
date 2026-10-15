@@ -1,0 +1,563 @@
+{
+  "mode": "baseline",
+  "video_name": "temple_2",
+  "n_flow_files": 49,
+  "n_frames_total": 50,
+  "global_complexity": 0.4244733154773712,
+  "n_frames_selected": 8,
+  "selected_frames": [
+    {
+      "index": 1,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 8,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 15,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 22,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 29,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 36,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 43,
+      "weight": 1.0,
+      "complexity": 0.0
+    },
+    {
+      "index": 50,
+      "weight": 1.0,
+      "complexity": 0.0
+    }
+  ],
+  "motion_profile": [
+    {
+      "frame": 1,
+      "mean_mag": 8.771486282348633,
+      "p95_mag": 13.474517822265625,
+      "variance": 11.973280906677246,
+      "complexity": 0.16132675111293793
+    },
+    {
+      "frame": 2,
+      "mean_mag": 8.72589111328125,
+      "p95_mag": 13.370970726013184,
+      "variance": 12.020736694335938,
+      "complexity": 0.152337446808815
+    },
+    {
+      "frame": 3,
+      "mean_mag": 8.713286399841309,
+      "p95_mag": 13.278270721435547,
+      "variance": 12.324450492858887,
+      "complexity": 0.15645979344844818
+    },
+    {
+      "frame": 4,
+      "mean_mag": 8.700544357299805,
+      "p95_mag": 13.232566833496094,
+      "variance": 12.934163093566895,
+      "complexity": 0.15924569964408875
+    },
+    {
+      "frame": 5,
+      "mean_mag": 8.822033882141113,
+      "p95_mag": 13.23912239074707,
+      "variance": 15.080138206481934,
+      "complexity": 0.16078375279903412
+    },
+    {
+      "frame": 6,
+      "mean_mag": 8.976591110229492,
+      "p95_mag": 13.25369930267334,
+      "variance": 19.95485496520996,
+      "complexity": 0.17517293989658356
+    },
+    {
+      "frame": 7,
+      "mean_mag": 9.544305801391602,
+      "p95_mag": 13.272392272949219,
+      "variance": 80.7745132446289,
+      "complexity": 0.2541784644126892
+    },
+    {
+      "frame": 8,
+      "mean_mag": 8.614958763122559,
+      "p95_mag": 13.029191017150879,
+      "variance": 13.00839900970459,
+      "complexity": 0.14434953033924103
+    },
+    {
+      "frame": 9,
+      "mean_mag": 8.825940132141113,
+      "p95_mag": 13.156505584716797,
+      "variance": 18.183391571044922,
+      "complexity": 0.1609400361776352
+    },
+    {
+      "frame": 10,
+      "mean_mag": 8.766115188598633,
+      "p95_mag": 13.230621337890625,
+      "variance": 18.449068069458008,
+      "complexity": 0.16671645641326904
+    },
+    {
+      "frame": 11,
+      "mean_mag": 8.826961517333984,
+      "p95_mag": 13.306501388549805,
+      "variance": 21.290943145751953,
+      "complexity": 0.16621673107147217
+    },
+    {
+      "frame": 12,
+      "mean_mag": 9.011247634887695,
+      "p95_mag": 13.431866645812988,
+      "variance": 30.911758422851563,
+      "complexity": 0.182586207985878
+    },
+    {
+      "frame": 13,
+      "mean_mag": 9.416513442993164,
+      "p95_mag": 13.868863105773926,
+      "variance": 73.1902847290039,
+      "complexity": 0.2468104362487793
+    },
+    {
+      "frame": 14,
+      "mean_mag": 9.1301908493042,
+      "p95_mag": 13.846647262573242,
+      "variance": 49.24501037597656,
+      "complexity": 0.23816028237342834
+    },
+    {
+      "frame": 15,
+      "mean_mag": 9.7208890914917,
+      "p95_mag": 21.81537628173828,
+      "variance": 50.20798873901367,
+      "complexity": 0.20808003842830658
+    },
+    {
+      "frame": 16,
+      "mean_mag": 9.464803695678711,
+      "p95_mag": 16.264183044433594,
+      "variance": 39.317440032958984,
+      "complexity": 0.198738694190979
+    },
+    {
+      "frame": 17,
+      "mean_mag": 10.712508201599121,
+      "p95_mag": 33.70561599731445,
+      "variance": 91.00537872314453,
+      "complexity": 0.21267713606357574
+    },
+    {
+      "frame": 18,
+      "mean_mag": 12.395367622375488,
+      "p95_mag": 47.883201599121094,
+      "variance": 155.63182067871094,
+      "complexity": 0.2601292133331299
+    },
+    {
+      "frame": 19,
+      "mean_mag": 18.15411376953125,
+      "p95_mag": 90.61840057373047,
+      "variance": 875.7948608398438,
+      "complexity": 0.5432097315788269
+    },
+    {
+      "frame": 20,
+      "mean_mag": 13.988399505615234,
+      "p95_mag": 52.365535736083984,
+      "variance": 228.86077880859375,
+      "complexity": 0.2902893126010895
+    },
+    {
+      "frame": 21,
+      "mean_mag": 17.621204376220703,
+      "p95_mag": 71.93327331542969,
+      "variance": 490.6077575683594,
+      "complexity": 0.4069550633430481
+    },
+    {
+      "frame": 22,
+      "mean_mag": 20.440040588378906,
+      "p95_mag": 78.56877136230469,
+      "variance": 689.0514526367188,
+      "complexity": 0.48832568526268005
+    },
+    {
+      "frame": 23,
+      "mean_mag": 26.194787979125977,
+      "p95_mag": 97.5542984008789,
+      "variance": 1245.80859375,
+      "complexity": 0.6464532017707825
+    },
+    {
+      "frame": 24,
+      "mean_mag": 29.803943634033203,
+      "p95_mag": 128.97970581054688,
+      "variance": 1867.777099609375,
+      "complexity": 0.8088265657424927
+    },
+    {
+      "frame": 25,
+      "mean_mag": 29.572711944580078,
+      "p95_mag": 150.10765075683594,
+      "variance": 2527.369384765625,
+      "complexity": 0.9873887300491333
+    },
+    {
+      "frame": 26,
+      "mean_mag": 20.620243072509766,
+      "p95_mag": 92.09822082519531,
+      "variance": 909.5364990234375,
+      "complexity": 0.5199389457702637
+    },
+    {
+      "frame": 27,
+      "mean_mag": 17.185997009277344,
+      "p95_mag": 78.77315521240234,
+      "variance": 555.8023681640625,
+      "complexity": 0.4413700997829437
+    },
+    {
+      "frame": 28,
+      "mean_mag": 19.6765193939209,
+      "p95_mag": 86.18021392822266,
+      "variance": 813.6015625,
+      "complexity": 0.5166342258453369
+    },
+    {
+      "frame": 29,
+      "mean_mag": 19.88727378845215,
+      "p95_mag": 133.85699462890625,
+      "variance": 1456.2303466796875,
+      "complexity": 0.6270654201507568
+    },
+    {
+      "frame": 30,
+      "mean_mag": 12.633965492248535,
+      "p95_mag": 13.471384048461914,
+      "variance": 755.1571044921875,
+      "complexity": 0.43877890706062317
+    },
+    {
+      "frame": 31,
+      "mean_mag": 7.463774681091309,
+      "p95_mag": 12.332693099975586,
+      "variance": 23.70969009399414,
+      "complexity": 0.14816966652870178
+    },
+    {
+      "frame": 32,
+      "mean_mag": 7.8283233642578125,
+      "p95_mag": 12.330584526062012,
+      "variance": 54.4150276184082,
+      "complexity": 0.18340910971164703
+    },
+    {
+      "frame": 33,
+      "mean_mag": 7.841475009918213,
+      "p95_mag": 12.369839668273926,
+      "variance": 45.89564514160156,
+      "complexity": 0.16928765177726746
+    },
+    {
+      "frame": 34,
+      "mean_mag": 8.01791763305664,
+      "p95_mag": 12.391636848449707,
+      "variance": 63.128623962402344,
+      "complexity": 0.18593066930770874
+    },
+    {
+      "frame": 35,
+      "mean_mag": 7.929563999176025,
+      "p95_mag": 12.253676414489746,
+      "variance": 58.75343322753906,
+      "complexity": 0.181430384516716
+    },
+    {
+      "frame": 36,
+      "mean_mag": 7.3176751136779785,
+      "p95_mag": 12.091023445129395,
+      "variance": 37.94801712036133,
+      "complexity": 0.22685939073562622
+    },
+    {
+      "frame": 37,
+      "mean_mag": 6.939623832702637,
+      "p95_mag": 11.976072311401367,
+      "variance": 15.650623321533203,
+      "complexity": 0.12965594232082367
+    },
+    {
+      "frame": 38,
+      "mean_mag": 6.828945159912109,
+      "p95_mag": 11.90607738494873,
+      "variance": 14.511652946472168,
+      "complexity": 0.13396255671977997
+    },
+    {
+      "frame": 39,
+      "mean_mag": 6.741618633270264,
+      "p95_mag": 11.835941314697266,
+      "variance": 13.610325813293457,
+      "complexity": 0.13797691464424133
+    },
+    {
+      "frame": 40,
+      "mean_mag": 6.666289329528809,
+      "p95_mag": 11.754687309265137,
+      "variance": 13.261552810668945,
+      "complexity": 0.10141626000404358
+    },
+    {
+      "frame": 41,
+      "mean_mag": 6.587396621704102,
+      "p95_mag": 11.668816566467285,
+      "variance": 13.076241493225098,
+      "complexity": 0.1000388115644455
+    },
+    {
+      "frame": 42,
+      "mean_mag": 6.507928848266602,
+      "p95_mag": 11.562339782714844,
+      "variance": 12.883645057678223,
+      "complexity": 0.10082113742828369
+    },
+    {
+      "frame": 43,
+      "mean_mag": 6.432082176208496,
+      "p95_mag": 11.463946342468262,
+      "variance": 12.694418907165527,
+      "complexity": 0.09981364756822586
+    },
+    {
+      "frame": 44,
+      "mean_mag": 6.350617408752441,
+      "p95_mag": 11.359087944030762,
+      "variance": 12.458856582641602,
+      "complexity": 0.0961785539984703
+    },
+    {
+      "frame": 45,
+      "mean_mag": 6.270879745483398,
+      "p95_mag": 11.244763374328613,
+      "variance": 12.24272632598877,
+      "complexity": 0.09735458344221115
+    },
+    {
+      "frame": 46,
+      "mean_mag": 6.197680473327637,
+      "p95_mag": 11.119555473327637,
+      "variance": 12.02164077758789,
+      "complexity": 0.09335868060588837
+    },
+    {
+      "frame": 47,
+      "mean_mag": 6.122966766357422,
+      "p95_mag": 11.000313758850098,
+      "variance": 11.834877014160156,
+      "complexity": 0.09186220914125443
+    },
+    {
+      "frame": 48,
+      "mean_mag": 6.045614719390869,
+      "p95_mag": 10.87738037109375,
+      "variance": 11.644039154052734,
+      "complexity": 0.09022130817174911
+    },
+    {
+      "frame": 49,
+      "mean_mag": 5.98051118850708,
+      "p95_mag": 10.741654396057129,
+      "variance": 11.415050506591797,
+      "complexity": 0.08875968307256699
+    }
+  ],
+  "spatial_analysis": [],
+  "inference": {
+    "generated_text": "A woman stands on a rooftop, her",
+    "n_tokens": 8,
+    "encode_time_ms": 14694.0,
+    "generation_time_ms": 639.0
+  },
+  "metrics": {
+    "motion_coverage": 0.17730531635293229,
+    "shannon_entropy": 3.667837797403416,
+    "temporal_reduction": 0.84,
+    "avg_spatial_savings": 0.0
+  },
+  "timing": {
+    "flow_analysis_ms": 180.0,
+    "frame_selection_ms": 0.0,
+    "encode_ms": 14694.0,
+    "generation_ms": 639.0,
+    "ttft_ms": 14914.0,
+    "total_ms": 25896.0,
+    "breakdown": {
+      "analysis_ms": 180.0,
+      "flow_ms": 180.0,
+      "rest_image_load_ms": 186.0,
+      "rest_tokenize_ms": 34.0,
+      "rest": {
+        "vit_ms": 8589.8291015625,
+        "prefill_img_ms": 5320.7197265625,
+        "prefill_txt_ms": 772.6399536132813,
+        "n_images": 8,
+        "tokens_encoded": 4608,
+        "n_full": 8,
+        "n_crop": 0,
+        "n_skip": 0,
+        "wc_diff_ms": 1.569000005722046,
+        "wc_prep_ms": 0.0
+      },
+      "vit_flash_attn": "off",
+      "window_cache": {
+        "frames": [
+          {
+            "action": "key",
+            "n_dirty": 0,
+            "crop": [
+              0,
+              0
+            ],
+            "tokens_encoded": 576,
+            "diff_ms": 0.0,
+            "prep_ms": 0.0,
+            "encode_ms": 1247.083984375
+          },
+          {
+            "action": "full",
+            "n_dirty": 22,
+            "crop": [
+              0,
+              0
+            ],
+            "tokens_encoded": 576,
+            "diff_ms": 0.23600000143051147,
+            "prep_ms": 0.0,
+            "encode_ms": 1052.2220458984375
+          },
+          {
+            "action": "full",
+            "n_dirty": 23,
+            "crop": [
+              0,
+              0
+            ],
+            "tokens_encoded": 576,
+            "diff_ms": 0.22200000286102295,
+            "prep_ms": 0.0,
+            "encode_ms": 1035.8780517578125
+          },
+          {
+            "action": "full",
+            "n_dirty": 26,
+            "crop": [
+              0,
+              0
+            ],
+            "tokens_encoded": 576,
+            "diff_ms": 0.22100000083446503,
+            "prep_ms": 0.0,
+            "encode_ms": 1065.0660400390625
+          },
+          {
+            "action": "full",
+            "n_dirty": 26,
+            "crop": [
+              0,
+              0
+            ],
+            "tokens_encoded": 576,
+            "diff_ms": 0.22200000286102295,
+            "prep_ms": 0.0,
+            "encode_ms": 1194.3709716796875
+          },
+          {
+            "action": "full",
+            "n_dirty": 22,
+            "crop": [
+              0,
+              0
+            ],
+            "tokens_encoded": 576,
+            "diff_ms": 0.22100000083446503,
+            "prep_ms": 0.0,
+            "encode_ms": 974.0809936523438
+          },
+          {
+            "action": "full",
+            "n_dirty": 20,
+            "crop": [
+              0,
+              0
+            ],
+            "tokens_encoded": 576,
+            "diff_ms": 0.22300000488758087,
+            "prep_ms": 0.0,
+            "encode_ms": 1057.9000244140625
+          },
+          {
+            "action": "full",
+            "n_dirty": 23,
+            "crop": [
+              0,
+              0
+            ],
+            "tokens_encoded": 576,
+            "diff_ms": 0.2240000069141388,
+            "prep_ms": 0.0,
+            "encode_ms": 963.2269897460938
+          }
+        ],
+        "calibration_ms": 0.0
+      }
+    }
+  },
+  "params": {
+    "sintel_dir": "/home/nvidia/data/MPI-Sintel",
+    "video_name": "temple_2",
+    "min_frames": 3,
+    "max_frames": 24,
+    "base_frames": 8,
+    "motion_threshold": 2.0,
+    "motion_percentile": 0.949999988079071,
+    "patch_grid": 4,
+    "spatial_threshold": 0.05000000074505806
+  },
+  "switches": {
+    "selection": "uniform",
+    "flow": "none",
+    "anchor_first": false,
+    "window_align": true,
+    "window_cache": true,
+    "wc_threshold": 48.0,
+    "wc_halo": 0,
+    "wc_rekey_frac": 0.75,
+    "wc_cost_model": false,
+    "vit_flash_attn": "off",
+    "vit_window_batch": false,
+    "gemm_f32_out": false,
+    "gemm_bias_fuse": false,
+    "gemm_table": ""
+  }
+}
