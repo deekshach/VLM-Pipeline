@@ -3,12 +3,18 @@
 //
 //   GGML_CUDA_JETSON_GEMM_RECORD=shapes.txt llama-jetson-vlm ...   # collect the shapes once
 //   jetson-gemm-tune shapes.txt table.txt [candidates=32] [reps=10]
+//   jetson-gemm-tune --profile m n k d_f32 bias table.txt   # one call with the heuristic's algorithm and
+//                                                           # one with the table's, in NVTX ranges
+//                                                           # "heuristic" and "tuned" (for ncu)
 //
 // Shapes are "m n k d_f32 bias" (the GEMM is D[m x n] = A[k x m]^T B[k x n], BF16 in, F32 accumulate,
 // D F32 or BF16, optional F32 bias epilogue), exactly as ggml-cuda/jetson-gemm.cu calls it.
 // Each candidate is timed (median of `reps` after 3 warm-up calls); the heuristic's first pick is
 // what the engine uses without a table, so its time is the baseline in the report.
 #include <cublasLt.h>
+#ifdef JETSON_NVTX
+#include <nvtx3/nvToolsExt.h>
+#endif
 #include <cuda_bf16.h>
 #include <cuda_runtime.h>
 
@@ -27,7 +33,73 @@
 
 static constexpr size_t WORKSPACE = 32u << 20;   // same as jetson-gemm.cu
 
+// --profile: run one shape once with the heuristic's first pick and once with the table's algorithm.
+static int profile_shape(int argc, char ** argv) {
+    if (argc < 8) { fprintf(stderr, "usage: %s --profile m n k d_f32 bias table.txt\n", argv[0]); return 1; }
+    const long long m = atoll(argv[2]), n = atoll(argv[3]), k = atoll(argv[4]);
+    const int d32 = atoi(argv[5]), use_bias = atoi(argv[6]);
+    cublasLtMatmulAlgo_t tuned;
+    bool have_tuned = false;
+    if (FILE * f = fopen(argv[7], "r")) {
+        char line[512];
+        while (fgets(line, sizeof(line), f)) {
+            long long tm, tn, tk; int td, tb; unsigned long long w[8];
+            if (sscanf(line, "%lld %lld %lld %d %d %llx %llx %llx %llx %llx %llx %llx %llx", &tm, &tn, &tk, &td, &tb,
+                       &w[0], &w[1], &w[2], &w[3], &w[4], &w[5], &w[6], &w[7]) == 13 &&
+                tm == m && tn == n && tk == k && td == d32 && tb == use_bias) {
+                memcpy(tuned.data, w, sizeof(w));
+                have_tuned = true;
+            }
+        }
+        fclose(f);
+    }
+    if (!have_tuned) { fprintf(stderr, "shape not in %s\n", argv[7]); return 1; }
+    cublasLtHandle_t h; CL(cublasLtCreate(&h));
+    void * ws; CK(cudaMalloc(&ws, WORKSPACE));
+    nv_bfloat16 *A, *B; void * D; float * bias = nullptr;
+    CK(cudaMalloc(&A, m * k * 2)); CK(cudaMalloc(&B, k * n * 2)); CK(cudaMalloc(&D, m * n * (d32 ? 4 : 2)));
+    CK(cudaMemset(A, 0, m * k * 2)); CK(cudaMemset(B, 0, k * n * 2));
+    if (use_bias) { CK(cudaMalloc(&bias, m * 4)); CK(cudaMemset(bias, 0, m * 4)); }
+    cublasLtMatmulDesc_t op; cublasLtMatrixLayout_t la, lb, ld;
+    CL(cublasLtMatmulDescCreate(&op, CUBLAS_COMPUTE_32F, CUDA_R_32F));
+    const cublasOperation_t ta = CUBLAS_OP_T, tb = CUBLAS_OP_N;
+    CL(cublasLtMatmulDescSetAttribute(op, CUBLASLT_MATMUL_DESC_TRANSA, &ta, sizeof(ta)));
+    CL(cublasLtMatmulDescSetAttribute(op, CUBLASLT_MATMUL_DESC_TRANSB, &tb, sizeof(tb)));
+    if (use_bias) {
+        const cublasLtEpilogue_t epi = CUBLASLT_EPILOGUE_BIAS; const cudaDataType_t bt = CUDA_R_32F;
+        CL(cublasLtMatmulDescSetAttribute(op, CUBLASLT_MATMUL_DESC_EPILOGUE, &epi, sizeof(epi)));
+        CL(cublasLtMatmulDescSetAttribute(op, CUBLASLT_MATMUL_DESC_BIAS_POINTER, &bias, sizeof(bias)));
+        CL(cublasLtMatmulDescSetAttribute(op, CUBLASLT_MATMUL_DESC_BIAS_DATA_TYPE, &bt, sizeof(bt)));
+    }
+    CL(cublasLtMatrixLayoutCreate(&la, CUDA_R_16BF, k, m, k));
+    CL(cublasLtMatrixLayoutCreate(&lb, CUDA_R_16BF, k, n, k));
+    CL(cublasLtMatrixLayoutCreate(&ld, d32 ? CUDA_R_32F : CUDA_R_16BF, m, n, m));
+    cublasLtMatmulPreference_t pref; CL(cublasLtMatmulPreferenceCreate(&pref));
+    const size_t wsz = WORKSPACE;
+    CL(cublasLtMatmulPreferenceSetAttribute(pref, CUBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES, &wsz, sizeof(wsz)));
+    cublasLtMatmulHeuristicResult_t res; int n_res = 0;
+    CL(cublasLtMatmulAlgoGetHeuristic(h, op, la, lb, ld, ld, pref, 1, &res, &n_res));
+    const float alpha = 1.0f, beta = 0.0f;
+    const cublasLtMatmulAlgo_t * algos[2] = { &res.algo, &tuned };
+    const char * names[2] = { "heuristic", "tuned" };
+    for (int i = 0; i < 2; i++) {
+        CL(cublasLtMatmul(h, op, &alpha, A, la, B, lb, &beta, D, ld, D, ld, algos[i], ws, WORKSPACE, 0));   // warm-up
+        CK(cudaDeviceSynchronize());
+#ifdef JETSON_NVTX
+        nvtxRangePushA(names[i]);
+#endif
+        CL(cublasLtMatmul(h, op, &alpha, A, la, B, lb, &beta, D, ld, D, ld, algos[i], ws, WORKSPACE, 0));
+        CK(cudaDeviceSynchronize());
+#ifdef JETSON_NVTX
+        nvtxRangePop();
+#endif
+        printf("%s done\n", names[i]);
+    }
+    return 0;
+}
+
 int main(int argc, char ** argv) {
+    if (argc > 1 && strcmp(argv[1], "--profile") == 0) return profile_shape(argc, argv);
     if (argc < 3) {
         fprintf(stderr, "usage: %s <shapes.txt> <table.txt> [candidates=32] [reps=10]\n", argv[0]);
         return 1;

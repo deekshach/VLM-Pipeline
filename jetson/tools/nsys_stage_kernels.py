@@ -10,15 +10,18 @@ decode) that was open on the launching thread when it was launched.
 import collections, os, sqlite3, sys
 
 STAGES = ["vit", "prefill_img", "prefill_txt", "decode", "flow"]
-CLASSES = ["attention", "softmax", "attn matmul", "GEMM", "cast", "add", "norm", "rope", "copy", "glu", "other"]
+CLASSES = ["attention", "softmax", "attn matmul", "GEMM", "GEMM split-K", "cast", "add", "norm", "rope", "copy",
+           "glu", "other"]
 
 
 def classify(name, gz):
     n = name.lower()
     if "flash_attn" in n: return "attention"
     if "soft_max" in n: return "softmax"
-    if ("gemm" in n or "kernel2" in n or "mul_mat" in n) and gz > 1: return "attn matmul"   # batched over heads
-    if "gemm" in n or "kernel2" in n or "mul_mat" in n or "cutlass" in n: return "GEMM"
+    if any(k in n for k in ("gemm", "kernel2", "mul_mat", "cutlass", "xmma", "splitk")):
+        # weight GEMMs take BF16 operands; the ViT's KQ / KQV products without flash attention are F32/TF32
+        if "bf16" not in n and "bfloat16" not in n: return "attn matmul"
+        return "GEMM split-K" if gz > 1 else "GEMM"   # gridZ > 1 on a weight GEMM = split-K slices
     if "convert" in n: return "cast"
     if "bin_bcast" in n or "add" in n: return "add"
     if "norm" in n: return "norm"
