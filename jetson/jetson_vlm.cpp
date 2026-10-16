@@ -1719,7 +1719,8 @@ static void write_results_json(const std::string & output_path,
         LOG_ERR("Cannot write JSON to %s\n", output_path.c_str());
         return;
     }
-    out << j.dump(2) << std::endl;
+    // generated text can end in a partial UTF-8 sequence (token limit) or the model can emit invalid bytes
+    out << j.dump(2, ' ', false, json::error_handler_t::replace) << std::endl;
     out.close();
 
     LOG_INF("Results written to %s\n", output_path.c_str());
