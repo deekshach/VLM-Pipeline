@@ -54,6 +54,7 @@ struct rgb_frame {
 #include <algorithm>
 #include <numeric>
 #include <random>
+#include <filesystem>
 #include <fstream>
 #include <chrono>
 #include <cinttypes>
@@ -100,6 +101,7 @@ struct sintel_params {
     bool        gemm_f32_out  = false;
     bool        gemm_bias_fuse = false;
     bool        act_dedup      = false;
+    std::string dump_dir;                 // --dump-dir: what the LLM receives (accuracy study)
     bool        act_fuse       = false;
     std::string gemm_table;
     std::string gemm_record;
@@ -173,6 +175,8 @@ static std::vector<char *> filter_custom_args(int argc, char ** argv, sintel_par
             sparams.gemm_f32_out = true;
         } else if (arg == "--gemm-bias-fuse") {
             sparams.gemm_bias_fuse = true;
+        } else if (arg == "--dump-dir" && i + 1 < argc) {
+            sparams.dump_dir = argv[++i];
         } else if (arg == "--act-dedup") {
             sparams.act_dedup = true;
         } else if (arg == "--act-fuse") {
@@ -229,7 +233,9 @@ static void show_additional_info(int /*argc*/, char ** argv) {
     printf("  --gemm-table <f>    Per-shape cuBLASLt algorithms from jetson-gemm-tune\n");
     printf("  --act-dedup         Convert each F32 GEMM input to BF16 once, shared by the GEMMs reading it\n");
     printf("  --act-fuse          RMS norm and SwiGLU write the BF16 GEMM input directly (no F32 intermediate)\n");
-    printf("  --gemm-record <f>   Append the BF16 GEMM shapes this run uses (input for jetson-gemm-tune)\n\n");
+    printf("  --gemm-record <f>   Append the BF16 GEMM shapes this run uses (input for jetson-gemm-tune)\n");
+    printf("  --dump-dir <dir>    Write what the LLM receives: each image's embeddings (after the window cache),\n");
+    printf("                      the text tokens, the first-token logits and the generated tokens (manifest.jsonl)\n\n");
     printf("Standard llama.cpp options (-p, -n, -ngl, -c, etc.) are also supported.\n");
 }
 
@@ -880,6 +886,40 @@ struct encode_breakdown {
     int   tokens_encoded = 0;      // tokens that went through the ViT
 };
 
+// --dump-dir: the exact input sequence of the LLM, for the accuracy study (jetson/tools/accuracy/). manifest.jsonl
+// holds one line per segment in prefill order: text tokens, or an image (embeddings in img_<k>.f32, F32 raster
+// order, nx*ny x n_embd) with the window-cache action and the re-encoded rectangle in windows.
+static std::string g_dump_dir;
+static int         g_dump_img = 0;
+
+static void dump_line(const std::string & line) {
+    if (g_dump_dir.empty()) return;
+    FILE * f = fopen((g_dump_dir + "/manifest.jsonl").c_str(), "a");
+    if (f) { fprintf(f, "%s\n", line.c_str()); fclose(f); }
+}
+
+static void dump_tokens(const char * kind, const llama_token * tok, size_t n) {
+    if (g_dump_dir.empty()) return;
+    std::string l = std::string("{\"type\":\"") + kind + "\",\"tokens\":[";
+    for (size_t i = 0; i < n; i++) l += (i ? "," : "") + std::to_string(tok[i]);
+    dump_line(l + "]}");
+}
+
+static void dump_image(const float * embd, int nx, int ny, int n_embd, const char * action,
+                       int cx = 0, int cy = 0, int cw = 0, int ch = 0) {
+    if (g_dump_dir.empty()) return;
+    char name[32];
+    snprintf(name, sizeof(name), "img_%03d.f32", g_dump_img++);
+    if (FILE * f = fopen((g_dump_dir + "/" + name).c_str(), "wb")) {
+        fwrite(embd, sizeof(float), (size_t) nx * ny * n_embd, f);
+        fclose(f);
+    }
+    char l[256];
+    snprintf(l, sizeof(l), "{\"type\":\"image\",\"file\":\"%s\",\"nx\":%d,\"ny\":%d,\"n_embd\":%d,\"action\":\"%s\","
+             "\"rect\":[%d,%d,%d,%d]}", name, nx, ny, n_embd, action, cx, cy, cw, ch);
+    dump_line(l);
+}
+
 // mtmd_helper_eval_chunk_single, with the ViT encode and the LLM prefill timed separately
 // (each followed by a sync so the times do not bleed into the next stage).
 static int32_t eval_chunk_timed(mtmd_context * mctx, llama_context * lctx, const mtmd_input_chunk * chunk,
@@ -887,6 +927,11 @@ static int32_t eval_chunk_timed(mtmd_context * mctx, llama_context * lctx, const
     int64_t t0 = ggml_time_us();
     if (mtmd_input_chunk_get_type(chunk) != MTMD_INPUT_CHUNK_TYPE_IMAGE) {
         NVTX_PUSH("prefill_txt");
+        if (!g_dump_dir.empty()) {
+            size_t n_tok = 0;
+            const llama_token * tok = mtmd_input_chunk_get_tokens_text(chunk, &n_tok);
+            dump_tokens("text", tok, n_tok);
+        }
         int32_t ret = mtmd_helper_eval_chunk_single(mctx, lctx, chunk, n_past, 0, n_batch, logits_last, &n_past);
         llama_synchronize(lctx);
         NVTX_POP();
@@ -898,6 +943,11 @@ static int32_t eval_chunk_timed(mtmd_context * mctx, llama_context * lctx, const
     NVTX_POP();
     if (ret != 0) return ret;
     int64_t t1 = ggml_time_us();
+    if (!g_dump_dir.empty()) {
+        const auto * it = mtmd_input_chunk_get_tokens_image(chunk);
+        const int nx = (int) mtmd_image_tokens_get_nx(it), ny = (int) mtmd_image_tokens_get_ny(it);
+        dump_image(mtmd_get_output_embd(mctx), nx, ny, llama_model_n_embd_inp(llama_get_model(lctx)), "full", 0, 0, nx, ny);
+    }
     NVTX_PUSH("prefill_img");
     ret = mtmd_helper_decode_image_chunk(mctx, lctx, chunk, mtmd_get_output_embd(mctx), n_past, 0, n_batch, &n_past);
     llama_synchronize(lctx);
@@ -1108,6 +1158,7 @@ static int32_t eval_image_chunk_wc(mtmd_context * mctx, llama_context * lctx, co
     }
     const int nwx = cnx / WINDOW_TOKENS, nwy = cny / WINDOW_TOKENS;
     wc_frame_record fr;
+    int rx = 0, ry = 0, rw = nwx, rh = nwy;   // re-encoded rectangle in windows (for --dump-dir)
 
     auto encode_full = [&](const char * action) -> bool {
         int64_t t = ggml_time_us();
@@ -1166,10 +1217,12 @@ static int32_t eval_image_chunk_wc(mtmd_context * mctx, llama_context * lctx, co
 
         if (fr.n_dirty == 0) {
             fr.action = "skip";
+            rw = rh = 0;
         } else if (cw == nwx && ch == nwy) {
             if (!encode_full("full")) return -1;
         } else {
             const int cx = std::min(x0, nwx - cw), cy = std::min(y0, nwy - ch);
+            rx = cx; ry = cy; rw = cw; rh = ch;
             t = ggml_time_us();
             rgb_frame crop = crop_rgb(img, cx * WINDOW_PX, cy * WINDOW_PX, cw * WINDOW_PX, ch * WINDOW_PX);
             encoded_region reg;
@@ -1205,6 +1258,7 @@ static int32_t eval_image_chunk_wc(mtmd_context * mctx, llama_context * lctx, co
     if (fr.action == "skip") b.n_skip++; else if (fr.action == "crop") b.n_crop++; else b.n_full++;
 
     int64_t t1 = ggml_time_us();
+    dump_image(wc.cache.data(), cnx, cny, n_embd, fr.action.c_str(), rx, ry, rw, rh);
     NVTX_PUSH("prefill_img");
     const int32_t ret = mtmd_helper_decode_image_chunk(mctx, lctx, chunk, wc.cache.data(), n_past, 0, n_batch, &n_past);
     llama_synchronize(lctx);
@@ -1434,6 +1488,7 @@ static inference_result run_inference(adaptive_vlm_context & ctx,
             }
         }
         if (!first.empty()) {
+            dump_tokens("text", first.data(), first.size());
             int64_t t_txt = ggml_time_us();
             llama_batch text_batch = llama_batch_init((int32_t)first.size(), 0, 1);
             for (size_t k = 0; k < first.size(); k++) {
@@ -1473,6 +1528,12 @@ static inference_result run_inference(adaptive_vlm_context & ctx,
     LOG_INF("Chunks evaluated. n_past = %d, encode_time = %.1f ms\n",
             (int)ctx.n_past, result.encode_time_ms);
 
+    if (!g_dump_dir.empty()) {   // the next-token distribution after the full prompt
+        const float * lg = llama_get_logits_ith(ctx.lctx, -1);
+        const int n_vocab = llama_vocab_n_tokens(ctx.vocab);
+        if (FILE * f = fopen((g_dump_dir + "/logits0.f32").c_str(), "wb")) { fwrite(lg, sizeof(float), n_vocab, f); fclose(f); }
+    }
+
     // Generate tokens
     NVTX_PUSH("decode");
     int64_t t_gen_start = ggml_time_ms();
@@ -1506,6 +1567,7 @@ static inference_result run_inference(adaptive_vlm_context & ctx,
 
     result.generated_text    = generated_text;
     result.n_tokens_generated = (int)generated_tokens.size();
+    dump_tokens("generated", generated_tokens.data(), generated_tokens.size());
     result.inference_time_ms  = (float)(ggml_time_ms() - t_gen_start);
 
     LOG_INF("Generated %d tokens in %.1f ms (%.1f t/s)\n",
@@ -1688,6 +1750,11 @@ int main(int argc, char ** argv) {
     if (sparams.gemm_bias_fuse)   setenv("GGML_CUDA_JETSON_GEMM_BIAS", "1", 1);
     if (sparams.act_dedup)        setenv("GGML_CUDA_JETSON_ACT_DEDUP", "1", 1);
     if (sparams.act_fuse)         setenv("GGML_CUDA_JETSON_ACT_FUSE", "1", 1);
+    if (!sparams.dump_dir.empty()) {
+        g_dump_dir = sparams.dump_dir;
+        std::filesystem::create_directories(g_dump_dir);
+        std::remove((g_dump_dir + "/manifest.jsonl").c_str());
+    }
     if (!sparams.gemm_table.empty())  setenv("GGML_CUDA_JETSON_GEMM_TABLE", sparams.gemm_table.c_str(), 1);
     if (!sparams.gemm_record.empty()) setenv("GGML_CUDA_JETSON_GEMM_RECORD", sparams.gemm_record.c_str(), 1);
 

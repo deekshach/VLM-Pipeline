@@ -48,6 +48,11 @@ if (JETSON_NVTX3_DIR)
     target_compile_features(jetson-prefill-probe PRIVATE cxx_std_17)
     target_include_directories(jetson-prefill-probe PRIVATE ${JETSON_NVTX3_DIR})
 
+    # Dense ViT reference: every frame of a clip encoded whole (accuracy study)
+    add_executable(jetson-embed-frames tools/embed_frames.cpp)
+    target_link_libraries(jetson-embed-frames PRIVATE mtmd llama Threads::Threads)
+    target_compile_features(jetson-embed-frames PRIVATE cxx_std_17)
+
     # ViT encode and LLM prefill pipelined on two threads vs one after the other (optional stream priorities)
     add_executable(jetson-overlap-probe tools/overlap_probe.cpp)
     target_link_libraries(jetson-overlap-probe PRIVATE mtmd llama ggml Threads::Threads)
