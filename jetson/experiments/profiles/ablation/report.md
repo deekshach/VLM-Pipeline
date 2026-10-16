@@ -361,8 +361,25 @@ LLM prefill, last ubatch (512 tokens), per ubatch (ms / MB DRAM / MB L2 req):
 
 ## 3. Producer -> consumer reuse in L2 (caches kept between kernels vs flushed before each)
 
-| run | class | DRAM MB flushed | DRAM MB warm | removed by L2 reuse | L2 hit flushed -> warm |
-|---|---|---|---|---|---|
+Kernel time, warm (nsys, real run) vs flushed (ncu), ms per frame / per ubatch, change = warm/flushed - 1.
+
+| run | softmax | attn matmul | attention | GEMM split-K | cast | add | norm | rope | glu | copy | all |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| vit_base_9x4 | +2% | -0% |  | +4% | -11% | -3% | +3% | +2% | -9% | +7% | 978.4 / 985.8 (-1%) |
+| vit_base_5x2 | +1% | -2% |  |  | -15% | -13% | -3% | -5% | -9% | +2% | 208.0 / 217.5 (-4%) |
+| vit_base_1x2 | -26% | -20% |  | +4% | -43% | -51% | -40% | -22% | -16% | -18% | 31.8 / 41.5 (-23%) |
+| vit_W_9x4 | -3% | +0% |  | +4% | -13% | -4% | +3% | +3% | -12% | +6% | 523.0 / 541.3 (-3%) |
+| vit_W_5x2 | -7% | -2% |  |  | -15% | -13% | -5% | -6% | -9% | +5% | 148.0 / 158.4 (-7%) |
+| vit_W_1x2 | -37% | -33% |  | +5% | -42% | -51% | -40% | -21% | -19% | -17% | 31.6 / 41.3 (-24%) |
+| vit_FB_9x4 | +2% | -1% |  | +3% | -10% | -1% | +3% | +3% | -8% | +8% | 871.1 / 869.1 (+0%) |
+| vit_FB_5x2 | +1% | -1% |  |  | -17% | -9% | -5% | +1% | -9% | +5% | 181.2 / 184.9 (-2%) |
+| vit_FB_1x2 | -25% | -21% |  | +3% | -45% | -43% | -40% | -24% | -18% | -15% | 27.7 / 33.2 (-17%) |
+| vit_WFBT_9x4 | -3% | +0% |  |  | -13% | -4% | +3% | +2% | -12% | +5% | 411.5 / 420.8 (-2%) |
+| vit_WFBT_5x2 | -7% | -1% |  |  | -14% | -9% | -5% | -2% | -9% | +5% | 112.9 / 118.2 (-5%) |
+| vit_WFBT_1x2 | -37% | -35% |  | -5% | -44% | -42% | -40% | -22% | -18% | -17% | 23.8 / 29.5 (-19%) |
+| llm_base_1152 |  |  | -5% | -8% | -9% | -9% | -2% | -22% | -13% | -14% | 454.7 / 497.8 (-9%) |
+| llm_base_2304 |  |  | -5% | -9% | -9% | -9% | -2% | -22% | -14% | -12% | 465.7 / 514.2 (-9%) |
+| llm_base_4608 |  |  | -4% | -8% | -8% | -9% | -3% | -22% | -12% | -4% | 491.6 / 535.0 (-8%) |
 
 LLM prefill, last ubatch: the warm result covers the whole range, which also holds the output head (152064 x 3584 BF16 = 1.09 GB of weights read for the last token's logits) and the embedding lookup; the flushed figure is 28 x the profiled layers.
 

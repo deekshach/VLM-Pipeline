@@ -87,4 +87,47 @@ Adaptive sampling (KV length), last ubatch, base:
   outgrows the 4 MB L2: flash attention streams K/V tiles, so no cliff appears at the L2 size. Fewer frames
   mainly remove whole ubatches (linear work); the KV term is 4-11% of a ubatch.
 
-Pending: `sudo bash jetson/scripts/run_ablation.sh warm` (L2 reuse between kernels; report section 3).
+## L2 reuse between kernels (warm vs flushed caches, 2026-10-16; report section 3)
+
+Does a kernel find its producer's output still in the 4 MB L2? Section 2 flushes the caches before every
+kernel, so it cannot tell. Two measurements:
+
+- Time: nsys kernel time (real run, caches as the previous kernel left them) vs ncu time (flushed), per class, at
+  the same clock (the base frame totals agree within 1%).
+- DRAM bytes, LLM only: `run_ablation.sh warm` profiles the whole last-ubatch range in one result (app-range
+  replay, caches not flushed).
+
+Per-kernel ncu with `--cache-control none` was tried and dropped. Kernel replay saves and restores memory around
+each kernel. Per-kernel application replay showed no change at all, even at 1x2 where the time shows casts 44%
+faster. A microbenchmark confirms that L2 contents do survive a kernel boundary (a 2 MB buffer re-read
+kernel-to-kernel at 160-220 GB/s, vs 75 GB/s DRAM), so ncu's own work between kernels disturbs L2. It also hung
+on the ViT configs without F and on the LLM flash-attention kernel. app-range replay crashes the ViT probe.
+
+| | full frame 9x4 | crop 5x2 | crop 1x2 |
+|---|---|---|---|
+| ViT base, warm vs flushed | -1% | -4% | -23% |
+| ViT all switches (WFBT) | -2% | -5% | -19% |
+
+| | 2 frames | 4 frames | 8 frames |
+|---|---|---|---|
+| LLM last ubatch, time | -9% | -9% | -8% |
+| LLM last ubatch, DRAM read | -2% | -2% | -1% |
+
+- Full frame: there is almost no reuse between kernels. The activations (2,304 patches x 1280 x 4 B = 11.8 MB per
+  tensor) are about 3x the L2, so each kernel streams its input from DRAM. Only the casts and the GLU, which
+  read what the previous kernel just wrote, gain 9-13%. The two largest classes (softmax, attention matmul)
+  do not change.
+- Crops: the window cache shrinks the working set below the L2 size, so the producer's output is still in L2.
+  At 1x2 (128 patches, 0.6 MB per tensor), casts, adds and norms are 40-50% faster and softmax and the attention
+  matmul 20-37% faster. In the real run, then, the 1x2 crop costs 24 ms, not the 30-41 ms the flushed counters
+  imply. This gain from cross-kernel reuse is an extra effect of the window cache on top of the smaller work.
+  The weight GEMMs gain little (-3 to -5%): their weights (about 39 MB per layer pass) are read once per encode.
+- F + B remove the cast and add kernels, the classes that profit most from warm L2 at crops. So fusion saves
+  less in the real run than in the flushed counters (1x2: FB -17% vs base -23% warm gain).
+- LLM prefill: the warm run is 8-9% faster, but DRAM bytes drop only 1-2% (L2 hit 85-87%). A 512-token activation is
+  3.7 MB in BF16, 7.3 MB in F32: the same size as or larger than the L2, and the weights (13 GB per ubatch) are
+  read once. So the time saved is mostly latency (warm TLB and instruction caches, first wave of each kernel),
+  not fewer bytes. Rope (-22%) and the GLU (-13%), which consume the previous kernel's output directly, gain the
+  most. The gain does not depend on the KV length (2/4/8 frames).
+- The microarchitectural findings of section 2 (which switch moves which bytes) stand. Their absolute ms at crops
+  are upper bounds; use the nsys times (section 1) for TTFT.

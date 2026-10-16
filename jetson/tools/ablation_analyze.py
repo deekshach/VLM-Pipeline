@@ -387,21 +387,33 @@ def main():
                             "LLM prefill vs KV length (adaptive sampling: fewer frames = shorter KV)")
             intensive_table([(c, lf.get(f"llm_{c}_4608")) for c in LLM_CFGS], "LLM prefill per switch config (N=4608)")
 
-    # ---- warm caches: cross-kernel reuse. warm/vit_*: the same kernels as section 2 with caches kept between
-    # kernels (application replay); warm/llm_*: one result per whole ubatch range (app-range replay).
-    wa = {os.path.basename(p)[:-8]: ncu_kernels(p) for p in glob.glob(os.path.join(D, "warm", "*_raw.csv"))}
+    # ---- warm caches: cross-kernel reuse. (a) time: nsys runs with the caches as the previous kernel left them,
+    # ncu flushes before each kernel; both at the same clock (base totals agree within 1%), so per class
+    # nsys / ncu - 1 is what the warm state saves (L2 contents, plus TLB and instruction caches). Per-kernel ncu
+    # with --cache-control none cannot measure this: its profiling between kernels disturbs L2 (it reported no
+    # change even at 1x2, where the time shows -40% on casts). (b) DRAM bytes: warm/llm_* is one ncu result per
+    # whole ubatch range (app-range replay, nothing profiled between kernels); app-range crashes the ViT probe.
+    wa = {os.path.basename(p)[:-8]: ncu_kernels(p) for p in glob.glob(os.path.join(D, "warm", "llm_*_raw.csv"))}
     wa = {n: ks for n, ks in wa.items() if ks and n in nc}
-    if wa:
+    if ns and nc:
         print("\n## 3. Producer -> consumer reuse in L2 (caches kept between kernels vs flushed before each)\n")
-        print("| run | class | DRAM MB flushed | DRAM MB warm | removed by L2 reuse | L2 hit flushed -> warm |")
-        print("|---|---|---|---|---|---|")
-        for n in sorted(k for k in wa if k.startswith("vit_")):
-            a, b = vit_frame(nc[n]), vit_frame(wa[n])
-            if not a or not b: continue
-            for c in ["softmax", "attn matmul", "GEMM", "GEMM split-K", "cast", "add", "norm", "rope", "glu", "copy", "all"]:
-                if c not in a or c not in b or a[c].get("dram") < 5: continue
-                x, y = a[c].get("dram"), b[c].get("dram")
-                print(f"| {n} | {c} | {x:,.0f} | {y:,.0f} | {(1 - y / x) * 100:.0f}% | {a[c].get('hit'):.0f}% -> {b[c].get('hit'):.0f}% |")
+        print("Kernel time, warm (nsys, real run) vs flushed (ncu), ms per frame / per ubatch, change = warm/flushed - 1.\n")
+        rows = [(f"vit_{c}", f"vit_{sh}", f"vit_{c}_{sh}", vit_frame) for c in ("base", "W", "FB", "WFBT")
+                for sh in ("9x4", "5x2", "1x2")]
+        rows += [("llm_base", f"prefill_last_{n}", f"llm_base_{n}", llm_ubatch) for n in (1152, 2304, 4608)]
+        cols = ["softmax", "attn matmul", "attention", "GEMM split-K", "cast", "add", "norm", "rope", "glu", "copy"]
+        print("| run | " + " | ".join(cols) + " | all |\n|---|" + "---|" * (len(cols) + 1))
+        for src, rng, run, compose in rows:
+            ks = ns.get(src, {}).get(rng)
+            if not ks or run not in nc: continue
+            f = compose(nc[run])
+            cells, tw, tf = [], 0.0, 0.0
+            for c in cols + ["GEMM"]:
+                w = sum(k["us"] for k in ks if k["cls"] == c) / 1e3
+                u = f[c].get("us") / 1e3 if c in f else 0.0
+                if c != "GEMM" or src.startswith("vit_"): tw += w; tf += u   # LLM range GEMM holds the output head
+                if c != "GEMM": cells.append(f"{(w / u - 1) * 100:+.0f}%" if u >= 0.3 else "")
+            print(f"| {run} | " + " | ".join(cells) + f" | {tw:.1f} / {tf:.1f} ({(tw / tf - 1) * 100:+.0f}%) |")
         llm = sorted(k for k in wa if k.startswith("llm_"))
         if llm:
             print("\nLLM prefill, last ubatch: the warm result covers the whole range, which also holds the output head "

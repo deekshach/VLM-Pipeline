@@ -12,9 +12,8 @@
 #                                                # 5 ViT / 3 prefill repetitions), whole
 #                                                # frame / whole prefill; also fixes the ncu launch windows
 #   sudo bash jetson/scripts/run_ablation.sh ncu # hardware counters, two layers per run (incl. global layer 7)
-#   sudo bash jetson/scripts/run_ablation.sh warm # L2 with caches NOT flushed between kernels (application
-#                                                # replay: ViT per kernel, LLM per whole ubatch range); DRAM read
-#                                                # vs the flushed per-kernel reads = producer -> consumer reuse
+#   sudo bash jetson/scripts/run_ablation.sh warm # LLM DRAM read with caches NOT flushed between kernels (one
+#                                                # result per ubatch range) vs the flushed per-kernel reads
 #   python3 jetson/tools/ablation_analyze.py     # afterwards, no sudo
 set -u
 MODE="${1:-}"
@@ -71,13 +70,14 @@ ncu|warm)
         REPLAY=(--replay-mode kernel --cache-control all)
         FILTER=cat
     else
-        # Kernel replay cannot measure reuse between kernels: it saves and restores device memory around each
-        # kernel (evicting the 4 MB L2) and needs 3 passes even for 4 metrics. Use application replay instead:
-        # ViT per kernel (same two-layer window as ncu mode), LLM per whole ubatch range (app-range; per-kernel
-        # application replay hangs at its flash-attention kernel, and app-range crashes the ViT probe).
+        # DRAM bytes with caches kept between kernels: one result per whole LLM ubatch range (app-range replay).
+        # Per-kernel profiling cannot measure this: kernel replay saves/restores memory around each kernel, and
+        # per-kernel application replay disturbs L2 between kernels (no change measured even where the real-run
+        # time shows reuse), hangs at the LLM flash-attention kernel and in ViT configs without F. app-range
+        # crashes the ViT probe, so the ViT warm effect is measured as time instead (report section 3).
         DEST="$OUT/warm"
         SECTIONS=(--metrics gpu__time_duration.sum,lts__t_sectors.sum,lts__d_sectors_fill_sysmem.sum,lts__t_sector_hit_rate.pct)
-        FILTER='grep -E ^(vit_(base|W|FB|FBT|WFBT)_|llm_base_)'
+        FILTER='grep -E ^llm_base_'
     fi
     # windows.txt: <run name> <nvtx range> <skip> <count>, e.g. "vit_WF_9x4 vit_9x4 237 83"
     grep -v '^#' "$OUT/windows.txt" | $FILTER | while read -r NAME RANGE SKIP COUNT; do
@@ -90,10 +90,7 @@ ncu|warm)
             APP=("$REPO/build/bin/jetson-prefill-probe" "$LLM" "${RANGE#prefill_last_}" 1 1)
         fi
         WINDOW=(--launch-skip "$SKIP" --launch-count "$COUNT")
-        if [ "$MODE" = warm ]; then
-            if [[ "$NAME" == vit_* ]]; then REPLAY=(--replay-mode application --cache-control none)
-            else REPLAY=(--replay-mode app-range --cache-control none); WINDOW=(); fi   # whole range = one result
-        fi
+        [ "$MODE" = warm ] && { REPLAY=(--replay-mode app-range --cache-control none); WINDOW=(); }   # whole range
         run() {
             env $(envs_for "$CFG") timeout -k 30 "${RUN_TIMEOUT:-2400}" "$NCU" --nvtx --nvtx-include "$RANGE/" "${WINDOW[@]}" \
                 "$@" "${SECTIONS[@]}" -o "$DEST/$NAME" -f "${APP[@]}" > "$DEST/$NAME.log" 2>&1
