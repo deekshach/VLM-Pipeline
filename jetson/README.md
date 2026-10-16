@@ -40,6 +40,8 @@ cmake --build build --target llama-jetson-vlm jetson-gemm-tune jetson-vit-probe 
 
 ## Switches
 
+Complete list of optimizations with their measured effects: [`OPTIMIZATIONS.md`](OPTIMIZATIONS.md).
+
 All on `llama-jetson-vlm`; everything else is a standard llama.cpp option (`-m`, `--mmproj`, `-p`, `-n`, `-ngl`, ...).
 
 | switch | what it changes | bottleneck it targets |
