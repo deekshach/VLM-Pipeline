@@ -1329,6 +1329,8 @@ struct ggml_cuda_stream_context {
     }
 };
 
+extern thread_local int ggml_cuda_thread_stream_priority;   // see ggml_backend_cuda_set_thread_stream_priority
+
 struct ggml_backend_cuda_context {
     int device;
     std::string name;
@@ -1387,7 +1389,12 @@ struct ggml_backend_cuda_context {
     cudaStream_t stream(int device, int stream) {
         if (streams[device][stream] == nullptr) {
             ggml_cuda_set_device(device);
-            CUDA_CHECK(cudaStreamCreateWithFlags(&streams[device][stream], cudaStreamNonBlocking));
+            if (ggml_cuda_thread_stream_priority != 0) {   // ggml_backend_cuda_set_thread_stream_priority
+                CUDA_CHECK(cudaStreamCreateWithPriority(&streams[device][stream], cudaStreamNonBlocking,
+                                                        ggml_cuda_thread_stream_priority));
+            } else {
+                CUDA_CHECK(cudaStreamCreateWithFlags(&streams[device][stream], cudaStreamNonBlocking));
+            }
         }
         return streams[device][stream];
     }

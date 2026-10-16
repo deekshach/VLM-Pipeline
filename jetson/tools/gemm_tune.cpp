@@ -2,7 +2,7 @@
 // pipeline runs, and write the fastest per shape as a table for GGML_CUDA_JETSON_GEMM_TABLE.
 //
 //   GGML_CUDA_JETSON_GEMM_RECORD=shapes.txt llama-jetson-vlm ...   # collect the shapes once
-//   jetson-gemm-tune shapes.txt table.txt [candidates=32] [reps=10]
+//   jetson-gemm-tune shapes.txt table.txt [candidates=32] [reps=10] [swizzle=0]
 //   jetson-gemm-tune --profile m n k d_f32 bias table.txt   # one call with the heuristic's algorithm and
 //                                                           # one with the table's, in NVTX ranges
 //                                                           # "heuristic" and "tuned" (for ncu)
@@ -11,6 +11,9 @@
 // D F32 or BF16, optional F32 bias epilogue), exactly as ggml-cuda/jetson-gemm.cu calls it.
 // Each candidate is timed (median of `reps` after 3 warm-up calls); the heuristic's first pick is
 // what the engine uses without a table, so its time is the baseline in the report.
+// swizzle=1 also tries each candidate with CTA swizzling flipped (CUBLASLT_ALGO_CONFIG_CTA_SWIZZLING, where the
+// algorithm supports it): the tile launch order that makes tiles sharing a weight panel run together, so the
+// panel is still in the 4 MB L2 when the next tile reads it (prefill GEMMs read 1.4-1.5x their weights from DRAM).
 #include <cublasLt.h>
 #ifdef JETSON_NVTX
 #include <nvtx3/nvToolsExt.h>
@@ -101,11 +104,12 @@ static int profile_shape(int argc, char ** argv) {
 int main(int argc, char ** argv) {
     if (argc > 1 && strcmp(argv[1], "--profile") == 0) return profile_shape(argc, argv);
     if (argc < 3) {
-        fprintf(stderr, "usage: %s <shapes.txt> <table.txt> [candidates=32] [reps=10]\n", argv[0]);
+        fprintf(stderr, "usage: %s <shapes.txt> <table.txt> [candidates=32] [reps=10] [swizzle=0]\n", argv[0]);
         return 1;
     }
     const int n_cand = argc > 3 ? atoi(argv[3]) : 32;
     const int reps   = argc > 4 ? atoi(argv[4]) : 10;
+    const bool swz   = argc > 5 && atoi(argv[5]) != 0;
 
     std::set<std::tuple<long long, long long, long long, int, int>> shapes;
     {
@@ -177,6 +181,25 @@ int main(int argc, char ** argv) {
         std::vector<cublasLtMatmulHeuristicResult_t> res(n_cand);
         int n_res = 0;
         CL(cublasLtMatmulAlgoGetHeuristic(h, op, la, lb, ld, ld, pref, n_cand, res.data(), &n_res));
+        res.resize(n_res);
+        int n_swz = 0;
+        if (swz) {   // append each candidate with CTA swizzling flipped
+            for (int i = 0; i < n_res; i++) {
+                if (res[i].state != CUBLAS_STATUS_SUCCESS) continue;
+                uint32_t sup = 0, cur = 0; size_t sz = 0;
+                if (cublasLtMatmulAlgoCapGetAttribute(&res[i].algo, CUBLASLT_ALGO_CAP_CTA_SWIZZLING_SUPPORT, &sup, sizeof(sup), &sz) !=
+                    CUBLAS_STATUS_SUCCESS || !sup) continue;
+                CL(cublasLtMatmulAlgoConfigGetAttribute(&res[i].algo, CUBLASLT_ALGO_CONFIG_CTA_SWIZZLING, &cur, sizeof(cur), &sz));
+                cublasLtMatmulHeuristicResult_t r = res[i];
+                const uint32_t flip = cur ? 0 : 1;
+                CL(cublasLtMatmulAlgoConfigSetAttribute(&r.algo, CUBLASLT_ALGO_CONFIG_CTA_SWIZZLING, &flip, sizeof(flip)));
+                if (cublasLtMatmulAlgoCheck(h, op, la, lb, ld, ld, &r.algo, &r) != CUBLAS_STATUS_SUCCESS ||
+                    r.workspaceSize > WORKSPACE) continue;
+                r.state = CUBLAS_STATUS_SUCCESS;
+                res.push_back(r); n_swz++;
+            }
+            n_res = (int) res.size();
+        }
 
         const float alpha = 1.0f, beta = 0.0f;
         double base_us = -1, best_us = 1e30;
@@ -208,8 +231,9 @@ int main(int argc, char ** argv) {
             for (int w = 0; w < 8; w++) fprintf(out, " %llx", (unsigned long long) res[best].algo.data[w]);
             fprintf(out, "\n");
             if (base_us > 0) { total_base += base_us; total_best += best_us; }
-            printf("%6lld %6lld %6lld %3d %4d | %10.1f %10.1f %6.2fx | %d tried, pick #%d\n", m, n, k, d32, use_bias,
-                   base_us, best_us, base_us > 0 ? base_us / best_us : 0.0, n_ok, best);
+            printf("%6lld %6lld %6lld %3d %4d | %10.1f %10.1f %6.2fx | %d tried, pick #%d%s\n", m, n, k, d32, use_bias,
+                   base_us, best_us, base_us > 0 ? base_us / best_us : 0.0, n_ok, best,
+                   best >= n_res - n_swz ? " (swizzle flipped)" : "");
         } else {
             printf("%6lld %6lld %6lld %3d %4d | no working candidate\n", m, n, k, d32, use_bias);
         }

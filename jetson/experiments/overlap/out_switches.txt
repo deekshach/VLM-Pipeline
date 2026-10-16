@@ -1,0 +1,72 @@
+== shape 9x4 vit_prio 0 llm_prio 0
+crop 9x4 (576 ViT tokens), prefill 576 tokens per frame, 8 frames, stream priority vit 0 llm 0
+round 0 | serial 6524 ms (vit 3240 = 405.0/frame, prefill 3284 = 410.6/frame)
+        | pipelined 6426 ms, speedup 1.015x (ideal 3689 ms, 1.768x) | concurrent: vit 655.0/frame (1.62x solo), prefill 752.1/frame (1.83x solo), prefill waited 409 ms
+round 1 | serial 6528 ms (vit 3243 = 405.4/frame, prefill 3285 = 410.6/frame)
+        | pipelined 6424 ms, speedup 1.016x (ideal 3690 ms, 1.769x) | concurrent: vit 657.8/frame (1.62x solo), prefill 751.8/frame (1.83x solo), prefill waited 410 ms
+round 2 | serial 6528 ms (vit 3245 = 405.6/frame, prefill 3283 = 410.4/frame)
+        | pipelined 6421 ms, speedup 1.017x (ideal 3689 ms, 1.770x) | concurrent: vit 657.0/frame (1.62x solo), prefill 751.7/frame (1.83x solo), prefill waited 407 ms
+== shape 9x4 vit_prio -5 llm_prio 0
+crop 9x4 (576 ViT tokens), prefill 576 tokens per frame, 8 frames, stream priority vit -5 llm 0
+round 0 | serial 6530 ms (vit 3245 = 405.7/frame, prefill 3285 = 410.6/frame)
+        | pipelined 6482 ms, speedup 1.007x (ideal 3691 ms, 1.769x) | concurrent: vit 441.0/frame (1.09x solo), prefill 759.1/frame (1.85x solo), prefill waited 409 ms
+round 1 | serial 6524 ms (vit 3241 = 405.2/frame, prefill 3282 = 410.3/frame)
+        | pipelined 6480 ms, speedup 1.007x (ideal 3688 ms, 1.769x) | concurrent: vit 440.9/frame (1.09x solo), prefill 758.9/frame (1.85x solo), prefill waited 408 ms
+round 2 | serial 6525 ms (vit 3241 = 405.2/frame, prefill 3283 = 410.4/frame)
+        | pipelined 6479 ms, speedup 1.007x (ideal 3689 ms, 1.769x) | concurrent: vit 440.5/frame (1.09x solo), prefill 759.1/frame (1.85x solo), prefill waited 406 ms
+== shape 9x4 vit_prio 0 llm_prio -5
+crop 9x4 (576 ViT tokens), prefill 576 tokens per frame, 8 frames, stream priority vit 0 llm -5
+round 0 | serial 6551 ms (vit 3266 = 408.3/frame, prefill 3285 = 410.6/frame)
+        | pipelined 6447 ms, speedup 1.016x (ideal 3693 ms, 1.774x) | concurrent: vit 751.2/frame (1.84x solo), prefill 440.3/frame (1.07x solo), prefill waited 2924 ms
+round 1 | serial 6534 ms (vit 3248 = 406.0/frame, prefill 3286 = 410.7/frame)
+        | pipelined 6437 ms, speedup 1.015x (ideal 3692 ms, 1.770x) | concurrent: vit 750.2/frame (1.85x solo), prefill 439.2/frame (1.07x solo), prefill waited 2924 ms
+round 2 | serial 6530 ms (vit 3247 = 405.9/frame, prefill 3283 = 410.3/frame)
+        | pipelined 6439 ms, speedup 1.014x (ideal 3688 ms, 1.770x) | concurrent: vit 750.3/frame (1.85x solo), prefill 439.5/frame (1.07x solo), prefill waited 2922 ms
+== shape 5x2 vit_prio 0 llm_prio 0
+crop 5x2 (160 ViT tokens), prefill 576 tokens per frame, 8 frames, stream priority vit 0 llm 0
+round 0 | serial 4197 ms (vit 901 = 112.6/frame, prefill 3297 = 412.1/frame)
+        | pipelined 4093 ms, speedup 1.025x (ideal 3409 ms, 1.231x) | concurrent: vit 339.8/frame (3.02x solo), prefill 497.4/frame (1.21x solo), prefill waited 114 ms
+round 1 | serial 4177 ms (vit 897 = 112.2/frame, prefill 3280 = 410.0/frame)
+        | pipelined 4096 ms, speedup 1.020x (ideal 3392 ms, 1.231x) | concurrent: vit 339.3/frame (3.03x solo), prefill 498.0/frame (1.21x solo), prefill waited 112 ms
+round 2 | serial 4179 ms (vit 898 = 112.2/frame, prefill 3281 = 410.1/frame)
+        | pipelined 4089 ms, speedup 1.022x (ideal 3393 ms, 1.231x) | concurrent: vit 338.7/frame (3.02x solo), prefill 497.0/frame (1.21x solo), prefill waited 113 ms
+== shape 5x2 vit_prio -5 llm_prio 0
+crop 5x2 (160 ViT tokens), prefill 576 tokens per frame, 8 frames, stream priority vit -5 llm 0
+round 0 | serial 4192 ms (vit 902 = 112.7/frame, prefill 3291 = 411.4/frame)
+        | pipelined 4118 ms, speedup 1.018x (ideal 3404 ms, 1.232x) | concurrent: vit 132.3/frame (1.17x solo), prefill 500.4/frame (1.22x solo), prefill waited 114 ms
+round 1 | serial 4177 ms (vit 897 = 112.1/frame, prefill 3280 = 410.1/frame)
+        | pipelined 4116 ms, speedup 1.015x (ideal 3392 ms, 1.231x) | concurrent: vit 132.3/frame (1.18x solo), prefill 500.4/frame (1.22x solo), prefill waited 113 ms
+round 2 | serial 4177 ms (vit 896 = 112.0/frame, prefill 3280 = 410.0/frame)
+        | pipelined 4114 ms, speedup 1.015x (ideal 3392 ms, 1.231x) | concurrent: vit 132.1/frame (1.18x solo), prefill 500.2/frame (1.22x solo), prefill waited 112 ms
+== shape 5x2 vit_prio 0 llm_prio -5
+crop 5x2 (160 ViT tokens), prefill 576 tokens per frame, 8 frames, stream priority vit 0 llm -5
+round 0 | serial 4203 ms (vit 900 = 112.5/frame, prefill 3303 = 412.8/frame)
+        | pipelined 4109 ms, speedup 1.023x (ideal 3415 ms, 1.231x) | concurrent: vit 458.9/frame (4.08x solo), prefill 444.1/frame (1.08x solo), prefill waited 555 ms
+round 1 | serial 4184 ms (vit 898 = 112.2/frame, prefill 3286 = 410.7/frame)
+        | pipelined 4107 ms, speedup 1.019x (ideal 3398 ms, 1.231x) | concurrent: vit 458.7/frame (4.09x solo), prefill 444.7/frame (1.08x solo), prefill waited 549 ms
+round 2 | serial 4183 ms (vit 897 = 112.2/frame, prefill 3286 = 410.8/frame)
+        | pipelined 4104 ms, speedup 1.019x (ideal 3398 ms, 1.231x) | concurrent: vit 458.4/frame (4.09x solo), prefill 443.9/frame (1.08x solo), prefill waited 553 ms
+== shape 1x2 vit_prio 0 llm_prio 0
+crop 1x2 (32 ViT tokens), prefill 576 tokens per frame, 8 frames, stream priority vit 0 llm 0
+round 0 | serial 3495 ms (vit 197 = 24.6/frame, prefill 3298 = 412.3/frame)
+        | pipelined 3440 ms, speedup 1.016x (ideal 3323 ms, 1.052x) | concurrent: vit 166.7/frame (6.77x solo), prefill 426.8/frame (1.04x solo), prefill waited 25 ms
+round 1 | serial 3477 ms (vit 197 = 24.6/frame, prefill 3280 = 409.9/frame)
+        | pipelined 3434 ms, speedup 1.012x (ideal 3304 ms, 1.052x) | concurrent: vit 165.7/frame (6.73x solo), prefill 426.1/frame (1.04x solo), prefill waited 25 ms
+round 2 | serial 3474 ms (vit 197 = 24.6/frame, prefill 3278 = 409.7/frame)
+        | pipelined 3429 ms, speedup 1.013x (ideal 3302 ms, 1.052x) | concurrent: vit 165.9/frame (6.75x solo), prefill 425.5/frame (1.04x solo), prefill waited 25 ms
+== shape 1x2 vit_prio -5 llm_prio 0
+crop 1x2 (32 ViT tokens), prefill 576 tokens per frame, 8 frames, stream priority vit -5 llm 0
+round 0 | serial 3504 ms (vit 197 = 24.7/frame, prefill 3306 = 413.3/frame)
+        | pipelined 3457 ms, speedup 1.014x (ideal 3331 ms, 1.052x) | concurrent: vit 42.5/frame (1.72x solo), prefill 428.8/frame (1.04x solo), prefill waited 25 ms
+round 1 | serial 3485 ms (vit 198 = 24.7/frame, prefill 3288 = 410.9/frame)
+        | pipelined 3446 ms, speedup 1.011x (ideal 3312 ms, 1.052x) | concurrent: vit 42.4/frame (1.72x solo), prefill 427.6/frame (1.04x solo), prefill waited 25 ms
+round 2 | serial 3483 ms (vit 197 = 24.7/frame, prefill 3286 = 410.8/frame)
+        | pipelined 3444 ms, speedup 1.012x (ideal 3311 ms, 1.052x) | concurrent: vit 42.3/frame (1.71x solo), prefill 427.3/frame (1.04x solo), prefill waited 25 ms
+== shape 1x2 vit_prio 0 llm_prio -5
+crop 1x2 (32 ViT tokens), prefill 576 tokens per frame, 8 frames, stream priority vit 0 llm -5
+round 0 | serial 3495 ms (vit 197 = 24.6/frame, prefill 3298 = 412.3/frame)
+        | pipelined 3484 ms, speedup 1.003x (ideal 3323 ms, 1.052x) | concurrent: vit 214.4/frame (8.71x solo), prefill 432.2/frame (1.05x solo), prefill waited 25 ms
+round 1 | serial 3503 ms (vit 197 = 24.6/frame, prefill 3306 = 413.3/frame)
+        | pipelined 4082 ms, speedup 0.858x (ideal 3331 ms, 1.052x) | concurrent: vit 228.0/frame (9.27x solo), prefill 507.0/frame (1.23x solo), prefill waited 26 ms
+round 2 | serial 3689 ms (vit 203 = 25.4/frame, prefill 3485 = 435.7/frame)
+        | pipelined 3687 ms, speedup 1.001x (ideal 3511 ms, 1.051x) | concurrent: vit 226.7/frame (8.93x solo), prefill 457.0/frame (1.05x solo), prefill waited 31 ms

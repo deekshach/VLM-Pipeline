@@ -40,6 +40,10 @@ GGML_BACKEND_API void ggml_backend_cuda_get_device_memory(int device, size_t * f
 GGML_BACKEND_API bool ggml_backend_cuda_register_host_buffer(void * buffer, size_t size);
 GGML_BACKEND_API void ggml_backend_cuda_unregister_host_buffer(void * buffer);
 
+// Jetson study switch: CUDA streams that ggml creates afterwards on the calling thread get this priority
+// (lower = higher priority, clamped to the device range; 0 = default). For running two models concurrently.
+GGML_BACKEND_API void ggml_backend_cuda_set_thread_stream_priority(int priority);
+
 GGML_BACKEND_API ggml_backend_reg_t ggml_backend_cuda_reg(void);
 
 #ifdef  __cplusplus

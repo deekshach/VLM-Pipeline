@@ -4327,6 +4327,14 @@ bool ggml_backend_cuda_register_host_buffer(void * buffer, size_t size) {
 #endif // CUDART_VERSION >= 11010 || defined(GGML_USE_MUSA)
 }
 
+thread_local int ggml_cuda_thread_stream_priority = 0;
+
+void ggml_backend_cuda_set_thread_stream_priority(int priority) {
+    int lo = 0, hi = 0;   // least, greatest priority
+    CUDA_CHECK(cudaDeviceGetStreamPriorityRange(&lo, &hi));
+    ggml_cuda_thread_stream_priority = std::min(lo, std::max(hi, priority));
+}
+
 void ggml_backend_cuda_unregister_host_buffer(void * buffer) {
     if (getenv("GGML_CUDA_REGISTER_HOST") == nullptr) {
         return;

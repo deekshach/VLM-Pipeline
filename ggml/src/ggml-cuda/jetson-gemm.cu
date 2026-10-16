@@ -48,7 +48,8 @@ using gemm_key = std::tuple<int64_t, int64_t, int64_t, int, int>;
 struct jetson_gemm_state {
     std::mutex mtx;
     cublasLtHandle_t handle[GGML_CUDA_MAX_DEVICES] = {};
-    void * workspace[GGML_CUDA_MAX_DEVICES] = {};
+    std::map<cudaStream_t, void *> workspace;   // per stream: split-K keeps partial sums and counters here, so
+                                                // two models running concurrently must not share one
     std::map<gemm_key, cublasLtMatmulAlgo_t> tuned;      // from GGML_CUDA_JETSON_GEMM_TABLE
     std::map<gemm_key, cublasLtMatmulAlgo_t> heuristic;  // first heuristic pick, cached per shape
     std::set<gemm_key> recorded;
@@ -110,14 +111,13 @@ void ggml_cuda_jetson_gemm_bf16(
     void * workspace;
     {
         std::lock_guard<std::mutex> lk(st.mtx);
-        if (!st.handle[device]) {
-            CUBLASLT_CHECK(cublasLtCreate(&st.handle[device]));
-            CUDA_CHECK(cudaMalloc(&st.workspace[device], JETSON_GEMM_WORKSPACE));
-        }
+        if (!st.handle[device]) CUBLASLT_CHECK(cublasLtCreate(&st.handle[device]));
+        void *& ws = st.workspace[stream];
+        if (!ws) CUDA_CHECK(cudaMalloc(&ws, JETSON_GEMM_WORKSPACE));
         if (sw.table && !st.table_loaded) load_table(st);
         if (sw.record) record_shape(st, key);
         handle = st.handle[device];
-        workspace = st.workspace[device];
+        workspace = ws;
     }
 
     const cudaDataType_t d_type = d_f32 ? CUDA_R_32F : CUDA_R_16BF;
