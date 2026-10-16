@@ -358,3 +358,16 @@ LLM prefill, last ubatch (512 tokens), per ubatch (ms / MB DRAM / MB L2 req):
 | FBT | cast | 35.7 | 2320 | 33% | 2 | 84% | long_scoreboard 69% |
 | FBT | add | 6.9 | 822 | 33% | 2 | 93% | long_scoreboard 88% |
 | FBT | all | 361.0 | 27721 | 70% | 55 | 31% | wait 32% |
+
+## 3. Producer -> consumer reuse in L2 (caches kept between kernels vs flushed before each)
+
+| run | class | DRAM MB flushed | DRAM MB warm | removed by L2 reuse | L2 hit flushed -> warm |
+|---|---|---|---|---|---|
+
+LLM prefill, last ubatch: the warm result covers the whole range, which also holds the output head (152064 x 3584 BF16 = 1.09 GB of weights read for the last token's logits) and the embedding lookup; the flushed figure is 28 x the profiled layers.
+
+| run | DRAM read flushed (28 layers) | DRAM read warm (range) | warm minus output head | L2 hit warm |
+|---|---|---|---|---|
+| llm_base_1152 | 27,612 MB | 28,187 MB | 27,097 MB (-2% vs flushed) | 85% |
+| llm_base_2304 | 27,871 MB | 28,292 MB | 27,202 MB (-2% vs flushed) | 86% |
+| llm_base_4608 | 28,724 MB | 29,461 MB | 28,371 MB (-1% vs flushed) | 87% |

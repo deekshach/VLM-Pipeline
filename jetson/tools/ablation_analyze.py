@@ -387,25 +387,35 @@ def main():
                             "LLM prefill vs KV length (adaptive sampling: fewer frames = shorter KV)")
             intensive_table([(c, lf.get(f"llm_{c}_4608")) for c in LLM_CFGS], "LLM prefill per switch config (N=4608)")
 
-    # ---- warm caches: cross-kernel reuse. warm/ holds one result per whole range (app-range replay: the
-    # kernels run back to back, caches not flushed); compare with the per-kernel flushed sum composed above.
+    # ---- warm caches: cross-kernel reuse. warm/vit_*: the same kernels as section 2 with caches kept between
+    # kernels (application replay); warm/llm_*: one result per whole ubatch range (app-range replay).
     wa = {os.path.basename(p)[:-8]: ncu_kernels(p) for p in glob.glob(os.path.join(D, "warm", "*_raw.csv"))}
-    if wa and nc:
-        print("\n## 3. Producer -> consumer reuse in L2 (whole range, caches warm, vs sum of per-kernel flushed)\n")
-        print("Flushed = section 2 composition (layers only; the warm range also includes the patch embedding and "
-              "merger, about 0.1 GB of weights, so small crops slightly understate the reuse).\n")
-        print("| run | DRAM read flushed (sum of kernels) | DRAM read warm (range) | removed by L2 reuse | "
-              "L2 requests flushed / warm | warm L2 hit |")
+    wa = {n: ks for n, ks in wa.items() if ks and n in nc}
+    if wa:
+        print("\n## 3. Producer -> consumer reuse in L2 (caches kept between kernels vs flushed before each)\n")
+        print("| run | class | DRAM MB flushed | DRAM MB warm | removed by L2 reuse | L2 hit flushed -> warm |")
         print("|---|---|---|---|---|---|")
-        for n in sorted(wa):
-            if n not in nc or not wa[n]: continue
-            fl = (vit_frame if n.startswith("vit_") else llm_ubatch)(nc[n])
-            if not fl: continue
-            w = wa[n]
-            wd = sum(k["dram"] for k in w); wl = sum(k["l2req"] for k in w)
-            fd, fr = fl["all"].get("dram"), fl["all"].get("l2req")
-            hit = sum(k["hit"] * k["l2req"] for k in w) / wl if wl else 0
-            print(f"| {n} | {fd:,.0f} MB | {wd:,.0f} MB | {(1 - wd / fd) * 100:.0f}% | {fr:,.0f} / {wl:,.0f} MB | {hit:.0f}% |")
+        for n in sorted(k for k in wa if k.startswith("vit_")):
+            a, b = vit_frame(nc[n]), vit_frame(wa[n])
+            if not a or not b: continue
+            for c in ["softmax", "attn matmul", "GEMM", "GEMM split-K", "cast", "add", "norm", "rope", "glu", "copy", "all"]:
+                if c not in a or c not in b or a[c].get("dram") < 5: continue
+                x, y = a[c].get("dram"), b[c].get("dram")
+                print(f"| {n} | {c} | {x:,.0f} | {y:,.0f} | {(1 - y / x) * 100:.0f}% | {a[c].get('hit'):.0f}% -> {b[c].get('hit'):.0f}% |")
+        llm = sorted(k for k in wa if k.startswith("llm_"))
+        if llm:
+            print("\nLLM prefill, last ubatch: the warm result covers the whole range, which also holds the output head "
+                  "(152064 x 3584 BF16 = 1.09 GB of weights read for the last token's logits) and the embedding lookup; "
+                  "the flushed figure is 28 x the profiled layers.\n")
+            print("| run | DRAM read flushed (28 layers) | DRAM read warm (range) | warm minus output head | L2 hit warm |")
+            print("|---|---|---|---|---|")
+            for n in llm:
+                fl = llm_ubatch(nc[n])["all"]
+                w = wa[n]
+                wd = sum(k["dram"] for k in w); wl = sum(k["l2req"] for k in w)
+                hit = sum(k["hit"] * k["l2req"] for k in w) / wl if wl else 0
+                print(f"| {n} | {fl.get('dram'):,.0f} MB | {wd:,.0f} MB | {wd - 1090:,.0f} MB "
+                      f"({((wd - 1090) / fl.get('dram') - 1) * 100:+.0f}% vs flushed) | {hit:.0f}% |")
 
 
 if __name__ == "__main__":
