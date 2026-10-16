@@ -117,3 +117,207 @@ Command (all switches):
 - `--act-fuse` assumes that all readers of a fused tensor are in the same graph split, which holds with the whole
   model on the GPU (the ViT is one split; the LLM is the CPU embedding lookup plus one GPU split).
 - The RTX 4090 study (`dmc955/`) is separate and not included here.
+
+## H. Why each optimization: the microarchitectural rationale on Jetson
+
+### H.0 The platform constraints that drive every decision
+
+| Resource | Orin (this board) | Why it matters here |
+|---|---|---|
+| GPU | Ampere sm_87, 16 SMs, 64 tensor cores, locked at 1,300.5 MHz | Few SMs: a grid of a few dozen tiles already fills the GPU, and partial last waves and split-K choices matter. |
+| BF16 tensor throughput | Theoretical dense: 64 TC x 512 FLOP/clk x 1.3 GHz = 42.6 TFLOP/s. An early microbenchmark measured 32.8, but the tuned prefill gate/up GEMM sustains 35.5 (= 2 x 512 x 3584 x 18944 FLOP in 1.956 ms). | Percent-of-peak figures in this file use 42.6. |
+| L2 | 4 MB, shared by all SMs (RTX 4090: 72 MB) | Smaller than almost every activation tensor. This is the single most important constraint (H.1). |
+| DRAM | 256-bit LPDDR5: 204.8 GB/s theoretical; measured 159 GB/s read, 183 GB/s copy. Unified: CPU and GPU share it. | Every pass over an activation that misses L2 costs DRAM time, and CPU-side work competes for the same bandwidth. |
+| Ridge point | 35.5 TFLOP/s / 159 GB/s = ~220 FLOP per DRAM byte | Below it a kernel is memory-bound (H.1). |
+| Other engines | OFA (optical-flow accelerator), 12 Arm Cortex-A78AE CPU cores | Work on these engines runs beside the SMs without using them. |
+
+### H.1 The resulting bound classes
+
+1. **Elementwise kernels.** Casts, bias adds, norms, RoPE, SwiGLU and copies do 0.25-1 FLOP per byte, so they are
+   purely DRAM-bound.
+   - Measured on the baseline ViT: 106-186 GB/s, i.e. at the 159-183 GB/s ceiling.
+   - 64-89% of warp stalls are long-scoreboard (waiting on memory).
+   - L2 hit 33-53%. A 33% hit rate means only the writes hit; every read misses.
+2. **Prefill weight GEMMs at 512 tokens are compute-bound.** Each BF16 weight byte is reused 512 times, which is
+   2 x 512 / 2 = 512 FLOP per byte, above the ridge point.
+3. **The same GEMMs at 64 tokens are memory-bound.** 64 FLOP per byte, below the ridge point: the whole 13 GB of
+   weights is streamed for 64 tokens.
+4. **Producer-consumer reuse through L2 almost never happens at full size.** Working sets that matter:
+
+   | Tensor | Size | vs the 4 MB L2 |
+   |---|---|---|
+   | ViT full frame (2,304 patches) activation | 11.8 MB F32 | 3x |
+   | ViT full frame FFN intermediate | 31.5 MB | 8x |
+   | ViT full frame dense scores (flash attention off) | 340 MB per layer | 85x |
+   | LLM 512-token activation | 7.3 MB F32 | 1.8x |
+   | LLM 512-token FFN intermediate | 39 MB F32 | 10x |
+
+   Measured warm vs flushed caches:
+   - Reuse between kernels is 1-3% of DRAM bytes (full frame and LLM).
+   - At a 1x2 crop the working sets fit, and reuse rises to ~20%.
+
+   So the only ways to cut elementwise cost on this chip are:
+   - remove the pass;
+   - write fewer bytes per pass;
+   - make the working set smaller than 4 MB.
+
+   Keeping data in L2 longer is not one of them.
+
+### H.2 Per optimization
+
+**A1 Adaptive frame sampling.**
+- At baseline, TTFT is 90% per-frame work: ViT 49.6% + image prefill 40.4% (~1.2 s per frame on Orin, ~6.6x the
+  RTX 4090).
+- Both stages are linear in frames, and neither has a cache effect that fewer frames would unlock:
+  - Prefill GEMMs are compute-bound at a fixed cost per 512-token ubatch; every class except attention is constant
+    across 2 / 4 / 8 frames.
+  - Prefill flash attention keeps a 95-96% L2 hit rate even when the KV per layer (2.4 -> 9.4 MB) outgrows the
+    4 MB L2. It streams K/V tiles, so there is no cliff to stay under.
+- Frame count is therefore the only lever that scales both dominant stages at once, and it costs only flow
+  analysis.
+
+**A2 Live flow on the OFA.**
+- Real video has no precomputed flow, and computing it on the CPU or SMs takes compute from the pipeline:
+  - CPU Farneback: 137 ms per pair, x 49 pairs.
+  - DIS (2.9 ms per pair): cheaper but less accurate.
+- Orin has a dedicated optical-flow engine that does not use SMs, CPU cores or (beyond its frames) much DRAM
+  bandwidth. Running flow there and pipelining it with CPU frame decode (6 threads) puts the three engines (CPU,
+  OFA, SMs) on separate parts of the work.
+- Grid 2 with 4 pyramid levels: at grid 4 the 436-px frames allow only 3 levels (the coarsest level must stay at
+  least 16 px), which underestimates large motion.
+
+**A3 Live-flow engineering.**
+- **Host-memory wrappers → copies into VPI images.** On a unified-memory SoC, VPI images wrapping host memory were
+  synchronized against the busy GPU stream, so CPU-side flow work queued behind GPU kernels. Copying into
+  VPI-owned images decouples them.
+- **Fixed ring of 4 slots.** VPI's buffer pool was exhausted after about 40 frames.
+- **`nth_element` for p95.** Statistics run on the A78AE cores on the critical path, so the O(n log n) full sort
+  (316 ms) became O(n) (56 ms).
+
+**A4 Anchor-first.**
+- During flow analysis the SMs are idle: the work is on the CPU and OFA.
+- Frame 1 is always selected, so encoding it then fills an idle engine. This is overlap across engines, the kind
+  that works on this chip (contrast E, overlap on the SMs).
+
+**A5 Window alignment.**
+- The Qwen2.5-VL ViT attends within 112 px windows: 8 x 8 patches of 14 px, i.e. 4 x 4 merged tokens of 28 px.
+- At 1024 x 436 the frame edges produce partial windows, which have to be padded and masked. Resizing to 1008 x 448
+  makes every window complete and identical (64 patches). Without that:
+  - window batching (B1) could not form one batch of equal-size windows;
+  - the cache (A6) could not crop on window boundaries.
+- Tokens per frame also drop 592 -> 576 (-2.7%), which shortens the LLM prefill.
+
+**A6 Window cache.**
+- With ViT flash attention off, the cost per encoded window grows with frame size (15 ms for small crops, 27 ms
+  for a full frame), because dense attention is quadratic in the number of patches.
+- In video most windows do not change between selected frames. Re-encoding only the dirty rectangle cuts work
+  linearly and attention work super-linearly.
+- It also shrinks the working set below the L2 size:
+  - A 5x2 crop's activation is 3.3 MB; a 1x2 crop's dense scores are 1.0 MB.
+  - Without B1, each encoded window then costs 35% less DRAM (softmax L2 hit 39 -> 59%).
+  - In the real run, reuse between kernels reaches ~20% at 1x2, vs ~1% for a full frame.
+- The dirty test is a cheap single-thread CPU diff (~0.2-0.4 ms per frame); clean windows never touch the GPU.
+
+**B1 Batched-window attention.**
+- With flash attention off, every one of the 32 layers built the full dense score matrix: 2,304 x 2,304 x 16
+  heads x 4 B = 340 MB per layer, 85x the L2. Softmax alone was 39% of the ViT and attention 55%.
+- 28 of the 32 layers only need the block-diagonal part (64-patch windows), so 35/36 of those scores were computed
+  only to be masked away.
+- Running the windowed layers as a batch of 64 x 64 problems makes each (head, window) score tile 16 KB, which
+  stays on chip. Measured effects:
+  - DRAM -14 GB per frame;
+  - softmax L2 hit 39 -> 50%;
+  - the attention matmul went from barrier-bound at 16% occupancy (36% tensor) to 29 instead of 148 ms per frame;
+  - the 21 MB mask is no longer built.
+- The 4 global layers stay dense by design and are now most of the remaining attention time.
+
+**B2 / C3 GEMM F32 output.**
+- ggml keeps activations in F32, so the stock path ran cuBLAS with BF16 output and then a separate BF16 -> F32
+  conversion kernel.
+- That kernel is pure DRAM traffic over a tensor larger than L2. At baseline, the ViT's 7 casts took 1.5 ms per
+  layer, and in the LLM, casts were 79 ms per 512-token ubatch.
+- cuBLASLt can write F32 straight from the F32 accumulators in its epilogue. One full read + write pass per GEMM
+  disappears, and precision rises.
+- The GEMM writes twice the output bytes (+0.35 GB per ViT frame), much less than the pass it removes.
+- In the prefill, split-K partial sums also become F32 (+2.4 GB of reads); time still drops 265 ms. The F32
+  partial sums are part of what motivated C1.
+
+**B3 / C4 Bias fusion.**
+- Each bias add is a separate kernel that reads and writes a full activation (larger than L2) for one add per
+  element. The ViT had 5 per layer (2.0 ms per layer at baseline).
+- The cuBLASLt bias epilogue adds the bias while the accumulators are still in registers, removing the pass and a
+  kernel launch:
+  - kernels launched per run fell 3,903 -> 2,547 with B2;
+  - long-scoreboard stalls in the ViT fell 39 -> 32%.
+
+**B4 / C1 Tuned GEMM table.**
+- cuBLASLt's heuristic tends to pick split-K for narrow outputs, which helps big GPUs fill many SMs. On Orin that
+  is the wrong trade.
+- The prefill down projection (3,584 x 512 output, K = 18,944) ran split-K x9:
+  - partial sums go through workspace memory and are reduced by a second pass;
+  - the GEMMs were bound by L2 traffic and instruction issue (MIO throttle 33%, tensor pipe 50%), at 32% of peak.
+- Measuring every offered algorithm per shape on the board itself picked tilings with little or no split-K.
+  Effects:
+  - tensor pipe 50 -> 86%;
+  - L2 requests -33 GB per ubatch (-22%);
+  - DRAM unchanged, confirming the limit was on-chip traffic, not DRAM;
+  - down projection 6.7 -> 2.5 ms.
+- In the ViT the same change mostly cuts L2 requests (-3.1 GB per frame).
+
+**B5 / C2 GEMM-input fusion (`--act-fuse`).**
+- After B2-B4, the largest remaining elementwise class was the F32 -> BF16 conversion of every GEMM input (cuBLAS
+  needs BF16 operands; ggml hands it F32). In the LLM:
+  - the attention-norm output was converted three times (Q, K, V) and the FFN-norm output twice (gate, up);
+  - SwiGLU wrote a 39 MB F32 tensor that a cast then read back to write 19.4 MB of BF16.
+- These passes cannot be served from L2: the tensors are 1.8-10x the L2 size, and measured reuse between kernels
+  was 1-2%. Each was a full DRAM round trip, with the elementwise signature: L2 hit 33% (writes only), 69-88%
+  long-scoreboard.
+- With L2 capacity ruled out, the producers (RMS norm x weight, SwiGLU) now write the BF16 value the GEMMs need,
+  in the same kernel that computes it. Every reader shares one BF16 copy, and the F32 tensor is never written.
+  - Same arithmetic and rounding point, so the output is bit-identical.
+  - Casts 278 -> 26 ms per 8-frame prefill; SwiGLU writes half the bytes (192 -> 169 ms).
+- The ViT runs as a captured CUDA graph, so the BF16 buffers are allocated once and never freed while a graph may
+  reference them.
+- Persisting L2 (pinning the activation) was rejected: the 3.7 MB BF16 activation is almost the whole 4 MB L2.
+
+**C5 Full cuBLASLt configuration search.**
+- Hypothesis from the 16-SM geometry: the down projection's 56 output tiles (256 x 128) are 3.5 waves on 16 SMs,
+  so the last wave runs half-empty (it sits at 63% of peak vs 82% for gate/up). The heuristic offers only ~8
+  configurations per shape.
+- Enumerating every tile, stage count, split-K and reduction scheme (900-2,400 configurations) tests this
+  directly.
+- Result: the small K/V GEMM, whose few tiles make it sensitive to tile choice, gained 12%. The down projection did
+  not move even with split-K variants that make the tile count a multiple of 16. Its limit is the long
+  K = 18,944 reduction per tile, not wave quantization.
+
+**C6 Convert once (`--act-dedup`).**
+- This was the first, simpler form of C2: it removes the redundant conversions (each a 7.3 MB read + 3.7 MB write
+  per 512 tokens) without touching the producer kernels.
+- It is subsumed by C2.
+
+**D4 Per-stream cuBLASLt workspace.**
+- Split-K GEMMs keep partial sums and reduction counters in the workspace. With one workspace per device, two
+  models running GEMMs concurrently on different streams shared it: this corrupted the sums or deadlocked (the
+  GPU sat busy at ~6 W).
+- Found while testing overlap. The workspace is now per stream.
+
+### H.3 Why the rejected ideas were tried, and why they failed
+
+- **ViT / prefill overlap.**
+  - Why tried: the ViT's crop kernels run at low occupancy (12% for the 1x2 GEMMs), which suggested idle SM
+    capacity.
+  - Why it failed: the prefill GEMMs leave none. Their 256 x 128 tiles take one CTA per SM with most of the shared
+    memory, and they run at 63-82% of tensor peak. The two models can only time-share the 16 SMs, so total work
+    is conserved: the prioritized stage runs at 1.07-1.18x its solo time and the other absorbs the rest.
+  - On this chip overlap only pays across different engines (A2, A4).
+- **CTA swizzle.**
+  - Why tried: prefill GEMMs read 1.4-1.5x their weights from DRAM (gate/up 205 MB vs 140 MB compulsory). The 4 MB
+    L2 drops a weight panel before the next token tile reads it (L2 requests ~4x the weights, 75% hit).
+  - Why it failed: reordering tiles could cut those bytes, but the GEMMs are compute-bound (H.1 point 2), so the
+    bytes cost no time (0.2%).
+- **One ubatch per frame (`-ub 576`).**
+  - Why tried: a frame's 576 tokens split as 512 + 64, and the 64-token ubatch is memory-bound (H.1 point 3). It
+    streams all the weights for 64 tokens, ~90-100 ms per frame.
+  - Why it gained little: 576 = 4.5 tiles of 128 tokens, so the 576-token GEMMs waste half a tile per row of
+    tiles and run 30% slower for 12.5% more tokens. The net gain was only 2.8%.
+  - What would work: packing frames into full 512-token ubatches.
