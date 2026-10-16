@@ -108,3 +108,7 @@ __device__ __forceinline__ float ggml_cuda_op_swiglu_oai_single(float x, float g
     out_glu = out_glu * (1.0f + g);
     return out_glu;
 }
+
+// Jetson study switch GGML_CUDA_JETSON_ACT_FUSE: SwiGLU node `dst` computed into a BF16 buffer instead of dst->data.
+// With out == nullptr only checks. Returns false (doing nothing) if the node does not qualify.
+bool ggml_cuda_jetson_swiglu_bf16(ggml_backend_cuda_context & ctx, const ggml_tensor * dst, nv_bfloat16 * out);

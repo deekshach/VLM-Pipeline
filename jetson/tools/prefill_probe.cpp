@@ -9,13 +9,15 @@
 //
 //   jetson-prefill-probe <model.gguf> <N e.g. 1152,2304,4608> [warm=1] [reps=3]
 //
-// The engine switches (GGML_CUDA_JETSON_GEMM_*) apply as set in the environment; PROBE_MARK_ALL=1 marks every
-// timed repetition (not only the last), for averaging in nsys.
+// The engine switches (GGML_CUDA_JETSON_*) apply as set in the environment; PROBE_MARK_ALL=1 marks every
+// timed repetition (not only the last), for averaging in nsys; PROBE_LOGITS=1 prints a hash (FNV-1a) of the last
+// token's logits, to check that a switch leaves the output bit-identical.
 #include "llama.h"
 #include <nvtx3/nvToolsExt.h>
 #include <algorithm>
 #include <chrono>
 #include <cstdio>
+#include <cstdint>
 #include <cstdlib>
 #include <sstream>
 #include <string>
@@ -87,6 +89,14 @@ int main(int argc, char ** argv) {
             const double t2 = now_ms();
             if (mark) nvtxRangePop();
             if (i >= warm) { t.push_back(t2 - t0); tl.push_back(t2 - t1); }
+        }
+        if (getenv("PROBE_LOGITS")) {
+            const float * lg = llama_get_logits_ith(ctx, -1);
+            uint64_t h = 1469598103934665603ull;
+            const unsigned char * b = (const unsigned char *) lg;
+            for (size_t j = 0; j < (size_t) n_vocab * sizeof(float); j++) { h ^= b[j]; h *= 1099511628211ull; }
+            const int top = (int) (std::max_element(lg, lg + n_vocab) - lg);
+            fprintf(stderr, "N=%d logits fnv %016llx top %d (%.4f)\n", n, (unsigned long long) h, top, lg[top]);
         }
         std::sort(t.begin(), t.end()); std::sort(tl.begin(), tl.end());
         printf("%d,%d,%.2f,%.2f,%.2f\n", n, (n + UBATCH - 1) / UBATCH, t[t.size() / 2], t[0], tl[tl.size() / 2]);

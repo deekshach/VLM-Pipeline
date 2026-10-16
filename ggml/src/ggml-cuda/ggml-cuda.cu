@@ -1259,14 +1259,18 @@ static void ggml_cuda_op_mul_mat_cublas(
 
     if (supports_bf16 && src0->type == GGML_TYPE_BF16 && ggml_is_contiguous(src0) && row_diff == src0->ne[1]) {
         ggml_cuda_pool_alloc<nv_bfloat16> src1_as_bf16(ctx.pool(id));
-        if (src1->type != GGML_TYPE_BF16) {
+        // Jetson study switches GGML_CUDA_JETSON_ACT_*: the BF16 input converted once / written by its producer
+        const nv_bfloat16 * src1_cached = src1->type == GGML_TYPE_F32 && src1_ddf_i == (const float *) src1->data &&
+            src1_ncols == src1->ne[1] ? ggml_cuda_jetson_act_get(ctx, stream, src1) : nullptr;
+        if (src1->type != GGML_TYPE_BF16 && !src1_cached) {
             const to_bf16_cuda_t to_bf16_cuda = ggml_get_to_bf16_cuda(src1->type);
             GGML_ASSERT(to_bf16_cuda != nullptr);
             size_t ne = src1_ncols*ne10;
             src1_as_bf16.alloc(ne);
             to_bf16_cuda(src1_ddf_i, src1_as_bf16.get(), ne, stream);
         }
-        const nv_bfloat16 * src1_ptr = src1->type == GGML_TYPE_BF16 ? (const nv_bfloat16 *) src1_ddf_i : src1_as_bf16.get();
+        const nv_bfloat16 * src1_ptr = src1->type == GGML_TYPE_BF16 ? (const nv_bfloat16 *) src1_ddf_i :
+                                       src1_cached ? src1_cached : src1_as_bf16.get();
         const nv_bfloat16 * src0_ptr = (const nv_bfloat16 *)src0_dd_i;
 
         // Jetson study switches (jetson-gemm.cuh): cuBLASLt, F32 output and/or a tuned algorithm
@@ -3492,6 +3496,9 @@ static void ggml_cuda_graph_evaluate_and_capture(ggml_backend_cuda_context * cud
                 stream_ctx.concurrent_events.clear();
             }
 
+            if (ggml_cuda_jetson_gemm_get_switches().act()) {   // Jetson ACT switches: new graph, new activations
+                ggml_cuda_jetson_act_reset(cuda_ctx->stream());
+            }
             for (int i = 0; i < cgraph->n_nodes; i++) {
                 ggml_tensor * node = cgraph->nodes[i];
                 if (is_concurrent_event_active) {
@@ -3652,6 +3659,25 @@ static void ggml_cuda_graph_evaluate_and_capture(ggml_backend_cuda_context * cud
                             ggml_cuda_op_fused_add(*cuda_ctx, &fused_add_node, n_fuse);
                             i += n_fuse - 1;
 
+                            continue;
+                        }
+                    }
+
+                    // Jetson study switch (GGML_CUDA_JETSON_ACT_FUSE): RMS norm x weight and SwiGLU write the BF16 input
+                    // of the GEMMs that read them, instead of F32 that each GEMM then converts
+                    if (ggml_cuda_jetson_gemm_get_switches().act_fuse) {
+                        int readers = 0;
+                        if (ggml_cuda_can_fuse(cgraph, i, { GGML_OP_RMS_NORM, GGML_OP_MUL }, {}) &&
+                            ggml_cuda_jetson_rms_norm_mul_bf16(*cuda_ctx, node, cgraph->nodes[i + 1], nullptr) &&
+                            (readers = ggml_cuda_jetson_act_fusable(*cuda_ctx, cgraph, i + 1, cgraph->nodes[i + 1])) > 0) {
+                            ggml_cuda_jetson_rms_norm_mul_bf16(*cuda_ctx, node, cgraph->nodes[i + 1],
+                                ggml_cuda_jetson_act_produce(*cuda_ctx, cgraph->nodes[i + 1], readers));
+                            i += 1;
+                            continue;
+                        }
+                        if (node->op == GGML_OP_GLU && ggml_cuda_jetson_swiglu_bf16(*cuda_ctx, node, nullptr) &&
+                            (readers = ggml_cuda_jetson_act_fusable(*cuda_ctx, cgraph, i, node)) > 0) {
+                            ggml_cuda_jetson_swiglu_bf16(*cuda_ctx, node, ggml_cuda_jetson_act_produce(*cuda_ctx, node, readers));
                             continue;
                         }
                     }

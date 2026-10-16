@@ -11,6 +11,7 @@
 //   ViT attention     --vit-flash-attn on|off; --vit-window-batch: windowed layers as a batch of windows
 //                     (engine switch MTMD_VIT_WINDOW_BATCH; needs aligned frames)
 //   BF16 GEMMs        --gemm-f32-out, --gemm-bias-fuse, --gemm-table <file>, --gemm-record <file>
+//   GEMM inputs       --act-dedup (convert each activation to BF16 once), --act-fuse (norm / SwiGLU write BF16)
 //                     (engine switches GGML_CUDA_JETSON_GEMM_*, see ggml-cuda/jetson-gemm.cuh)
 //
 // The JSON output records every switch and a TTFT breakdown; NVTX ranges (request, flow, select,
@@ -98,6 +99,8 @@ struct sintel_params {
     bool        vit_window_batch = false;
     bool        gemm_f32_out  = false;
     bool        gemm_bias_fuse = false;
+    bool        act_dedup      = false;
+    bool        act_fuse       = false;
     std::string gemm_table;
     std::string gemm_record;
 };
@@ -170,6 +173,10 @@ static std::vector<char *> filter_custom_args(int argc, char ** argv, sintel_par
             sparams.gemm_f32_out = true;
         } else if (arg == "--gemm-bias-fuse") {
             sparams.gemm_bias_fuse = true;
+        } else if (arg == "--act-dedup") {
+            sparams.act_dedup = true;
+        } else if (arg == "--act-fuse") {
+            sparams.act_fuse = true;
         } else if (arg == "--gemm-table" && i + 1 < argc) {
             sparams.gemm_table = argv[++i];
         } else if (arg == "--gemm-record" && i + 1 < argc) {
@@ -220,6 +227,8 @@ static void show_additional_info(int /*argc*/, char ** argv) {
     printf("  --gemm-f32-out      BF16 GEMMs write F32 directly (no BF16->F32 conversion kernel)\n");
     printf("  --gemm-bias-fuse    Fold the bias ADD after a BF16 GEMM into the GEMM (needs --gemm-f32-out)\n");
     printf("  --gemm-table <f>    Per-shape cuBLASLt algorithms from jetson-gemm-tune\n");
+    printf("  --act-dedup         Convert each F32 GEMM input to BF16 once, shared by the GEMMs reading it\n");
+    printf("  --act-fuse          RMS norm and SwiGLU write the BF16 GEMM input directly (no F32 intermediate)\n");
     printf("  --gemm-record <f>   Append the BF16 GEMM shapes this run uses (input for jetson-gemm-tune)\n\n");
     printf("Standard llama.cpp options (-p, -n, -ngl, -c, etc.) are also supported.\n");
 }
@@ -1629,6 +1638,8 @@ static void write_results_json(const std::string & output_path,
         {"vit_window_batch", sparams.vit_window_batch},
         {"gemm_f32_out",     sparams.gemm_f32_out},
         {"gemm_bias_fuse",   sparams.gemm_bias_fuse && sparams.gemm_f32_out},
+        {"act_dedup",        sparams.act_dedup},
+        {"act_fuse",         sparams.act_fuse},
         {"gemm_table",       sparams.gemm_table},
     };
     j["params"]["video_name"]         = sparams.video_name;
@@ -1675,6 +1686,8 @@ int main(int argc, char ** argv) {
     if (sparams.vit_window_batch) setenv("MTMD_VIT_WINDOW_BATCH", "1", 1);
     if (sparams.gemm_f32_out)     setenv("GGML_CUDA_JETSON_GEMM_F32OUT", "1", 1);
     if (sparams.gemm_bias_fuse)   setenv("GGML_CUDA_JETSON_GEMM_BIAS", "1", 1);
+    if (sparams.act_dedup)        setenv("GGML_CUDA_JETSON_ACT_DEDUP", "1", 1);
+    if (sparams.act_fuse)         setenv("GGML_CUDA_JETSON_ACT_FUSE", "1", 1);
     if (!sparams.gemm_table.empty())  setenv("GGML_CUDA_JETSON_GEMM_TABLE", sparams.gemm_table.c_str(), 1);
     if (!sparams.gemm_record.empty()) setenv("GGML_CUDA_JETSON_GEMM_RECORD", sparams.gemm_record.c_str(), 1);
 

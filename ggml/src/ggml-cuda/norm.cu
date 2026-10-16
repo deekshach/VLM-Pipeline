@@ -71,9 +71,9 @@ static __global__ void group_norm_f32(const float * x, float * dst, const int gr
     }
 }
 
-template <int block_size, bool do_multiply = false, bool do_add = false>
+template <int block_size, bool do_multiply = false, bool do_add = false, typename dst_t = float>
 static __global__ void rms_norm_f32(const float * x,
-                                    float *       dst,
+                                    dst_t *       dst,
                                     const int     ncols,
                                     const int64_t stride_row,
                                     const int64_t stride_channel,
@@ -140,12 +140,12 @@ static __global__ void rms_norm_f32(const float * x,
         if constexpr (do_multiply && do_add) {
             const int mul_col = fastmodulo(col, mul_ncols_packed);
             const int add_col = fastmodulo(col, add_ncols_packed);
-            dst[col]          = scale * x[col] * mul[mul_col] + add[add_col];
+            dst[col]          = (dst_t) (scale * x[col] * mul[mul_col] + add[add_col]);
         } else if constexpr (do_multiply) {
             const int mul_col = fastmodulo(col, mul_ncols_packed);
-            dst[col]          = scale * x[col] * mul[mul_col];
+            dst[col]          = (dst_t) (scale * x[col] * mul[mul_col]);
         } else {
-            dst[col] = scale * x[col];
+            dst[col] = (dst_t) (scale * x[col]);
         }
     }
 }
@@ -531,6 +531,38 @@ void ggml_cuda_op_rms_norm_fused(ggml_backend_cuda_context & ctx, ggml_tensor * 
                           /*add_s00*/ 0, 0, 0,
                           0, 0, 0, 0,
                           eps, stream);
+}
+
+// Jetson study switch GGML_CUDA_JETSON_ACT_FUSE: RMS_NORM x MUL(weight) written as BF16 (the GEMM input) instead
+// of F32; same kernel and arithmetic, so the value equals the F32 result converted to BF16 afterwards.
+bool ggml_cuda_jetson_rms_norm_mul_bf16(ggml_backend_cuda_context & ctx, const ggml_tensor * norm,
+                                        const ggml_tensor * mul_tensor, nv_bfloat16 * out) {
+    const ggml_tensor * x = norm->src[0];
+    const ggml_tensor * w = mul_tensor->src[0] == norm ? mul_tensor->src[1] : mul_tensor->src[0];
+    // the LLM / ViT case: contiguous 2-D rows, one weight vector broadcast over the rows
+    if (x->type != GGML_TYPE_F32 || w->type != GGML_TYPE_F32 || mul_tensor->type != GGML_TYPE_F32 ||
+        !ggml_is_contiguous(x) || !ggml_is_contiguous(w) || x->ne[2] != 1 || x->ne[3] != 1 ||
+        w->ne[0] != x->ne[0] || ggml_nelements(w) != w->ne[0] || !ggml_are_same_shape(x, mul_tensor)) {
+        return false;
+    }
+    if (out == nullptr) return true;   // qualification only
+    float eps = 0.0f;
+    memcpy(&eps, norm->op_params, sizeof(float));
+    const int ncols = x->ne[0], nrows = x->ne[1];
+    const int64_t s01 = x->nb[1] / sizeof(float);
+    const uint3 one = init_fastdiv_values(1), nc = init_fastdiv_values(ncols);
+    const dim3 blocks_num(nrows, 1, 1);
+    cudaStream_t stream = ctx.stream();
+    if (ncols < 1024) {
+        rms_norm_f32<256, true, false, nv_bfloat16><<<blocks_num, dim3(256, 1, 1), 32 * sizeof(float), stream>>>(
+            (const float *) x->data, out, ncols, s01, s01 * nrows, s01 * nrows, eps, (const float *) w->data, 0, 0, 0,
+            nc, one, one, one);
+    } else {
+        rms_norm_f32<1024, true, false, nv_bfloat16><<<blocks_num, dim3(1024, 1, 1), 32 * sizeof(float), stream>>>(
+            (const float *) x->data, out, ncols, s01, s01 * nrows, s01 * nrows, eps, (const float *) w->data, 0, 0, 0,
+            nc, one, one, one);
+    }
+    return true;
 }
 
 void ggml_cuda_op_rms_norm_fused_add(ggml_backend_cuda_context & ctx,

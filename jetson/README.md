@@ -24,7 +24,7 @@ Engine changes outside this directory are switches that default to off:
 | file | switch |
 |---|---|
 | `tools/mtmd/models/qwen2vl.cpp`, `tools/mtmd/clip.cpp`, `tools/mtmd/clip-impl.h` | `MTMD_VIT_WINDOW_BATCH=1` |
-| `ggml/src/ggml-cuda/jetson-gemm.cu(h)`, `ggml/src/ggml-cuda/ggml-cuda.cu` | `GGML_CUDA_JETSON_GEMM_F32OUT=1`, `GGML_CUDA_JETSON_GEMM_BIAS=1`, `GGML_CUDA_JETSON_GEMM_TABLE=<file>`, `GGML_CUDA_JETSON_GEMM_RECORD=<file>` |
+| `ggml/src/ggml-cuda/jetson-gemm.cu(h)`, `ggml/src/ggml-cuda/ggml-cuda.cu` | `GGML_CUDA_JETSON_GEMM_F32OUT=1`, `GGML_CUDA_JETSON_GEMM_BIAS=1`, `GGML_CUDA_JETSON_GEMM_TABLE=<file>`, `GGML_CUDA_JETSON_GEMM_RECORD=<file>`, `GGML_CUDA_JETSON_ACT_DEDUP=1`, `GGML_CUDA_JETSON_ACT_FUSE=1` (also `norm.cu`, `unary.cu`) |
 
 ## Build
 
@@ -55,6 +55,8 @@ All on `llama-jetson-vlm`; everything else is a standard llama.cpp option (`-m`,
 | `--gemm-bias-fuse` | the bias ADD after a BF16 GEMM goes into the GEMM epilogue (needs `--gemm-f32-out`) | elementwise passes |
 | `--gemm-table <file>` | per-shape cuBLASLt algorithm measured on this Orin | GEMM tile choice (prefill down projection at 32% of peak) |
 | `--gemm-record <file>` | append the BF16 GEMM shapes the run uses | input for `jetson-gemm-tune` |
+| `--act-dedup` | each F32 GEMM input is converted to BF16 once and shared (Q/K/V, gate/up) | repeated conversion passes |
+| `--act-fuse` | RMS norm x weight and SwiGLU write the BF16 GEMM input directly; bit-identical | F32 intermediates larger than the 4 MB L2, each a DRAM round trip |
 
 The JSON output (`--output-json`) records every switch under `switches` and a TTFT breakdown under
 `timing.breakdown` (analysis, ViT, image prefill, text prefill, window-cache actions per frame, live
@@ -95,7 +97,8 @@ runs do not.
 | directory | what |
 |---|---|
 | `experiments/baseline_f8.log` | first baseline run (dmc955 `llama-baseline-vlm`, 8 frames) |
-| `experiments/overlap/` | ViT and prefill run concurrently on one GPU: no gain (0.99-1.02x) |
+| `experiments/overlap/` | ViT and prefill run concurrently on one GPU: no gain (0.99-1.02x; re-test with crops, all switches and stream priorities: 1-2%) |
+| `experiments/act_fusion/` | `--act-fuse` / `--act-dedup`: TTFT -6.2%, prefill -9.8%, ViT -7 to -11%; wider GEMM config search |
 | `experiments/adaptive_sweep/` | adaptive vs uniform on 23 clips with Sintel ground-truth flow; `anchor/`: anchor-first; `ofa_flow/`: precomputed OFA flow vs ground truth |
 | `experiments/flow_timing/` | optical-flow cost on CPU (OpenCV) vs OFA; OFA accuracy vs ground truth |
 | `experiments/live_flow/` | live OFA flow in the pipeline: serial vs pipelined vs anchor-first, 23 clips |

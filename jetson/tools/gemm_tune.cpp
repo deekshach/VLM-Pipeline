@@ -2,7 +2,7 @@
 // pipeline runs, and write the fastest per shape as a table for GGML_CUDA_JETSON_GEMM_TABLE.
 //
 //   GGML_CUDA_JETSON_GEMM_RECORD=shapes.txt llama-jetson-vlm ...   # collect the shapes once
-//   jetson-gemm-tune shapes.txt table.txt [candidates=32] [reps=10] [swizzle=0]
+//   jetson-gemm-tune shapes.txt table.txt [candidates=32] [reps=10] [mode=0]
 //   jetson-gemm-tune --profile m n k d_f32 bias table.txt   # one call with the heuristic's algorithm and
 //                                                           # one with the table's, in NVTX ranges
 //                                                           # "heuristic" and "tuned" (for ncu)
@@ -11,9 +11,13 @@
 // D F32 or BF16, optional F32 bias epilogue), exactly as ggml-cuda/jetson-gemm.cu calls it.
 // Each candidate is timed (median of `reps` after 3 warm-up calls); the heuristic's first pick is
 // what the engine uses without a table, so its time is the baseline in the report.
-// swizzle=1 also tries each candidate with CTA swizzling flipped (CUBLASLT_ALGO_CONFIG_CTA_SWIZZLING, where the
+// mode=1 also tries each candidate with CTA swizzling flipped (CUBLASLT_ALGO_CONFIG_CTA_SWIZZLING, where the
 // algorithm supports it): the tile launch order that makes tiles sharing a weight panel run together, so the
 // panel is still in the 4 MB L2 when the next tile reads it (prefill GEMMs read 1.4-1.5x their weights from DRAM).
+// mode=2 searches the whole configuration space beyond the heuristic's few picks: every algorithm id x tile x
+// stages x split-K (1-8) x reduction scheme x swizzle that cublasLtMatmulAlgoCheck accepts, screened by a
+// 3-call median, the best 12 re-timed with `reps`. On Orin's 16 SMs the tile count of a GEMM decides how full
+// its last wave is (e.g. 56 tiles = 3.5 waves); the heuristic offers about 8 candidates and misses some.
 #include <cublasLt.h>
 #ifdef JETSON_NVTX
 #include <nvtx3/nvToolsExt.h>
@@ -104,12 +108,13 @@ static int profile_shape(int argc, char ** argv) {
 int main(int argc, char ** argv) {
     if (argc > 1 && strcmp(argv[1], "--profile") == 0) return profile_shape(argc, argv);
     if (argc < 3) {
-        fprintf(stderr, "usage: %s <shapes.txt> <table.txt> [candidates=32] [reps=10] [swizzle=0]\n", argv[0]);
+        fprintf(stderr, "usage: %s <shapes.txt> <table.txt> [candidates=32] [reps=10] [mode=0]\n", argv[0]);
         return 1;
     }
     const int n_cand = argc > 3 ? atoi(argv[3]) : 32;
     const int reps   = argc > 4 ? atoi(argv[4]) : 10;
-    const bool swz   = argc > 5 && atoi(argv[5]) != 0;
+    const int mode   = argc > 5 ? atoi(argv[5]) : 0;
+    const bool swz   = mode == 1;
 
     std::set<std::tuple<long long, long long, long long, int, int>> shapes;
     {
@@ -226,14 +231,82 @@ int main(int argc, char ** argv) {
             if (i == 0) base_us = us;
             if (us < best_us) { best_us = us; best = i; }
         }
+        cublasLtMatmulAlgo_t best_algo = {};
+        if (best >= 0) best_algo = res[best].algo;
+        int n_searched = 0; bool from_search = false;
+        if (mode == 2) {
+            auto time_algo = [&](const cublasLtMatmulAlgo_t & a, int r_n) -> double {
+                if (cublasLtMatmul(h, op, &alpha, A, la, B, lb, &beta, D, ld, D, ld, &a, ws, WORKSPACE, stream) !=
+                    CUBLAS_STATUS_SUCCESS) return 1e30;
+                std::vector<float> t(r_n);
+                for (int r = 0; r < r_n; r++) {
+                    CK(cudaEventRecord(e0, stream));
+                    if (cublasLtMatmul(h, op, &alpha, A, la, B, lb, &beta, D, ld, D, ld, &a, ws, WORKSPACE, stream) !=
+                        CUBLAS_STATUS_SUCCESS) return 1e30;
+                    CK(cudaEventRecord(e1, stream));
+                    CK(cudaEventSynchronize(e1));
+                    CK(cudaEventElapsedTime(&t[r], e0, e1));
+                }
+                std::sort(t.begin(), t.end());
+                return t[r_n / 2] * 1000.0;
+            };
+            auto cap_list = [](const cublasLtMatmulAlgo_t & a, cublasLtMatmulAlgoCapAttributes_t c) {
+                size_t sz = 0;
+                cublasLtMatmulAlgoCapGetAttribute(&a, c, nullptr, 0, &sz);
+                std::vector<uint32_t> v(sz / sizeof(uint32_t));
+                if (!v.empty()) cublasLtMatmulAlgoCapGetAttribute(&a, c, v.data(), sz, &sz);
+                if (v.empty()) v.push_back(0);   // undefined = library default
+                return v;
+            };
+            const cudaDataType_t dt = d32 ? CUDA_R_32F : CUDA_R_16BF;
+            int ids[64], n_ids = 0;
+            CL(cublasLtMatmulAlgoGetIds(h, CUBLAS_COMPUTE_32F, CUDA_R_32F, CUDA_R_16BF, CUDA_R_16BF, dt, dt, 64, ids, &n_ids));
+            std::vector<std::pair<double, cublasLtMatmulAlgo_t>> screened;
+            for (int a = 0; a < n_ids; a++) {
+                cublasLtMatmulAlgo_t base;
+                if (cublasLtMatmulAlgoInit(h, CUBLAS_COMPUTE_32F, CUDA_R_32F, CUDA_R_16BF, CUDA_R_16BF, dt, dt, ids[a], &base) !=
+                    CUBLAS_STATUS_SUCCESS) continue;
+                size_t sz = 0;
+                int32_t splitk_sup = 0; uint32_t red_mask = 0, swz_sup = 0;
+                cublasLtMatmulAlgoCapGetAttribute(&base, CUBLASLT_ALGO_CAP_SPLITK_SUPPORT, &splitk_sup, sizeof(splitk_sup), &sz);
+                cublasLtMatmulAlgoCapGetAttribute(&base, CUBLASLT_ALGO_CAP_REDUCTION_SCHEME_MASK, &red_mask, sizeof(red_mask), &sz);
+                cublasLtMatmulAlgoCapGetAttribute(&base, CUBLASLT_ALGO_CAP_CTA_SWIZZLING_SUPPORT, &swz_sup, sizeof(swz_sup), &sz);
+                const auto tiles = cap_list(base, CUBLASLT_ALGO_CAP_TILE_IDS);
+                const auto stages = cap_list(base, CUBLASLT_ALGO_CAP_STAGES_IDS);
+                std::vector<std::pair<uint32_t, uint32_t>> splits = {{1, CUBLASLT_REDUCTION_SCHEME_NONE}};
+                if (splitk_sup) for (uint32_t sk : {2u, 3u, 4u, 6u, 8u})
+                    for (uint32_t rs : {(uint32_t) CUBLASLT_REDUCTION_SCHEME_INPLACE, (uint32_t) CUBLASLT_REDUCTION_SCHEME_COMPUTE_TYPE,
+                                        (uint32_t) CUBLASLT_REDUCTION_SCHEME_OUTPUT_TYPE})
+                        if (red_mask & rs) splits.push_back({sk, rs});
+                for (uint32_t tile : tiles) for (uint32_t stg : stages) for (auto [sk, rs] : splits)
+                for (uint32_t sw = 0; sw <= (swz_sup ? 1u : 0u); sw++) {
+                    cublasLtMatmulAlgo_t c = base;
+                    cublasLtMatmulAlgoConfigSetAttribute(&c, CUBLASLT_ALGO_CONFIG_TILE_ID, &tile, sizeof(tile));
+                    cublasLtMatmulAlgoConfigSetAttribute(&c, CUBLASLT_ALGO_CONFIG_STAGES_ID, &stg, sizeof(stg));
+                    cublasLtMatmulAlgoConfigSetAttribute(&c, CUBLASLT_ALGO_CONFIG_SPLITK_NUM, &sk, sizeof(sk));
+                    cublasLtMatmulAlgoConfigSetAttribute(&c, CUBLASLT_ALGO_CONFIG_REDUCTION_SCHEME, &rs, sizeof(rs));
+                    cublasLtMatmulAlgoConfigSetAttribute(&c, CUBLASLT_ALGO_CONFIG_CTA_SWIZZLING, &sw, sizeof(sw));
+                    cublasLtMatmulHeuristicResult_t chk;
+                    if (cublasLtMatmulAlgoCheck(h, op, la, lb, ld, ld, &c, &chk) != CUBLAS_STATUS_SUCCESS ||
+                        chk.workspaceSize > WORKSPACE) continue;
+                    n_searched++;
+                    screened.push_back({time_algo(c, 3), c});
+                }
+            }
+            std::sort(screened.begin(), screened.end(), [](const auto & x, const auto & y) { return x.first < y.first; });
+            for (size_t i = 0; i < screened.size() && i < 12; i++) {
+                const double us = time_algo(screened[i].second, reps);
+                if (us < best_us) { best_us = us; best_algo = screened[i].second; best = 0; from_search = true; }
+            }
+        }
         if (best >= 0) {
             fprintf(out, "%lld %lld %lld %d %d", m, n, k, d32, use_bias);
-            for (int w = 0; w < 8; w++) fprintf(out, " %llx", (unsigned long long) res[best].algo.data[w]);
+            for (int w = 0; w < 8; w++) fprintf(out, " %llx", (unsigned long long) best_algo.data[w]);
             fprintf(out, "\n");
             if (base_us > 0) { total_base += base_us; total_best += best_us; }
             printf("%6lld %6lld %6lld %3d %4d | %10.1f %10.1f %6.2fx | %d tried, pick #%d%s\n", m, n, k, d32, use_bias,
-                   base_us, best_us, base_us > 0 ? base_us / best_us : 0.0, n_ok, best,
-                   best >= n_res - n_swz ? " (swizzle flipped)" : "");
+                   base_us, best_us, base_us > 0 ? base_us / best_us : 0.0, n_ok + n_searched, best,
+                   from_search ? " (config search)" : best >= n_res - n_swz ? " (swizzle flipped)" : "");
         } else {
             printf("%6lld %6lld %6lld %3d %4d | no working candidate\n", m, n, k, d32, use_bias);
         }

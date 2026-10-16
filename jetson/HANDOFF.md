@@ -70,6 +70,9 @@ cmake --build build --target llama-jetson-vlm jetson-gemm-tune jetson-vit-probe 
 | `--gemm-bias-fuse` | `GGML_CUDA_JETSON_GEMM_BIAS=1` | bias ADD folded into the GEMM epilogue (needs F32 out) |
 | `--gemm-table F` | `GGML_CUDA_JETSON_GEMM_TABLE=F` | tuned per-shape cuBLASLt algorithm (`jetson/gemm/table_orin.txt`) |
 | `--gemm-record F` | `GGML_CUDA_JETSON_GEMM_RECORD=F` | record GEMM shapes for `jetson-gemm-tune` |
+| `--act-dedup` | `GGML_CUDA_JETSON_ACT_DEDUP=1` | each F32 GEMM input converted to BF16 once, shared by the GEMMs reading it |
+| `--act-fuse` | `GGML_CUDA_JETSON_ACT_FUSE=1` | RMS norm x weight and SwiGLU write the BF16 GEMM input directly (bit-identical) |
+| (probe env) | `OVERLAP_VIT_PRIO` / `OVERLAP_LLM_PRIO` | per-model CUDA stream priority in `jetson-overlap-probe` |
 
 Engine files: `tools/mtmd/models/qwen2vl.cpp`, `tools/mtmd/clip.cpp`, `tools/mtmd/clip-impl.h`,
 `ggml/src/ggml-cuda/jetson-gemm.cu(h)`, `ggml/src/ggml-cuda/ggml-cuda.cu` (fusion hook + cuBLAS branch),
@@ -120,6 +123,13 @@ vit, prefill_img, prefill_txt, wc_diff, decode.
     3-6% rel. L2 from a CPU F32-output reference). Generation varies run to run even with identical settings.
 13. **GEMM tuning** (`jetson/gemm/tune_report.txt`): 70 shapes; prefill down projection 3584x18944 (512 tokens)
     6.7 -> 2.5 ms (2.64x, no split-K); sum over shapes 1.33x.
+14. **Switch ablation** (`experiments/profiles/ablation/`): Shapley attribution of time, DRAM and L2 traffic to each
+    switch (nsys + ncu); warm vs flushed caches: cross-kernel L2 reuse 1-3% at full frame / LLM, ~20% at 1x2 crops.
+15. **ViT/prefill overlap re-test** (`experiments/overlap/`): crops + all switches + stream priorities: 1-2%; GPU work
+    is conserved (the prefill GEMMs fill all 16 SMs). Fixed a shared cuBLASLt workspace (deadlock when concurrent).
+16. **GEMM-input fusion** (`experiments/act_fusion/`): `--act-fuse` removes the F32 -> BF16 passes (L2 too small to
+    keep 7-39 MB activations between kernels): prefill -9.8%, ViT -7 to -11%, TTFT 4,700 -> 4,407 ms (-6.2%; uniform
+    7,772 -> 7,234), bit-identical. Wider GEMM config search (tuner mode 2): K/V -12%, end to end -0.15%.
 
 ## 6. Microarchitectural effects of the switches (nsys, alley_1, 3 frames, ViT FA off)
 
@@ -164,7 +174,9 @@ Working sets vs the 4 MB L2 (computed):
 - Push new commits to GitHub (the user pushed up to `8aabc1fd`).
 - Window-cache threshold vs answer quality (needs repeated runs or a scored benchmark; generation is nondeterministic).
 - Remaining ViT cost after all switches: the 4 global layers' dense attention (flash attention for those only?),
-  elementwise passes (input casts F32->BF16 still there; norms, RoPE, K/V copies), RoPE kernel efficiency.
+  elementwise passes (norms, RoPE, K/V copies), RoPE kernel efficiency.
+- Prefill: per-frame 512 + 64 ubatches cost one extra weight pass per frame; packing frames into full ubatches needs
+  the marker tokens between frames as embeddings. Remaining glue: residual add + norm (not fused), O-projection cast.
 - OFA flow underestimates large motion: recalibrate the frame-count thresholds for OFA flow.
 - GEMM table covers shapes recorded on alley_1 and ambush_2; record more clips for full coverage.
 - MSVD has been prepared but not run through the new pipeline.

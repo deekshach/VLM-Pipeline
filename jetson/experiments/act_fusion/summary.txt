@@ -1,0 +1,16 @@
+mean over 6 clips: alley_1, ambush_5, bandage_1, cave_2, sleeping_1, temple_2
+| config | TTFT ms | ViT ms | image prefill ms | text prefill ms |
+|---|---|---|---|---|
+| all_anchor | 4,700 | 2,136 | 1,976 | 488 |
+| all_anchor_dedup | 4,655 | 2,096 | 1,969 | 491 |
+| all_anchor_fuse | 4,407 | 1,979 | 1,840 | 487 |
+| uniform_all | 7,772 | 3,453 | 3,342 | 738 |
+| uniform_all_fuse | 7,234 | 3,156 | 3,103 | 739 |
+
+per clip TTFT: all_anchor -> all_anchor_fuse | uniform_all -> uniform_all_fuse | image tokens (adaptive)
+alley_1        3052 ->    2849 |    7722 ->    7165 | 1728
+ambush_5       7510 ->    7085 |    7692 ->    7145 | 4416
+bandage_1      3030 ->    2851 |    7699 ->    7603 | 1728
+cave_2         7636 ->    7100 |    7684 ->    7150 | 4608
+sleeping_1     3044 ->    2855 |    8134 ->    7149 | 1728
+temple_2       3931 ->    3701 |    7700 ->    7191 | 2304

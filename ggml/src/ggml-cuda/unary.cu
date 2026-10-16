@@ -251,8 +251,8 @@ void ggml_cuda_op_softplus(ggml_backend_cuda_context & ctx, ggml_tensor * dst) {
 }
 /* gated ops */
 
-template <float (*op)(float), typename T>
-static __global__ void unary_gated_op_kernel(const T * x, const T * g, T * dst, const int64_t k, const int64_t n, const int64_t o0, const int64_t o1) {
+template <float (*op)(float), typename T, typename D = T>
+static __global__ void unary_gated_op_kernel(const T * x, const T * g, D * dst, const int64_t k, const int64_t n, const int64_t o0, const int64_t o1) {
     const int64_t i = int64_t(blockDim.x)*blockIdx.x + threadIdx.x;
 
     if (i >= k) {
@@ -263,7 +263,7 @@ static __global__ void unary_gated_op_kernel(const T * x, const T * g, T * dst, 
     const int64_t j0 = (i / n) * o0 + (i % n);
     const int64_t j1 = o0 == o1 ? j0 : (i / n) * o1 + (i % n);
 
-    dst[i] = (T)(op((float)x[j0]) * (float)g[j1]);
+    dst[i] = (D)(op((float)x[j0]) * (float)g[j1]);
 }
 
 template <float (*op)(float), typename T>
@@ -336,6 +336,30 @@ void ggml_cuda_op_geglu(ggml_backend_cuda_context & ctx, ggml_tensor * dst) {
 
 void ggml_cuda_op_swiglu(ggml_backend_cuda_context & ctx, ggml_tensor * dst) {
     ggml_cuda_op_unary_gated<op_silu>(ctx, dst);
+}
+
+// Jetson study switch GGML_CUDA_JETSON_ACT_FUSE: the same SwiGLU, written as BF16 (the GEMM input) instead of F32.
+// The value is identical to the F32 result converted to BF16 afterwards (same arithmetic, same rounding).
+bool ggml_cuda_jetson_swiglu_bf16(ggml_backend_cuda_context & ctx, const ggml_tensor * dst, nv_bfloat16 * out) {
+    const ggml_tensor * src0 = dst->src[0];
+    const ggml_tensor * src1 = dst->src[1];
+    if (dst->op != GGML_OP_GLU || ggml_get_glu_op(dst) != GGML_GLU_OP_SWIGLU || src0->type != GGML_TYPE_F32 ||
+        dst->type != GGML_TYPE_F32 || !ggml_is_contiguous_1(src0) || src0->nb[0] != sizeof(float) ||
+        !ggml_is_contiguous(dst) || (src1 && (src1->type != GGML_TYPE_F32 || !ggml_is_contiguous_1(src1) ||
+        src1->nb[0] != sizeof(float)))) {
+        return false;
+    }
+    if (out == nullptr) return true;   // qualification only
+    const int64_t nc = src1 ? src0->ne[0] : src0->ne[0] / 2;
+    const int32_t swapped = ((const int32_t *) dst->op_params)[1];
+    const float * x = (const float *) src0->data;
+    const float * g = src1 ? (const float *) src1->data : x;
+    if (!src1) { x += swapped ? nc : 0; g += swapped ? 0 : nc; }
+    const int64_t o0 = src0->nb[1] / sizeof(float), o1 = src1 ? src1->nb[1] / sizeof(float) : o0;
+    const int64_t k = ggml_nelements(dst);
+    const int64_t num_blocks = (k + CUDA_GLU_BLOCK_SIZE - 1) / CUDA_GLU_BLOCK_SIZE;
+    unary_gated_op_kernel<op_silu, float, nv_bfloat16><<<num_blocks, CUDA_GLU_BLOCK_SIZE, 0, ctx.stream()>>>(x, g, out, k, nc, o0, o1);
+    return true;
 }
 
 void ggml_cuda_op_geglu_erf(ggml_backend_cuda_context & ctx, ggml_tensor * dst) {
