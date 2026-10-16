@@ -13,7 +13,8 @@
 #                                                # frame / whole prefill; also fixes the ncu launch windows
 #   sudo bash jetson/scripts/run_ablation.sh ncu # hardware counters, two layers per run (incl. global layer 7)
 #   sudo bash jetson/scripts/run_ablation.sh warm # L2 counters with caches NOT flushed between kernels
-#                                                # (application replay): producer -> consumer reuse in L2
+#                                                # (kernel replay, 4 metrics = one pass, so each kernel sees
+#                                                # the L2 its real predecessor left): producer -> consumer reuse
 #   python3 jetson/tools/ablation_analyze.py     # afterwards, no sudo
 set -u
 MODE="${1:-}"
@@ -70,10 +71,11 @@ ncu|warm)
         REPLAY=(--replay-mode kernel --cache-control all)
         FILTER=cat
     else
-        # caches kept between kernels; application replay so each pass sees the real predecessor kernels
+        # caches kept between kernels. Four metrics fit in one pass, so kernel replay measures each kernel with
+        # the L2 contents its real predecessor left. (Application replay hangs on the LLM's flash-attention kernel.)
         DEST="$OUT/warm"
         SECTIONS=(--metrics gpu__time_duration.sum,lts__t_sectors.sum,lts__d_sectors_fill_sysmem.sum,lts__t_sector_hit_rate.pct)
-        REPLAY=(--replay-mode application --cache-control none)
+        REPLAY=(--replay-mode kernel --cache-control none)
         FILTER='grep -E ^(vit_(base|W|FBT|WFBT)_|llm_base_)'
     fi
     # windows.txt: <run name> <nvtx range> <skip> <count>, e.g. "vit_WF_9x4 vit_9x4 237 83"
@@ -87,7 +89,7 @@ ncu|warm)
             APP=("$REPO/build/bin/jetson-prefill-probe" "$LLM" "${RANGE#prefill_last_}" 1 1)
         fi
         run() {
-            env $(envs_for "$CFG") "$NCU" --nvtx --nvtx-include "$RANGE/" --launch-skip "$SKIP" --launch-count "$COUNT" \
+            env $(envs_for "$CFG") timeout -k 30 "${RUN_TIMEOUT:-2400}" "$NCU" --nvtx --nvtx-include "$RANGE/" --launch-skip "$SKIP" --launch-count "$COUNT" \
                 "$@" "${SECTIONS[@]}" -o "$DEST/$NAME" -f "${APP[@]}" > "$DEST/$NAME.log" 2>&1
         }
         run "${REPLAY[@]}"
@@ -96,6 +98,7 @@ ncu|warm)
             run --replay-mode application --cache-control all
         fi
         grep -E "==ERROR==|No kernels were profiled" "$DEST/$NAME.log" && echo "   !! see $DEST/$NAME.log"
+        [ -s "$DEST/$NAME.ncu-rep" ] || { echo "   !! no report (timed out after ${RUN_TIMEOUT:-2400} s?), see $DEST/$NAME.log"; continue; }
         "$NCU" --import "$DEST/$NAME.ncu-rep" --page raw --csv --print-units base > "$DEST/${NAME}_raw.csv" 2>/dev/null
         echo "   $(($(wc -l < "$DEST/${NAME}_raw.csv") - 2)) kernels"
     done

@@ -86,3 +86,275 @@ Last ubatch by class vs KV length (base), ms:
 | rope | 55.1 | 54.9 | 0.6 | -0.6 | -0.2 |
 | copy | 10.2 | 10.5 | 0.1 | 0.1 | 0.1 |
 | glu | 174.5 | 190.7 | 17.8 | -0.9 | -0.7 |
+
+## 2. Hardware counters (ncu, clocks at base, caches flushed per kernel), composed per frame
+
+ViT per frame (ms / MB DRAM read / MB L2 requests):
+
+| config | 9x4 | 5x2 | 1x2 |
+|---|---|---|---|
+| base | 986 / 56315 / 154469 | 217 / 10176 / 29605 | 42 / 2345 / 5674 |
+| T | 982 / 56359 / 150308 | 210 / 9818 / 25967 | 38 / 2343 / 4470 |
+| F | 928 / 54750 / 150930 | 202 / 9947 / 28527 | 37 / 2243 / 5473 |
+| FT | 928 / 54448 / 150163 | 195 / 9128 / 24826 | 35 / 2235 / 4290 |
+| FB | 869 / 51053 / 142899 | 185 / 8906 / 26241 | 33 / 2024 / 5005 |
+| FBT | 862 / 49228 / 141984 | 177 / 8188 / 22570 | 30 / 2017 / 3815 |
+| W | 541 / 29750 / 84530 | 158 / 8836 / 24584 | 41 / 2321 / 5531 |
+| WT | 537 / 29864 / 80369 | 151 / 8331 / 20949 | 38 / 2313 / 4327 |
+| WF | 488 / 28349 / 80975 | 144 / 8489 / 23509 | 37 / 2213 / 5331 |
+| WFT | 483 / 27832 / 80203 | 137 / 7774 / 19811 | 34 / 2204 / 4150 |
+| WFB | 427 / 24648 / 72959 | 126 / 7433 / 21219 | 33 / 1999 / 4858 |
+| WFBT | 421 / 22756 / 72048 | 118 / 6680 / 17558 | 29 / 1986 / 3674 |
+
+### ViT per frame: attribution of time and memory traffic
+
+| metric | base | all on | W alone | F alone | B alone | T alone | C alone | W Shapley | F Shapley | B Shapley | T Shapley | C Shapley |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| ms | 985.8 | 118.2 (-88%) | -444.5 | -58.1 | - | -3.4 | -768.3 | -250.9 (29%) | -42.6 (5%) | -32.6 (4%) | -5.6 (1%) | -535.9 (62%) |
+| MB DRAM read | 56315 | 6680 (-88%) | -26565 | -1565 | - | 44 | -46139 | -13980 (28%) | -1241 (2%) | -2179 (4%) | -553 (1%) | -31682 (64%) |
+| MB L2 requests | 154469 | 17558 (-89%) | -69939 | -3540 | - | -4161 | -124865 | -37480 (27%) | -2166 (2%) | -4206 (3%) | -3080 (2%) | -89979 (66%) |
+
+### ViT (ncu): MB DRAM read per kernel class, Shapley value of each switch
+
+| class | base | all on | W | F | B | T | C |
+|---|---|---|---|---|---|---|---|
+| softmax | 18120 | 178 | -8628 | -8 | 13 | 11 | -9329 |
+| attn matmul | 12971 | 497 | -5360 | -53 | 10 | -8 | -7062 |
+| GEMM | 7669 | 3483 | 9 | 351 | -174 | 732 | -5103 |
+| GEMM split-K | 2624 | 0 | -0 | -47 | -0 | -1288 | -1288 |
+| cast | 5227 | 910 | 0 | -1483 | 0 | 0 | -2834 |
+| add | 5419 | 420 | 0 | 0 | -2028 | -0 | -2972 |
+| norm | 756 | 211 | -0 | 0 | -0 | 0 | -545 |
+| rope | 756 | 210 | 0 | 0 | 0 | 0 | -546 |
+| copy | 756 | 210 | 0 | 0 | 0 | 0 | -545 |
+| glu | 2017 | 561 | 0 | 0 | 0 | 0 | -1457 |
+
+### ViT (ncu): MB L2 requests per kernel class, Shapley value of each switch
+
+| class | base | all on | W | F | B | T | C |
+|---|---|---|---|---|---|---|---|
+| softmax | 28992 | 357 | -13811 | 0 | -0 | 0 | -14823 |
+| attn matmul | 52702 | 1043 | -23708 | 0 | -0 | -0 | -27952 |
+| GEMM | 32325 | 11439 | -1 | 2464 | 13 | 1627 | -24989 |
+| GEMM split-K | 9587 | 0 | -1 | -177 | 1 | -4705 | -4705 |
+| cast | 10775 | 1368 | 0 | -4451 | -0 | 0 | -4956 |
+| add | 10385 | 630 | -0 | 0 | -4225 | -0 | -5530 |
+| norm | 1517 | 427 | -0 | 0 | -0 | 0 | -1091 |
+| rope | 1530 | 426 | 0 | 0 | -0 | 0 | -1104 |
+| copy | 3630 | 1027 | 40 | -3 | 4 | -1 | -2643 |
+| glu | 3026 | 841 | 0 | 0 | 0 | 0 | -2185 |
+
+### ViT (ncu): ms per kernel class, Shapley value of each switch
+
+| class | base | all on | W | F | B | T | C |
+|---|---|---|---|---|---|---|---|
+| softmax | 381.4 | 10.6 | -187.4 | -2.7 | 0.4 | 0.2 | -181.2 |
+| attn matmul | 148.3 | 4.9 | -63.7 | 0.1 | 0.1 | 0.0 | -80.0 |
+| GEMM | 97.0 | 48.5 | 0.1 | 8.2 | 1.4 | 14.1 | -72.3 |
+| GEMM split-K | 41.1 | 0.0 | 0.0 | -0.8 | 0.0 | -20.2 | -20.2 |
+| cast | 113.0 | 14.8 | 0.1 | -47.5 | -0.2 | 0.1 | -50.8 |
+| add | 77.9 | 3.8 | 0.1 | 0.1 | -34.3 | 0.2 | -40.2 |
+| norm | 30.7 | 8.9 | -0.0 | 0.0 | -0.0 | 0.0 | -21.8 |
+| rope | 45.8 | 13.0 | -0.0 | 0.0 | -0.0 | -0.0 | -32.8 |
+| copy | 30.0 | 8.3 | -0.1 | -0.1 | -0.0 | 0.1 | -21.5 |
+| glu | 20.6 | 5.5 | -0.0 | 0.0 | -0.1 | -0.0 | -15.0 |
+
+### ViT full frame: efficiency of the main classes per config
+
+| config | class | ms | DRAM MB | L2 hit | tensor % | occupancy | top stall |
+|---|---|---|---|---|---|---|---|
+| base | softmax | 381.4 | 18120 | 39% | 0 | 66% | long_scoreboard 39% |
+| base | attn matmul | 148.3 | 12971 | 88% | 36 | 16% | barrier 21% |
+| base | GEMM | 97.0 | 7669 | 76% | 58 | 16% | wait 29% |
+| base | GEMM split-K | 41.1 | 2624 | 83% | 38 | 17% | mio_throttle 37% |
+| base | cast | 113.0 | 5227 | 52% | 2 | 85% | long_scoreboard 69% |
+| base | add | 77.9 | 5419 | 49% | 2 | 90% | long_scoreboard 88% |
+| base | all | 985.8 | 56315 | 56% | 13 | 54% | long_scoreboard 39% |
+| W | softmax | 55.2 | 1623 | 50% | 0 | 65% | long_scoreboard 38% |
+| W | attn matmul | 29.1 | 2881 | 80% | 28 | 18% | long_scoreboard 29% |
+| W | GEMM | 97.4 | 7691 | 76% | 58 | 16% | wait 29% |
+| W | GEMM split-K | 41.3 | 2624 | 83% | 38 | 17% | mio_throttle 37% |
+| W | cast | 113.5 | 5227 | 52% | 2 | 85% | long_scoreboard 70% |
+| W | add | 78.3 | 5419 | 49% | 2 | 90% | long_scoreboard 88% |
+| W | all | 541.3 | 29750 | 60% | 16 | 55% | long_scoreboard 44% |
+| FB | softmax | 380.0 | 18120 | 39% | 0 | 66% | long_scoreboard 39% |
+| FB | attn matmul | 149.5 | 12995 | 88% | 36 | 16% | barrier 21% |
+| FB | GEMM | 106.7 | 8044 | 77% | 53 | 16% | wait 30% |
+| FB | GEMM split-K | 43.9 | 2824 | 82% | 36 | 17% | mio_throttle 36% |
+| FB | cast | 49.9 | 3274 | 33% | 2 | 84% | long_scoreboard 69% |
+| FB | add | 12.8 | 1510 | 33% | 2 | 93% | long_scoreboard 89% |
+| FB | all | 869.1 | 51053 | 56% | 15 | 48% | long_scoreboard 32% |
+| T | softmax | 380.9 | 18120 | 39% | 0 | 66% | long_scoreboard 39% |
+| T | attn matmul | 148.2 | 12929 | 88% | 36 | 16% | barrier 21% |
+| T | GEMM | 134.4 | 10379 | 75% | 54 | 17% | mio_throttle 26% |
+| T | cast | 113.3 | 5227 | 52% | 2 | 85% | long_scoreboard 70% |
+| T | add | 78.7 | 5419 | 49% | 2 | 90% | long_scoreboard 88% |
+| T | all | 982.4 | 56359 | 55% | 13 | 54% | long_scoreboard 39% |
+| FBT | softmax | 377.8 | 18120 | 39% | 0 | 66% | long_scoreboard 39% |
+| FBT | attn matmul | 148.9 | 12838 | 88% | 36 | 16% | barrier 21% |
+| FBT | GEMM | 144.9 | 9200 | 82% | 49 | 17% | mio_throttle 29% |
+| FBT | cast | 50.8 | 3274 | 33% | 2 | 84% | long_scoreboard 69% |
+| FBT | add | 13.1 | 1510 | 33% | 2 | 93% | long_scoreboard 89% |
+| FBT | all | 862.4 | 49228 | 56% | 15 | 49% | long_scoreboard 32% |
+| WFBT | softmax | 55.3 | 1623 | 50% | 0 | 65% | long_scoreboard 38% |
+| WFBT | attn matmul | 29.2 | 2870 | 80% | 28 | 18% | long_scoreboard 29% |
+| WFBT | GEMM | 145.3 | 9192 | 82% | 49 | 17% | mio_throttle 29% |
+| WFBT | cast | 51.3 | 3274 | 33% | 2 | 84% | long_scoreboard 69% |
+| WFBT | add | 13.0 | 1510 | 33% | 2 | 93% | long_scoreboard 89% |
+| WFBT | all | 420.8 | 22756 | 61% | 19 | 45% | long_scoreboard 33% |
+
+### ViT crops (window cache) with and without batched windows
+
+| config | class | ms | DRAM MB | L2 hit | tensor % | occupancy | top stall |
+|---|---|---|---|---|---|---|---|
+| base 9x4 | softmax | 381.4 | 18120 | 39% | 0 | 66% | long_scoreboard 39% |
+| base 9x4 | attn matmul | 148.3 | 12971 | 88% | 36 | 16% | barrier 21% |
+| base 9x4 | GEMM | 97.0 | 7669 | 76% | 58 | 16% | wait 29% |
+| base 9x4 | GEMM split-K | 41.1 | 2624 | 83% | 38 | 17% | mio_throttle 37% |
+| base 9x4 | cast | 113.0 | 5227 | 52% | 2 | 85% | long_scoreboard 69% |
+| base 9x4 | add | 77.9 | 5419 | 49% | 2 | 90% | long_scoreboard 88% |
+| base 9x4 | all | 985.8 | 56315 | 56% | 13 | 54% | long_scoreboard 39% |
+| base 5x2 | softmax | 61.5 | 890 | 59% | 0 | 65% | short_scoreboard 21% |
+| base 5x2 | attn matmul | 13.0 | 1177 | 86% | 37 | 16% | barrier 18% |
+| base 5x2 | GEMM | 52.5 | 3957 | 76% | 38 | 16% | wait 21% |
+| base 5x2 | cast | 32.4 | 1453 | 51% | 2 | 85% | long_scoreboard 68% |
+| base 5x2 | add | 22.4 | 1507 | 49% | 2 | 88% | long_scoreboard 85% |
+| base 5x2 | all | 217.5 | 10176 | 61% | 12 | 54% | long_scoreboard 36% |
+| base 1x2 | softmax | 1.0 | 35 | 56% | 1 | 91% | long_scoreboard 31% |
+| base 1x2 | attn matmul | 1.4 | 98 | 80% | 14 | 22% | long_scoreboard 16% |
+| base 1x2 | GEMM | 11.5 | 1049 | 71% | 28 | 12% | lg_throttle 24% |
+| base 1x2 | GEMM split-K | 4.8 | 328 | 82% | 19 | 15% | mio_throttle 41% |
+| base 1x2 | cast | 8.6 | 292 | 51% | 1 | 84% | long_scoreboard 61% |
+| base 1x2 | add | 5.7 | 304 | 50% | 2 | 83% | long_scoreboard 74% |
+| base 1x2 | all | 41.5 | 2345 | 62% | 11 | 48% | long_scoreboard 39% |
+| W 9x4 | softmax | 55.2 | 1623 | 50% | 0 | 65% | long_scoreboard 38% |
+| W 9x4 | attn matmul | 29.1 | 2881 | 80% | 28 | 18% | long_scoreboard 29% |
+| W 9x4 | GEMM | 97.4 | 7691 | 76% | 58 | 16% | wait 29% |
+| W 9x4 | GEMM split-K | 41.3 | 2624 | 83% | 38 | 17% | mio_throttle 37% |
+| W 9x4 | cast | 113.5 | 5227 | 52% | 2 | 85% | long_scoreboard 70% |
+| W 9x4 | add | 78.3 | 5419 | 49% | 2 | 90% | long_scoreboard 88% |
+| W 9x4 | all | 541.3 | 29750 | 60% | 16 | 55% | long_scoreboard 44% |
+| W 5x2 | softmax | 10.6 | 178 | 50% | 0 | 64% | short_scoreboard 24% |
+| W 5x2 | attn matmul | 4.9 | 497 | 72% | 20 | 18% | long_scoreboard 32% |
+| W 5x2 | GEMM | 52.4 | 4008 | 75% | 38 | 16% | wait 21% |
+| W 5x2 | cast | 32.5 | 1453 | 51% | 2 | 85% | long_scoreboard 68% |
+| W 5x2 | add | 22.4 | 1507 | 49% | 2 | 88% | long_scoreboard 85% |
+| W 5x2 | all | 158.4 | 8836 | 60% | 14 | 52% | long_scoreboard 45% |
+| W 1x2 | softmax | 0.9 | 19 | 51% | 1 | 65% | long_scoreboard 34% |
+| W 1x2 | attn matmul | 1.4 | 83 | 69% | 8 | 19% | long_scoreboard 24% |
+| W 1x2 | GEMM | 11.5 | 1051 | 71% | 28 | 12% | lg_throttle 24% |
+| W 1x2 | GEMM split-K | 4.8 | 332 | 82% | 19 | 15% | mio_throttle 41% |
+| W 1x2 | cast | 8.6 | 292 | 51% | 1 | 84% | long_scoreboard 61% |
+| W 1x2 | add | 5.7 | 304 | 50% | 2 | 84% | long_scoreboard 74% |
+| W 1x2 | all | 41.3 | 2321 | 61% | 11 | 47% | long_scoreboard 40% |
+
+LLM prefill, last ubatch (512 tokens), per ubatch (ms / MB DRAM / MB L2 req):
+
+- llm_FBT_4608: 361 / 27721 / 118104
+- llm_FB_4608: 507 / 30673 / 152580
+- llm_FT_4608: 361 / 27940 / 118641
+- llm_F_4608: 514 / 30823 / 153116
+- llm_T_4608: 401 / 29239 / 121228
+- llm_base_1152: 503 / 27612 / 132847
+- llm_base_2304: 519 / 27871 / 138660
+- llm_base_4608: 540 / 28724 / 151740
+
+### LLM prefill ubatch at N=4608: attribution
+
+| metric | base | all on | F alone | B alone | T alone | F Shapley | B Shapley | T Shapley |
+|---|---|---|---|---|---|---|---|---|
+| ms | 540.2 | 361.0 (-33%) | -26.6 | - | -139.2 | -30.8 (17%) | -2.3 (1%) | -145.9 (81%) |
+| MB DRAM read | 28724 | 27721 (-3%) | 2099 | - | 515 | 967 (-96%) | -196 (20%) | -1774 (177%) |
+| MB L2 requests | 151740 | 118104 (-22%) | 1376 | - | -30512 | 55 (-0%) | -536 (2%) | -33154 (99%) |
+
+### LLM prefill (ncu): MB DRAM read per kernel class, Shapley value of each switch
+
+| class | base | all on | F | B | T |
+|---|---|---|---|---|---|
+| attention | 1263 | 1263 | 0 | -0 | 0 |
+| GEMM | 425 | 13773 | -4 | -2 | 13354 |
+| GEMM split-K | 19323 | 6663 | 2395 | 71 | -15128 |
+| cast | 3745 | 2320 | -1425 | 0 | 0 |
+| add | 1087 | 822 | -0 | -265 | -0 |
+| norm | 412 | 412 | 0 | 0 | 0 |
+| rope | 236 | 236 | 0 | 0 | 0 |
+| copy | 59 | 59 | 0 | 0 | 0 |
+| glu | 2173 | 2173 | 0 | 0 | 0 |
+
+### LLM prefill (ncu): ms per kernel class, Shapley value of each switch
+
+| class | base | all on | F | B | T |
+|---|---|---|---|---|---|
+| attention | 56.6 | 56.5 | -0.0 | -0.0 | 0.0 |
+| GEMM | 5.2 | 142.3 | 1.6 | 2.4 | 133.2 |
+| GEMM split-K | 346.5 | 78.6 | 11.5 | -0.7 | -278.8 |
+| cast | 79.8 | 35.7 | -43.8 | -0.1 | -0.2 |
+| add | 10.9 | 6.9 | 0.1 | -4.1 | 0.0 |
+| norm | 9.5 | 9.4 | -0.1 | 0.1 | -0.1 |
+| rope | 7.9 | 7.9 | -0.0 | 0.0 | -0.0 |
+| copy | 1.3 | 1.3 | -0.0 | 0.0 | -0.0 |
+| glu | 22.5 | 22.4 | -0.1 | 0.1 | -0.0 |
+
+### LLM prefill vs KV length (adaptive sampling: fewer frames = shorter KV)
+
+| config | class | ms | DRAM MB | L2 hit | tensor % | occupancy | top stall |
+|---|---|---|---|---|---|---|---|
+| base N=1152 | attention | 19.2 | 430 | 95% | 41 | 17% | wait 32% |
+| base N=1152 | GEMM | 5.2 | 421 | 92% | 51 | 15% | mio_throttle 29% |
+| base N=1152 | GEMM split-K | 346.4 | 19049 | 89% | 50 | 16% | mio_throttle 33% |
+| base N=1152 | cast | 80.2 | 3745 | 52% | 2 | 85% | long_scoreboard 69% |
+| base N=1152 | add | 11.0 | 1087 | 40% | 2 | 92% | long_scoreboard 84% |
+| base N=1152 | all | 503.0 | 27612 | 79% | 37 | 34% | mio_throttle 24% |
+| base N=2304 | attention | 30.8 | 672 | 96% | 46 | 17% | wait 35% |
+| base N=2304 | GEMM | 5.3 | 418 | 92% | 51 | 15% | mio_throttle 30% |
+| base N=2304 | GEMM split-K | 350.8 | 19069 | 89% | 50 | 16% | mio_throttle 33% |
+| base N=2304 | cast | 80.4 | 3745 | 52% | 2 | 86% | long_scoreboard 69% |
+| base N=2304 | add | 11.0 | 1087 | 40% | 2 | 92% | long_scoreboard 84% |
+| base N=2304 | all | 519.5 | 27871 | 79% | 38 | 33% | wait 24% |
+| base N=4608 | attention | 56.6 | 1263 | 96% | 50 | 17% | wait 36% |
+| base N=4608 | GEMM | 5.2 | 425 | 91% | 52 | 15% | mio_throttle 29% |
+| base N=4608 | GEMM split-K | 346.5 | 19323 | 89% | 50 | 16% | mio_throttle 33% |
+| base N=4608 | cast | 79.8 | 3745 | 52% | 2 | 85% | long_scoreboard 69% |
+| base N=4608 | add | 10.9 | 1087 | 40% | 2 | 92% | long_scoreboard 84% |
+| base N=4608 | all | 540.2 | 28724 | 80% | 38 | 32% | wait 24% |
+
+### LLM prefill per switch config (N=4608)
+
+| config | class | ms | DRAM MB | L2 hit | tensor % | occupancy | top stall |
+|---|---|---|---|---|---|---|---|
+| base | attention | 56.6 | 1263 | 96% | 50 | 17% | wait 36% |
+| base | GEMM | 5.2 | 425 | 91% | 52 | 15% | mio_throttle 29% |
+| base | GEMM split-K | 346.5 | 19323 | 89% | 50 | 16% | mio_throttle 33% |
+| base | cast | 79.8 | 3745 | 52% | 2 | 85% | long_scoreboard 69% |
+| base | add | 10.9 | 1087 | 40% | 2 | 92% | long_scoreboard 84% |
+| base | all | 540.2 | 28724 | 80% | 38 | 32% | wait 24% |
+| T | attention | 56.7 | 1264 | 96% | 50 | 17% | wait 36% |
+| T | GEMM | 134.0 | 13772 | 75% | 86 | 17% | wait 43% |
+| T | GEMM split-K | 78.0 | 6490 | 74% | 65 | 17% | mio_throttle 40% |
+| T | cast | 79.9 | 3745 | 52% | 2 | 85% | long_scoreboard 69% |
+| T | add | 11.1 | 1087 | 40% | 2 | 92% | long_scoreboard 84% |
+| T | all | 400.9 | 29239 | 69% | 49 | 38% | wait 30% |
+| F | attention | 56.7 | 1263 | 96% | 50 | 17% | wait 36% |
+| F | GEMM | 5.2 | 416 | 92% | 51 | 15% | mio_throttle 30% |
+| F | GEMM split-K | 363.6 | 22856 | 87% | 49 | 16% | mio_throttle 33% |
+| F | cast | 36.1 | 2320 | 33% | 2 | 84% | long_scoreboard 69% |
+| F | add | 11.1 | 1087 | 40% | 2 | 92% | long_scoreboard 84% |
+| F | all | 513.6 | 30823 | 80% | 41 | 27% | mio_throttle 25% |
+| FT | attention | 56.5 | 1263 | 96% | 50 | 17% | wait 36% |
+| FT | GEMM | 138.8 | 13778 | 76% | 83 | 17% | wait 41% |
+| FT | GEMM split-K | 78.4 | 6611 | 74% | 64 | 17% | mio_throttle 39% |
+| FT | cast | 35.9 | 2320 | 33% | 2 | 84% | long_scoreboard 69% |
+| FT | add | 11.0 | 1087 | 40% | 2 | 92% | long_scoreboard 84% |
+| FT | all | 361.5 | 27940 | 69% | 54 | 32% | wait 31% |
+| FB | attention | 56.5 | 1264 | 96% | 50 | 17% | wait 36% |
+| FB | GEMM | 5.2 | 419 | 92% | 51 | 15% | mio_throttle 30% |
+| FB | GEMM split-K | 361.3 | 22968 | 87% | 48 | 16% | mio_throttle 33% |
+| FB | cast | 36.1 | 2320 | 33% | 2 | 84% | long_scoreboard 69% |
+| FB | add | 6.9 | 822 | 33% | 2 | 93% | long_scoreboard 88% |
+| FB | all | 507.5 | 30673 | 80% | 41 | 27% | mio_throttle 25% |
+| FBT | attention | 56.5 | 1263 | 96% | 50 | 17% | wait 36% |
+| FBT | GEMM | 142.3 | 13773 | 76% | 83 | 17% | wait 41% |
+| FBT | GEMM split-K | 78.6 | 6663 | 74% | 64 | 17% | mio_throttle 39% |
+| FBT | cast | 35.7 | 2320 | 33% | 2 | 84% | long_scoreboard 69% |
+| FBT | add | 6.9 | 822 | 33% | 2 | 93% | long_scoreboard 88% |
+| FBT | all | 361.0 | 27721 | 70% | 55 | 31% | wait 32% |
