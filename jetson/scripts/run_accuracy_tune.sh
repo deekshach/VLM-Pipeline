@@ -42,7 +42,8 @@ for V in ${CLIPS//,/ }; do
         # shellcheck disable=SC2046
         "$BIN" -m "$MODEL" --mmproj "$MMPROJ" -c 16384 --no-mmap --sintel-dir $ROOT --video $V --base-frames 8 \
             -p "$P" -n $N --temp 0 -ngl 99 --vit-flash-attn off $(flags $C) --dump-dir $OUT/$V \
-            --output-json $OUT/$V.json > $OUT/$V.log 2>&1 || echo "FAIL $V $C"
+            --decode-threads 3 --output-json $OUT/$V.json > $OUT/$V.log 2>&1 || echo "FAIL $V $C"
+        sleep "${COOL:-10}"   # board-safe: let the power rails and temperature settle between runs
     done
     echo "[$(date +%T)] tune $DS $V done"
 done
