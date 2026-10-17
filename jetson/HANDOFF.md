@@ -172,7 +172,12 @@ Working sets vs the 4 MB L2 (computed):
 
 - Optional: `sudo NCU_CACHE=none bash jetson/scripts/run_microarch_ncu.sh` for cross-kernel L2 reuse with crops.
 - Push new commits to GitHub (the user pushed up to `8aabc1fd`).
-- Window-cache threshold vs answer quality (needs repeated runs or a scored benchmark; generation is nondeterministic).
+- Window-cache threshold vs answer quality (needs repeated runs or a scored benchmark).
+- Generation used to be nondeterministic (logits differed run to run, ~15% garbled captions in every config): upstream
+  ggml-cuda fused mul_mat_vec + SwiGLU (+ bias) let its output alias its input vector (ggml-alloc reuse), a race. Hit at
+  -c 16384 with FA on (the last layer's 1-token FFN in prefill, every layer in decode). Fixed in ggml-cuda.cu
+  (ggml_cuda_fused_dst_overlaps: no fusion when the output overlaps an input); outputs are now bit-identical across runs.
+  All LLM outputs (captions, logits) produced before this fix are suspect and must be re-run.
 - Remaining ViT cost after all switches: the 4 global layers' dense attention (flash attention for those only?),
   elementwise passes (norms, RoPE, K/V copies), RoPE kernel efficiency.
 - Prefill: per-frame 512 + 64 ubatches cost one extra weight pass per frame; packing frames into full ubatches needs

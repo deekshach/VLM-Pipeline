@@ -3092,6 +3092,26 @@ static void ggml_cuda_graph_update_executable(ggml_backend_cuda_context * cuda_c
 }
 #endif // USE_CUDA_GRAPH
 
+// A fused mul_mat_vec (+ bias, + GLU) kernel writes its output while other blocks still read the input vector and the
+// biases. Unfused, each op reads finished inputs, so ggml-alloc may place the last op's output in memory freed by an
+// input (e.g. the FFN input after the up projection, its last reader); fusing such nodes is a read/write race that gives
+// wrong, run-to-run varying results (seen on Orin: the last layer's 1-token FFN in prefill, every layer in decode).
+static bool ggml_cuda_fused_dst_overlaps(const ggml_tensor * dst, std::initializer_list<const ggml_tensor *> srcs) {
+    const char * d0 = (const char *) dst->data;
+    const char * d1 = d0 + ggml_nbytes(dst);
+    for (const ggml_tensor * t : srcs) {
+        if (t == nullptr || t->data == nullptr) {
+            continue;
+        }
+        const char * s0 = (const char *) t->data;
+        const char * s1 = s0 + ggml_nbytes(t);
+        if (d0 < s1 && s0 < d1) {
+            return true;
+        }
+    }
+    return false;
+}
+
 static bool ggml_cuda_should_fuse_rope_set_rows(const ggml_tensor * rope,
                                                 const ggml_tensor * view,
                                                 const ggml_tensor * set_rows) {
@@ -3752,6 +3772,10 @@ static void ggml_cuda_graph_evaluate_and_capture(ggml_backend_cuda_context * cud
                             const ggml_tensor * src1 = up_n->src[1];
                             const ggml_tensor * ids  = up_n->src[2];
 
+                            if (ggml_cuda_fused_dst_overlaps(glu, { src1, gate_n->src[1], up_bias_tensor, gate_bias_tensor })) {
+                                continue;
+                            }
+
                             if (ggml_cuda_should_fuse_mul_mat_vec_f(up_n)) {
                                 ggml_cuda_mm_fusion_args_host fusion_data{};
                                 fusion_data.gate      = gate_n->src[0];
@@ -3790,6 +3814,10 @@ static void ggml_cuda_graph_evaluate_and_capture(ggml_backend_cuda_context * cud
                             const ggml_tensor * src0 = up->src[0];
                             const ggml_tensor * src1 = up->src[1];
                             const ggml_tensor * ids  = up->src[2];
+
+                            if (ggml_cuda_fused_dst_overlaps(glu, { src1, gate->src[1] })) {
+                                continue;
+                            }
 
                             if (ggml_cuda_should_fuse_mul_mat_vec_f(up)) {
                                 ggml_cuda_mm_fusion_args_host fusion_data{};
@@ -3858,6 +3886,10 @@ static void ggml_cuda_graph_evaluate_and_capture(ggml_backend_cuda_context * cud
                         }
 
                         if (bias_op == GGML_OP_ADD && !ggml_are_same_shape(bias_node->src[0], bias_node->src[1])) {
+                            continue;
+                        }
+
+                        if (ggml_cuda_fused_dst_overlaps(bias_node, { src1, bias_tensor })) {
                             continue;
                         }
 

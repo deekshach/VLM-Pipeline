@@ -11,6 +11,10 @@
 #   t1         one CPU thread (-t 1 -tb 1)
 #   ub2048     one ubatch per image chunk (-ub 2048: no 512 + 64 split)
 #   smallctx   -c 8192 (different KV padding)
+#
+# Result (alley_1): logits differed every run with FA on at -c 16384, not with -fa off or -c <= 12288. Cause: ggml-cuda's
+# fused mul_mat_vec + SwiGLU wrote its output over its own input (ggml-alloc reuse), a race; fixed in ggml-cuda.cu
+# (ggml_cuda_fused_dst_overlaps). The same race is reproducible without the ViT: PROBE_CTX=16384 jetson-prefill-probe.
 set -u
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO="$(cd "$HERE/../.." && pwd)"
@@ -28,7 +32,7 @@ for VAR in ${VARIANTS//,/ }; do
         smallctx) F=(-c 8192) ;;
     esac
     for R in $(seq 1 $REPS); do
-        D=$OUT/$VAR/r$R; rm -rf $D
+        D=$OUT/$VAR/r$R; rm -rf $D; mkdir -p $OUT/$VAR
         env "${ENV[@]}" "$REPO/build/bin/llama-jetson-vlm" -m "$MODEL" --mmproj "$MMPROJ" --no-mmap "${F[@]}" --video $V \
             --base-frames 8 -p "$P" -n 1 --temp 0 -ngl 99 --vit-flash-attn off --baseline --dump-dir $D \
             --output-json $D.json > $D.log 2>&1 || { echo "$VAR r$R FAIL"; continue; }

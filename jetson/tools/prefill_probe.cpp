@@ -12,7 +12,10 @@
 // The engine switches (GGML_CUDA_JETSON_*) apply as set in the environment; PROBE_MARK_ALL=1 marks every
 // timed repetition (not only the last), for averaging in nsys; PROBE_LOGITS=1 prints a hash (FNV-1a) of the last
 // token's logits, to check that a switch leaves the output bit-identical.
+// PROBE_CTX=<n> sets the context (KV cache) size instead of N + 64; PROBE_TRACE=1 prints a hash of every graph
+// node's output (runs the graph node by node, so it also hides races between fused kernels).
 #include "llama.h"
+#include "ggml-backend.h"
 #include <nvtx3/nvToolsExt.h>
 #include <algorithm>
 #include <chrono>
@@ -42,6 +45,18 @@ static bool decode(llama_context * ctx, std::vector<llama_token> & tok, int pos0
     return ok;
 }
 
+// PROBE_TRACE=1: print an FNV-1a hash of every graph node's output (eval callback), to diff two runs
+static bool trace_cb(ggml_tensor * t, bool ask, void *) {
+    if (ask) return true;
+    if (!t->data || !t->buffer) return true;
+    std::vector<uint8_t> h(ggml_nbytes(t));
+    ggml_backend_tensor_get(t, h.data(), 0, h.size());
+    uint64_t x = 1469598103934665603ull;
+    for (uint8_t c : h) x = (x ^ c) * 1099511628211ull;
+    printf("TRACE %s %s %016llx\n", t->name, ggml_op_desc(t), (unsigned long long) x);
+    return true;
+}
+
 int main(int argc, char ** argv) {
     if (argc < 3) { fprintf(stderr, "usage: %s model.gguf N[,N...] [warm=1] [reps=3]\n", argv[0]); return 1; }
     const int warm = argc > 3 ? atoi(argv[3]) : 1;
@@ -60,10 +75,11 @@ int main(int argc, char ** argv) {
     if (!model) return 1;
 
     llama_context_params cp = llama_context_default_params();
-    cp.n_ctx = n_max + 64;
+    cp.n_ctx = getenv("PROBE_CTX") ? atoi(getenv("PROBE_CTX")) : n_max + 64;   // PROBE_CTX: a larger KV cache
     cp.n_batch = std::max(2048, n_max);
     cp.n_ubatch = UBATCH;
     cp.flash_attn_type = LLAMA_FLASH_ATTN_TYPE_AUTO;
+    if (getenv("PROBE_TRACE")) cp.cb_eval = trace_cb;
     llama_context * ctx = llama_init_from_model(model, cp);
     if (!ctx) return 1;
 
