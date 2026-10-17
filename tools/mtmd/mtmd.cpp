@@ -885,6 +885,18 @@ int32_t mtmd_encode_chunk(mtmd_context * ctx, const mtmd_input_chunk * chunk) {
     return 1;
 }
 
+int32_t mtmd_encode_chunk_windows(mtmd_context * ctx, const mtmd_input_chunk * chunk,
+                                  const int32_t * windows, int32_t n_windows) {
+    if (!ctx->ctx_v || chunk->type != MTMD_INPUT_CHUNK_TYPE_IMAGE || n_windows <= 0) {
+        LOG_ERR("%s: needs an image chunk and at least one window\n", __func__);
+        return 1;
+    }
+    clip_pw_set_windows(ctx->ctx_v, windows, n_windows);
+    const int32_t ret = mtmd_encode_chunk(ctx, chunk);
+    clip_pw_set_windows(ctx->ctx_v, nullptr, 0);
+    return ret;
+}
+
 int32_t mtmd_encode(mtmd_context * ctx, const mtmd_image_tokens * image_tokens) {
     clip_ctx * ctx_clip = ctx->ctx_v;
     if (!ctx_clip) {

@@ -19,6 +19,7 @@ Metrics (one row per clip and config; means and paired tests in the summary):
                run selected: how well every moment of the clip is represented
   Window cache -- per image vs the same frame encoded whole (dense aligned)
     cos_reused / cos_crop / cos_full   mean token cosine for windows reused from the cache, re-encoded in a crop,
+    cos_pw                             ... re-encoded by the per-window encode (--wc-per-window),
                                        or encoded with the whole frame; frac_reused share of tokens reused
   LLM input / output vs the baseline config of the same clip
     n_img_tok, n_txt_tok   sequence composition
@@ -33,7 +34,7 @@ import collections, glob, json, math, os, re, sys
 import numpy as np
 
 ACC = "/home/nvidia/data/accuracy"
-CONFIGS = ["base", "sel", "align", "wc", "arch", "ours", "uni_arch"]
+CONFIGS = ["base", "sel", "align", "wc", "arch", "ours", "ours_nocache", "ours_pw", "uni_arch"]
 K = 64
 STOP = set("a an the is are was were be been being of in on at to for with and or but by from as it its this that "
            "these those there their they them he she his her him we you i our your into onto over under up down "
@@ -248,6 +249,12 @@ def analyze_clip(ds, clip, cfgs):
                 if img["action"] in ("key", "full"):
                     mask[:] = True
                     acc["cos_full"].extend(cs.tolist())
+                elif img["action"] == "pw":   # per-window encode: the listed windows re-encoded
+                    for w in img["windows"]:
+                        wy, wx = divmod(w, nwx)
+                        mask[wy * 4:(wy + 1) * 4, wx * 4:(wx + 1) * 4] = True
+                    acc["cos_pw"].extend(cs[mask.ravel()].tolist())
+                    acc["cos_reused"].extend(cs[~mask.ravel()].tolist())
                 elif img["action"] == "crop":
                     mask[ry * 4:(ry + rh) * 4, rx * 4:(rx + rw) * 4] = True
                     acc["cos_crop"].extend(cs[mask.ravel()].tolist())
@@ -363,7 +370,7 @@ def main():
                     s[f"p_{k}"] = wilcoxon([a[x] for x in common], [b[x] for x in common])
     json.dump(dict(summary=summary, rows=rows), open(out, "w"), indent=1)
     show = ["n", "n_frames", "n_img_tok", "ttft", "spec_H", "cb_H", "cb_cover", "cb_jsd", "t_cover", "frac_reused",
-            "cos_full", "cos_crop", "cos_reused", "chamfer", "kl0", "top1", "top5", "cap_sbert_base", "cap_bleu_base",
+            "cos_full", "cos_crop", "cos_pw", "cos_reused", "chamfer", "kl0", "top1", "top5", "cap_sbert_base", "cap_bleu_base",
             "BLEU-4", "METEOR", "ROUGE-L", "CIDEr", "sbert_max", "sbert_mean", "content_prec", "p_sbert_max", "p_cider_s"]
     print("| metric | " + " | ".join(c for c in cfgs if c in summary) + " |")
     print("|---|" + "---|" * len([c for c in cfgs if c in summary]))

@@ -222,6 +222,15 @@ MTMD_API int32_t mtmd_encode(mtmd_context * ctx,
 MTMD_API int32_t mtmd_encode_chunk(mtmd_context * ctx,
                                    const mtmd_input_chunk * chunk);
 
+// Jetson study: encode only the listed 112 px windows of a window-aligned Qwen2.5-VL image chunk (see
+// clip_pw_set_windows: needs MTMD_VIT_WINDOW_BATCH; after a new image size, every window first). On success
+// mtmd_get_output_embd holds n_windows * 16 tokens, window by window, each window's 4x4 tokens row-major.
+// returns 0 on success
+MTMD_API int32_t mtmd_encode_chunk_windows(mtmd_context * ctx,
+                                           const mtmd_input_chunk * chunk,
+                                           const int32_t * windows,
+                                           int32_t n_windows);
+
 // get output embeddings from the last encode pass
 // the reading size (in bytes) is equal to:
 // llama_model_n_embd_inp(model) * mtmd_input_chunk_get_n_tokens(chunk) * sizeof(float)

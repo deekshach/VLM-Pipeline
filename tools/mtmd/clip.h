@@ -107,6 +107,12 @@ bool clip_image_batch_encode(struct clip_ctx * ctx, int n_threads, const struct 
 
 int clip_is_minicpmv(const struct clip_ctx * ctx);
 bool clip_is_glm(const struct clip_ctx * ctx);
+
+// Jetson study: per-window encode of a window-aligned Qwen2.5-VL image (needs MTMD_VIT_WINDOW_BATCH). The next encode
+// runs only the listed 112 px windows (indices in raster order of windows) and outputs their merged tokens, window by
+// window (each window's tokens row-major); n = 0 restores the normal encode. The global-attention layers use a
+// persistent K/V cache of the frame; after it is (re)allocated (first use, new image size) every window must be listed.
+void clip_pw_set_windows(struct clip_ctx * ctx, const int32_t * windows, int n);
 bool clip_is_llava(const struct clip_ctx * ctx);
 // note for contributor: this clip_is_(model) pattern is deprecated
 //                       do NOT add new functions like this

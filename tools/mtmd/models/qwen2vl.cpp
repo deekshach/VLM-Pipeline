@@ -8,7 +8,6 @@ ggml_cgraph * clip_graph_qwen2vl::build() {
     const bool use_window_attn = hparams.n_wa_pattern > 0;
     const int n_wa_pattern     = hparams.n_wa_pattern;
     const int n_pos            = n_patches;
-    const int num_position_ids = n_pos * 4; // m-rope requires 4 dim per position
 
     norm_type norm_t = proj_type == PROJECTOR_TYPE_QWEN25VL
         ? NORM_TYPE_RMS // qwen 2.5 vl
@@ -60,7 +59,19 @@ ggml_cgraph * clip_graph_qwen2vl::build() {
     const bool window_batch = use_window_attn && proj_type == PROJECTOR_TYPE_QWEN25VL && clip_vit_window_batch_enabled() &&
                               (n_patches_x / 2) % win_merged == 0 && (n_patches_y / 2) % win_merged == 0;
     const int  win_patches  = win_merged * win_merged * 4;   // patches per window (64 for 112 px)
-    const int  n_windows    = n_patches / win_patches;
+
+    // Per-window encode (Jetson study, see clip_pw_state): only the listed windows' patches go through the layers.
+    const bool pw_on     = pw != nullptr && !pw->windows.empty();
+    GGML_ASSERT(!pw_on || window_batch);
+    const int  n_windows = pw_on ? (int) pw->windows.size() : n_patches / win_patches;
+    const int  n_tok     = pw_on ? n_windows * win_patches : n_patches;   // patches through the layers
+    const int  num_position_ids = n_tok * 4; // m-rope requires 4 dim per position
+    ggml_tensor * pw_kv_rows = nullptr;   // the listed windows' patch rows in the K/V cache (window order)
+    if (pw_on) {
+        pw_kv_rows = ggml_new_tensor_1d(ctx0, GGML_TYPE_I64, n_tok);
+        ggml_set_name(pw_kv_rows, "pw_kv_rows");
+        ggml_set_input(pw_kv_rows);
+    }
 
     ggml_tensor * inpL           = inp;
     ggml_tensor * window_mask    = nullptr;
@@ -97,7 +108,13 @@ ggml_cgraph * clip_graph_qwen2vl::build() {
         GGML_ASSERT(batch_size == 1);
         inpL = ggml_reshape_2d(ctx0, inpL, n_embd * 4, n_patches_x * n_patches_y * batch_size / 4);
         inpL = ggml_get_rows(ctx0, inpL, inv_window_idx);
-        inpL = ggml_reshape_3d(ctx0, inpL, n_embd, n_patches_x * n_patches_y, batch_size);
+        if (pw_on) {   // keep the listed windows (merged-token rows, window order)
+            ggml_tensor * pw_rows = ggml_new_tensor_1d(ctx0, GGML_TYPE_I32, n_tok / 4);
+            ggml_set_name(pw_rows, "pw_rows");
+            ggml_set_input(pw_rows);
+            inpL = ggml_get_rows(ctx0, inpL, pw_rows);
+        }
+        inpL = ggml_reshape_3d(ctx0, inpL, n_embd, n_tok, batch_size);
     }
 
     // loop over layers
@@ -120,9 +137,9 @@ ggml_cgraph * clip_graph_qwen2vl::build() {
             ggml_tensor * Vcur = ggml_add(ctx0,
                 ggml_mul_mat(ctx0, layer.v_w, cur), layer.v_b);
 
-            Qcur = ggml_reshape_3d(ctx0, Qcur, d_head, n_head, n_patches);
-            Kcur = ggml_reshape_3d(ctx0, Kcur, d_head, n_head, n_patches);
-            Vcur = ggml_reshape_3d(ctx0, Vcur, d_head, n_head, n_patches);
+            Qcur = ggml_reshape_3d(ctx0, Qcur, d_head, n_head, n_tok);
+            Kcur = ggml_reshape_3d(ctx0, Kcur, d_head, n_head, n_tok);
+            Vcur = ggml_reshape_3d(ctx0, Vcur, d_head, n_head, n_tok);
 
             cb(Qcur, "Qcur", il);
             cb(Kcur, "Kcur", il);
@@ -147,6 +164,12 @@ ggml_cgraph * clip_graph_qwen2vl::build() {
                 Kcur = ggml_reshape_4d(ctx0, Kcur, d_head, n_head, win_patches, n_windows);
                 Vcur = ggml_reshape_4d(ctx0, Vcur, d_head, n_head, win_patches, n_windows);
                 attn_mask = nullptr;
+            } else if (full_attn && pw_on) {
+                // refresh the listed windows' rows of the frame's K/V cache, then attend over the whole frame
+                ggml_tensor * Kall = ggml_set_rows(ctx0, pw->k[il], ggml_reshape_2d(ctx0, Kcur, n_embd, n_tok), pw_kv_rows);
+                ggml_tensor * Vall = ggml_set_rows(ctx0, pw->v[il], ggml_reshape_2d(ctx0, Vcur, n_embd, n_tok), pw_kv_rows);
+                Kcur = ggml_reshape_3d(ctx0, Kall, d_head, n_head, n_patches);
+                Vcur = ggml_reshape_3d(ctx0, Vall, d_head, n_head, n_patches);
             }
 
             cur = build_attn(layer.o_w, layer.o_b,
@@ -188,7 +211,7 @@ ggml_cgraph * clip_graph_qwen2vl::build() {
 
     // multimodal projection
     ggml_tensor * embeddings = inpL;
-    embeddings = ggml_reshape_3d(ctx0, embeddings, n_embd * 4, n_pos / 4, batch_size);
+    embeddings = ggml_reshape_3d(ctx0, embeddings, n_embd * 4, n_tok / 4, batch_size);
     embeddings = build_ffn(embeddings,
                         model.mm_0_w, model.mm_0_b,
                         nullptr, nullptr,
@@ -196,7 +219,7 @@ ggml_cgraph * clip_graph_qwen2vl::build() {
                         FFN_GELU,
                         -1);
 
-    if (use_window_attn) {
+    if (use_window_attn && !pw_on) {   // per-window output stays in window order
         window_idx = ggml_new_tensor_1d(ctx0, GGML_TYPE_I32, n_pos / 4);
         ggml_set_name(window_idx, "window_idx");
         ggml_set_input(window_idx);

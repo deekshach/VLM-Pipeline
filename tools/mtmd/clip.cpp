@@ -158,6 +158,7 @@ struct clip_ctx {
     ggml_backend_sched_ptr sched;
     clip_flash_attn_type flash_attn_type = CLIP_FLASH_ATTN_TYPE_AUTO;
     bool is_allocated = false;
+    clip_pw_state pw;   // per-window encode (Jetson study)
 
     clip_ctx(clip_context_params & ctx_params) {
         flash_attn_type = ctx_params.flash_attn_type;
@@ -240,7 +241,8 @@ clip_graph::clip_graph(clip_ctx * ctx, const clip_image_f32 & img) :
         n_mmproj_embd(clip_n_mmproj_embd(ctx)),
         eps(hparams.eps),
         kq_scale(1.0f / sqrtf((float)d_head)),
-        flash_attn_type(ctx->flash_attn_type) {
+        flash_attn_type(ctx->flash_attn_type),
+        pw(&ctx->pw) {
     struct ggml_init_params params = {
         /*.mem_size   =*/ ctx->buf_compute_meta.size(),
         /*.mem_buffer =*/ ctx->buf_compute_meta.data(),
@@ -3520,6 +3522,49 @@ bool clip_image_encode(struct clip_ctx * ctx, const int n_threads, clip_image_f3
     return clip_image_batch_encode(ctx, n_threads, &imgs, vec);
 }
 
+void clip_pw_set_windows(clip_ctx * ctx, const int32_t * windows, int n) {
+    ctx->pw.windows.assign(windows, windows + n);
+}
+
+// Per-window encode: (re)allocate the global layers' K/V cache for an nx x ny image on the main backend.
+static bool clip_pw_prepare(clip_ctx * ctx, int nx, int ny) {
+    const auto & hparams = ctx->model.hparams;
+    const int ps = hparams.patch_size;
+    const int win = (hparams.attn_window_size > 0 ? hparams.attn_window_size : 112);
+    if (ctx->proj_type() != PROJECTOR_TYPE_QWEN25VL || hparams.n_wa_pattern <= 0 || !clip_vit_window_batch_enabled() ||
+        win / ps != 8 || nx % win != 0 || ny % win != 0) {
+        LOG_ERR("%s: per-window encode needs Qwen2.5-VL, MTMD_VIT_WINDOW_BATCH and a %d px aligned image\n", __func__, win);
+        return false;
+    }
+    const int n_windows = (nx / win) * (ny / win);
+    for (int32_t w : ctx->pw.windows) {
+        if (w < 0 || w >= n_windows) { LOG_ERR("%s: window %d out of range\n", __func__, w); return false; }
+    }
+    auto & pw = ctx->pw;
+    if (pw.buf && pw.nx == nx && pw.ny == ny) {
+        pw.fresh = false;
+    } else {
+        const int n_layer = hparams.n_layer, n_patches = (nx / ps) * (ny / ps);
+        ggml_init_params params = { ggml_tensor_overhead() * 2 * n_layer, nullptr, true };
+        pw.ctx.reset(ggml_init(params));
+        pw.k.assign(n_layer, nullptr);
+        pw.v.assign(n_layer, nullptr);
+        for (int il = 0; il < n_layer; il++) {
+            if ((il + 1) % hparams.n_wa_pattern != 0) continue;   // windowed layer: needs no state
+            pw.k[il] = ggml_new_tensor_2d(pw.ctx.get(), GGML_TYPE_F32, hparams.n_embd, n_patches);
+            pw.v[il] = ggml_new_tensor_2d(pw.ctx.get(), GGML_TYPE_F32, hparams.n_embd, n_patches);
+        }
+        pw.buf.reset(ggml_backend_alloc_ctx_tensors_from_buft(pw.ctx.get(), ggml_backend_get_default_buffer_type(ctx->backend)));
+        if (!pw.buf) { LOG_ERR("%s: failed to allocate the K/V cache\n", __func__); return false; }
+        pw.nx = nx; pw.ny = ny; pw.fresh = true;
+    }
+    if (pw.fresh && (int) pw.windows.size() != n_windows) {
+        LOG_ERR("%s: new K/V cache: all %d windows must be encoded first (got %zu)\n", __func__, n_windows, pw.windows.size());
+        return false;
+    }
+    return true;
+}
+
 bool clip_image_batch_encode(clip_ctx * ctx, const int n_threads, const clip_image_f32_batch * imgs_c_ptr, float * vec) {
     const clip_image_f32_batch & imgs = *imgs_c_ptr;
     int batch_size = imgs.entries.size();
@@ -3538,6 +3583,11 @@ bool clip_image_batch_encode(clip_ctx * ctx, const int n_threads, const clip_ima
     // if buffers are not allocated, we need to do a warmup run to allocate them
     if (!ctx->is_allocated) {
         clip_model_loader::warmup(*ctx, *imgs_c_ptr);
+    }
+
+    const bool pw_active = !ctx->pw.windows.empty();
+    if (pw_active && !clip_pw_prepare(ctx, imgs.entries[0]->nx, imgs.entries[0]->ny)) {
+        return false;
     }
 
     // build the inference graph
@@ -3778,7 +3828,9 @@ bool clip_image_batch_encode(clip_ctx * ctx, const int n_threads, const clip_ima
                         }
                     }
 
-                    set_input_i32("window_idx",     idx);
+                    if (!pw_active) {
+                        set_input_i32("window_idx", idx);
+                    }
                     set_input_i32("inv_window_idx", inv_idx);
                     if (!window_batch) {
                         set_input_f32("window_mask", mask);
@@ -3810,7 +3862,29 @@ bool clip_image_batch_encode(clip_ctx * ctx, const int n_threads, const clip_ima
                     }
                 }
 
-                set_input_i32("positions", positions);
+                if (pw_active) {
+                    // the listed windows' patches, in window order: window w owns patches [w*wp, (w+1)*wp)
+                    const int win_patches = 64, win_merged = 16;   // 112 px window: 8x8 patches, 4x4 merged tokens
+                    const auto & wins = ctx->pw.windows;
+                    const int n_dp = (int) wins.size() * win_patches;
+                    std::vector<int32_t> pos_d((size_t) n_dp * 4), rows((size_t) wins.size() * win_merged);
+                    std::vector<int64_t> kv_rows((size_t) n_dp);
+                    for (size_t i = 0; i < wins.size(); i++) {
+                        for (int p = 0; p < win_patches; p++) {
+                            const int src = wins[i] * win_patches + p, dst = (int) i * win_patches + p;
+                            for (int s = 0; s < 4; s++) pos_d[(size_t) s * n_dp + dst] = positions[(size_t) s * num_patches + src];
+                            kv_rows[dst] = src;
+                        }
+                        for (int m = 0; m < win_merged; m++) rows[i * win_merged + m] = wins[i] * win_merged + m;
+                    }
+                    set_input_i32("positions", pos_d);
+                    set_input_i32("pw_rows", rows);
+                    ggml_tensor * t = get_inp_tensor("pw_kv_rows");
+                    GGML_ASSERT(t->type == GGML_TYPE_I64 && ggml_nelements(t) == (int64_t) kv_rows.size());
+                    ggml_backend_tensor_set(t, kv_rows.data(), 0, ggml_nbytes(t));
+                } else {
+                    set_input_i32("positions", positions);
+                }
             } break;
         case PROJECTOR_TYPE_PIXTRAL:
         case PROJECTOR_TYPE_KIMIVL:
@@ -3941,7 +4015,7 @@ bool clip_image_batch_encode(clip_ctx * ctx, const int n_threads, const clip_ima
 
     // sanity check (only support batch size of 1 for now)
     const int n_tokens_out = embeddings->ne[1];
-    const int expected_n_tokens_out = clip_n_output_tokens(ctx, imgs.entries[0].get());
+    const int expected_n_tokens_out = pw_active ? (int) ctx->pw.windows.size() * 16 : clip_n_output_tokens(ctx, imgs.entries[0].get());
     if (n_tokens_out != expected_n_tokens_out) {
         LOG_ERR("%s: expected output %d tokens, got %d\n", __func__, expected_n_tokens_out, n_tokens_out);
         GGML_ABORT("Invalid number of output tokens");

@@ -7,7 +7,8 @@
 //   anchor            --anchor-first: frame 1 always selected and encoded while the flow is analysed
 //   window grid       --window-align: frames resized to a multiple of the 112 px ViT attention window
 //   window cache      --window-cache: re-encode only the windows that changed since they were last
-//                     encoded (dirty-window crop), reuse the rest of the embeddings (implies --window-align)
+//                     encoded (dirty-window crop), reuse the rest of the embeddings (implies --window-align);
+//                     --wc-per-window: exactly the dirty windows, global ViT layers over the frame's cached K/V
 //   ViT attention     --vit-flash-attn on|off; --vit-window-batch: windowed layers as a batch of windows
 //                     (engine switch MTMD_VIT_WINDOW_BATCH; needs aligned frames)
 //   BF16 GEMMs        --gemm-f32-out, --gemm-bias-fuse, --gemm-table <file>, --gemm-record <file>
@@ -96,6 +97,7 @@ struct sintel_params {
     int         wc_halo       = 0;     // grow the dirty rectangle by this many windows
     float       wc_rekey_frac = 0.75f; // without the cost model: crops above this fraction of the frame become full encodes
     bool        wc_cost_model = false; // choose the crop shape from measured encode times (calibrated at setup)
+    bool        wc_per_window = false; // re-encode exactly the dirty windows, global layers over a cached frame K/V
     int         wc_calib_reps = 3;
     bool        vit_window_batch = false;
     bool        gemm_f32_out  = false;
@@ -165,6 +167,11 @@ static std::vector<char *> filter_custom_args(int argc, char ** argv, sintel_par
             sparams.wc_halo = std::stoi(argv[++i]);
         } else if (arg == "--wc-rekey-frac" && i + 1 < argc) {
             sparams.wc_rekey_frac = std::stof(argv[++i]);
+        } else if (arg == "--wc-per-window") {
+            sparams.wc_per_window    = true;
+            sparams.window_cache     = true;
+            sparams.window_align     = true;
+            sparams.vit_window_batch = true;   // the per-window encode is built on the batched-window ViT graph
         } else if (arg == "--wc-cost-model") {
             sparams.wc_cost_model = true;
         } else if (arg == "--wc-calib-reps" && i + 1 < argc) {
@@ -227,6 +234,8 @@ static void show_additional_info(int /*argc*/, char ** argv) {
     printf("  --wc-halo <n>       Window cache: grow the dirty rectangle by n windows (default: 0)\n");
     printf("  --wc-rekey-frac <f> Window cache: crops above this frame fraction are full encodes (default: 0.75)\n");
     printf("  --wc-cost-model     Window cache: pick the crop shape from encode times measured at setup\n");
+    printf("  --wc-per-window     Window cache: re-encode exactly the dirty windows; the ViT's global layers attend\n");
+    printf("                      over the frame's cached K/V (implies --window-cache, --vit-window-batch)\n");
     printf("  --vit-window-batch  ViT windowed layers as a batch of windows (needs --window-align)\n");
     printf("  --gemm-f32-out      BF16 GEMMs write F32 directly (no BF16->F32 conversion kernel)\n");
     printf("  --gemm-bias-fuse    Fold the bias ADD after a BF16 GEMM into the GEMM (needs --gemm-f32-out)\n");
@@ -906,7 +915,7 @@ static void dump_tokens(const char * kind, const llama_token * tok, size_t n) {
 }
 
 static void dump_image(const float * embd, int nx, int ny, int n_embd, const char * action,
-                       int cx = 0, int cy = 0, int cw = 0, int ch = 0) {
+                       int cx = 0, int cy = 0, int cw = 0, int ch = 0, const std::vector<int32_t> * wins = nullptr) {
     if (g_dump_dir.empty()) return;
     char name[32];
     snprintf(name, sizeof(name), "img_%03d.f32", g_dump_img++);
@@ -916,8 +925,14 @@ static void dump_image(const float * embd, int nx, int ny, int n_embd, const cha
     }
     char l[256];
     snprintf(l, sizeof(l), "{\"type\":\"image\",\"file\":\"%s\",\"nx\":%d,\"ny\":%d,\"n_embd\":%d,\"action\":\"%s\","
-             "\"rect\":[%d,%d,%d,%d]}", name, nx, ny, n_embd, action, cx, cy, cw, ch);
-    dump_line(l);
+             "\"rect\":[%d,%d,%d,%d]", name, nx, ny, n_embd, action, cx, cy, cw, ch);
+    std::string line = l;
+    if (wins) {   // per-window encode: the re-encoded windows (raster order of windows)
+        line += ",\"windows\":[";
+        for (size_t i = 0; i < wins->size(); i++) line += (i ? "," : "") + std::to_string((*wins)[i]);
+        line += "]";
+    }
+    dump_line(line + "}");
 }
 
 // mtmd_helper_eval_chunk_single, with the ViT encode and the LLM prefill timed separately
@@ -1136,6 +1151,7 @@ struct wc_state {
     float threshold  = 6.0f;
     int   halo       = 0;
     float rekey_frac = 0.75f;
+    bool  per_window = false;      // --wc-per-window: re-encode exactly the dirty windows (mtmd_encode_chunk_windows)
     cost_table table;
     std::vector<float> cache;      // embeddings handed to the LLM, raster order
     int   nx = 0, ny = 0;          // token grid of the cached frame
@@ -1178,7 +1194,54 @@ static int32_t eval_image_chunk_wc(mtmd_context * mctx, llama_context * lctx, co
     };
 
     const bool have_cache = !wc.cache.empty() && cnx == wc.nx && cny == wc.ny;
-    if (!have_cache) {
+    std::vector<int32_t> pw_wins;   // per-window encode: the windows re-encoded this frame
+    if (wc.per_window) {
+        // Each window is re-encoded iff it changed since it was last encoded (no rectangle); the ViT's
+        // global-attention layers see the other windows through their K/V cached in the encoder.
+        // A new cache (first frame, new size) encodes every window, which fills the encoder's K/V cache.
+        if (!have_cache) {
+            for (int w = 0; w < nwx * nwy; w++) pw_wins.push_back(w);
+            fr.action = "key";
+        } else {
+            int64_t t = ggml_time_us();
+            NVTX_PUSH("wc_diff");
+            const std::vector<float> score = window_diff(img, wc.ref, nwx, nwy);
+            for (int w = 0; w < nwx * nwy; w++) {
+                if (score[w] > wc.threshold) pw_wins.push_back(w);
+            }
+            NVTX_POP();
+            fr.diff_ms = (ggml_time_us() - t) / 1000.0f;
+            fr.n_dirty = (int) pw_wins.size();
+            fr.action  = pw_wins.empty() ? "skip" : (int) pw_wins.size() == nwx * nwy ? "full" : "pw";
+        }
+        rw = rh = 0;
+        if (!pw_wins.empty()) {
+            int64_t t = ggml_time_us();
+            NVTX_PUSH("vit");
+            const bool ok = mtmd_encode_chunk_windows(mctx, chunk, pw_wins.data(), (int32_t) pw_wins.size()) == 0;
+            NVTX_POP();
+            if (!ok) return -1;
+            fr.encode_ms = (ggml_time_us() - t) / 1000.0f;
+            if (!have_cache) {
+                wc.cache.assign((size_t) n_tok * n_embd, 0.0f);
+                wc.nx = cnx; wc.ny = cny;
+                wc.ref = img;
+            }
+            // output: window by window, each window's WINDOW_TOKENS x WINDOW_TOKENS tokens row-major
+            const float * embd = mtmd_get_output_embd(mctx);
+            const int wt = WINDOW_TOKENS * WINDOW_TOKENS;
+            for (size_t i = 0; i < pw_wins.size(); i++) {
+                const int wy = pw_wins[i] / nwx, wx = pw_wins[i] % nwx;
+                for (int k = 0; k < wt; k++) {
+                    const int ty = wy * WINDOW_TOKENS + k / WINDOW_TOKENS, tx = wx * WINDOW_TOKENS + k % WINDOW_TOKENS;
+                    memcpy(&wc.cache[((size_t) ty * wc.nx + tx) * n_embd], embd + (i * wt + k) * n_embd,
+                           (size_t) n_embd * sizeof(float));
+                }
+                copy_region(wc.ref, img, wx * WINDOW_PX, wy * WINDOW_PX, WINDOW_PX, WINDOW_PX);
+            }
+            fr.tokens_encoded = (int) pw_wins.size() * wt;
+        }
+    } else if (!have_cache) {
         if (!encode_full("key")) return -1;
     } else {
         int64_t t = ggml_time_us();
@@ -1255,10 +1318,10 @@ static int32_t eval_image_chunk_wc(mtmd_context * mctx, llama_context * lctx, co
     b.wc_diff_ms += fr.diff_ms;
     b.wc_prep_ms += fr.prep_ms;
     b.tokens_encoded += fr.tokens_encoded;
-    if (fr.action == "skip") b.n_skip++; else if (fr.action == "crop") b.n_crop++; else b.n_full++;
+    if (fr.action == "skip") b.n_skip++; else if (fr.action == "crop" || fr.action == "pw") b.n_crop++; else b.n_full++;
 
     int64_t t1 = ggml_time_us();
-    dump_image(wc.cache.data(), cnx, cny, n_embd, fr.action.c_str(), rx, ry, rw, rh);
+    dump_image(wc.cache.data(), cnx, cny, n_embd, fr.action.c_str(), rx, ry, rw, rh, fr.action == "pw" ? &pw_wins : nullptr);
     NVTX_PUSH("prefill_img");
     const int32_t ret = mtmd_helper_decode_image_chunk(mctx, lctx, chunk, wc.cache.data(), n_past, 0, n_batch, &n_past);
     llama_synchronize(lctx);
@@ -1695,6 +1758,7 @@ static void write_results_json(const std::string & output_path,
         {"wc_threshold",     sparams.wc_threshold},
         {"wc_halo",          sparams.wc_halo},
         {"wc_rekey_frac",    sparams.wc_rekey_frac},
+        {"wc_per_window",    sparams.wc_per_window},
         {"wc_cost_model",    sparams.wc_cost_model},
         {"vit_flash_attn",   sparams.vit_fa_off ? "off" : "on"},
         {"vit_window_batch", sparams.vit_window_batch},
@@ -1860,6 +1924,7 @@ int main(int argc, char ** argv) {
     wc.threshold  = sparams.wc_threshold;
     wc.halo       = sparams.wc_halo;
     wc.rekey_frac = sparams.wc_rekey_frac;
+    wc.per_window = sparams.wc_per_window;
     float calib_ms = 0.0f;
     if (wc.enabled && sparams.wc_cost_model) {
         rgb_frame probe;

@@ -11,6 +11,19 @@
 
 #define DEFAULT_INTERPOLATION_MODE (GGML_SCALE_MODE_BILINEAR | GGML_SCALE_FLAG_ANTIALIAS)
 
+// Per-window encode (Jetson study, see clip_pw_set_windows): encode only the listed 112 px attention windows of a
+// window-aligned Qwen2.5-VL image. The windowed layers are exact (a window attends only to itself); the
+// global-attention layers attend over a persistent K/V cache of the whole frame, whose rows for the listed windows are
+// refreshed first, so the other windows contribute their K/V from when they were last encoded.
+struct clip_pw_state {
+    std::vector<int32_t> windows;      // window indices (raster order of windows); empty: normal encode
+    int nx = 0, ny = 0;                // image size the K/V cache was allocated for
+    bool fresh = false;                // K/V cache (re)allocated: every window must be encoded first
+    ggml_context_ptr ctx;
+    ggml_backend_buffer_ptr buf;
+    std::vector<ggml_tensor *> k, v;   // per layer [n_embd, n_patches] in window order (RoPE applied); null if windowed
+};
+
 struct clip_graph {
     const clip_model & model;
     const clip_hparams & hparams;
@@ -31,6 +44,7 @@ struct clip_graph {
     const float eps;
     const float kq_scale;
     const clip_flash_attn_type flash_attn_type;
+    clip_pw_state * pw;                // per-window encode when pw->windows is non-empty
 
     ggml_context_ptr ctx0_ptr;
     ggml_context * ctx0;

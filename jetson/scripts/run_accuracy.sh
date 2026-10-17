@@ -15,6 +15,7 @@
 #   arch      + ViT window batch, GEMM F32 out, bias fusion, GEMM table, act-fuse (the kernel switches)
 #   ours      + anchor-first (the full system)
 #   uni_arch  uniform 8 frames + window align + the kernel switches, no window cache (numerics alone)
+#   ours_nocache  ours without the window cache (what the cache adds)
 # Same context size for all (-c 16384): greedy output depends on the attention kernel's KV padding.
 # Results: /home/nvidia/data/accuracy/runs/<dataset>/<config>/<clip>.json and .../<clip>/ (dump).
 set -u
@@ -22,7 +23,9 @@ DS="${1:?sintel or msvd}"
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO="$(cd "$HERE/../.." && pwd)"
 source "$REPO/dmc955/model_config.sh"
-BIN="$REPO/build/bin/llama-jetson-vlm"
+BIN_DIR="${BIN_DIR:-$REPO/build/bin}"   # BIN_DIR=<frozen copy of build/bin>: keep a long run on one build
+export LD_LIBRARY_PATH="$BIN_DIR${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"   # searched before the binaries' RUNPATH
+BIN="$BIN_DIR/llama-jetson-vlm"
 ACC=/home/nvidia/data/accuracy
 TABLE="$REPO/jetson/gemm/table_orin.txt"
 WC_T="${WC_T:-24}"
@@ -46,6 +49,7 @@ flags() {
         arch)     echo "--live-flow $OFA --window-align --window-cache --wc-threshold $WC_T $ARCH" ;;
         ours)     echo "--live-flow $OFA --window-align --window-cache --wc-threshold $WC_T $ARCH --anchor-first" ;;
         uni_arch) echo "--baseline --window-align $ARCH" ;;
+        ours_nocache) echo "--live-flow $OFA --window-align $ARCH --anchor-first" ;;
         wc*)      echo "--live-flow $OFA --window-align --window-cache --wc-threshold ${1#wc} $ARCH --anchor-first" ;;
     esac
 }
@@ -53,7 +57,7 @@ for V in ${CLIPS//,/ }; do
     # dense ViT reference (no LLM on the GPU; ~1 s per Sintel frame)
     for MODE in native aligned; do
         D=$ACC/dense/$DS/$V/$MODE
-        [ -f $D/meta.json ] || "$REPO/build/bin/jetson-embed-frames" "$MODEL" "$MMPROJ" $ROOT/training/clean/$V $D $MODE \
+        [ -f $D/meta.json ] || "$BIN_DIR/jetson-embed-frames" "$MODEL" "$MMPROJ" $ROOT/training/clean/$V $D $MODE \
             > /dev/null 2>&1 || echo "FAIL dense $V $MODE"
     done
     for C in ${CONFIGS//,/ }; do
@@ -62,7 +66,8 @@ for V in ${CLIPS//,/ }; do
         # shellcheck disable=SC2046
         "$BIN" -m "$MODEL" --mmproj "$MMPROJ" -c 16384 --no-mmap --sintel-dir $ROOT --video $V --base-frames 8 \
             -p "$P" -n $N --temp 0 -ngl 99 --vit-flash-attn off $(flags $C) --dump-dir $OUT/$V \
-            --output-json $OUT/$V.json > $OUT/$V.log 2>&1 || echo "FAIL $V $C"
+            --decode-threads 3 --output-json $OUT/$V.json > $OUT/$V.log 2>&1 || echo "FAIL $V $C"
+        sleep "${COOL:-10}"   # board-safe: let the power rails and temperature settle between runs
     done
     echo "[$(date +%T)] $DS $V done"
 done
