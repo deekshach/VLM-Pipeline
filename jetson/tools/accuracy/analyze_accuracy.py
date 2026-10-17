@@ -34,6 +34,7 @@ import collections, glob, json, math, os, re, sys
 import numpy as np
 
 ACC = "/home/nvidia/data/accuracy"
+RUNS = os.environ.get("ACC_RUNS", f"{ACC}/runs")   # ACC_RUNS: another set of runs (e.g. runs_pwsmall)
 CONFIGS = ["base", "sel", "align", "wc", "arch", "ours", "ours_nocache", "ours_pw", "uni_arch"]
 K = 64
 STOP = set("a an the is are was were be been being of in on at to for with and or but by from as it its this that "
@@ -44,8 +45,8 @@ STOP = set("a an the is are was were be been being of in on at to for with and o
 
 # ---------------------------------------------------------------- loading
 def load_run(ds, cfg, clip):
-    j = f"{ACC}/runs/{ds}/{cfg}/{clip}.json"
-    d = f"{ACC}/runs/{ds}/{cfg}/{clip}"
+    j = f"{RUNS}/{ds}/{cfg}/{clip}.json"
+    d = f"{RUNS}/{ds}/{cfg}/{clip}"
     if not os.path.exists(j) or not os.path.exists(f"{d}/manifest.jsonl"):
         return None
     try:   # a run in progress or one that failed
@@ -315,9 +316,9 @@ def wilcoxon(a, b):
 def main():
     ds = sys.argv[1]
     out = sys.argv[2] if len(sys.argv) > 2 else f"{ACC}/analysis_{ds}.json"
-    cfgs = [c for c in CONFIGS if os.path.isdir(f"{ACC}/runs/{ds}/{c}")]
-    cfgs += sorted(os.path.basename(p) for p in glob.glob(f"{ACC}/runs/{ds}/*") if os.path.basename(p) not in cfgs)
-    clips = sorted(os.path.basename(p)[:-5] for p in glob.glob(f"{ACC}/runs/{ds}/base/*.json"))
+    cfgs = [c for c in CONFIGS if os.path.isdir(f"{RUNS}/{ds}/{c}")]
+    cfgs += sorted(os.path.basename(p) for p in glob.glob(f"{RUNS}/{ds}/*") if os.path.basename(p) not in cfgs)
+    clips = sorted(os.path.basename(p)[:-5] for p in glob.glob(f"{RUNS}/{ds}/base/*.json"))
     rows = []
     for i, clip in enumerate(clips):
         rows += analyze_clip(ds, clip, cfgs)

@@ -185,3 +185,13 @@ Working sets vs the 4 MB L2 (computed):
 - OFA flow underestimates large motion: recalibrate the frame-count thresholds for OFA flow.
 - GEMM table covers shapes recorded on alley_1 and ambush_2; record more clips for full coverage.
 - MSVD has been prepared but not run through the new pipeline.
+
+## Per-window window cache (--wc-per-window), small-set check (2026-10-17)
+
+6 Sintel + 8 MSVD clips chosen for high reuse, same build, vs ours_nocache (`jetson/tools/accuracy/pw_compare.py`,
+runs in /home/nvidia/data/accuracy/runs_pwsmall). The mechanism is valid (key frame identical to the normal encode;
+re-encoded windows cos 0.99+ vs a whole-frame encode at a strict threshold), but on these datasets savings come only
+from reusing windows that did change: threshold 24 -> -9% TTFT, frame cos 0.82-0.85, captions drift (SBERT 0.84-0.89
+vs no cache); threshold 3 -> frame cos 0.97-0.99, TTFT -1 to -2%. Reused windows with identical pixels still reach
+only cos ~0.82-0.86: their embeddings carry the global-attention context of an older frame (a ceiling for any reuse in
+this ViT). Untested idea: refresh reused windows through the last global layer only.
