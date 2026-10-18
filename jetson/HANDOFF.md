@@ -212,3 +212,12 @@ this ViT). Untested idea: refresh reused windows through the last global layer o
 Frame selection is where answers change (2 of 10 on both MC sets, all vs base); the cache changes nothing but saves
 almost nothing (<= 1% TTFT): selected frames are ~10 s apart on these videos, so nearly every window changed.
 Guard pauses did not reach the TTFT window (no +30 s outliers), so timings are over all runs.
+
+## --wc-drop-clean, 2 clips per dataset (2026-10-18)
+
+Per-window cache T24, later frames prefill only their re-encoded windows' tokens (positions as in the full frame).
+Highest-reuse clips per dataset, runs in /home/nvidia/data/accuracy/runs_drop (build 78d0c55b). TTFT no cache ->
+pw24 -> pwd24: TACoS ~7.5 -> 5.3 -> 3.6 s; Perception Test 6.6 -> 5.6 -> 4.7 and 5.0 -> 4.3 -> 3.5 s; MSVD 2.28 -> 1.93
+-> 1.50 and 2.00 -> 1.75 -> 1.45 s; Sintel 2.90 -> 2.44 -> 2.07 and 2.89 -> 2.61 -> 2.39 s; Charades and Video-MME
+-8 to -13%; NExT-QA ~0 (no reuse). Outputs vs pw24: 12 of 14 unchanged or near-identical (SBERT >= 0.97); one
+Perception Test answer flipped right -> wrong (video_874_q3), one TACoS caption reworded (closer to the references).
