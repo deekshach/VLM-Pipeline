@@ -8,7 +8,8 @@
 //   window grid       --window-align: frames resized to a multiple of the 112 px ViT attention window
 //   window cache      --window-cache: re-encode only the windows that changed since they were last
 //                     encoded (dirty-window crop), reuse the rest of the embeddings (implies --window-align);
-//                     --wc-per-window: exactly the dirty windows, global ViT layers over the frame's cached K/V
+//                     --wc-per-window: exactly the dirty windows, global ViT layers over the frame's cached K/V;
+//                     --wc-drop-clean: after the first frame, prefill only the re-encoded windows' tokens
 //   ViT attention     --vit-flash-attn on|off; --vit-window-batch: windowed layers as a batch of windows
 //                     (engine switch MTMD_VIT_WINDOW_BATCH; needs aligned frames)
 //   BF16 GEMMs        --gemm-f32-out, --gemm-bias-fuse, --gemm-table <file>, --gemm-record <file>
@@ -98,6 +99,7 @@ struct sintel_params {
     float       wc_rekey_frac = 0.75f; // without the cost model: crops above this fraction of the frame become full encodes
     bool        wc_cost_model = false; // choose the crop shape from measured encode times (calibrated at setup)
     bool        wc_per_window = false; // re-encode exactly the dirty windows, global layers over a cached frame K/V
+    bool        wc_drop_clean = false; // per-window cache: later frames prefill only their re-encoded windows' tokens
     int         wc_calib_reps = 3;
     bool        vit_window_batch = false;
     bool        gemm_f32_out  = false;
@@ -172,6 +174,8 @@ static std::vector<char *> filter_custom_args(int argc, char ** argv, sintel_par
             sparams.window_cache     = true;
             sparams.window_align     = true;
             sparams.vit_window_batch = true;   // the per-window encode is built on the batched-window ViT graph
+        } else if (arg == "--wc-drop-clean") {
+            sparams.wc_drop_clean = true;
         } else if (arg == "--wc-cost-model") {
             sparams.wc_cost_model = true;
         } else if (arg == "--wc-calib-reps" && i + 1 < argc) {
@@ -236,6 +240,8 @@ static void show_additional_info(int /*argc*/, char ** argv) {
     printf("  --wc-cost-model     Window cache: pick the crop shape from encode times measured at setup\n");
     printf("  --wc-per-window     Window cache: re-encode exactly the dirty windows; the ViT's global layers attend\n");
     printf("                      over the frame's cached K/V (implies --window-cache, --vit-window-batch)\n");
+    printf("  --wc-drop-clean     Per-window cache: after the first frame, the LLM prefills only the re-encoded\n");
+    printf("                      windows' tokens (at their positions in the full frame); clean windows are left out\n");
     printf("  --vit-window-batch  ViT windowed layers as a batch of windows (needs --window-align)\n");
     printf("  --gemm-f32-out      BF16 GEMMs write F32 directly (no BF16->F32 conversion kernel)\n");
     printf("  --gemm-bias-fuse    Fold the bias ADD after a BF16 GEMM into the GEMM (needs --gemm-f32-out)\n");
@@ -1142,7 +1148,7 @@ static bool calibrate_cost_table(mtmd_context * mctx, const rgb_frame & frame, i
 
 struct wc_frame_record {
     std::string action;            // key | full | crop | skip
-    int   n_dirty = 0, crop_w = 0, crop_h = 0, tokens_encoded = 0;
+    int   n_dirty = 0, crop_w = 0, crop_h = 0, tokens_encoded = 0, tokens_prefilled = 0;
     float diff_ms = 0.0f, prep_ms = 0.0f, encode_ms = 0.0f;
 };
 
@@ -1152,6 +1158,7 @@ struct wc_state {
     int   halo       = 0;
     float rekey_frac = 0.75f;
     bool  per_window = false;      // --wc-per-window: re-encode exactly the dirty windows (mtmd_encode_chunk_windows)
+    bool  drop_clean = false;      // --wc-drop-clean: prefill only the re-encoded windows' tokens after the first frame
     cost_table table;
     std::vector<float> cache;      // embeddings handed to the LLM, raster order
     int   nx = 0, ny = 0;          // token grid of the cached frame
@@ -1159,6 +1166,40 @@ struct wc_state {
     int   last_w = 0, last_h = 0;  // window shape encoded last (cost model)
     std::vector<wc_frame_record> frames;
 };
+
+// Prefill only some of an image chunk's tokens (raster indices `rows` into `embd`), each at the M-RoPE position it
+// has in the full frame (mtmd_helper_decode_image_chunk's layout: temporal n_past, then n_past + y, n_past + x).
+// n_past advances by the whole chunk, so the text after the image keeps its positions.
+static int32_t decode_image_rows(mtmd_context * mctx, llama_context * lctx, const mtmd_input_chunk * chunk,
+                                 const float * embd, int n_embd, int nx, const std::vector<int32_t> & rows,
+                                 llama_pos & n_past, int32_t n_batch) {
+    const int n = (int) rows.size();
+    for (int i0 = 0; i0 < n; i0 += n_batch) {
+        const int m = std::min(n_batch, n - i0);
+        std::vector<float> e((size_t) m * n_embd);
+        std::vector<llama_pos> pos((size_t) m * 4);
+        std::vector<int32_t> n_seq(m, 1);
+        llama_seq_id seq0 = 0;
+        std::vector<llama_seq_id *> seq(m + 1, &seq0);
+        seq[m] = nullptr;
+        std::vector<int8_t> out(m, 0);
+        for (int i = 0; i < m; i++) {
+            const int r = rows[i0 + i];
+            memcpy(&e[(size_t) i * n_embd], embd + (size_t) r * n_embd, (size_t) n_embd * sizeof(float));
+            pos[i]         = n_past;
+            pos[i + m]     = n_past + r / nx;
+            pos[i + m * 2] = n_past + r % nx;
+            pos[i + m * 3] = 0;
+        }
+        llama_batch batch = { m, nullptr, e.data(), pos.data(), n_seq.data(), seq.data(), out.data() };
+        if (llama_decode(lctx, batch) != 0) {
+            LOG_ERR("failed to decode image rows\n");
+            return -1;
+        }
+    }
+    n_past += mtmd_input_chunk_get_n_pos(chunk);
+    return 0;
+}
 
 // Encode an image chunk through the window cache, then prefill the frame from the cache.
 // `img` is the (window-aligned) frame the chunk was tokenized from.
@@ -1323,7 +1364,22 @@ static int32_t eval_image_chunk_wc(mtmd_context * mctx, llama_context * lctx, co
     int64_t t1 = ggml_time_us();
     dump_image(wc.cache.data(), cnx, cny, n_embd, fr.action.c_str(), rx, ry, rw, rh, fr.action == "pw" ? &pw_wins : nullptr);
     NVTX_PUSH("prefill_img");
-    const int32_t ret = mtmd_helper_decode_image_chunk(mctx, lctx, chunk, wc.cache.data(), n_past, 0, n_batch, &n_past);
+    int32_t ret;
+    if (wc.per_window && wc.drop_clean && (fr.action == "pw" || fr.action == "skip")) {
+        std::vector<int32_t> rows;   // the re-encoded windows' tokens, raster order
+        for (int w : pw_wins) {
+            const int wy = w / nwx, wx = w % nwx;
+            for (int k = 0; k < WINDOW_TOKENS * WINDOW_TOKENS; k++) {
+                rows.push_back((wy * WINDOW_TOKENS + k / WINDOW_TOKENS) * cnx + wx * WINDOW_TOKENS + k % WINDOW_TOKENS);
+            }
+        }
+        std::sort(rows.begin(), rows.end());
+        fr.tokens_prefilled = (int) rows.size();
+        ret = decode_image_rows(mctx, lctx, chunk, wc.cache.data(), n_embd, cnx, rows, n_past, n_batch);
+    } else {
+        fr.tokens_prefilled = n_tok;
+        ret = mtmd_helper_decode_image_chunk(mctx, lctx, chunk, wc.cache.data(), n_past, 0, n_batch, &n_past);
+    }
     llama_synchronize(lctx);
     NVTX_POP();
     b.prefill_img_ms += (ggml_time_us() - t1) / 1000.0f;
@@ -1759,6 +1815,7 @@ static void write_results_json(const std::string & output_path,
         {"wc_halo",          sparams.wc_halo},
         {"wc_rekey_frac",    sparams.wc_rekey_frac},
         {"wc_per_window",    sparams.wc_per_window},
+        {"wc_drop_clean",    sparams.wc_drop_clean},
         {"wc_cost_model",    sparams.wc_cost_model},
         {"vit_flash_attn",   sparams.vit_fa_off ? "off" : "on"},
         {"vit_window_batch", sparams.vit_window_batch},
@@ -1925,6 +1982,7 @@ int main(int argc, char ** argv) {
     wc.halo       = sparams.wc_halo;
     wc.rekey_frac = sparams.wc_rekey_frac;
     wc.per_window = sparams.wc_per_window;
+    wc.drop_clean = sparams.wc_drop_clean;
     float calib_ms = 0.0f;
     if (wc.enabled && sparams.wc_cost_model) {
         rgb_frame probe;
@@ -2251,7 +2309,8 @@ int main(int argc, char ** argv) {
         json frames = json::array();
         for (const auto & f : wc.frames) {
             frames.push_back({{"action", f.action}, {"n_dirty", f.n_dirty}, {"crop", {f.crop_w, f.crop_h}},
-                              {"tokens_encoded", f.tokens_encoded}, {"diff_ms", f.diff_ms}, {"prep_ms", f.prep_ms},
+                              {"tokens_encoded", f.tokens_encoded}, {"tokens_prefilled", f.tokens_prefilled},
+                              {"diff_ms", f.diff_ms}, {"prep_ms", f.prep_ms},
                               {"encode_ms", f.encode_ms}});
         }
         breakdown["window_cache"] = {{"frames", frames}, {"calibration_ms", calib_ms}};

@@ -20,8 +20,9 @@
 #   uni_arch  uniform 8 frames + window align + the kernel switches, no window cache (numerics alone)
 #   ours_nocache  ours without the window cache (what the cache adds)
 #   pw<T>     ours with the per-window cache (--wc-per-window) at threshold T instead of the rectangle cache
+#   pwd<T>    pw<T> + --wc-drop-clean (later frames prefill only their re-encoded windows' tokens)
 # Same context size for all (-c 16384): greedy output depends on the attention kernel's KV padding.
-# Results: /home/nvidia/data/accuracy/runs/<dataset>/<config>/<clip>.json and .../<clip>/ (dump).
+# Results: /home/nvidia/data/accuracy/runs/<dataset>/<config>/<clip>.json and .../<clip>/ (dump); RUNS=<dir> elsewhere.
 set -u
 DS="${1:?sintel or msvd}"
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -58,6 +59,7 @@ flags() {
         ours)     echo "--live-flow $OFA --window-align --window-cache --wc-threshold $WC_T $ARCH --anchor-first" ;;
         uni_arch) echo "--baseline --window-align $ARCH" ;;
         ours_nocache) echo "--live-flow $OFA --window-align $ARCH --anchor-first" ;;
+        pwd*)     echo "--live-flow $OFA --window-align --wc-per-window --wc-drop-clean --wc-threshold ${1#pwd} $ARCH --anchor-first" ;;
         pw*)      echo "--live-flow $OFA --window-align --wc-per-window --wc-threshold ${1#pw} $ARCH --anchor-first" ;;
         wc*)      echo "--live-flow $OFA --window-align --window-cache --wc-threshold ${1#wc} $ARCH --anchor-first" ;;
     esac
@@ -71,7 +73,7 @@ for V in ${CLIPS//,/ }; do
             > /dev/null 2>&1 || echo "FAIL dense $V $MODE"
     done
     for C in ${CONFIGS//,/ }; do
-        OUT=$ACC/runs/$DS/$C; mkdir -p $OUT
+        OUT=${RUNS:-$ACC/runs}/$DS/$C; mkdir -p $OUT
         [ -f $OUT/$V.json ] && continue
         # shellcheck disable=SC2046
         "$BIN" -m "$MODEL" --mmproj "$MMPROJ" -c 16384 --no-mmap --sintel-dir $ROOT --video $V --base-frames 8 \
