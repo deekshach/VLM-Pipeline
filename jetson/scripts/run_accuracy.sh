@@ -41,7 +41,7 @@ elif [ "$DS" = msvd ]; then
     P="Describe what is happening in this video in one sentence. Answer in English."
 else
     ROOT=/mnt/external_ssd/VLM-datasets/eval/$DS; OFA="--ofa-levels 3"; N=48
-    [ "$DS" = charades ] || N=8   # multiple choice: the option letter
+    grep -q '"refs"' $ROOT/items.json || N=8   # multiple choice: the option letter
     P=""
 fi
 CLIPS="${2:-all}"

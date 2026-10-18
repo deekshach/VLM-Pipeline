@@ -7,8 +7,8 @@ Per config, over the clips present for every config:
   accuracy  multiple choice: option letter correct; Charades: CIDEr / METEOR / SBERT vs the Charades-STA sentences
   vs base   same first token, same answer (multiple choice) or caption SBERT
   vs ours_nocache (same frames, no cache)  first-token KL and agreement, same answer or caption SBERT
-paused: runs whose wall time overlapped a board guard pause. The window is generous (it includes model load and
-generation), so this over-counts; check the TTFT spread for +30 s outliers before dropping any run.
+paused: runs whose wall time overlapped a board guard pause (a pause adds >= 30 s); left out of the timings. The window
+includes model load and generation, so a few unaffected runs are left out too.
 """
 import datetime as dt, json, os, re, sys
 import numpy as np
@@ -21,22 +21,25 @@ GUARD = f"{aa.ACC}/board_guard.log"
 
 
 def guard_pauses():
-    """Pause intervals from the board guard log (times only: a day boundary is a time going backwards)."""
+    """Pause intervals from the board guard log. Its lines carry times only: a time going backwards is a new day, and
+    the last line is from the day the log was last written."""
     if not os.path.exists(GUARD):
         return []
-    first = dt.datetime.fromtimestamp(os.path.getctime(GUARD)).date()
-    day, prev, cur, out = dt.datetime.combine(first, dt.time()), None, None, []
+    ev = []
     for l in open(GUARD):
         m = re.match(r"\[(\d\d):(\d\d):(\d\d)\] (\w+)", l)
-        if not m:
-            continue
-        t = dt.timedelta(hours=int(m[1]), minutes=int(m[2]), seconds=int(m[3]))
+        if m:
+            ev.append((dt.timedelta(hours=int(m[1]), minutes=int(m[2]), seconds=int(m[3])), m[4]))
+    days = sum(b[0] < a[0] for a, b in zip(ev, ev[1:]))
+    day = dt.datetime.combine(dt.datetime.fromtimestamp(os.path.getmtime(GUARD)).date(), dt.time()) - dt.timedelta(days=days)
+    prev, cur, out = None, None, []
+    for t, what in ev:
         if prev is not None and t < prev:
             day += dt.timedelta(days=1)
         prev = t
-        if m[4] == "paused":
+        if what == "paused":
             cur = day + t
-        elif m[4] == "resumed" and cur:
+        elif what == "resumed" and cur:
             out.append((cur, day + t))
             cur = None
     return out
@@ -57,7 +60,7 @@ def main():
     ds = sys.argv[1]
     cfgs = sys.argv[2:] or ["base", "uni_arch", "sel", "ours_nocache", "pw12", "pw24", "pw36"]
     items = json.load(open(f"{ROOT}/{ds}/items.json"))
-    mc = ds != "charades"
+    mc = "refs" not in next(iter(items.values()))   # multiple choice, or captions with references
     clips = sorted(v for v in items if all(os.path.exists(f"{aa.RUNS}/{ds}/{c}/{v}.json") for c in cfgs))
     runs = {c: {v: aa.load_run(ds, c, v) for v in clips} for c in cfgs}
     clips = [v for v in clips if all(runs[c][v] is not None for c in cfgs)]
@@ -75,10 +78,12 @@ def main():
             res = run["res"]
             r["frames"].append(len(run["imgs"]))
             r["img_tok"].append(sum(im["nx"] * im["ny"] for im in run["imgs"]))
-            n_paused += paused(f"{aa.RUNS}/{ds}/{c}/{v}.json", res, pauses)
-            b = res["timing"]["breakdown"]
-            r["ttft"].append(res["timing"]["ttft_ms"])
-            r["vit_ms"].append(sum(b[k]["vit_ms"] for k in ("rest", "anchor") if k in b))
+            if paused(f"{aa.RUNS}/{ds}/{c}/{v}.json", res, pauses):
+                n_paused += 1
+            else:
+                b = res["timing"]["breakdown"]
+                r["ttft"].append(res["timing"]["ttft_ms"])
+                r["vit_ms"].append(sum(b[k]["vit_ms"] for k in ("rest", "anchor") if k in b))
             wc = res["timing"]["breakdown"].get("window_cache", {}).get("frames", [])
             if wc:
                 r["enc_frac"].append(sum(f["tokens_encoded"] for f in wc[1:]) / (wc[0]["tokens_encoded"] * (len(wc) - 1))
