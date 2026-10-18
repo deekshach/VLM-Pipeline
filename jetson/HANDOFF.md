@@ -195,3 +195,20 @@ from reusing windows that did change: threshold 24 -> -9% TTFT, frame cos 0.82-0
 vs no cache); threshold 3 -> frame cos 0.97-0.99, TTFT -1 to -2%. Reused windows with identical pixels still reach
 only cos ~0.82-0.86: their embeddings carry the global-attention context of an older frame (a ceiling for any reuse in
 this ViT). Untested idea: refresh reused windows through the last global layer only.
+
+## New datasets, basic check (2026-10-17)
+
+10 clips each, one question per clip; `prepare_newds.py` (frames like MSVD: 4 fps, <= 50, <= 640 px wide, under
+`/mnt/external_ssd/VLM-datasets/eval/<ds>`), `run_accuracy.sh <ds> all base,uni_arch,sel,ours_nocache,pw12,pw24,pw36`
+(DENSE=0), `newds_compare.py <ds>`. Frozen build bin-cfa7eec9.
+
+| | Charades (caption) | NExT-QA (5-way MC) | Video-MME short (4-way MC) |
+|---|---|---|---|
+| TTFT base -> ours_nocache | 4.55 -> 1.49 s | 8.44 -> 2.81 s | 7.07 -> 2.55 s |
+| accuracy base / uni_arch / sel / ours_nocache | CIDEr 0.37 / 0.34 / 0.11 / 0.15 | 10 / 9 / 8 / 8 of 10 | 10 / 9 / 8 / 8 of 10 |
+| per-window cache: windows re-encoded T12 / T24 / T36 | 85 / 78 / 72% | 99 / 98 / 96% | 95 / 93 / 91% |
+| per-window cache vs no cache | caption SBERT 0.85-0.92 | same answers, KL < 0.001 | same answers, KL < 0.01 |
+
+Frame selection is where answers change (2 of 10 on both MC sets, all vs base); the cache changes nothing but saves
+almost nothing (<= 1% TTFT): selected frames are ~10 s apart on these videos, so nearly every window changed.
+Guard pauses did not reach the TTFT window (no +30 s outliers), so timings are over all runs.

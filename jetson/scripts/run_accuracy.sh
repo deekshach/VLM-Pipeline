@@ -1,7 +1,10 @@
 #!/bin/bash
 # Accuracy study: what each optimization changes in what the LLM sees and answers.
 #
-#   bash jetson/scripts/run_accuracy.sh <sintel|msvd> [clips, comma-separated | all] [configs, comma-separated]
+#   bash jetson/scripts/run_accuracy.sh <sintel|msvd|nextqa|videomme|charades> [clips, comma-separated | all] [configs]
+#
+# nextqa / videomme / charades: small sets from jetson/tools/accuracy/prepare_newds.py, a prompt per clip from
+# <root>/items.json (multiple choice: answer with the option letter). DENSE=0 skips the dense ViT reference.
 #
 # Per clip and config: llama-jetson-vlm with greedy decoding (--temp 0) and --dump-dir (the embeddings of every
 # image as handed to the LLM, the text tokens, the first-token logits, the generated tokens), plus the dense ViT
@@ -16,6 +19,7 @@
 #   ours      + anchor-first (the full system)
 #   uni_arch  uniform 8 frames + window align + the kernel switches, no window cache (numerics alone)
 #   ours_nocache  ours without the window cache (what the cache adds)
+#   pw<T>     ours with the per-window cache (--wc-per-window) at threshold T instead of the rectangle cache
 # Same context size for all (-c 16384): greedy output depends on the attention kernel's KV padding.
 # Results: /home/nvidia/data/accuracy/runs/<dataset>/<config>/<clip>.json and .../<clip>/ (dump).
 set -u
@@ -32,9 +36,13 @@ WC_T="${WC_T:-24}"
 if [ "$DS" = sintel ]; then
     ROOT=/home/nvidia/data/MPI-Sintel; OFA="--ofa-levels 4"; N=96
     P="Describe the scene, motion patterns, and key visual elements in these video frames. Answer in English."
-else
+elif [ "$DS" = msvd ]; then
     ROOT=$ACC/msvd; OFA="--ofa-levels 3"; N=48   # 320-640 px frames: the OFA allows 3 pyramid levels
     P="Describe what is happening in this video in one sentence. Answer in English."
+else
+    ROOT=/mnt/external_ssd/VLM-datasets/eval/$DS; OFA="--ofa-levels 3"; N=48
+    [ "$DS" = charades ] || N=8   # multiple choice: the option letter
+    P=""
 fi
 CLIPS="${2:-all}"
 [ "$CLIPS" = all ] && CLIPS="$(ls $ROOT/training/clean | paste -sd,)"
@@ -50,14 +58,16 @@ flags() {
         ours)     echo "--live-flow $OFA --window-align --window-cache --wc-threshold $WC_T $ARCH --anchor-first" ;;
         uni_arch) echo "--baseline --window-align $ARCH" ;;
         ours_nocache) echo "--live-flow $OFA --window-align $ARCH --anchor-first" ;;
+        pw*)      echo "--live-flow $OFA --window-align --wc-per-window --wc-threshold ${1#pw} $ARCH --anchor-first" ;;
         wc*)      echo "--live-flow $OFA --window-align --window-cache --wc-threshold ${1#wc} $ARCH --anchor-first" ;;
     esac
 }
 for V in ${CLIPS//,/ }; do
+    [ -f $ROOT/items.json ] && P="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))[sys.argv[2]]["prompt"])' $ROOT/items.json $V)"
     # dense ViT reference (no LLM on the GPU; ~1 s per Sintel frame)
     for MODE in native aligned; do
         D=$ACC/dense/$DS/$V/$MODE
-        [ -f $D/meta.json ] || "$BIN_DIR/jetson-embed-frames" "$MODEL" "$MMPROJ" $ROOT/training/clean/$V $D $MODE \
+        [ "${DENSE:-1}" = 0 ] || [ -f $D/meta.json ] || "$BIN_DIR/jetson-embed-frames" "$MODEL" "$MMPROJ" $ROOT/training/clean/$V $D $MODE \
             > /dev/null 2>&1 || echo "FAIL dense $V $MODE"
     done
     for C in ${CONFIGS//,/ }; do
