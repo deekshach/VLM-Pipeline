@@ -1,0 +1,72 @@
+
+## vit  (GPU kernel ms)
+| class | baseline_f8 |
+|---|---|
+| softmax | 3634.5 |
+| attn matmul | 1424.1 |
+| GEMM | 875.9 |
+| GEMM split-K | 377.8 |
+| cast | 916.5 |
+| add | 705.0 |
+| norm | 274.2 |
+| rope | 427.6 |
+| copy | 284.9 |
+| glu | 165.0 |
+| other | 3.0 |
+| **total** | 9088.7 |
+| kernels | 10408 |
+
+## prefill_img  (GPU kernel ms)
+| class | baseline_f8 |
+|---|---|
+| attention | 360.0 |
+| GEMM | 532.0 |
+| GEMM split-K | 3142.2 |
+| cast | 720.0 |
+| add | 97.1 |
+| norm | 86.5 |
+| rope | 57.4 |
+| copy | 12.3 |
+| glu | 203.4 |
+| **total** | 5210.8 |
+| kernels | 15264 |
+
+## prefill_txt  (GPU kernel ms)
+| class | baseline_f8 |
+|---|---|
+| attention | 20.0 |
+| GEMM | 700.9 |
+| GEMM split-K | 38.6 |
+| cast | 3.9 |
+| add | 6.4 |
+| norm | 3.8 |
+| rope | 2.1 |
+| copy | 2.2 |
+| glu | 2.6 |
+| **total** | 780.6 |
+| kernels | 5688 |
+
+## decode  (GPU kernel ms)
+| class | baseline_f8 |
+|---|---|
+| attention | 17.7 |
+| GEMM | 738.9 |
+| norm | 4.3 |
+| rope | 2.1 |
+| copy | 2.1 |
+| **total** | 765.1 |
+| kernels | 3184 |
+
+## unattributed  (GPU kernel ms)
+| class | baseline_f8 |
+|---|---|
+| attention | 0.8 |
+| GEMM | 88.4 |
+| add | 0.5 |
+| norm | 0.3 |
+| rope | 0.1 |
+| copy | 0.2 |
+| glu | 0.1 |
+| **total** | 90.5 |
+| kernels | 590 |
+trace: /home/nvidia/Desktop/Projects/VLM/VLM-Pipeline/jetson/experiments/profiles/nsys/baseline_f8.nsys-rep   (compare: python3 jetson/tools/nsys_stage_kernels.py A.sqlite B.sqlite)
