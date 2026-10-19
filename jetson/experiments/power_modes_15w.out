@@ -1,0 +1,84 @@
+NV Power Mode: MODE_15W
+1
+gpu_max_freq 408000000 cur 408000000
+tpc_pg_mask 248
+emc_cap 2133000000
+cpu_online 0-3
+| frames | tokens | ttft_ms | vit_ms | prefill_img_ms | prefill_txt_ms | module_w | gpu_w | energy_j | ram_delta_gb | oc3_events |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 8 | 4736 | 8.286e+04 | 4.993e+04 | 3.017e+04 | 2354 | 10.23 | 5.297 | 847.6 | 20.25 | 0 |
+| 32 | 18944 | 3.576e+05 | 2.019e+05 | 1.46e+05 | 8095 | 10.32 | 5.352 | 3691 | 15.25 | 0 |
+
+## vit  (GPU kernel ms)
+| class | pm_15w_f8 |
+|---|---|
+| softmax | 21197.8 |
+| attn matmul | 7227.0 |
+| GEMM | 6633.3 |
+| GEMM split-K | 2181.8 |
+| cast | 5177.2 |
+| add | 2746.7 |
+| norm | 1839.7 |
+| rope | 1794.1 |
+| copy | 1983.4 |
+| glu | 823.4 |
+| other | 23.4 |
+| **total** | 51627.9 |
+| kernels | 10408 |
+
+## prefill_img  (GPU kernel ms)
+| class | pm_15w_f8 |
+|---|---|
+| attention | 2522.8 |
+| GEMM | 637.3 |
+| GEMM split-K | 21150.8 |
+| cast | 4099.6 |
+| add | 453.4 |
+| norm | 517.0 |
+| rope | 375.6 |
+| copy | 71.5 |
+| glu | 976.8 |
+| **total** | 30804.8 |
+| kernels | 15040 |
+
+## prefill_txt  (GPU kernel ms)
+| class | pm_15w_f8 |
+|---|---|
+| attention | 60.4 |
+| GEMM | 1784.2 |
+| GEMM split-K | 395.7 |
+| cast | 21.4 |
+| add | 16.7 |
+| norm | 10.7 |
+| rope | 7.6 |
+| copy | 5.5 |
+| glu | 11.1 |
+| **total** | 2313.4 |
+| kernels | 5604 |
+
+## decode  (GPU kernel ms)
+| class | pm_15w_f8 |
+|---|---|
+| attention | 47.9 |
+| GEMM | 3084.8 |
+| add | 0.1 |
+| norm | 10.3 |
+| rope | 5.2 |
+| copy | 5.0 |
+| **total** | 3153.3 |
+| kernels | 3184 |
+
+## unattributed  (GPU kernel ms)
+| class | pm_15w_f8 |
+|---|---|
+| attention | 2.4 |
+| GEMM | 264.8 |
+| add | 1.2 |
+| norm | 0.9 |
+| rope | 0.5 |
+| copy | 0.4 |
+| glu | 0.6 |
+| **total** | 270.8 |
+| kernels | 590 |
+trace: /home/nvidia/Desktop/Projects/VLM/VLM-Pipeline/jetson/experiments/profiles/nsys/pm_15w_f8.nsys-rep   (compare: python3 jetson/tools/nsys_stage_kernels.py A.sqlite B.sqlite)
+done: /home/nvidia/Desktop/Projects/VLM/VLM-Pipeline/jetson/experiments/power_modes/15w
