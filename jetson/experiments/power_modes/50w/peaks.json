@@ -1,0 +1,22 @@
+{
+  "device": "Orin",
+  "cc": "8.7",
+  "sm_count": 16,
+  "integrated": true,
+  "sm_clock_mhz_max": 1300,
+  "l2_kib": 4096,
+  "regs_per_sm": 65536,
+  "max_threads_per_sm": 1536,
+  "smem_per_sm_kib": 164,
+  "dram_theoretical_gbps": 52.2,
+  "gemm_size": 4096,
+  "peaks": {
+    "bf16_tc_tflops": 20.452,
+    "fp16_tc_fp16acc_tflops": 21.999,
+    "tf32_tc_tflops": 8.386,
+    "fp32_tflops": 2.012,
+    "dram_copy_gbps": 175.4,
+    "dram_read_gbps": 139.3,
+    "dram_memcpy_gbps": 144.6
+  }
+}

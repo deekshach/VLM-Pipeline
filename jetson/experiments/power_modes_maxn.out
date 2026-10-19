@@ -1,0 +1,92 @@
+NV Power Mode: MAXN
+0
+gpu_max_freq 1300500000 cur 1300500000
+tpc_pg_mask 0
+emc_cap 3199000000
+cpu_online 0-11
+| frames | tokens | ttft_ms | vit_ms | prefill_img_ms | prefill_txt_ms | module_w | gpu_w | energy_j | ram_delta_gb | oc3_events |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 8 | 4736 | 1.44e+04 | 8477 | 4956 | 764.4 | 38.41 | 28.1 | 553.2 | 15.08 | 3 |
+| 32 | 18944 | 5.967e+04 | 3.327e+04 | 2.287e+04 | 2725 | 40.53 | 30.13 | 2419 | 15.6 | 22 |
+
+## vit  (GPU kernel ms)
+| class | pm_maxn_f8 |
+|---|---|
+| softmax | 3190.5 |
+| attn matmul | 1267.6 |
+| GEMM | 812.9 |
+| GEMM split-K | 343.1 |
+| cast | 828.5 |
+| add | 613.1 |
+| norm | 260.5 |
+| rope | 386.4 |
+| copy | 256.6 |
+| glu | 154.3 |
+| other | 3.0 |
+| **total** | 8116.5 |
+| kernels | 10408 |
+
+## prefill_img  (GPU kernel ms)
+| class | pm_maxn_f8 |
+|---|---|
+| attention | 331.8 |
+| GEMM | 498.8 |
+| GEMM split-K | 2867.7 |
+| cast | 668.9 |
+| add | 91.9 |
+| norm | 84.0 |
+| rope | 55.4 |
+| copy | 12.2 |
+| glu | 177.9 |
+| **total** | 4788.7 |
+| kernels | 15264 |
+
+## prefill_txt  (GPU kernel ms)
+| class | pm_maxn_f8 |
+|---|---|
+| attention | 20.1 |
+| GEMM | 642.1 |
+| GEMM split-K | 32.5 |
+| cast | 3.9 |
+| add | 6.4 |
+| norm | 3.8 |
+| rope | 2.1 |
+| copy | 2.2 |
+| glu | 2.6 |
+| **total** | 715.6 |
+| kernels | 5688 |
+
+## decode  (GPU kernel ms)
+| class | pm_maxn_f8 |
+|---|---|
+| attention | 17.5 |
+| GEMM | 700.3 |
+| norm | 4.3 |
+| rope | 2.0 |
+| copy | 2.1 |
+| **total** | 726.3 |
+| kernels | 3184 |
+
+## unattributed  (GPU kernel ms)
+| class | pm_maxn_f8 |
+|---|---|
+| attention | 0.8 |
+| GEMM | 82.0 |
+| add | 0.5 |
+| norm | 0.3 |
+| rope | 0.1 |
+| copy | 0.2 |
+| glu | 0.1 |
+| **total** | 84.1 |
+| kernels | 590 |
+trace: /home/nvidia/Desktop/Projects/VLM/VLM-Pipeline/jetson/experiments/profiles/nsys/pm_maxn_f8.nsys-rep   (compare: python3 jetson/tools/nsys_stage_kernels.py A.sqlite B.sqlite)
+| clip | uniform (baseline) ms | full design ms | speed-up |
+|---|---|---|---|
+| alley_1 | 14239 | 2966 | 4.80x |
+| ambush_5 | 14765 | 6665 | 2.22x |
+| bandage_1 | 14626 | 2789 | 5.24x |
+| cave_2 | 14123 | 6581 | 2.15x |
+| sleeping_1 | 14016 | 2815 | 4.98x |
+| temple_2 | 14103 | 4013 | 3.51x |
+| mean | 14312 | 4305 | 3.32x |
+done: /home/nvidia/Desktop/Projects/VLM/VLM-Pipeline/jetson/experiments/power_modes/maxn

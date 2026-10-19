@@ -1,0 +1,83 @@
+NV Power Mode: MODE_50W
+3
+gpu_max_freq 816000000 cur 816000000
+tpc_pg_mask 0
+emc_cap 3199000000
+cpu_online 0-11
+| frames | tokens | ttft_ms | vit_ms | prefill_img_ms | prefill_txt_ms | module_w | gpu_w | energy_j | ram_delta_gb | oc3_events |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 8 | 4736 | 1.958e+04 | 1.13e+04 | 7143 | 849.9 | 24.34 | 15.75 | 476.6 | 15.01 | 0 |
+| 32 | 18944 | 8.313e+04 | 4.52e+04 | 3.364e+04 | 3091 | 24.67 | 16.17 | 2051 | 15.64 | 0 |
+
+## vit  (GPU kernel ms)
+| class | pm_50w_f8 |
+|---|---|
+| softmax | 4382.9 |
+| attn matmul | 1811.2 |
+| GEMM | 1216.6 |
+| GEMM split-K | 507.0 |
+| cast | 1091.9 |
+| add | 719.9 |
+| norm | 367.9 |
+| rope | 509.1 |
+| copy | 386.4 |
+| glu | 190.0 |
+| other | 4.6 |
+| **total** | 11187.5 |
+| kernels | 10408 |
+
+## prefill_img  (GPU kernel ms)
+| class | pm_50w_f8 |
+|---|---|
+| attention | 496.4 |
+| GEMM | 689.9 |
+| GEMM split-K | 4529.5 |
+| cast | 878.2 |
+| add | 113.6 |
+| norm | 112.3 |
+| rope | 79.2 |
+| copy | 16.4 |
+| glu | 224.8 |
+| **total** | 7140.4 |
+| kernels | 15264 |
+
+## prefill_txt  (GPU kernel ms)
+| class | pm_50w_f8 |
+|---|---|
+| attention | 27.8 |
+| GEMM | 712.3 |
+| GEMM split-K | 50.3 |
+| cast | 5.4 |
+| add | 8.3 |
+| norm | 5.2 |
+| rope | 3.0 |
+| copy | 3.0 |
+| glu | 3.3 |
+| **total** | 818.8 |
+| kernels | 5688 |
+
+## decode  (GPU kernel ms)
+| class | pm_50w_f8 |
+|---|---|
+| attention | 23.2 |
+| GEMM | 795.2 |
+| norm | 5.6 |
+| rope | 2.8 |
+| copy | 2.8 |
+| **total** | 829.7 |
+| kernels | 3184 |
+
+## unattributed  (GPU kernel ms)
+| class | pm_50w_f8 |
+|---|---|
+| attention | 1.1 |
+| GEMM | 92.0 |
+| add | 0.6 |
+| norm | 0.5 |
+| rope | 0.2 |
+| copy | 0.2 |
+| glu | 0.2 |
+| **total** | 94.8 |
+| kernels | 590 |
+trace: /home/nvidia/Desktop/Projects/VLM/VLM-Pipeline/jetson/experiments/profiles/nsys/pm_50w_f8.nsys-rep   (compare: python3 jetson/tools/nsys_stage_kernels.py A.sqlite B.sqlite)
+done: /home/nvidia/Desktop/Projects/VLM/VLM-Pipeline/jetson/experiments/power_modes/50w
