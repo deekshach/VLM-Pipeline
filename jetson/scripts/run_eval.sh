@@ -2,7 +2,7 @@
 # Main evaluation (MAXN, clocks pinned), in short bursts. One request per job, exactly as run_accuracy.sh runs it
 # (-c 16384, greedy, --dump-dir for the accuracy tools), plus tegrastats and the oc3 over-current counter per run.
 #
-#   bash jetson/scripts/run_eval.sh <e1|e3|e4|e6> [minutes=60]
+#   bash jetson/scripts/run_eval.sh <e1|e3|e4|e6|e8> [minutes=60]
 #
 #   e1  headline TTFT + accuracy: base, uni_arch, pw24 (the design), pwd24 (+ drop-clean) on all 123 clips of the
 #       seven datasets (MSVD: the 45-clip set)
@@ -10,6 +10,10 @@
 #   e4  accuracy vs TTFT: uniform 4 / 16 frames with the kernel switches (uni4, uni16), cache threshold 12 / 36
 #       (pw12, pw36) on NExT-QA, Video-MME, Perception Test and Charades
 #   e6  base and pw24 on NExT-QA and TACoS, run under 30W (the script then expects MODE_30W)
+#   e8  qwen2fps on all 123 clips: Qwen2.5-VL's own video input -- every frame of its 2 fps sampling (qwen-vl-utils
+#       smart_nframes, frames from video_redundancy.py, long side <= 644 px) fed as the reference does, two frames per
+#       ViT pass and one video block with video rotary positions (llama-temporal-pair-vlm --mode video). Accuracy arm:
+#       its JSON is that tool's (requests[0]: vit_ms, prefill_ms, text); LLM and ViT flash attention both on (-fa).
 #
 # Results: /home/nvidia/data/accuracy/runs_eval/<dataset>/<config>[_r<rep>]/<clip>.{json,log,tegrastats,oc3} (+ dump
 # dir for repetition 1). Finished jobs are skipped, so the script resumes where it stopped; it exits after <minutes>.
@@ -18,12 +22,14 @@
 # exit): before each request the junction must be under COOL_TJ (55 C); after BURST_MIN (20) minutes of requests the
 # script idles COOL_MIN (5) minutes; above STOP_TJ (80 C) after a request it stops.
 set -u
-EXP="${1:?e1|e3|e4|e6}"
+EXP="${1:?e1|e3|e4|e6|e8}"
 MINUTES="${2:-60}"
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO="$(cd "$HERE/../.." && pwd)"
 source "$REPO/dmc955/model_config.sh"
 BIN="$REPO/build/bin/llama-jetson-vlm"
+QBIN="$REPO/build/bin/llama-temporal-pair-vlm"
+QFRAMES=/mnt/external_ssd/VLM-datasets/qwen2fps/frames
 ACC=/home/nvidia/data/accuracy
 OUTROOT=$ACC/runs_eval
 TABLE="$REPO/jetson/gemm/table_orin.txt"
@@ -111,6 +117,8 @@ jobs() {
                 for V in $(clips $D); do for C in uni4 uni16 pw12 pw36; do echo "$D $C 1 $V"; done; done; done ;;
         e6) for D in nextqa tacos; do
                 for V in $(clips $D); do for C in base pw24; do echo "$D $C 1 $V"; done; done; done ;;
+        e8) for D in sintel msvd charades nextqa videomme perception tacos; do
+                for V in $(clips $D); do echo "$D qwen2fps 1 $V"; done; done ;;
     esac
 }
 
@@ -128,18 +136,27 @@ while read -r D C R V <&3; do
     fi
     while [ "$(tj)" -ge "$COOL_TJ" ]; do sleep 10; done
     [ -f $ROOT/items.json ] && P="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))[sys.argv[2]]["prompt"])' $ROOT/items.json $V)"
-    read -r NF FLAGS <<< "$(cfg $C)"
-    DUMP=""; [ "$R" = 1 ] && DUMP="--dump-dir $OUT/$V"
     echo "before $(cat $OC) tj $(tj)" > "$OUT/$V.oc3"
     tegrastats --interval 100 --logfile "$OUT/$V.tegrastats" &
-    # shellcheck disable=SC2086
-    "$BIN" -m "$MODEL" --mmproj "$MMPROJ" -c 16384 --no-mmap --sintel-dir $ROOT --video $V --base-frames $NF \
-        -p "$P" -n $N --temp 0 -ngl 99 --vit-flash-attn off $FLAGS $DUMP --decode-threads 3 \
-        --output-json "$OUT/$V.json" > "$OUT/$V.log" 2>&1 || log "FAIL $D $C $R $V"
+    if [ "$C" = qwen2fps ]; then
+        # all frames of the clip's 2 fps sampling (up to 210 frames, ~35k visual tokens: -c 40960)
+        "$QBIN" -m "$MODEL" --mmproj "$MMPROJ" -c 40960 --no-mmap --sintel-dir $QFRAMES --frames-subdir $D --videos $V \
+            --base-frames 100000 --mode video --video-fps 2 --warmup-requests 0 -p "$P" -n $N --temp 0 -ngl 99 \
+            --output-json "$OUT/$V.json" > "$OUT/$V.log" 2>&1 || log "FAIL $D $C $R $V"
+        TT='r = j["requests"][0]; print(round(r["vit_ms"] + r["prefill_ms"]))'
+    else
+        read -r NF FLAGS <<< "$(cfg $C)"
+        DUMP=""; [ "$R" = 1 ] && DUMP="--dump-dir $OUT/$V"
+        # shellcheck disable=SC2086
+        "$BIN" -m "$MODEL" --mmproj "$MMPROJ" -c 16384 --no-mmap --sintel-dir $ROOT --video $V --base-frames $NF \
+            -p "$P" -n $N --temp 0 -ngl 99 --vit-flash-attn off $FLAGS $DUMP --decode-threads 3 \
+            --output-json "$OUT/$V.json" > "$OUT/$V.log" 2>&1 || log "FAIL $D $C $R $V"
+        TT='print(j["timing"]["ttft_ms"])'
+    fi
     tegrastats --stop
     echo "after $(cat $OC) tj $(tj)" >> "$OUT/$V.oc3"
     DONE=$((DONE + 1)); TODO=$((TODO - 1))
-    log "$D $C r$R $V  ttft $(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["timing"]["ttft_ms"])' "$OUT/$V.json" 2>/dev/null) ms  tj $(tj) C"
+    log "$D $C r$R $V  ttft $(python3 -c "import json,sys; j = json.load(open(sys.argv[1])); $TT" "$OUT/$V.json" 2>/dev/null) ms  tj $(tj) C"
     if [ "$(tj)" -ge "$STOP_TJ" ]; then log "junction $(tj) C >= $STOP_TJ C: stopping"; break; fi
     sleep 5
 done 3< <(jobs)
