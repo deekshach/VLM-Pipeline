@@ -35,7 +35,7 @@ import numpy as np
 
 ACC = "/home/nvidia/data/accuracy"
 RUNS = os.environ.get("ACC_RUNS", f"{ACC}/runs")   # ACC_RUNS: another set of runs (e.g. runs_pwsmall)
-CONFIGS = ["base", "sel", "align", "wc", "arch", "ours", "ours_nocache", "ours_pw", "uni_arch"]
+CONFIGS = ["base", "sel", "align", "wc", "arch", "ours", "ours_nocache", "ours_pw", "uni_arch", "pw24", "pwd24"]
 K = 64
 STOP = set("a an the is are was were be been being of in on at to for with and or but by from as it its this that "
            "these those there their they them he she his her him we you i our your into onto over under up down "
