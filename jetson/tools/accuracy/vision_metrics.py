@@ -43,7 +43,8 @@ import analyze_accuracy as aa
 ACC = aa.ACC
 SOURCES = [f"{ACC}/runs_eval", f"{ACC}/runs"]
 EVAL = "/mnt/external_ssd/VLM-datasets/eval"
-QFRAMES = "/mnt/external_ssd/VLM-datasets/qwen2fps/frames"
+QRES = "/mnt/external_ssd/VLM-datasets/qres"   # prepare_qres.py: every frame at Qwen's per-frame resolution
+QFRAMES = f"{QRES}/qwen2fps"
 DATASETS = ["sintel", "msvd", "charades", "tacos", "nextqa", "videomme", "perception"]
 CFGS = ["base", "qwen2fps", "ours_nocache", "pw24", "pwd24"]
 WIN = 4          # tokens per window side (the ViT's 112 px windows)
@@ -61,7 +62,7 @@ def clips(ds):
 
 
 def pool_root(ds):
-    return {"sintel": "/home/nvidia/data/MPI-Sintel", "msvd": f"{ACC}/msvd"}.get(ds, f"{EVAL}/{ds}")
+    return f"{QRES}/pool/{ds}"
 
 
 def sub(x, n=MAX_TOK):

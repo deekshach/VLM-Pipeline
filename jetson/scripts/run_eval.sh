@@ -2,7 +2,7 @@
 # Main evaluation (MAXN, clocks pinned), in short bursts. One request per job, exactly as run_accuracy.sh runs it
 # (-c 16384, greedy, --dump-dir for the accuracy tools), plus tegrastats and the oc3 over-current counter per run.
 #
-#   bash jetson/scripts/run_eval.sh <e1|e3|e4|e6|e8|e9> [minutes=60]
+#   bash jetson/scripts/run_eval.sh <e1|e3|e4|e6|e8|e9|e10> [minutes=60]
 #
 #   e1  headline TTFT + accuracy: base, uni_arch, pw24 (the design), pwd24 (+ drop-clean) on all 123 clips of the
 #       seven datasets (MSVD: the 45-clip set)
@@ -17,6 +17,11 @@
 #       The LLM's visual input is dumped (<clip>/<clip>.video.embd.bin) for the spectral entropy of the tokens.
 #   e9  the design and the design + drop-clean (pw24, pwd24: later frames prefill only their re-encoded windows'
 #       tokens) on all 123 clips -- the E1 runs of those two configs, ahead of E1
+#   e10 the clips whose frames tools/accuracy/prepare_qres.py regenerated at Qwen's per-frame resolution (its
+#       affected.txt): base, ours_nocache, pw24, pwd24 where the pool changed, qwen2fps where its frames changed
+#
+# Frames: every arm reads the Qwen-resolution sets of prepare_qres.py (QRES): the pools under $QRES/pool/<dataset>
+# and the 2 fps frames under $QRES/qwen2fps, each frame at qwen-vl-utils smart_resize of its source.
 #
 # Results: /home/nvidia/data/accuracy/runs_eval/<dataset>/<config>[_r<rep>]/<clip>.{json,log,tegrastats,oc3} (+ dump
 # dir for repetition 1). Finished jobs are skipped, so the script resumes where it stopped; it exits after <minutes>.
@@ -27,14 +32,15 @@
 # exit): before each request the junction must be under COOL_TJ (55 C); after BURST_MIN (20) minutes of requests the
 # script idles COOL_MIN (5) minutes; above STOP_TJ (80 C) after a request it stops.
 set -u
-EXP="${1:?e1|e3|e4|e6|e8|e9}"
+EXP="${1:?e1|e3|e4|e6|e8|e9|e10}"
 MINUTES="${2:-60}"
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO="$(cd "$HERE/../.." && pwd)"
 source "$REPO/dmc955/model_config.sh"
 BIN="$REPO/build/bin/llama-jetson-vlm"
 QBIN="$REPO/build/bin/llama-temporal-pair-vlm"
-QFRAMES=/mnt/external_ssd/VLM-datasets/qwen2fps/frames
+QRES="${QRES:-/mnt/external_ssd/VLM-datasets/qres}"
+QFRAMES=$QRES/qwen2fps
 ACC=/home/nvidia/data/accuracy
 OUTROOT=$ACC/runs_eval
 TABLE="$REPO/jetson/gemm/table_orin.txt"
@@ -72,13 +78,13 @@ ARCH="--vit-window-batch --gemm-f32-out --gemm-bias-fuse --gemm-table $TABLE --a
 setds() {
     DS=$1
     if [ "$DS" = sintel ]; then
-        ROOT=/home/nvidia/data/MPI-Sintel; OFA="--ofa-levels 4"; N=96
+        ROOT=$QRES/pool/sintel; OFA="--ofa-levels 4"; N=96
         P="Describe the scene, motion patterns, and key visual elements in these video frames. Answer in English."
     elif [ "$DS" = msvd ]; then
-        ROOT=$ACC/msvd; OFA="--ofa-levels 3"; N=48
+        ROOT=$QRES/pool/msvd; OFA="--ofa-levels 3"; N=48
         P="Describe what is happening in this video in one sentence. Answer in English."
     else
-        ROOT=/mnt/external_ssd/VLM-datasets/eval/$DS; OFA="--ofa-levels 3"; N=48
+        ROOT=$QRES/pool/$DS; OFA="--ofa-levels 3"; N=48
         grep -q '"refs"' $ROOT/items.json || N=8
         P=""
     fi
@@ -98,6 +104,7 @@ cfg() {
         uni_arch)  echo "8 --baseline --window-align $ARCH" ;;
         uni4)      echo "4 --baseline --window-align $ARCH" ;;
         uni16)     echo "16 --baseline --window-align $ARCH" ;;
+        ours_nocache) echo "8 --live-flow $OFA --window-align $ARCH --anchor-first" ;;
         # E3 ladder: each step adds to the previous one
         l1_sel)      echo "8 $L" ;;
         l2_anchor)   echo "8 $L --anchor-first" ;;
@@ -126,6 +133,11 @@ jobs() {
                 for V in $(clips $D); do echo "$D qwen2fps 1 $V"; done; done ;;
         e9) for D in sintel msvd charades nextqa videomme perception tacos; do
                 for V in $(clips $D); do for C in pw24 pwd24; do echo "$D $C 1 $V"; done; done; done ;;
+        e10) for D in sintel msvd charades nextqa videomme perception tacos; do
+                awk -v d=$D '$1 == d' $QRES/affected.txt | while read -r _ V WHAT; do
+                    if [ "$WHAT" = pool ]; then for C in base ours_nocache pw24 pwd24; do echo "$D $C 1 $V"; done
+                    else echo "$D qwen2fps 1 $V"; fi
+                done; done ;;
     esac
 }
 
@@ -147,9 +159,10 @@ while read -r D C R V <&3; do
     echo "before $(cat $OC) tj $(tj)" > "$OUT/$V.oc3"
     tegrastats --interval 100 --logfile "$OUT/$V.tegrastats" &
     if [ "$C" = qwen2fps ]; then
-        # all frames of the clip's 2 fps sampling (up to 210 frames, ~35k visual tokens: -c 40960)
+        # all frames of the clip's 2 fps sampling: up to 210 frames, 105 pairs of up to ~770 tokens at Qwen's resolution
+        # (Video-MME: ~76k visual tokens), so -c 81920
         mkdir -p "$OUT/$V"
-        "$QBIN" -m "$MODEL" --mmproj "$MMPROJ" -c 40960 --no-mmap --sintel-dir $QFRAMES --frames-subdir $D --videos $V \
+        "$QBIN" -m "$MODEL" --mmproj "$MMPROJ" -c 81920 --no-mmap --sintel-dir $QFRAMES --frames-subdir $D --videos $V \
             --base-frames 100000 --mode video --video-fps 2 --warmup-requests 0 -p "$P" -n $N --temp 0 -ngl 99 \
             --dump-dir "$OUT/$V" --output-json "$OUT/$V.json" > "$OUT/$V.log" 2>&1 || log "FAIL $D $C $R $V"
         rm -f "$OUT/$V/$V.video.frames.bin"   # the input frames, up to 150 MB; they are on the SSD already
