@@ -2,7 +2,7 @@
 # Main evaluation (MAXN, clocks pinned), in short bursts. One request per job, exactly as run_accuracy.sh runs it
 # (-c 16384, greedy, --dump-dir for the accuracy tools), plus tegrastats and the oc3 over-current counter per run.
 #
-#   bash jetson/scripts/run_eval.sh <e1|e3|e4|e6|e8> [minutes=60]
+#   bash jetson/scripts/run_eval.sh <e1|e3|e4|e6|e8|e9> [minutes=60]
 #
 #   e1  headline TTFT + accuracy: base, uni_arch, pw24 (the design), pwd24 (+ drop-clean) on all 123 clips of the
 #       seven datasets (MSVD: the 45-clip set)
@@ -14,6 +14,9 @@
 #       smart_nframes, frames from video_redundancy.py, long side <= 644 px) fed as the reference does, two frames per
 #       ViT pass and one video block with video rotary positions (llama-temporal-pair-vlm --mode video). Accuracy arm:
 #       its JSON is that tool's (requests[0]: vit_ms, prefill_ms, text); LLM and ViT flash attention both on (-fa).
+#       The LLM's visual input is dumped (<clip>/<clip>.video.embd.bin) for the spectral entropy of the tokens.
+#   e9  the design and the design + drop-clean (pw24, pwd24: later frames prefill only their re-encoded windows'
+#       tokens) on all 123 clips -- the E1 runs of those two configs, ahead of E1
 #
 # Results: /home/nvidia/data/accuracy/runs_eval/<dataset>/<config>[_r<rep>]/<clip>.{json,log,tegrastats,oc3} (+ dump
 # dir for repetition 1). Finished jobs are skipped, so the script resumes where it stopped; it exits after <minutes>.
@@ -22,7 +25,7 @@
 # exit): before each request the junction must be under COOL_TJ (55 C); after BURST_MIN (20) minutes of requests the
 # script idles COOL_MIN (5) minutes; above STOP_TJ (80 C) after a request it stops.
 set -u
-EXP="${1:?e1|e3|e4|e6|e8}"
+EXP="${1:?e1|e3|e4|e6|e8|e9}"
 MINUTES="${2:-60}"
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO="$(cd "$HERE/../.." && pwd)"
@@ -119,6 +122,8 @@ jobs() {
                 for V in $(clips $D); do for C in base pw24; do echo "$D $C 1 $V"; done; done; done ;;
         e8) for D in sintel msvd charades nextqa videomme perception tacos; do
                 for V in $(clips $D); do echo "$D qwen2fps 1 $V"; done; done ;;
+        e9) for D in sintel msvd charades nextqa videomme perception tacos; do
+                for V in $(clips $D); do for C in pw24 pwd24; do echo "$D $C 1 $V"; done; done; done ;;
     esac
 }
 
@@ -140,9 +145,11 @@ while read -r D C R V <&3; do
     tegrastats --interval 100 --logfile "$OUT/$V.tegrastats" &
     if [ "$C" = qwen2fps ]; then
         # all frames of the clip's 2 fps sampling (up to 210 frames, ~35k visual tokens: -c 40960)
+        mkdir -p "$OUT/$V"
         "$QBIN" -m "$MODEL" --mmproj "$MMPROJ" -c 40960 --no-mmap --sintel-dir $QFRAMES --frames-subdir $D --videos $V \
             --base-frames 100000 --mode video --video-fps 2 --warmup-requests 0 -p "$P" -n $N --temp 0 -ngl 99 \
-            --output-json "$OUT/$V.json" > "$OUT/$V.log" 2>&1 || log "FAIL $D $C $R $V"
+            --dump-dir "$OUT/$V" --output-json "$OUT/$V.json" > "$OUT/$V.log" 2>&1 || log "FAIL $D $C $R $V"
+        rm -f "$OUT/$V/$V.video.frames.bin"   # the input frames, up to 150 MB; they are on the SSD already
         TT='r = j["requests"][0]; print(round(r["vit_ms"] + r["prefill_ms"]))'
     else
         read -r NF FLAGS <<< "$(cfg $C)"
