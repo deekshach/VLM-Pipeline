@@ -60,7 +60,9 @@ for ds in DATASETS:
 q, o = [x["qwen_2fps"] for x in rows], [x["ours"] for x in rows]
 md.append(f"| all | {len(rows)} | 8 | {st.median(q):g} ({min(q)}-{max(q)}) | {st.median(o):g} ({min(o)}-{max(o)}) | "
           f"{sum(o) / (8 * len(rows)):.0%} | {sum(o) / sum(q):.0%} |")
-md += ["", "| dataset | clip | pool | baseline | Qwen 2 fps | ours |", "|---|---|---|---|---|---|"]
-md += [f"| {x['dataset']} | {x['clip']} | {x['pool']} | 8 | {x['qwen_2fps']} | {x['ours']} |" for x in rows]
+md += ["", "| dataset | clip | pool | baseline | Qwen 2 fps | ours | ours / baseline | ours / Qwen 2 fps |",
+       "|---|---|---|---|---|---|---|---|"]
+md += [f"| {x['dataset']} | {x['clip']} | {x['pool']} | 8 | {x['qwen_2fps']} | {x['ours']} | {x['ours'] / 8:.0%} | "
+       f"{x['ours'] / x['qwen_2fps']:.0%} |" for x in rows]
 open(os.path.join(OUT, "frame_counts.md"), "w").write("\n".join(md) + "\n")
 print("\n".join(md))

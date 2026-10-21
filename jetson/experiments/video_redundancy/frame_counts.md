@@ -9,128 +9,128 @@
 | tacos | 9 | 8 | 16 (10-22) | 3 (3-3) | 38% | 18% |
 | all | 123 | 8 | 18 (4-210) | 4 (3-8) | 48% | 10% |
 
-| dataset | clip | pool | baseline | Qwen 2 fps | ours |
-|---|---|---|---|---|---|
-| sintel | alley_1 | 50 | 8 | 4 | 3 |
-| sintel | alley_2 | 50 | 8 | 4 | 3 |
-| sintel | ambush_2 | 21 | 8 | 4 | 8 |
-| sintel | ambush_4 | 33 | 8 | 4 | 8 |
-| sintel | ambush_5 | 50 | 8 | 4 | 8 |
-| sintel | ambush_6 | 20 | 8 | 4 | 4 |
-| sintel | ambush_7 | 50 | 8 | 4 | 4 |
-| sintel | bamboo_1 | 50 | 8 | 4 | 3 |
-| sintel | bamboo_2 | 50 | 8 | 4 | 3 |
-| sintel | bandage_1 | 50 | 8 | 4 | 3 |
-| sintel | bandage_2 | 50 | 8 | 4 | 3 |
-| sintel | cave_2 | 50 | 8 | 4 | 8 |
-| sintel | cave_4 | 50 | 8 | 4 | 4 |
-| sintel | market_2 | 50 | 8 | 4 | 3 |
-| sintel | market_5 | 50 | 8 | 4 | 8 |
-| sintel | market_6 | 40 | 8 | 4 | 4 |
-| sintel | mountain_1 | 50 | 8 | 4 | 3 |
-| sintel | shaman_2 | 50 | 8 | 4 | 3 |
-| sintel | shaman_3 | 50 | 8 | 4 | 3 |
-| sintel | sleeping_1 | 50 | 8 | 4 | 3 |
-| sintel | sleeping_2 | 50 | 8 | 4 | 3 |
-| sintel | temple_2 | 50 | 8 | 4 | 4 |
-| sintel | temple_3 | 50 | 8 | 4 | 8 |
-| msvd | fcvW1vr8hAs_104_108 | 16 | 8 | 8 | 3 |
-| msvd | fF89MasBFLw_321_326 | 20 | 8 | 10 | 3 |
-| msvd | fIaLVw_Gc_w_99_109 | 40 | 8 | 20 | 4 |
-| msvd | g36ho6UrBz0_5_20 | 50 | 8 | 30 | 3 |
-| msvd | gbbRwBZuhzI_26_40 | 50 | 8 | 28 | 3 |
-| msvd | glii-kazad8_21_29 | 32 | 8 | 16 | 3 |
-| msvd | gtixLEvO2Us_0_6 | 24 | 8 | 12 | 3 |
-| msvd | gvVsgOK1iJw_32_38 | 24 | 8 | 12 | 4 |
-| msvd | gWRRHV7DLV0_21_31 | 40 | 8 | 20 | 4 |
-| msvd | h0JvF9vpqx8_36_42 | 24 | 8 | 12 | 4 |
-| msvd | hJFBXHtxKIc_225_230 | 20 | 8 | 10 | 3 |
-| msvd | iEW-EkPQywU_61_83 | 50 | 8 | 44 | 4 |
-| msvd | iLr7ZHAq1ro_7_11 | 16 | 8 | 8 | 3 |
-| msvd | iuqVpMdb1NM_35_43 | 32 | 8 | 16 | 4 |
-| msvd | iwpnUHFhjWc_9_14 | 20 | 8 | 10 | 4 |
-| msvd | j2sOMdilDWU_87_97 | 40 | 8 | 20 | 3 |
-| msvd | j4dMnAPZu70_11_18 | 17 | 8 | 8 | 4 |
-| msvd | jcIrD7rNvTM_10_21 | 44 | 8 | 22 | 4 |
-| msvd | jdAbpLooDgM_10_15 | 20 | 8 | 10 | 4 |
-| msvd | jjl2ZMdFCsw_17_35 | 50 | 8 | 36 | 4 |
-| msvd | k4hhWYtaQ14_0_10 | 40 | 8 | 20 | 3 |
-| msvd | klFyrnrUSck_87_100 | 50 | 8 | 26 | 4 |
-| msvd | krAk8WPZRL4_207_212 | 20 | 8 | 10 | 3 |
-| msvd | kWLNZzuo3do_24_31 | 28 | 8 | 14 | 4 |
-| msvd | kWLNZzuo3do_262_270 | 32 | 8 | 16 | 4 |
-| msvd | kWLNZzuo3do_56_62 | 24 | 8 | 12 | 4 |
-| msvd | kzyFBlNRohs_82_88 | 24 | 8 | 12 | 3 |
-| msvd | lfGlDg47How_361_367 | 24 | 8 | 12 | 3 |
-| msvd | lsanQj2yacs_102_108 | 24 | 8 | 12 | 4 |
-| msvd | lsanQj2yacs_80_85 | 20 | 8 | 10 | 4 |
-| msvd | lSnWhsmlGec_5_10 | 20 | 8 | 10 | 3 |
-| msvd | lvFYUmDSOvU_34_38 | 16 | 8 | 8 | 4 |
-| msvd | m1NR0uNNs5Y_160_166 | 24 | 8 | 12 | 4 |
-| msvd | m1NR0uNNs5Y_73_78 | 20 | 8 | 10 | 4 |
-| msvd | m1NR0uNNs5Y_88_94 | 24 | 8 | 12 | 4 |
-| msvd | m7x8uIdg2XU_67_73 | 24 | 8 | 12 | 3 |
-| msvd | mCrRHP4LFmo_24_40 | 50 | 8 | 32 | 4 |
-| msvd | mmSQTI6gMNQ_120_128 | 32 | 8 | 16 | 3 |
-| msvd | mmSQTI6gMNQ_15_21 | 24 | 8 | 12 | 3 |
-| msvd | n016q1w8Q30_2_11 | 36 | 8 | 18 | 4 |
-| msvd | ngHDYzhDBk4_5_14 | 36 | 8 | 18 | 3 |
-| msvd | nLvX-erABqY_67_72 | 20 | 8 | 10 | 3 |
-| msvd | nULE40HEWpA_5_11 | 24 | 8 | 12 | 3 |
-| msvd | n_Z0-giaspE_437_447 | 40 | 8 | 20 | 4 |
-| msvd | nZSFn51l3hc_318_326 | 32 | 8 | 16 | 3 |
-| charades | 0Z1PC | 50 | 8 | 78 | 4 |
-| charades | 73ZXZ | 50 | 8 | 34 | 4 |
-| charades | 8CCEV | 50 | 8 | 40 | 3 |
-| charades | 8UCK1 | 50 | 8 | 30 | 3 |
-| charades | E002I | 50 | 8 | 48 | 4 |
-| charades | HHNTA | 50 | 8 | 68 | 4 |
-| charades | NKLTK | 50 | 8 | 60 | 3 |
-| charades | QUXYH | 50 | 8 | 62 | 4 |
-| charades | SKZUG | 50 | 8 | 32 | 3 |
-| charades | ST7MR | 50 | 8 | 96 | 4 |
-| nextqa | 2976591964 | 50 | 8 | 110 | 4 |
-| nextqa | 3148729782 | 50 | 8 | 100 | 4 |
-| nextqa | 3523006445 | 50 | 8 | 72 | 4 |
-| nextqa | 3751613141 | 50 | 8 | 56 | 4 |
-| nextqa | 4405746537 | 50 | 8 | 180 | 4 |
-| nextqa | 4696626424 | 50 | 8 | 108 | 4 |
-| nextqa | 5139599690 | 50 | 8 | 42 | 4 |
-| nextqa | 5460127828 | 50 | 8 | 44 | 4 |
-| nextqa | 5890296039 | 50 | 8 | 180 | 4 |
-| nextqa | 6134687264 | 50 | 8 | 28 | 4 |
-| videomme | 026dzf-vc5g | 50 | 8 | 128 | 4 |
-| videomme | 5fPtlxR3s3c | 50 | 8 | 210 | 4 |
-| videomme | 9_M4bNOxsYs | 50 | 8 | 176 | 4 |
-| videomme | 9v9NHoTXc-Q | 50 | 8 | 114 | 4 |
-| videomme | HmnKbBmYii8 | 50 | 8 | 130 | 4 |
-| videomme | JbDRs0ja3PE | 50 | 8 | 60 | 4 |
-| videomme | KOwR0Ln46Ks | 50 | 8 | 152 | 4 |
-| videomme | fkJv7LRa6Pc | 50 | 8 | 106 | 4 |
-| videomme | tiMaUSvlzIU | 50 | 8 | 92 | 4 |
-| videomme | uz6rjbw0ZA0 | 50 | 8 | 130 | 4 |
-| perception | video_10993_q1 | 50 | 8 | 68 | 4 |
-| perception | video_10993_q3 | 50 | 8 | 68 | 4 |
-| perception | video_1580_q0 | 50 | 8 | 68 | 4 |
-| perception | video_1580_q2 | 50 | 8 | 68 | 4 |
-| perception | video_2564_q3 | 50 | 8 | 64 | 4 |
-| perception | video_2564_q4 | 50 | 8 | 64 | 4 |
-| perception | video_3501_q2 | 50 | 8 | 70 | 4 |
-| perception | video_3501_q3 | 50 | 8 | 70 | 4 |
-| perception | video_6860_q0 | 50 | 8 | 70 | 4 |
-| perception | video_6860_q1 | 50 | 8 | 70 | 4 |
-| perception | video_8241_q1 | 50 | 8 | 52 | 4 |
-| perception | video_8241_q4 | 50 | 8 | 52 | 4 |
-| perception | video_874_q1 | 50 | 8 | 70 | 3 |
-| perception | video_874_q3 | 50 | 8 | 70 | 3 |
-| perception | video_9253_q0 | 50 | 8 | 52 | 4 |
-| perception | video_9253_q1 | 50 | 8 | 52 | 4 |
-| tacos | s17-d55_1964 | 29 | 8 | 14 | 3 |
-| tacos | s21-d28_449 | 22 | 8 | 12 | 3 |
-| tacos | s21-d28_454 | 21 | 8 | 10 | 3 |
-| tacos | s21-d55_1383 | 38 | 8 | 18 | 3 |
-| tacos | s21-d55_1694 | 33 | 8 | 16 | 3 |
-| tacos | s33-d45_3532 | 40 | 8 | 20 | 3 |
-| tacos | s33-d45_7241 | 39 | 8 | 20 | 3 |
-| tacos | s34-d69_5805 | 29 | 8 | 14 | 3 |
-| tacos | s34-d69_8453 | 45 | 8 | 22 | 3 |
+| dataset | clip | pool | baseline | Qwen 2 fps | ours | ours / baseline | ours / Qwen 2 fps |
+|---|---|---|---|---|---|---|---|
+| sintel | alley_1 | 50 | 8 | 4 | 3 | 38% | 75% |
+| sintel | alley_2 | 50 | 8 | 4 | 3 | 38% | 75% |
+| sintel | ambush_2 | 21 | 8 | 4 | 8 | 100% | 200% |
+| sintel | ambush_4 | 33 | 8 | 4 | 8 | 100% | 200% |
+| sintel | ambush_5 | 50 | 8 | 4 | 8 | 100% | 200% |
+| sintel | ambush_6 | 20 | 8 | 4 | 4 | 50% | 100% |
+| sintel | ambush_7 | 50 | 8 | 4 | 4 | 50% | 100% |
+| sintel | bamboo_1 | 50 | 8 | 4 | 3 | 38% | 75% |
+| sintel | bamboo_2 | 50 | 8 | 4 | 3 | 38% | 75% |
+| sintel | bandage_1 | 50 | 8 | 4 | 3 | 38% | 75% |
+| sintel | bandage_2 | 50 | 8 | 4 | 3 | 38% | 75% |
+| sintel | cave_2 | 50 | 8 | 4 | 8 | 100% | 200% |
+| sintel | cave_4 | 50 | 8 | 4 | 4 | 50% | 100% |
+| sintel | market_2 | 50 | 8 | 4 | 3 | 38% | 75% |
+| sintel | market_5 | 50 | 8 | 4 | 8 | 100% | 200% |
+| sintel | market_6 | 40 | 8 | 4 | 4 | 50% | 100% |
+| sintel | mountain_1 | 50 | 8 | 4 | 3 | 38% | 75% |
+| sintel | shaman_2 | 50 | 8 | 4 | 3 | 38% | 75% |
+| sintel | shaman_3 | 50 | 8 | 4 | 3 | 38% | 75% |
+| sintel | sleeping_1 | 50 | 8 | 4 | 3 | 38% | 75% |
+| sintel | sleeping_2 | 50 | 8 | 4 | 3 | 38% | 75% |
+| sintel | temple_2 | 50 | 8 | 4 | 4 | 50% | 100% |
+| sintel | temple_3 | 50 | 8 | 4 | 8 | 100% | 200% |
+| msvd | fcvW1vr8hAs_104_108 | 16 | 8 | 8 | 3 | 38% | 38% |
+| msvd | fF89MasBFLw_321_326 | 20 | 8 | 10 | 3 | 38% | 30% |
+| msvd | fIaLVw_Gc_w_99_109 | 40 | 8 | 20 | 4 | 50% | 20% |
+| msvd | g36ho6UrBz0_5_20 | 50 | 8 | 30 | 3 | 38% | 10% |
+| msvd | gbbRwBZuhzI_26_40 | 50 | 8 | 28 | 3 | 38% | 11% |
+| msvd | glii-kazad8_21_29 | 32 | 8 | 16 | 3 | 38% | 19% |
+| msvd | gtixLEvO2Us_0_6 | 24 | 8 | 12 | 3 | 38% | 25% |
+| msvd | gvVsgOK1iJw_32_38 | 24 | 8 | 12 | 4 | 50% | 33% |
+| msvd | gWRRHV7DLV0_21_31 | 40 | 8 | 20 | 4 | 50% | 20% |
+| msvd | h0JvF9vpqx8_36_42 | 24 | 8 | 12 | 4 | 50% | 33% |
+| msvd | hJFBXHtxKIc_225_230 | 20 | 8 | 10 | 3 | 38% | 30% |
+| msvd | iEW-EkPQywU_61_83 | 50 | 8 | 44 | 4 | 50% | 9% |
+| msvd | iLr7ZHAq1ro_7_11 | 16 | 8 | 8 | 3 | 38% | 38% |
+| msvd | iuqVpMdb1NM_35_43 | 32 | 8 | 16 | 4 | 50% | 25% |
+| msvd | iwpnUHFhjWc_9_14 | 20 | 8 | 10 | 4 | 50% | 40% |
+| msvd | j2sOMdilDWU_87_97 | 40 | 8 | 20 | 3 | 38% | 15% |
+| msvd | j4dMnAPZu70_11_18 | 17 | 8 | 8 | 4 | 50% | 50% |
+| msvd | jcIrD7rNvTM_10_21 | 44 | 8 | 22 | 4 | 50% | 18% |
+| msvd | jdAbpLooDgM_10_15 | 20 | 8 | 10 | 4 | 50% | 40% |
+| msvd | jjl2ZMdFCsw_17_35 | 50 | 8 | 36 | 4 | 50% | 11% |
+| msvd | k4hhWYtaQ14_0_10 | 40 | 8 | 20 | 3 | 38% | 15% |
+| msvd | klFyrnrUSck_87_100 | 50 | 8 | 26 | 4 | 50% | 15% |
+| msvd | krAk8WPZRL4_207_212 | 20 | 8 | 10 | 3 | 38% | 30% |
+| msvd | kWLNZzuo3do_24_31 | 28 | 8 | 14 | 4 | 50% | 29% |
+| msvd | kWLNZzuo3do_262_270 | 32 | 8 | 16 | 4 | 50% | 25% |
+| msvd | kWLNZzuo3do_56_62 | 24 | 8 | 12 | 4 | 50% | 33% |
+| msvd | kzyFBlNRohs_82_88 | 24 | 8 | 12 | 3 | 38% | 25% |
+| msvd | lfGlDg47How_361_367 | 24 | 8 | 12 | 3 | 38% | 25% |
+| msvd | lsanQj2yacs_102_108 | 24 | 8 | 12 | 4 | 50% | 33% |
+| msvd | lsanQj2yacs_80_85 | 20 | 8 | 10 | 4 | 50% | 40% |
+| msvd | lSnWhsmlGec_5_10 | 20 | 8 | 10 | 3 | 38% | 30% |
+| msvd | lvFYUmDSOvU_34_38 | 16 | 8 | 8 | 4 | 50% | 50% |
+| msvd | m1NR0uNNs5Y_160_166 | 24 | 8 | 12 | 4 | 50% | 33% |
+| msvd | m1NR0uNNs5Y_73_78 | 20 | 8 | 10 | 4 | 50% | 40% |
+| msvd | m1NR0uNNs5Y_88_94 | 24 | 8 | 12 | 4 | 50% | 33% |
+| msvd | m7x8uIdg2XU_67_73 | 24 | 8 | 12 | 3 | 38% | 25% |
+| msvd | mCrRHP4LFmo_24_40 | 50 | 8 | 32 | 4 | 50% | 12% |
+| msvd | mmSQTI6gMNQ_120_128 | 32 | 8 | 16 | 3 | 38% | 19% |
+| msvd | mmSQTI6gMNQ_15_21 | 24 | 8 | 12 | 3 | 38% | 25% |
+| msvd | n016q1w8Q30_2_11 | 36 | 8 | 18 | 4 | 50% | 22% |
+| msvd | ngHDYzhDBk4_5_14 | 36 | 8 | 18 | 3 | 38% | 17% |
+| msvd | nLvX-erABqY_67_72 | 20 | 8 | 10 | 3 | 38% | 30% |
+| msvd | nULE40HEWpA_5_11 | 24 | 8 | 12 | 3 | 38% | 25% |
+| msvd | n_Z0-giaspE_437_447 | 40 | 8 | 20 | 4 | 50% | 20% |
+| msvd | nZSFn51l3hc_318_326 | 32 | 8 | 16 | 3 | 38% | 19% |
+| charades | 0Z1PC | 50 | 8 | 78 | 4 | 50% | 5% |
+| charades | 73ZXZ | 50 | 8 | 34 | 4 | 50% | 12% |
+| charades | 8CCEV | 50 | 8 | 40 | 3 | 38% | 8% |
+| charades | 8UCK1 | 50 | 8 | 30 | 3 | 38% | 10% |
+| charades | E002I | 50 | 8 | 48 | 4 | 50% | 8% |
+| charades | HHNTA | 50 | 8 | 68 | 4 | 50% | 6% |
+| charades | NKLTK | 50 | 8 | 60 | 3 | 38% | 5% |
+| charades | QUXYH | 50 | 8 | 62 | 4 | 50% | 6% |
+| charades | SKZUG | 50 | 8 | 32 | 3 | 38% | 9% |
+| charades | ST7MR | 50 | 8 | 96 | 4 | 50% | 4% |
+| nextqa | 2976591964 | 50 | 8 | 110 | 4 | 50% | 4% |
+| nextqa | 3148729782 | 50 | 8 | 100 | 4 | 50% | 4% |
+| nextqa | 3523006445 | 50 | 8 | 72 | 4 | 50% | 6% |
+| nextqa | 3751613141 | 50 | 8 | 56 | 4 | 50% | 7% |
+| nextqa | 4405746537 | 50 | 8 | 180 | 4 | 50% | 2% |
+| nextqa | 4696626424 | 50 | 8 | 108 | 4 | 50% | 4% |
+| nextqa | 5139599690 | 50 | 8 | 42 | 4 | 50% | 10% |
+| nextqa | 5460127828 | 50 | 8 | 44 | 4 | 50% | 9% |
+| nextqa | 5890296039 | 50 | 8 | 180 | 4 | 50% | 2% |
+| nextqa | 6134687264 | 50 | 8 | 28 | 4 | 50% | 14% |
+| videomme | 026dzf-vc5g | 50 | 8 | 128 | 4 | 50% | 3% |
+| videomme | 5fPtlxR3s3c | 50 | 8 | 210 | 4 | 50% | 2% |
+| videomme | 9_M4bNOxsYs | 50 | 8 | 176 | 4 | 50% | 2% |
+| videomme | 9v9NHoTXc-Q | 50 | 8 | 114 | 4 | 50% | 4% |
+| videomme | HmnKbBmYii8 | 50 | 8 | 130 | 4 | 50% | 3% |
+| videomme | JbDRs0ja3PE | 50 | 8 | 60 | 4 | 50% | 7% |
+| videomme | KOwR0Ln46Ks | 50 | 8 | 152 | 4 | 50% | 3% |
+| videomme | fkJv7LRa6Pc | 50 | 8 | 106 | 4 | 50% | 4% |
+| videomme | tiMaUSvlzIU | 50 | 8 | 92 | 4 | 50% | 4% |
+| videomme | uz6rjbw0ZA0 | 50 | 8 | 130 | 4 | 50% | 3% |
+| perception | video_10993_q1 | 50 | 8 | 68 | 4 | 50% | 6% |
+| perception | video_10993_q3 | 50 | 8 | 68 | 4 | 50% | 6% |
+| perception | video_1580_q0 | 50 | 8 | 68 | 4 | 50% | 6% |
+| perception | video_1580_q2 | 50 | 8 | 68 | 4 | 50% | 6% |
+| perception | video_2564_q3 | 50 | 8 | 64 | 4 | 50% | 6% |
+| perception | video_2564_q4 | 50 | 8 | 64 | 4 | 50% | 6% |
+| perception | video_3501_q2 | 50 | 8 | 70 | 4 | 50% | 6% |
+| perception | video_3501_q3 | 50 | 8 | 70 | 4 | 50% | 6% |
+| perception | video_6860_q0 | 50 | 8 | 70 | 4 | 50% | 6% |
+| perception | video_6860_q1 | 50 | 8 | 70 | 4 | 50% | 6% |
+| perception | video_8241_q1 | 50 | 8 | 52 | 4 | 50% | 8% |
+| perception | video_8241_q4 | 50 | 8 | 52 | 4 | 50% | 8% |
+| perception | video_874_q1 | 50 | 8 | 70 | 3 | 38% | 4% |
+| perception | video_874_q3 | 50 | 8 | 70 | 3 | 38% | 4% |
+| perception | video_9253_q0 | 50 | 8 | 52 | 4 | 50% | 8% |
+| perception | video_9253_q1 | 50 | 8 | 52 | 4 | 50% | 8% |
+| tacos | s17-d55_1964 | 29 | 8 | 14 | 3 | 38% | 21% |
+| tacos | s21-d28_449 | 22 | 8 | 12 | 3 | 38% | 25% |
+| tacos | s21-d28_454 | 21 | 8 | 10 | 3 | 38% | 30% |
+| tacos | s21-d55_1383 | 38 | 8 | 18 | 3 | 38% | 17% |
+| tacos | s21-d55_1694 | 33 | 8 | 16 | 3 | 38% | 19% |
+| tacos | s33-d45_3532 | 40 | 8 | 20 | 3 | 38% | 15% |
+| tacos | s33-d45_7241 | 39 | 8 | 20 | 3 | 38% | 15% |
+| tacos | s34-d69_5805 | 29 | 8 | 14 | 3 | 38% | 21% |
+| tacos | s34-d69_8453 | 45 | 8 | 22 | 3 | 38% | 14% |
