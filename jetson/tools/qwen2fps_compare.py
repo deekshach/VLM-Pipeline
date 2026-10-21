@@ -7,6 +7,8 @@ Python env: /home/nvidia/data/envs/vlm-eval.
 
 Configs, per clip (text from runs_eval, else the earlier runs; decoding is greedy, so answers are reproducible):
   base          8 frames spread evenly, one image per frame (llama-jetson-vlm --baseline)
+  uni4          4 frames spread evenly, the frame count the motion selection sends (kernel switches, window
+                alignment: as ours_nocache but for the frame choice)
   qwen2fps      every frame of the 2 fps sampling, the reference video input (scripts/run_eval.sh e8)
   ours_nocache  motion-selected frames (--live-flow --anchor-first), no window cache: the frame choice alone
   pw24          the design: motion-selected frames + per-window cache at threshold 24
@@ -35,7 +37,7 @@ SOURCES = [os.environ.get("EVAL_RUNS", f"{ACC}/runs_eval"), f"{ACC}/runs"]
 vm.SOURCES = SOURCES
 EVAL = "/mnt/external_ssd/VLM-datasets/eval"
 DATASETS = ["sintel", "msvd", "charades", "tacos", "nextqa", "videomme", "perception"]
-CFGS = ["base", "qwen2fps", "ours_nocache", "pw24", "pwd24"]
+CFGS = ["base", "uni4", "qwen2fps", "ours_nocache", "pw24", "pwd24"]
 
 
 def clips(ds):

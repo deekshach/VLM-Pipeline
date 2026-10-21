@@ -4,7 +4,7 @@ Python env: /home/nvidia/data/envs/vlm-eval.
 
     python vision_metrics.py [datasets...]        CLIP=0: skip the grounding metrics (they load CLIP ViT-L/14)
 
-Configs (runs_eval, else the earlier runs): base (8 uniform frames), qwen2fps (Qwen2.5-VL's 2 fps video input,
+Configs (runs_eval, else the earlier runs): base (8 uniform frames), uni4 (4 uniform frames), qwen2fps (Qwen2.5-VL's 2 fps video input,
 scripts/run_eval.sh e8), ours_nocache (motion-selected frames), pw24 (+ per-window cache), pwd24 (+ drop-clean).
 The runs need their --dump-dir; the reference is the clip's dense ViT encode (every pool frame encoded whole:
 run_accuracy.sh for Sintel / MSVD, scripts/embed_dense_eval.sh for the others), native for the uniform runs and
@@ -46,7 +46,7 @@ EVAL = "/mnt/external_ssd/VLM-datasets/eval"
 QRES = "/mnt/external_ssd/VLM-datasets/qres"   # prepare_qres.py: every frame at Qwen's per-frame resolution
 QFRAMES = f"{QRES}/qwen2fps"
 DATASETS = ["sintel", "msvd", "charades", "tacos", "nextqa", "videomme", "perception"]
-CFGS = ["base", "qwen2fps", "ours_nocache", "pw24", "pwd24"]
+CFGS = ["base", "uni4", "qwen2fps", "ours_nocache", "pw24", "pwd24"]
 WIN = 4          # tokens per window side (the ViT's 112 px windows)
 K_SUB = 64       # principal directions for sub_energy
 K_CB = 64        # codebook cells
