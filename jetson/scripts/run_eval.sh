@@ -20,6 +20,8 @@
 #
 # Results: /home/nvidia/data/accuracy/runs_eval/<dataset>/<config>[_r<rep>]/<clip>.{json,log,tegrastats,oc3} (+ dump
 # dir for repetition 1). Finished jobs are skipped, so the script resumes where it stopped; it exits after <minutes>.
+# DATASETS="msvd charades": only those datasets (scripts/run_eval_paced.sh runs one dataset at a time).
+# Exit status: 0 all jobs done, 3 jobs left (out of time), 2 stopped hot (STOP_TJ).
 #
 # Board safety (the board guard pauses every MAXN request on its oc3 events, so it is stopped here and restarted on
 # exit): before each request the junction must be under COOL_TJ (55 C); after BURST_MIN (20) minutes of requests the
@@ -127,9 +129,10 @@ jobs() {
     esac
 }
 
-T_END=$(( $(date +%s) + MINUTES * 60 )); T_BURST=$(date +%s); DONE=0; TODO=0
+T_END=$(( $(date +%s) + MINUTES * 60 )); T_BURST=$(date +%s); DONE=0; TODO=0; HOT=0
 TAG=""; [ "$EXP" = e6 ] && TAG="_30w"
 while read -r D C R V <&3; do
+    [ -n "${DATASETS:-}" ] && [[ " $DATASETS " != *" $D "* ]] && continue
     setds "$D"
     SUF=""; [ "$R" != 1 ] && SUF="_r$R"
     OUT=$OUTROOT/$D/$C$TAG$SUF; mkdir -p "$OUT"
@@ -164,7 +167,10 @@ while read -r D C R V <&3; do
     echo "after $(cat $OC) tj $(tj)" >> "$OUT/$V.oc3"
     DONE=$((DONE + 1)); TODO=$((TODO - 1))
     log "$D $C r$R $V  ttft $(python3 -c "import json,sys; j = json.load(open(sys.argv[1])); $TT" "$OUT/$V.json" 2>/dev/null) ms  tj $(tj) C"
-    if [ "$(tj)" -ge "$STOP_TJ" ]; then log "junction $(tj) C >= $STOP_TJ C: stopping"; break; fi
+    if [ "$(tj)" -ge "$STOP_TJ" ]; then log "junction $(tj) C >= $STOP_TJ C: stopping"; HOT=1; break; fi
     sleep 5
 done 3< <(jobs)
-log "$EXP: $DONE run now, $TODO left"
+log "$EXP${DATASETS:+ ($DATASETS)}: $DONE run now, $TODO left"
+[ "$HOT" = 1 ] && exit 2
+[ "$TODO" -gt 0 ] && exit 3
+exit 0
