@@ -28,9 +28,11 @@ import numpy as np
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "accuracy"))
 import analyze_accuracy as aa
+import vision_metrics as vm
 
 ACC = "/home/nvidia/data/accuracy"
 SOURCES = [os.environ.get("EVAL_RUNS", f"{ACC}/runs_eval"), f"{ACC}/runs"]
+vm.SOURCES = SOURCES
 EVAL = "/mnt/external_ssd/VLM-datasets/eval"
 DATASETS = ["sintel", "msvd", "charades", "tacos", "nextqa", "videomme", "perception"]
 CFGS = ["base", "qwen2fps", "ours_nocache", "pw24", "pwd24"]
@@ -60,18 +62,11 @@ def run(ds, cfg, clip):
     return None
 
 
-def visual_tokens(d, clip):
-    """the LLM's visual input from a run's dump dir, (n, 3584) float32, or None"""
-    if d is None:
-        return None
-    if os.path.exists(f"{d}/{clip}.video.embd.bin"):
-        return np.fromfile(f"{d}/{clip}.video.embd.bin", dtype=np.float32).reshape(-1, 3584)
-    if not os.path.exists(f"{d}/manifest.jsonl"):
-        return None
-    segs = [json.loads(l) for l in open(f"{d}/manifest.jsonl")]
-    x = [np.fromfile(f"{d}/{s['file']}", dtype=np.float32).reshape(s["nx"] * s["ny"], s["n_embd"])
-         for s in segs if s["type"] == "image" and os.path.exists(f"{d}/{s['file']}")]
-    return np.concatenate(x) if x else None
+def visual_tokens(ds, cfg, clip):
+    """the visual tokens the LLM received (vision_metrics.load: drop-clean sends only the re-encoded windows),
+    (n, 3584) float32, or None without a dump"""
+    r = vm.load(ds, cfg, clip)
+    return None if r is None or not r["groups"] else np.concatenate([g["sent"] for g in r["groups"]])
 
 
 def spectral_entropy(x):
@@ -103,7 +98,7 @@ def main():
         for c in have:
             tok, sh = [], []
             for v in common:
-                x = visual_tokens(runs[c][v][2], v)
+                x = visual_tokens(ds, c, v)
                 if x is not None:
                     tok.append(len(x))
                     sh.append(spectral_entropy(x))
