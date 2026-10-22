@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
 """Tables for the main evaluation (scripts/run_eval.sh), from /home/nvidia/data/accuracy/runs_eval.
 
-    python3 eval_summary.py <e1|e3|e4|e6> [out.md]
+    python3 eval_summary.py <e1|e3|e4|e5|e6> [out.md]
 
 e1/e6  per dataset and config: clips, mean and median TTFT, speed-up over base (mean of per-clip ratios, clips run in
-       both), frames and image tokens, energy to first token, oc3 events per run; multiple-choice accuracy where the
+       both), frames and the tokens the ViT encoded (anchor + later frames; with the cache, only re-encoded windows), energy to first token, oc3 events per run; multiple-choice accuracy where the
        items have an answer letter. Caption metrics (CIDEr, METEOR, SBERT): accuracy/newds_compare.py and
        accuracy/analyze_accuracy.py with ACC_RUNS=/home/nvidia/data/accuracy/runs_eval.
+       qwen2fps (Qwen's own 2 fps video input, e8) and uni4 (e11) are listed beside the E1 configs; its TTFT is
+       ViT + prefill + load + tokenize (total minus decode).
+e5     overheads and where the time goes, per dataset and config: mean optical flow (live OFA, CPU decode overlapped),
+       ViT, image and text prefill, load + tokenize, the anchor frame's work hidden behind the flow (anchor-first:
+       anchor total minus the wait for it), the window cache's change test, and frames selected against the clip's
+       motion complexity.
 e3     the attribution ladder on six Sintel clips: per step the median over the 3 repetitions of each clip, averaged
        over clips, and the saving of each step.
 e4     accuracy vs TTFT points for the multiple-choice sets: uniform 4 / 8 / 16 frames with the kernel switches and the
@@ -25,7 +31,15 @@ def run(ds, cfg, clip):
     if not os.path.exists(p + ".json"):
         return None
     j = json.load(open(p + ".json"))
-    t = j["timing"]
+    if "requests" in j:   # llama-temporal-pair-vlm (qwen2fps)
+        if not j["requests"]:
+            return None
+        q = j["requests"][0]
+        t = {"ttft_ms": q["total_ms"] - q["decode_ms"], "breakdown": {}}
+        j = {"inference": {"generated_text": q["text"]}, "selected_frames": [None] * q["n_frames"]}
+        t["breakdown"]["rest"] = {"tokens_encoded": q["n_visual_tokens"]}
+    else:
+        t = j["timing"]
     w = []
     if os.path.exists(p + ".tegrastats"):
         for l in open(p + ".tegrastats"):
@@ -37,9 +51,10 @@ def run(ds, cfg, clip):
         v = [int(l.split()[1]) for l in open(p + ".oc3")]
         oc = v[1] - v[0] if len(v) == 2 else None
     text = j.get("inference", {}).get("generated_text", "").strip()
-    r = t["breakdown"].get("rest", {})
-    return dict(ttft=t["ttft_ms"], frames=len(j.get("selected_frames", [])), tokens=r.get("tokens_encoded"),
-                energy=(st.mean(w) * t["ttft_ms"] / 1000) if w else None, oc3=oc, text=text)
+    b = t["breakdown"]
+    tokens = b.get("rest", {}).get("tokens_encoded", 0) + b.get("anchor", {}).get("tokens_encoded", 0)
+    return dict(ttft=t["ttft_ms"], frames=len(j.get("selected_frames", [])), tokens=tokens,
+                energy=(st.mean(w) * t["ttft_ms"] / 1000) if w else None, oc3=oc, text=text, j=j, t=t)
 
 
 def items(ds):
@@ -61,25 +76,50 @@ def fmt(x, n=0):
 
 
 def e1(tag=""):
-    out = ["| dataset | config | clips | mean TTFT ms | median TTFT ms | speed-up vs base | frames | image tokens | energy J | oc3/run | MC accuracy |",
-           "|---|---|---|---|---|---|---|---|---|---|---|"]
+    out = ["| dataset | config | clips | mean TTFT ms | median TTFT ms | speed-up vs base | speed-up vs qwen2fps | frames | tokens through the ViT | energy J | oc3/run | MC accuracy |",
+           "|---|---|---|---|---|---|---|---|---|---|---|---|"]
     for ds in sorted(os.listdir(R)):
         base = {c: run(ds, "base" + tag, c) for c in clips(ds, "base" + tag)}
+        qw = {c: run(ds, "qwen2fps", c) for c in clips(ds, "qwen2fps")} if not tag else {}
         it = items(ds)
-        for cfg in ("base", "uni_arch", "pw24", "pwd24"):
+        for cfg in ("qwen2fps", "base", "uni_arch", "uni4", "pw24", "pwd24") if not tag else ("base", "pw24"):
             cc = clips(ds, cfg + tag)
             rows = {c: run(ds, cfg + tag, c) for c in cc}
+            rows = {c: r for c, r in rows.items() if r}
             if not rows:
                 continue
             tt = [r["ttft"] for r in rows.values()]
             sp = [base[c]["ttft"] / r["ttft"] for c, r in rows.items() if c in base and base[c]]
+            sq = [qw[c]["ttft"] / r["ttft"] for c, r in rows.items() if c in qw and qw[c]]
             en = [r["energy"] for r in rows.values() if r["energy"]]
             oc = [r["oc3"] for r in rows.values() if r["oc3"] is not None]
             acc = [float(letter(r["text"]) == it[c]["answer"]) for c, r in rows.items() if c in it and "answer" in it[c]]
             out.append(f"| {ds} | {cfg} | {len(rows)} | {fmt(st.mean(tt))} | {fmt(st.median(tt))} | "
-                       f"{fmt(st.mean(sp), 2) + 'x' if sp else ''} | {fmt(st.mean(r['frames'] for r in rows.values()), 1)} | "
+                       f"{fmt(st.mean(sp), 2) + 'x' if sp else ''} | {fmt(st.mean(sq), 2) + 'x' if sq else ''} | {fmt(st.mean(r['frames'] for r in rows.values()), 1)} | "
                        f"{fmt(st.mean(r['tokens'] or 0 for r in rows.values()))} | {fmt(st.mean(en)) if en else ''} | "
                        f"{fmt(st.mean(oc), 1) if oc else ''} | {fmt(100 * st.mean(acc), 0) + '%' if acc else ''} |")
+    return out
+
+
+def e5():
+    out = ["| dataset | config | clips | TTFT ms | flow ms | ViT ms | image prefill ms | text prefill ms | load + tokenize ms | "
+           "anchor hidden ms | cache test ms | frames | motion complexity |", "|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
+    for ds in sorted(os.listdir(R)):
+        for cfg in ("base", "uni_arch", "uni4", "ours_nocache", "pw24", "pwd24"):
+            rows = [r for r in (run(ds, cfg, c) for c in clips(ds, cfg)) if r]
+            if not rows:
+                continue
+            def m(f):
+                return st.mean(f(r["t"]["breakdown"]) for r in rows)
+            stage = lambda b, k: b.get("rest", {}).get(k, 0) + b.get("anchor", {}).get(k, 0)
+            hidden = m(lambda b: b["anchor"]["total_ms"] - b["wait_for_anchor_ms"] if "anchor" in b else 0)
+            out.append(f"| {ds} | {cfg} | {len(rows)} | {fmt(st.mean(r['ttft'] for r in rows))} | "
+                       f"{fmt(m(lambda b: b.get('analysis_ms', 0)))} | {fmt(m(lambda b: stage(b, 'vit_ms')))} | "
+                       f"{fmt(m(lambda b: stage(b, 'prefill_img_ms')))} | {fmt(m(lambda b: stage(b, 'prefill_txt_ms')))} | "
+                       f"{fmt(m(lambda b: b.get('rest_image_load_ms', 0) + b.get('rest_tokenize_ms', 0) + b.get('anchor', {}).get('load_ms', 0)))} | "
+                       f"{fmt(hidden) if hidden else ''} | {fmt(m(lambda b: stage(b, 'wc_diff_ms') + stage(b, 'wc_prep_ms')), 1)} | "
+                       f"{fmt(st.mean(r['frames'] for r in rows), 1)} | "
+                       f"{fmt(st.mean(r['j'].get('global_complexity') or 0 for r in rows), 3)} |")
     return out
 
 
@@ -120,7 +160,7 @@ def e4():
 
 if __name__ == "__main__":
     exp = sys.argv[1]
-    lines = {"e1": e1, "e3": e3, "e4": e4, "e6": lambda: e1("_30w")}[exp]()
+    lines = {"e1": e1, "e3": e3, "e4": e4, "e5": e5, "e6": lambda: e1("_30w")}[exp]()
     text = "\n".join(lines) + "\n"
     print(text)
     if len(sys.argv) > 2:

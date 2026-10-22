@@ -7,14 +7,17 @@ Python env: /home/nvidia/data/envs/vlm-eval.
 
 Configs, per clip (text from runs_eval, else the earlier runs; decoding is greedy, so answers are reproducible):
   base          8 frames spread evenly, one image per frame (llama-jetson-vlm --baseline)
+  uni_arch      8 frames spread evenly with the kernel switches and window alignment (scripts/run_eval.sh e1)
+  uni16         16 frames, the same (e4)
   uni4          4 frames spread evenly, the frame count the motion selection sends (kernel switches, window
                 alignment: as ours_nocache but for the frame choice)
   qwen2fps      every frame of the 2 fps sampling, the reference video input (scripts/run_eval.sh e8)
   ours_nocache  motion-selected frames (--live-flow --anchor-first), no window cache: the frame choice alone
   pw24          the design: motion-selected frames + per-window cache at threshold 24
+  pw12, pw36    the design at cache threshold 12 / 36 (e4)
   pwd24         the design + drop-clean: later frames prefill only their re-encoded windows' tokens
 Accuracy, over the clips every config with runs has:
-  multiple choice (NExT-QA, Video-MME, Perception Test)  option letter correct
+  multiple choice (NExT-QA, Video-MME, Perception Test)  option letter correct, and the same letter as base
   captions with references (MSVD, Charades, TACoS)        CIDEr, METEOR (corpus, pycocoevalcap), SBERT: best cosine
                                                            to a reference (all-mpnet-base-v2)
   Sintel (no references)                                   SBERT cosine to the base caption
@@ -37,7 +40,7 @@ SOURCES = [os.environ.get("EVAL_RUNS", f"{ACC}/runs_eval"), f"{ACC}/runs"]
 vm.SOURCES = SOURCES
 EVAL = "/mnt/external_ssd/VLM-datasets/eval"
 DATASETS = ["sintel", "msvd", "charades", "tacos", "nextqa", "videomme", "perception"]
-CFGS = ["base", "uni4", "qwen2fps", "ours_nocache", "pw24", "pwd24"]
+CFGS = ["base", "uni_arch", "uni4", "uni16", "qwen2fps", "ours_nocache", "pw12", "pw24", "pw36", "pwd24"]
 
 
 def clips(ds):
@@ -108,6 +111,9 @@ def main():
                 rows["tokens"][c], rows["spec_H"][c] = st.mean(tok), st.mean(sh)
         if items and "answer" in next(iter(items.values())):
             rows["accuracy %"] = {c: 100 * st.mean(letter(runs[c][v][0]) == items[v]["answer"] for v in common) for c in have}
+            if "base" in have:
+                rows["same answer as base %"] = {c: 100 * st.mean(letter(runs[c][v][0]) == letter(runs["base"][v][0])
+                                                                  for v in common) for c in have}
         elif ds == "sintel":
             if "base" in have:
                 b = aa.sbert([runs["base"][v][0] for v in common])
