@@ -2,7 +2,7 @@
 # Main evaluation (MAXN, clocks pinned), in short bursts. One request per job, exactly as run_accuracy.sh runs it
 # (-c 16384, greedy, --dump-dir for the accuracy tools), plus tegrastats and the oc3 over-current counter per run.
 #
-#   bash jetson/scripts/run_eval.sh <e1|e3|e4|e6|e8|e9|e10> [minutes=60]
+#   bash jetson/scripts/run_eval.sh <e1|e3|e4|e6|e8|e9|e10|e11> [minutes=60]
 #
 #   e1  headline TTFT + accuracy: base, uni_arch, pw24 (the design), pwd24 (+ drop-clean) on all 123 clips of the
 #       seven datasets (MSVD: the 45-clip set)
@@ -19,6 +19,8 @@
 #       tokens) on all 123 clips -- the E1 runs of those two configs, ahead of E1
 #   e10 the clips whose frames tools/accuracy/prepare_qres.py regenerated at Qwen's per-frame resolution (its
 #       affected.txt): base, ours_nocache, pw24, pwd24 where the pool changed, qwen2fps where its frames changed
+#   e11 uni4 on all 123 clips: 4 uniform frames with the kernel switches and window alignment, the frame count the
+#       motion selection sends -- against ours_nocache it separates the frame choice from the frame count
 #
 # Frames: every arm reads the Qwen-resolution sets of prepare_qres.py (QRES): the pools under $QRES/pool/<dataset>
 # and the 2 fps frames under $QRES/qwen2fps, each frame at qwen-vl-utils smart_resize of its source.
@@ -32,7 +34,7 @@
 # exit): before each request the junction must be under COOL_TJ (55 C); after BURST_MIN (20) minutes of requests the
 # script idles COOL_MIN (5) minutes; above STOP_TJ (80 C) after a request it stops.
 set -u
-EXP="${1:?e1|e3|e4|e6|e8|e9|e10}"
+EXP="${1:?e1|e3|e4|e6|e8|e9|e10|e11}"
 MINUTES="${2:-60}"
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO="$(cd "$HERE/../.." && pwd)"
@@ -133,6 +135,8 @@ jobs() {
                 for V in $(clips $D); do echo "$D qwen2fps 1 $V"; done; done ;;
         e9) for D in sintel msvd charades nextqa videomme perception tacos; do
                 for V in $(clips $D); do for C in pw24 pwd24; do echo "$D $C 1 $V"; done; done; done ;;
+        e11) for D in sintel msvd charades nextqa videomme perception tacos; do
+                for V in $(clips $D); do echo "$D uni4 1 $V"; done; done ;;
         e10) for D in sintel msvd charades nextqa videomme perception tacos; do
                 awk -v d=$D '$1 == d' $QRES/affected.txt | while read -r _ V WHAT; do
                     if [ "$WHAT" = pool ]; then for C in base ours_nocache pw24 pwd24; do echo "$D $C 1 $V"; done
