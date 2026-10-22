@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Tables for the main evaluation (scripts/run_eval.sh), from /home/nvidia/data/accuracy/runs_eval.
+"""Tables for the main evaluation (scripts/run_eval.sh), from /home/nvidia/data/accuracy/runs_eval (EVAL_RUNS=... for
+runs_eval_fa, the evaluation with ViT flash attention on).
 
     python3 eval_summary.py <e1|e3|e4|e5|e6|e12> [out.md]
 
@@ -24,7 +25,7 @@ Energy = module power (GPU/SoC + CPU/CV + 5 V rails, mean over samples with the 
 """
 import glob, json, os, re, statistics as st, sys
 
-R = "/home/nvidia/data/accuracy/runs_eval"
+R = os.environ.get("EVAL_RUNS", "/home/nvidia/data/accuracy/runs_eval")   # runs_eval_fa: ViT flash attention on
 EVAL = "/mnt/external_ssd/VLM-datasets/eval"
 RAILS = ("VDD_GPU_SOC", "VDD_CPU_CV", "VIN_SYS_5V0")
 
