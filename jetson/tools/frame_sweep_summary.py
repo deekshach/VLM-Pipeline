@@ -35,6 +35,8 @@ def tegra(path):
 
 rows = []
 for j in glob.glob(f"{D}/*__f*.json"):
+    if ".paused" in j:  # moved aside by run_power_mode.sh: the guard paused that request
+        continue
     base = j[:-5]
     t = json.load(open(j))["timing"]
     b, r = t["breakdown"], t["breakdown"]["rest"]
