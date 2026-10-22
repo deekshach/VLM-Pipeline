@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Tables for the main evaluation (scripts/run_eval.sh), from /home/nvidia/data/accuracy/runs_eval.
 
-    python3 eval_summary.py <e1|e3|e4|e5|e6> [out.md]
+    python3 eval_summary.py <e1|e3|e4|e5|e6|e12> [out.md]
 
 e1/e6  per dataset and config: clips, mean and median TTFT, speed-up over base (mean of per-clip ratios, clips run in
        both), frames and the tokens the ViT encoded (anchor + later frames; with the cache, only re-encoded windows), energy to first token, oc3 events per run; multiple-choice accuracy where the
@@ -13,6 +13,9 @@ e5     overheads and where the time goes, per dataset and config: mean optical f
        ViT, image and text prefill, load + tokenize, the anchor frame's work hidden behind the flow (anchor-first:
        anchor total minus the wait for it), the window cache's change test, and frames selected against the clip's
        motion complexity.
+e12    ViT flash attention on vs off, per dataset, for base and the design (pw24) on the e12 clips: mean TTFT and ViT
+       time each way, the speed-up from turning it on (mean of per-clip ratios), the design's speed-up over base under
+       each setting, how often the answer is unchanged, and multiple-choice accuracy.
 e3     the attribution ladder on six Sintel clips: per step the median over the 3 repetitions of each clip, averaged
        over clips, and the saving of each step.
 e4     accuracy vs TTFT points for the multiple-choice sets: uniform 4 / 8 / 16 frames with the kernel switches and the
@@ -123,6 +126,33 @@ def e5():
     return out
 
 
+def e12():
+    out = ["| dataset | config | clips | TTFT ms, FA off | TTFT ms, FA on | ViT ms, FA off | ViT ms, FA on | speed-up from FA | "
+           "speed-up over base, FA off / on | same answer | MC accuracy, FA off / on |", "|---|---|---|---|---|---|---|---|---|---|---|"]
+    vit = lambda r: r["t"]["breakdown"].get("rest", {}).get("vit_ms", 0) + r["t"]["breakdown"].get("anchor", {}).get("vit_ms", 0)
+    for ds in ("sintel", "videomme"):
+        it = items(ds)
+        on = {cfg: {c: run(ds, cfg + "_fa", c) for c in clips(ds, cfg + "_fa")} for cfg in ("base", "pw24")}
+        cc = [c for c in on["base"] if c in on["pw24"]]
+        off = {cfg: {c: run(ds, cfg, c) for c in cc} for cfg in ("base", "pw24")}
+        cc = [c for c in cc if all(off[k][c] for k in off)]
+        if not cc:
+            continue
+        for cfg in ("base", "pw24"):
+            a, b = [off[cfg][c] for c in cc], [on[cfg][c] for c in cc]
+            sp = st.mean(x["ttft"] / y["ttft"] for x, y in zip(a, b))
+            vb = lambda d: st.mean(d["base"][c]["ttft"] / d[cfg][c]["ttft"] for c in cc)
+            same = st.mean(float(x["text"] == y["text"]) for x, y in zip(a, b))
+            acc = ""
+            if it and "answer" in it.get(cc[0], {}):
+                f = lambda rs: 100 * st.mean(float(letter(r["text"]) == it[c]["answer"]) for r, c in zip(rs, cc))
+                acc = f"{f(a):.0f}% / {f(b):.0f}%"
+            out.append(f"| {ds} | {cfg} | {len(cc)} | {fmt(st.mean(r['ttft'] for r in a))} | {fmt(st.mean(r['ttft'] for r in b))} | "
+                       f"{fmt(st.mean(map(vit, a)))} | {fmt(st.mean(map(vit, b)))} | {sp:.2f}x | "
+                       f"{vb(off):.2f}x / {vb(on):.2f}x | {100 * same:.0f}% | {acc} |")
+    return out
+
+
 def e3():
     steps = ["base", "l1_sel", "l2_anchor", "l3_align", "l4_winbatch", "l5_f32bias", "l6_table", "l7_actfuse", "pw24", "pwd24"]
     vids = ["alley_1", "sleeping_1", "bandage_1", "temple_2", "ambush_5", "cave_2"]
@@ -160,7 +190,7 @@ def e4():
 
 if __name__ == "__main__":
     exp = sys.argv[1]
-    lines = {"e1": e1, "e3": e3, "e4": e4, "e5": e5, "e6": lambda: e1("_30w")}[exp]()
+    lines = {"e1": e1, "e3": e3, "e4": e4, "e5": e5, "e12": e12, "e6": lambda: e1("_30w")}[exp]()
     text = "\n".join(lines) + "\n"
     print(text)
     if len(sys.argv) > 2:
