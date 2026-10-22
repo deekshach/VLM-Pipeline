@@ -15,6 +15,10 @@
 //   BF16 GEMMs        --gemm-f32-out, --gemm-bias-fuse, --gemm-table <file>, --gemm-record <file>
 //   GEMM inputs       --act-dedup (convert each activation to BF16 once), --act-fuse (norm / SwiGLU write BF16)
 //                     (engine switches GGML_CUDA_JETSON_GEMM_*, see ggml-cuda/jetson-gemm.cuh)
+//   With ViT flash    --gemm-residual-fuse (residual ADD in the GEMM, GGML_CUDA_JETSON_GEMM_RESIDUAL),
+//   attention on      --vit-rope-f16 (dense vision RoPE; K written as the F16 flash attention reads,
+//                     GGML_CUDA_JETSON_ROPE_F16, ggml-cuda/rope.cuh), --vit-fa-ncols 16|32 (ViT flash-attention
+//                     query tile, GGML_CUDA_JETSON_VIT_FA_NCOLS, ggml-cuda/fattn.cu)
 //
 // The JSON output records every switch and a TTFT breakdown; NVTX ranges (request, flow, select,
 // anchor, vit, prefill_img, prefill_txt, wc_diff, decode) let nsys/ncu attribute GPU work to stages.
@@ -107,6 +111,9 @@ struct sintel_params {
     bool        act_dedup      = false;
     std::string dump_dir;                 // --dump-dir: what the LLM receives (accuracy study)
     bool        act_fuse       = false;
+    bool        gemm_residual  = false;
+    bool        vit_rope_f16   = false;
+    int         vit_fa_ncols   = 0;
     std::string gemm_table;
     std::string gemm_record;
 };
@@ -192,6 +199,12 @@ static std::vector<char *> filter_custom_args(int argc, char ** argv, sintel_par
             sparams.act_dedup = true;
         } else if (arg == "--act-fuse") {
             sparams.act_fuse = true;
+        } else if (arg == "--gemm-residual-fuse") {
+            sparams.gemm_residual = true;
+        } else if (arg == "--vit-rope-f16") {
+            sparams.vit_rope_f16 = true;
+        } else if (arg == "--vit-fa-ncols" && i + 1 < argc) {
+            sparams.vit_fa_ncols = std::atoi(argv[++i]);
         } else if (arg == "--gemm-table" && i + 1 < argc) {
             sparams.gemm_table = argv[++i];
         } else if (arg == "--gemm-record" && i + 1 < argc) {
@@ -248,6 +261,10 @@ static void show_additional_info(int /*argc*/, char ** argv) {
     printf("  --gemm-table <f>    Per-shape cuBLASLt algorithms from jetson-gemm-tune\n");
     printf("  --act-dedup         Convert each F32 GEMM input to BF16 once, shared by the GEMMs reading it\n");
     printf("  --act-fuse          RMS norm and SwiGLU write the BF16 GEMM input directly (no F32 intermediate)\n");
+    printf("  --gemm-residual-fuse Fold the residual ADD after a BF16 GEMM (and its bias) into the GEMM (needs --gemm-f32-out)\n");
+    printf("  --vit-rope-f16      Vision RoPE with one thread per pair; with ViT flash attention, K is written as F16\n");
+    printf("                      directly (no F32 K, no cast kernel)\n");
+    printf("  --vit-fa-ncols <n>  ViT flash-attention query tile of 16 or 32 columns instead of 64\n");
     printf("  --gemm-record <f>   Append the BF16 GEMM shapes this run uses (input for jetson-gemm-tune)\n");
     printf("  --dump-dir <dir>    Write what the LLM receives: each image's embeddings (after the window cache),\n");
     printf("                      the text tokens, the first-token logits and the generated tokens (manifest.jsonl)\n\n");
@@ -1823,6 +1840,9 @@ static void write_results_json(const std::string & output_path,
         {"gemm_bias_fuse",   sparams.gemm_bias_fuse && sparams.gemm_f32_out},
         {"act_dedup",        sparams.act_dedup},
         {"act_fuse",         sparams.act_fuse},
+        {"gemm_residual",    sparams.gemm_residual && sparams.gemm_f32_out},
+        {"vit_rope_f16",     sparams.vit_rope_f16},
+        {"vit_fa_ncols",     sparams.vit_fa_ncols},
         {"gemm_table",       sparams.gemm_table},
     };
     j["params"]["video_name"]         = sparams.video_name;
@@ -1872,6 +1892,9 @@ int main(int argc, char ** argv) {
     if (sparams.gemm_bias_fuse)   setenv("GGML_CUDA_JETSON_GEMM_BIAS", "1", 1);
     if (sparams.act_dedup)        setenv("GGML_CUDA_JETSON_ACT_DEDUP", "1", 1);
     if (sparams.act_fuse)         setenv("GGML_CUDA_JETSON_ACT_FUSE", "1", 1);
+    if (sparams.gemm_residual)    setenv("GGML_CUDA_JETSON_GEMM_RESIDUAL", "1", 1);
+    if (sparams.vit_rope_f16)     setenv("GGML_CUDA_JETSON_ROPE_F16", "1", 1);
+    if (sparams.vit_fa_ncols > 0) setenv("GGML_CUDA_JETSON_VIT_FA_NCOLS", std::to_string(sparams.vit_fa_ncols).c_str(), 1);
     if (!sparams.dump_dir.empty()) {
         g_dump_dir = sparams.dump_dir;
         std::filesystem::create_directories(g_dump_dir);

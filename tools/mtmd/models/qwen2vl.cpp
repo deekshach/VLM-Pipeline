@@ -145,6 +145,14 @@ ggml_cgraph * clip_graph_qwen2vl::build() {
             cb(Kcur, "Kcur", il);
             cb(Vcur, "Vcur", il);
 
+            // Jetson study switch GGML_CUDA_JETSON_ROPE_F16 (ggml-cuda/rope.cuh): compute V before the RoPEs, so that only
+            // views lie between K's RoPE and the F16 cast flash attention reads, and the RoPE can write that cast.
+            // Same operations, another order.
+            static const bool rope_f16 = [] { const char * v = getenv("GGML_CUDA_JETSON_ROPE_F16"); return v && atoi(v) != 0; }();
+            if (rope_f16) {
+                ggml_build_forward_expand(gf, Vcur);
+            }
+
             // apply M-RoPE
             Qcur = ggml_rope_multi(
                 ctx0, Qcur, positions, nullptr,

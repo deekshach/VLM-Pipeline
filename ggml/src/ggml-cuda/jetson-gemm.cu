@@ -26,6 +26,7 @@ const ggml_cuda_jetson_gemm_switches & ggml_cuda_jetson_gemm_get_switches() {
         ggml_cuda_jetson_gemm_switches s;
         s.f32_out   = on("GGML_CUDA_JETSON_GEMM_F32OUT");
         s.bias_fuse = on("GGML_CUDA_JETSON_GEMM_BIAS");
+        s.residual  = on("GGML_CUDA_JETSON_GEMM_RESIDUAL");
         s.table     = getenv("GGML_CUDA_JETSON_GEMM_TABLE")  != nullptr;
         s.record    = getenv("GGML_CUDA_JETSON_GEMM_RECORD") != nullptr;
         s.act_dedup = on("GGML_CUDA_JETSON_ACT_DEDUP");
@@ -34,9 +35,13 @@ const ggml_cuda_jetson_gemm_switches & ggml_cuda_jetson_gemm_get_switches() {
             GGML_LOG_WARN("%s: GGML_CUDA_JETSON_GEMM_BIAS needs GGML_CUDA_JETSON_GEMM_F32OUT; bias fusion off\n", __func__);
             s.bias_fuse = false;
         }
+        if (s.residual && !s.f32_out) {
+            GGML_LOG_WARN("%s: GGML_CUDA_JETSON_GEMM_RESIDUAL needs GGML_CUDA_JETSON_GEMM_F32OUT; residual fusion off\n", __func__);
+            s.residual = false;
+        }
         if (s.any() || s.record) {
-            GGML_LOG_INFO("%s: cuBLASLt BF16 GEMM switches: f32_out=%d bias_fuse=%d table=%s record=%s act_dedup=%d act_fuse=%d\n",
-                          __func__, s.f32_out, s.bias_fuse, s.table ? getenv("GGML_CUDA_JETSON_GEMM_TABLE") : "-",
+            GGML_LOG_INFO("%s: cuBLASLt BF16 GEMM switches: f32_out=%d bias_fuse=%d residual=%d table=%s record=%s act_dedup=%d act_fuse=%d\n",
+                          __func__, s.f32_out, s.bias_fuse, s.residual, s.table ? getenv("GGML_CUDA_JETSON_GEMM_TABLE") : "-",
                           s.record ? getenv("GGML_CUDA_JETSON_GEMM_RECORD") : "-", s.act_dedup, s.act_fuse);
         }
         return s;
@@ -109,8 +114,9 @@ void ggml_cuda_jetson_gemm_bf16(
         int64_t m, int64_t n, int64_t k,
         const nv_bfloat16 * A, const nv_bfloat16 * B,
         void * D, bool d_f32, int64_t ldd,
-        const float * bias) {
+        const float * bias, const float * C) {
     GGML_ASSERT(bias == nullptr || d_f32);
+    GGML_ASSERT(C == nullptr || d_f32);
     const auto & sw = ggml_cuda_jetson_gemm_get_switches();
     auto & st = state();
     const int device = ctx.device;
@@ -184,8 +190,9 @@ void ggml_cuda_jetson_gemm_bf16(
         st.heuristic[key] = algo;
     }
 
-    const float alpha = 1.0f, beta = 0.0f;
-    CUBLASLT_CHECK(cublasLtMatmul(handle, op, &alpha, A, la, B, lb, &beta, D, ld, D, ld,
+    // C: the residual (beta = 1, same layout as D), or D itself with beta = 0 (not read)
+    const float alpha = 1.0f, beta = C ? 1.0f : 0.0f;
+    CUBLASLT_CHECK(cublasLtMatmul(handle, op, &alpha, A, la, B, lb, &beta, C ? (const void *) C : D, ld, D, ld,
                                   &algo, workspace, JETSON_GEMM_WORKSPACE, stream));
 
     cublasLtMatrixLayoutDestroy(la);
@@ -318,5 +325,54 @@ bool ggml_cuda_jetson_gemm_try_fuse_bias(ggml_backend_cuda_context & ctx, const 
     }
     ggml_cuda_jetson_gemm_bf16(ctx, stream, m, n, k, (const nv_bfloat16 *) src0->data, src1_ptr,
                                add->data, true, m, (const float *) bias->data);
+    return true;
+}
+
+bool ggml_cuda_jetson_gemm_try_fuse_residual(ggml_backend_cuda_context & ctx, const ggml_tensor * mm,
+                                             const ggml_tensor * add_bias, ggml_tensor * add_res) {
+    const auto & sw = ggml_cuda_jetson_gemm_get_switches();
+    if (!sw.residual || mm->op != GGML_OP_MUL_MAT || add_res->op != GGML_OP_ADD) return false;
+
+    const ggml_tensor * src0 = mm->src[0];
+    const ggml_tensor * src1 = mm->src[1];
+    // (the caller rules out split buffers)
+    if (src0->type != GGML_TYPE_BF16 || !ggml_is_contiguous(src0) || src0->ne[2] != 1 || src0->ne[3] != 1) return false;
+    if (src1->type != GGML_TYPE_F32 || !ggml_is_contiguous(src1) || src1->ne[2] != 1 || src1->ne[3] != 1) return false;
+    if (mm->type != GGML_TYPE_F32 || add_res->type != GGML_TYPE_F32 || !ggml_is_contiguous(add_res) ||
+        !ggml_are_same_shape(mm, add_res)) return false;
+
+    const ggml_tensor * bias = nullptr;
+    if (add_bias) {
+        if (add_bias->op != GGML_OP_ADD || add_bias->type != GGML_TYPE_F32 || !ggml_are_same_shape(mm, add_bias)) return false;
+        bias = add_bias->src[0] == mm ? add_bias->src[1] : add_bias->src[1] == mm ? add_bias->src[0] : nullptr;
+        if (!bias || bias->type != GGML_TYPE_F32 || !ggml_is_contiguous(bias) || bias->ne[0] != mm->ne[0] ||
+            ggml_nelements(bias) != bias->ne[0]) return false;
+    }
+    const ggml_tensor * prev = add_bias ? add_bias : mm;
+    const ggml_tensor * res  = add_res->src[0] == prev ? add_res->src[1] : add_res->src[1] == prev ? add_res->src[0] : nullptr;
+    if (!res || res == prev || res->type != GGML_TYPE_F32 || !ggml_is_contiguous(res) || !ggml_are_same_shape(res, mm)) return false;
+
+    // only where ggml would otherwise use cuBLAS (small batches go to its own kernels)
+    const int cc        = ggml_cuda_info().devices[ctx.device].cc;
+    const int warp_size = ggml_cuda_info().devices[ctx.device].warp_size;
+    if (ggml_cuda_should_use_mmvf(src0->type, cc, src0->ne, src0->nb, src1->ne[1]) ||
+        ggml_cuda_should_use_mmf(src0->type, cc, warp_size, src0->ne, src0->nb, src1->ne[1], false)) return false;
+
+    const int64_t m = src0->ne[1], k = src0->ne[0], n = src1->ne[1];
+    // With K not a multiple of 8 (the Qwen2.5-VL ViT's FFN down projection, K = 3,420), cuBLASLt on the Orin runs a
+    // separate pass over D to add C (globalKernel, 0.67 ms per 2,304 x 1,280 output) instead of adding it in the
+    // epilogue: slower than the ADD kernel it replaces (0.19 ms). Keep the ADD there.
+    if (k % 8 != 0) return false;
+    cudaStream_t stream = ctx.stream();
+    ggml_cuda_pool_alloc<nv_bfloat16> src1_bf16(ctx.pool());
+    const nv_bfloat16 * src1_ptr = ggml_cuda_jetson_act_get(ctx, stream, src1);   // ACT switches
+    if (!src1_ptr) {
+        src1_bf16.alloc(k * n);
+        ggml_get_to_bf16_cuda(GGML_TYPE_F32)(src1->data, src1_bf16.get(), k * n, stream);
+        src1_ptr = src1_bf16.get();
+    }
+    ggml_cuda_jetson_gemm_bf16(ctx, stream, m, n, k, (const nv_bfloat16 *) src0->data, src1_ptr,
+                               add_res->data, true, m, bias ? (const float *) bias->data : nullptr,
+                               (const float *) res->data);
     return true;
 }

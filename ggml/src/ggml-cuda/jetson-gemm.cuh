@@ -4,6 +4,8 @@
 //   GGML_CUDA_JETSON_GEMM_F32OUT=1      write the GEMM result as F32 directly instead of BF16 followed by
 //                                        a separate BF16 -> F32 conversion kernel
 //   GGML_CUDA_JETSON_GEMM_BIAS=1        fold a following bias ADD into the GEMM epilogue (needs F32OUT)
+//   GGML_CUDA_JETSON_GEMM_RESIDUAL=1    fold the residual ADD that follows a GEMM (after its bias ADD, if any) into the
+//                                        GEMM as D = A*B (+ bias) + C, C the residual (cuBLASLt beta = 1; needs F32OUT)
 //   GGML_CUDA_JETSON_GEMM_TABLE=<file>  use the cuBLASLt algorithm measured fastest for each GEMM shape
 //                                        (written by jetson/tools/gemm_tune) instead of the heuristic pick
 //   GGML_CUDA_JETSON_GEMM_RECORD=<file> append every BF16 GEMM shape seen, as input for the tuner
@@ -27,6 +29,7 @@
 struct ggml_cuda_jetson_gemm_switches {
     bool f32_out   = false;
     bool bias_fuse = false;
+    bool residual  = false;
     bool table     = false;
     bool record    = false;
     bool act_dedup = false;
@@ -39,17 +42,24 @@ const ggml_cuda_jetson_gemm_switches & ggml_cuda_jetson_gemm_get_switches();
 
 // D[m x n] (column-major, leading dimension ldd) = op(A)^T * B, with A BF16 [k x m] (lda = k) and
 // B BF16 [k x n] (ldb = k), F32 accumulation. D is F32 when d_f32, else BF16. With bias != nullptr
-// (F32, length m, needs d_f32) the bias is added to every column in the epilogue.
+// (F32, length m, needs d_f32) the bias is added to every column in the epilogue. With C != nullptr (F32, the layout
+// of D, needs d_f32; may be D itself) D = A*B (+ bias) + C.
 void ggml_cuda_jetson_gemm_bf16(
         ggml_backend_cuda_context & ctx, cudaStream_t stream,
         int64_t m, int64_t n, int64_t k,
         const nv_bfloat16 * A, const nv_bfloat16 * B,
         void * D, bool d_f32, int64_t ldd,
-        const float * bias);
+        const float * bias, const float * C = nullptr);
 
 // Fused MUL_MAT + ADD(bias) node pair: mm = MUL_MAT(src0 BF16 weight, src1 F32), add = ADD(mm, bias).
 // Returns false (and does nothing) when the pair does not qualify. src0 must not be in a split buffer.
 bool ggml_cuda_jetson_gemm_try_fuse_bias(ggml_backend_cuda_context & ctx, const ggml_tensor * mm, ggml_tensor * add);
+
+// GGML_CUDA_JETSON_GEMM_RESIDUAL: mm = MUL_MAT(src0 BF16 weight, src1 F32), add_bias = ADD(mm, bias) or nullptr,
+// add_res = ADD(add_bias or mm, residual) with the residual of the same shape. One cuBLASLt call writes add_res.
+// Returns false (and does nothing) when the nodes do not qualify. src0 must not be in a split buffer.
+bool ggml_cuda_jetson_gemm_try_fuse_residual(ggml_backend_cuda_context & ctx, const ggml_tensor * mm,
+                                             const ggml_tensor * add_bias, ggml_tensor * add_res);
 
 // ---- BF16 activation cache (GGML_CUDA_JETSON_ACT_*), per stream, valid within one graph evaluation.
 // Start of a graph evaluation: forget every cached BF16 activation of this stream.

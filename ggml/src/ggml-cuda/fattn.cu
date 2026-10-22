@@ -6,10 +6,32 @@
 #include "fattn-wmma-f16.cuh"
 #include "fattn.cuh"
 
+// Jetson study switch GGML_CUDA_JETSON_VIT_FA_NCOLS=16|32 (default off): for head size 80 (the Qwen2.5-VL ViT), query
+// tiles of that many columns instead of the 64 the selection below picks for long sequences (more CTAs per head, fewer
+// registers per CTA's work), e.g. to raise the occupancy of the fused kernel on 16 SMs.
+static int ggml_cuda_jetson_vit_fa_ncols() {
+    static const int n = [] { const char * v = getenv("GGML_CUDA_JETSON_VIT_FA_NCOLS"); return v ? atoi(v) : 0; }();
+    return n;
+}
+
 template <int DKQ, int DV, int ncols2>
 static void ggml_cuda_flash_attn_ext_mma_f16_switch_ncols1(ggml_backend_cuda_context & ctx, ggml_tensor * dst) {
     const int cc = ggml_cuda_info().devices[ggml_cuda_get_device()].cc;
     const ggml_tensor * Q = dst->src[0];
+
+    if constexpr (DKQ == 80 && DV == 80) {
+        const int force = ggml_cuda_jetson_vit_fa_ncols();
+        if constexpr (ncols2 <= 16) {
+            if (force == 16 && turing_mma_available(cc) && Q->ne[1] > 16/ncols2) {
+                ggml_cuda_flash_attn_ext_mma_f16_case<DKQ, DV, 16/ncols2, ncols2>(ctx, dst);
+                return;
+            }
+        }
+        if (force == 32 && Q->ne[1] > 32/ncols2) {
+            ggml_cuda_flash_attn_ext_mma_f16_case<DKQ, DV, 32/ncols2, ncols2>(ctx, dst);
+            return;
+        }
+    }
 
     if constexpr (ncols2 <= 8) {
         if (turing_mma_available(cc) && Q->ne[1] <= 8/ncols2) {

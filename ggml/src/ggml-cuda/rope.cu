@@ -663,3 +663,165 @@ void ggml_cuda_op_rope_back(ggml_backend_cuda_context & ctx, ggml_tensor * dst) 
 void ggml_cuda_op_rope_fused(ggml_backend_cuda_context & ctx, ggml_tensor * rope, ggml_tensor * set_rows) {
     ggml_cuda_op_rope_impl<true>(ctx, rope, set_rows);
 }
+
+// ---- Jetson study switch GGML_CUDA_JETSON_ROPE_F16 (see rope.cuh)
+
+// One thread per rotated pair (j, j + n_dims) of a row, rows packed densely: the stock launch gives each row a block of
+// CUDA_ROPE_BLOCK_SIZE threads of which only ne00/2 work (40 of 256 for the 80-wide ViT heads).
+// Output: the rope tensor itself (contiguous, F32), or, with view_out, the F16 tensor of a CPY that reads the rope
+// output through a reshape/permute view: rope element L (its offset in the contiguous rope output) is at view index
+// v_k = (L / vnb[k]) % vne[k], and the CPY result is that view, contiguous.
+struct rope_jetson_view {
+    int vne[4];
+    int vnb[4];   // in elements
+};
+
+template <bool view_out, typename D>
+static __global__ void rope_vision_jetson(const float * x, D * dst, const int ne00, const int ne01, const int ne02,
+        const int s01, const int s02, const int s03, const int n_dims, const int64_t n_pairs, const int32_t * pos,
+        const float freq_scale, const float ext_factor, const float attn_factor, const rope_corr_dims corr_dims,
+        const float theta_scale, const mrope_sections sections, const rope_jetson_view view) {
+    const int64_t t = (int64_t) blockDim.x*blockIdx.x + threadIdx.x;
+    if (t >= n_pairs) {
+        return;
+    }
+    const int     j   = t % n_dims;   // pair index: i0 = 2*j in rope_vision
+    const int64_t row = t / n_dims;
+    const int     i1  = row % ne01;
+    const int     i2  = (row / ne01) % ne02;
+    const int     i3  = row / ((int64_t) ne01*ne02);
+
+    const int ix = j + i1*s01 + i2*s02 + i3*s03;
+
+    const int sect_dims = sections.v[0] + sections.v[1];
+    const int sector    = j % sect_dims;
+    float theta_base = 0.0f;
+    if (sector < sections.v[0]) {
+        theta_base = pos[i2] * powf(theta_scale, sector);
+    } else if (sector < sect_dims) {
+        theta_base = pos[i2 + ne02] * powf(theta_scale, sector - sections.v[0]);
+    }
+
+    float cos_theta;
+    float sin_theta;
+    rope_yarn<true>(theta_base, freq_scale, corr_dims, 2*j, ext_factor, attn_factor, cos_theta, sin_theta);
+
+    const float x0 = x[ix + 0];
+    const float x1 = x[ix + n_dims];
+
+    const int64_t L0 = j + ((int64_t) i1 + (int64_t) ne01*(i2 + (int64_t) ne02*i3))*ne00;
+    int64_t d0 = L0;
+    int64_t d1 = L0 + n_dims;
+    if constexpr (view_out) {
+        int64_t o[2] = {0, 0};
+        const int64_t L[2] = {L0, L0 + n_dims};
+#pragma unroll
+        for (int e = 0; e < 2; ++e) {
+            int64_t mul = 1;
+#pragma unroll
+            for (int k = 0; k < 4; ++k) {
+                o[e] += ((L[e] / view.vnb[k]) % view.vne[k]) * mul;
+                mul  *= view.vne[k];
+            }
+        }
+        d0 = o[0];
+        d1 = o[1];
+    }
+    dst[d0] = ggml_cuda_cast<D>(x0*cos_theta - x1*sin_theta);
+    dst[d1] = ggml_cuda_cast<D>(x0*sin_theta + x1*cos_theta);
+}
+
+// the ROPE node's parameters, as ggml_cuda_op_rope_impl reads them
+static void rope_jetson_params(const ggml_tensor * rope, int & n_dims, float & freq_scale, float & ext_factor,
+                               float & attn_factor, rope_corr_dims & corr_dims, float & theta_scale, mrope_sections & sections) {
+    n_dims = ((const int32_t *) rope->op_params)[1];
+    const int n_ctx_orig = ((const int32_t *) rope->op_params)[4];
+    float freq_base, beta_fast, beta_slow;
+    memcpy(&freq_base,   (const int32_t *) rope->op_params +  5, sizeof(float));
+    memcpy(&freq_scale,  (const int32_t *) rope->op_params +  6, sizeof(float));
+    memcpy(&ext_factor,  (const int32_t *) rope->op_params +  7, sizeof(float));
+    memcpy(&attn_factor, (const int32_t *) rope->op_params +  8, sizeof(float));
+    memcpy(&beta_fast,   (const int32_t *) rope->op_params +  9, sizeof(float));
+    memcpy(&beta_slow,   (const int32_t *) rope->op_params + 10, sizeof(float));
+    memcpy(&sections.v,  (const int32_t *) rope->op_params + 11, sizeof(int)*4);
+    ggml_rope_yarn_corr_dims(n_dims, n_ctx_orig, freq_base, beta_fast, beta_slow, corr_dims.v);
+    theta_scale = powf(freq_base, -2.0f/n_dims);
+}
+
+static int ggml_cuda_jetson_rope_f16_mode() {   // 1: dense RoPE + F16 K fusion; 2: dense RoPE only (diagnostic)
+    static const int m = [] { const char * v = getenv("GGML_CUDA_JETSON_ROPE_F16"); return v != nullptr ? atoi(v) : 0; }();
+    return m;
+}
+
+bool ggml_cuda_jetson_rope_f16_enabled() {
+    return ggml_cuda_jetson_rope_f16_mode() != 0;
+}
+
+bool ggml_cuda_jetson_rope_vision_ok(const ggml_tensor * rope) {
+    if (rope->op != GGML_OP_ROPE || ((const int32_t *) rope->op_params)[2] != GGML_ROPE_TYPE_VISION) return false;
+    const ggml_tensor * src0 = rope->src[0];
+    return src0->type == GGML_TYPE_F32 && rope->type == GGML_TYPE_F32 && rope->src[2] == nullptr &&
+           ggml_is_contiguous(rope) && src0->nb[0] == sizeof(float) &&
+           ((const int32_t *) rope->op_params)[1] == src0->ne[0]/2;
+}
+
+bool ggml_cuda_jetson_rope_view_ok(const ggml_tensor * rope, const ggml_tensor * cpy) {
+    if (ggml_cuda_jetson_rope_f16_mode() == 2) return false;
+    const ggml_tensor * v = cpy->src[0];
+    if (cpy->op != GGML_OP_CPY || cpy->type != GGML_TYPE_F16 || !ggml_is_contiguous(cpy) || v->view_src != rope ||
+        v->view_offs != 0 || v->type != GGML_TYPE_F32 || ggml_nelements(v) != ggml_nelements(rope) ||
+        !ggml_are_same_shape(v, cpy) || ggml_nelements(rope) >= INT32_MAX) return false;
+    // the CPY result is written while the rope inputs are read (at the CPY, not at the ROPE): the graph allocator may
+    // have placed it over the rope input, which is dead after the ROPE node in the original order
+    const auto overlaps = [cpy](const ggml_tensor * t) {
+        const char * a = (const char *) cpy->data, * b = (const char *) t->data;
+        return a < b + ggml_nbytes(t) && b < a + ggml_nbytes(cpy);
+    };
+    if (overlaps(rope->src[0]) || overlaps(rope->src[1])) {
+        static int n_logged = 0;
+        if (n_logged++ < 4) {
+            GGML_LOG_INFO("%s: %s overlaps the rope input; F16 fusion skipped\n", __func__, cpy->name);
+        }
+        return false;
+    }
+    // the view must be a permutation of a contiguous layout: its strides, sorted, are the running products of its sizes
+    int idx[4] = {0, 1, 2, 3};
+    std::sort(idx, idx + 4, [&](int a, int b) { return v->nb[a] < v->nb[b] || (v->nb[a] == v->nb[b] && a < b); });
+    size_t expect = sizeof(float);
+    for (int k = 0; k < 4; ++k) {
+        if (v->ne[idx[k]] == 1) continue;
+        if (v->nb[idx[k]] != expect) return false;
+        expect *= v->ne[idx[k]];
+    }
+    return true;
+}
+
+void ggml_cuda_jetson_rope_vision(ggml_backend_cuda_context & ctx, const ggml_tensor * rope, ggml_tensor * cpy) {
+    const ggml_tensor * src0 = rope->src[0];
+    int n_dims; float freq_scale, ext_factor, attn_factor, theta_scale; rope_corr_dims corr_dims; mrope_sections sections;
+    rope_jetson_params(rope, n_dims, freq_scale, ext_factor, attn_factor, corr_dims, theta_scale, sections);
+
+    const int s01 = src0->nb[1] / sizeof(float);
+    const int s02 = src0->nb[2] / sizeof(float);
+    const int s03 = src0->nb[3] / sizeof(float);
+    const int64_t n_pairs = ggml_nrows(src0) * n_dims;
+    const int     block   = 256;
+    const int64_t n_blocks = (n_pairs + block - 1) / block;
+    const int32_t * pos = (const int32_t *) rope->src[1]->data;
+    cudaStream_t stream = ctx.stream();
+
+    rope_jetson_view view = {};
+    if (cpy) {
+        for (int k = 0; k < 4; ++k) {
+            view.vne[k] = cpy->src[0]->ne[k];
+            view.vnb[k] = cpy->src[0]->nb[k] / sizeof(float);
+        }
+        rope_vision_jetson<true, half><<<n_blocks, block, 0, stream>>>(
+            (const float *) src0->data, (half *) cpy->data, src0->ne[0], src0->ne[1], src0->ne[2], s01, s02, s03, n_dims,
+            n_pairs, pos, freq_scale, ext_factor, attn_factor, corr_dims, theta_scale, sections, view);
+    } else {
+        rope_vision_jetson<false, float><<<n_blocks, block, 0, stream>>>(
+            (const float *) src0->data, (float *) rope->data, src0->ne[0], src0->ne[1], src0->ne[2], s01, s02, s03, n_dims,
+            n_pairs, pos, freq_scale, ext_factor, attn_factor, corr_dims, theta_scale, sections, view);
+    }
+}

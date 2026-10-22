@@ -40,6 +40,8 @@ Sources:
 | B3 | Bias fusion: the bias ADD goes into the GEMM epilogue | `--gemm-bias-fuse` (needs B2) | -30 ms/frame (3%) | Adds -2.0 GB DRAM. With B2: 3,903 -> 2,547 kernels launched; long-scoreboard stalls 39 -> 32%. | as B2 |
 | B4 | Tuned GEMM table: per-shape cuBLASLt algorithm measured on this Orin | `--gemm-table` | -7 ms/frame (1%) | L2 requests -3.1 GB (less split-K partial-sum traffic). | Accumulation order changes. |
 | B5 | GEMM-input fusion: RMS norm x weight and SwiGLU write the BF16 GEMM input directly; works under CUDA graph capture | `--act-fuse` (the same engine switch as C2) | 9x4 410 -> 382 ms (-7%); 5x2 113 -> 101 ms (-11%) | Casts 44 -> 6 ms (9x4). | bit-identical |
+| B6 | Dense vision RoPE; with ViT flash attention on, K written directly as the F16 that flash attention reads | `--vit-rope-f16` (`GGML_CUDA_JETSON_ROPE_F16`) | ViT flash attention on, B1-B5 on, 4 full frames (alley_1, nsys): ViT 1,203 -> 1,045 ms (-13%), ~40 ms/frame | The stock vision RoPE launches a 256-thread block per 80-value row, of which 40 threads work: 0.73 ms per call against ~0.15 ms at the DRAM ceiling. One thread per rotated pair: RoPE 188 -> 88 ms. K's RoPE runs at its F16 cast instead (the ViT graph computes V before the RoPEs so that only views lie in between), so the strided F32 -> F16 copy disappears: copies 121 -> 63 ms, -128 kernels (32 layers x 4 frames). The V cast stays: cuBLASLt cannot write F16 from BF16 weights. With flash attention off only the dense RoPE applies. | bit-identical |
+| B7 | Residual ADD in the GEMM (D = A*B + bias + C, C the residual; cuBLASLt beta = 1) | `--gemm-residual-fuse` (`GGML_CUDA_JETSON_GEMM_RESIDUAL`, needs B2; also C7) | with B6: ViT 1,045 -> 1,026 ms (4 frames) | Removes the attention-output residual ADD (adds 49 -> 25 ms). Not applied when K % 8 != 0: for the FFN down projection (K = 3,420) cuBLASLt adds C in a separate pass (globalKernel, 0.67 ms) instead of the epilogue, slower than the 0.19 ms ADD. | F32 rounding order: median token cosine 1.000000, same text |
 
 ViT cumulative, nsys:
 - One full frame (9x4 windows): 979 ms (no switches) -> 412 ms (B1-B4) -> 382 ms (+B5).
@@ -55,6 +57,7 @@ ViT cumulative, nsys:
 | C4 | Bias fusion (B3 applied to the LLM; QKV biases) | `--gemm-bias-fuse` | -31 ms (2%) | Adds -0.27 GB. | as B2 |
 | C5 | Full cuBLASLt configuration search (tuner mode 2): every algorithm x tile x stages x split-K x reduction x swizzle (900-2,400 per shape) | `--gemm-table` rows | K/V projection -12%, gate/up -2%; end to end -0.15% | The down projection stays at 63% of BF16 peak (gate/up: 82%). Its limit is the K = 18,944 reduction, not the last wave on 16 SMs. | Accumulation order changes. |
 | C6 | Convert once: each F32 GEMM input converted to BF16 once and shared | `--act-dedup` | 2,820 -> 2,753 ms alone; nothing on top of C2 | Removes the repeated Q/K/V and gate/up conversions. | bit-identical |
+| C7 | Residual ADD in the GEMM (B7 applied to the LLM: attention output and FFN down projection) | `--gemm-residual-fuse` | 4 frames: image prefill 1,433 -> 1,409 ms (-1.7%) | Adds 30 -> 0 ms; GEMM +4 ms (the C read). 432 fewer kernels. | F32 rounding order |
 
 Prefill cumulative, 8 frames (nsys): 4,292 ms -> 2,834 ms (C1 + C3 + C4) -> 2,552 ms (+C2), -41% in total.
 
@@ -83,6 +86,7 @@ Prefill cumulative, 8 frames (nsys): 4,292 ms -> 2,834 ms (C1 + C3 + C4) -> 2,55
 | L2-aware GEMM tile order (CTA swizzle) | 0.2% | Prefill GEMMs read 1.4-1.5x their weights from DRAM (the 4 MB L2 drops weight panels between tile passes). They are compute-bound, so fewer bytes buy no time. |
 | One ubatch per frame (`-ub 576`, with tuned 576-token shapes) | image prefill -2.8% (alley_1, uniform 8 frames) | Removes the 64-token tail ubatch per frame (~90-100 ms each). But 576 tokens = 4.5 tiles of 128, so the GEMMs are 30% slower for 12.5% more tokens. |
 | Persisting L2 (access-policy window) | not implemented | The data worth pinning (the 3.7 MB BF16 activation) is about the size of the whole L2. |
+| Smaller ViT flash-attention query tiles (32 instead of 64 columns), `--vit-fa-ncols 32` (kept as a switch) | ViT attention 60 -> 90 ms (4 frames): +29 ms | More CTAs per head, but each re-reads K/V for half the queries; the 64-column tile is the better trade on 16 SMs. With B1, only the 4 global layers have long sequences to tile. |
 | Quantization | excluded by design | BF16 only. |
 
 ## F. Cumulative TTFT (6 clips)
@@ -108,7 +112,8 @@ Command (all switches):
   identical settings.
 - OFA flow underestimates large motion, so fast clips get fewer frames; the frame-count thresholds need
   recalibration for OFA flow.
-- The ViT's 4 global layers remain dense attention (flash attention off).
+- The ViT's 4 global layers remain dense attention (flash attention off). With ViT flash attention on (`VIT_FA=on` in
+  scripts/run_eval.sh), B6 and B7/C7 join the kernel switches.
 - Prefill: each frame still pays a 64-token tail ubatch. Packing frames into full 512-token ubatches would need the
   marker tokens between frames passed as embeddings.
 - Not yet fused in prefill: the residual add + RMS norm, and the conversion of the O-projection input (the

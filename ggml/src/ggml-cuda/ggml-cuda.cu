@@ -3146,6 +3146,60 @@ static bool ggml_cuda_should_fuse_rope_set_rows(const ggml_tensor * rope,
     return true;
 }
 
+// Jetson study switch GGML_CUDA_JETSON_ROPE_F16: the CPY to F16 that is the only reader of ROPE node i (directly or
+// through reshape/permute/view nodes of it), if ggml_cuda_jetson_rope_view_ok accepts it and the rope can run at the
+// CPY instead: no node computed in between may write over the rope's inputs (the graph allocator may reuse their
+// memory once the ROPE node, in the original order, has read them). Else nullptr.
+static ggml_tensor * ggml_cuda_jetson_rope_f16_target(const ggml_cgraph * cgraph, int i) {
+    const ggml_tensor * rope = cgraph->nodes[i];
+    if (rope->flags & GGML_TENSOR_FLAG_OUTPUT) {
+        return nullptr;
+    }
+    ggml_tensor * target = nullptr;
+    int           j_target = -1;
+    for (int j = i + 1; j < cgraph->n_nodes; j++) {
+        ggml_tensor * nd = cgraph->nodes[j];
+        const bool is_view = nd->op == GGML_OP_VIEW || nd->op == GGML_OP_RESHAPE || nd->op == GGML_OP_PERMUTE ||
+                             nd->op == GGML_OP_TRANSPOSE;
+        for (int s = 0; s < GGML_MAX_SRC; s++) {
+            const ggml_tensor * src = nd->src[s];
+            if (src == nullptr || (src != rope && src->view_src != rope) || src == nd) {
+                continue;
+            }
+            if (is_view && nd->view_src == rope) {
+                continue;   // a view of the rope output: costs nothing, its readers are checked here too
+            }
+            if ((target != nullptr && target != nd) || !ggml_cuda_jetson_rope_view_ok(rope, nd)) {
+                return nullptr;
+            }
+            target   = nd;
+            j_target = j;
+        }
+    }
+    if (target == nullptr) {
+        return nullptr;
+    }
+    const auto overlaps = [](const ggml_tensor * a, const ggml_tensor * b) {
+        const char * pa = (const char *) a->data, * pb = (const char *) b->data;
+        return pa < pb + ggml_nbytes(b) && pb < pa + ggml_nbytes(a);
+    };
+    for (int k = i + 1; k < j_target; k++) {
+        const ggml_tensor * nd = cgraph->nodes[k];
+        if (ggml_is_empty(nd) || nd->op == GGML_OP_NONE || nd->op == GGML_OP_VIEW || nd->op == GGML_OP_RESHAPE ||
+            nd->op == GGML_OP_PERMUTE || nd->op == GGML_OP_TRANSPOSE) {
+            continue;
+        }
+        if (overlaps(nd, rope->src[0]) || overlaps(nd, rope->src[1])) {
+            static int n_logged = 0;
+            if (n_logged++ < 4) {
+                GGML_LOG_INFO("%s: %s (node %d) writes over the input of %s; F16 fusion skipped\n", __func__, nd->name, k, rope->name);
+            }
+            return nullptr;
+        }
+    }
+    return target;
+}
+
 static bool ggml_cuda_topk_moe_fusion(const struct ggml_cgraph * cgraph, int node_idx, ggml_cuda_topk_moe_args & args) {
     args.sigmoid         = false;
     args.softmax         = false;
@@ -3519,6 +3573,7 @@ static void ggml_cuda_graph_evaluate_and_capture(ggml_backend_cuda_context * cud
             if (ggml_cuda_jetson_gemm_get_switches().act()) {   // Jetson ACT switches: new graph, new activations
                 ggml_cuda_jetson_act_reset(cuda_ctx->stream());
             }
+            std::unordered_map<const ggml_tensor *, const ggml_tensor *> jetson_rope_deferred;   // ROPE_F16: CPY -> ROPE
             for (int i = 0; i < cgraph->n_nodes; i++) {
                 ggml_tensor * node = cgraph->nodes[i];
                 if (is_concurrent_event_active) {
@@ -3641,6 +3696,28 @@ static void ggml_cuda_graph_evaluate_and_capture(ggml_backend_cuda_context * cud
                         }
                     }
 
+                    // Jetson study switch (GGML_CUDA_JETSON_ROPE_F16): the ViT's vision RoPE with a dense launch; a rotated
+                    // K read only by its F16 cast for flash attention is written by the RoPE at the cast, as F16
+                    if (ggml_cuda_jetson_rope_f16_enabled()) {
+                        if (node->op == GGML_OP_ROPE && ggml_cuda_jetson_rope_vision_ok(node)) {
+                            ggml_tensor * cast = is_concurrent_event_active ? nullptr : ggml_cuda_jetson_rope_f16_target(cgraph, i);
+                            if (cast) {
+                                jetson_rope_deferred[cast] = node;
+                            } else {
+                                ggml_cuda_jetson_rope_vision(*cuda_ctx, node, nullptr);
+                            }
+                            continue;
+                        }
+                        if (node->op == GGML_OP_CPY) {
+                            auto it = jetson_rope_deferred.find(node);
+                            if (it != jetson_rope_deferred.end()) {
+                                ggml_cuda_jetson_rope_vision(*cuda_ctx, it->second, node);
+                                jetson_rope_deferred.erase(it);
+                                continue;
+                            }
+                        }
+                    }
+
                     if (ggml_cuda_can_fuse(cgraph, i, { GGML_OP_ROPE, GGML_OP_VIEW, GGML_OP_SET_ROWS }, {})) {
                         ggml_tensor * rope = cgraph->nodes[i];
                         ggml_tensor * set_rows = cgraph->nodes[i + 2];
@@ -3698,6 +3775,26 @@ static void ggml_cuda_graph_evaluate_and_capture(ggml_backend_cuda_context * cud
                         if (node->op == GGML_OP_GLU && ggml_cuda_jetson_swiglu_bf16(*cuda_ctx, node, nullptr) &&
                             (readers = ggml_cuda_jetson_act_fusable(*cuda_ctx, cgraph, i, node)) > 0) {
                             ggml_cuda_jetson_swiglu_bf16(*cuda_ctx, node, ggml_cuda_jetson_act_produce(*cuda_ctx, node, readers));
+                            continue;
+                        }
+                    }
+
+                    // Jetson study switch (GGML_CUDA_JETSON_GEMM_RESIDUAL): BF16 GEMM (+ bias ADD) + residual ADD as one
+                    // cuBLASLt call, the residual read as its C matrix
+                    if (node->op == GGML_OP_MUL_MAT && ggml_cuda_jetson_gemm_get_switches().residual &&
+                        !ggml_backend_buft_is_cuda_split(node->src[0]->buffer->buft)) {
+                        const ggml_op mm_b_r_ops[3] = { GGML_OP_MUL_MAT, GGML_OP_ADD, GGML_OP_ADD };
+                        const int     mm_b_r_out[1] = { i + 2 };
+                        if (i + 2 < cgraph->n_nodes && ggml_can_fuse_subgraph(cgraph, i, 3, mm_b_r_ops, mm_b_r_out, 1) &&
+                            ggml_cuda_jetson_gemm_try_fuse_residual(*cuda_ctx, node, cgraph->nodes[i + 1], cgraph->nodes[i + 2])) {
+                            i += 2;
+                            continue;
+                        }
+                        const ggml_op mm_r_ops[2] = { GGML_OP_MUL_MAT, GGML_OP_ADD };
+                        const int     mm_r_out[1] = { i + 1 };
+                        if (i + 1 < cgraph->n_nodes && ggml_can_fuse_subgraph(cgraph, i, 2, mm_r_ops, mm_r_out, 1) &&
+                            ggml_cuda_jetson_gemm_try_fuse_residual(*cuda_ctx, node, nullptr, cgraph->nodes[i + 1])) {
+                            i += 1;
                             continue;
                         }
                     }
