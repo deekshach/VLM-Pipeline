@@ -12,6 +12,11 @@
 # Besides the usual sections, two L2 counters: lts__t_sectors.sum (all L2 sector requests) and
 # lts__d_sectors_fill_sysmem.sum (sectors filled from DRAM, x 32 B = main-memory read traffic).
 #
+# VIT_FA=on: the ViT part with ViT flash attention on (results in microarch_fa/): configurations base / winbatch /
+# f32bias as above plus design (every ViT switch: window batch, F32 out + bias, GEMM table, act-fuse, RoPE -> F16,
+# residual in the GEMM), and layers 2-7 profiled (windowed layers and global layer 7 differ with flash attention).
+# Part B (the LLM down projection) does not depend on it and is skipped.
+#
 # NCU_CACHE=none keeps the caches warm between kernels (ncu's default flushes them before every
 # kernel, which hides producer -> consumer reuse in L2); output then goes to microarch_cache_none/.
 set -u
@@ -21,7 +26,10 @@ NCU="${NCU:-/usr/local/cuda-12.6/bin/ncu}"
 M=/home/nvidia/data/models/Qwen2.5VL
 FRAME=/home/nvidia/data/MPI-Sintel/training/clean/alley_1/frame_0001.png
 NCU_CACHE="${NCU_CACHE:-all}"
+VIT_FA="${VIT_FA:-off}"
 OUT="$REPO/jetson/experiments/profiles/microarch"
+CFGS="base winbatch f32bias"; COUNT=120
+if [ "$VIT_FA" = on ]; then OUT="${OUT}_fa"; CFGS="base winbatch f32bias design"; COUNT=260; fi
 [ "$NCU_CACHE" != all ] && OUT="${OUT}_cache_$NCU_CACHE"
 mkdir -p "$OUT"
 SECTIONS=(--cache-control "$NCU_CACHE" --section SpeedOfLight --section LaunchStats --section Occupancy --section MemoryWorkloadAnalysis
@@ -33,23 +41,27 @@ export_csv() {   # $1 = report basename
 }
 
 # A. ViT
-for CFG in base winbatch f32bias; do
+for CFG in $CFGS; do
     ENVS=()
     [ "$CFG" = winbatch ] && ENVS=(MTMD_VIT_WINDOW_BATCH=1)
     [ "$CFG" = f32bias ]  && ENVS=(GGML_CUDA_JETSON_GEMM_F32OUT=1 GGML_CUDA_JETSON_GEMM_BIAS=1)
+    [ "$CFG" = design ]   && ENVS=(MTMD_VIT_WINDOW_BATCH=1 GGML_CUDA_JETSON_GEMM_F32OUT=1 GGML_CUDA_JETSON_GEMM_BIAS=1
+                                   GGML_CUDA_JETSON_GEMM_TABLE="$REPO/jetson/gemm/table_orin.txt" GGML_CUDA_JETSON_ACT_FUSE=1
+                                   GGML_CUDA_JETSON_ROPE_F16=1 GGML_CUDA_JETSON_GEMM_RESIDUAL=1)
     for S in 9x4 5x2 1x2; do
         N="vit_${CFG}_${S}"
         echo "[$(date +%T)] $N"
-        env "${ENVS[@]}" "$NCU" --nvtx --nvtx-include "vit_$S/" --launch-skip 80 --launch-count 120 "${SECTIONS[@]}" \
+        env "${ENVS[@]}" "$NCU" --nvtx --nvtx-include "vit_$S/" --launch-skip 80 --launch-count $COUNT "${SECTIONS[@]}" \
             -o "$OUT/$N" -f "$REPO/build/bin/jetson-vit-probe" "$M/Qwen2.5-VL-7B-Instruct-BF16.gguf" "$M/mmproj-BF16.gguf" \
-            "$FRAME" "$S" 2 1 off > "$OUT/$N.log" 2>&1
+            "$FRAME" "$S" 2 1 "$VIT_FA" > "$OUT/$N.log" 2>&1
         grep -E "==ERROR==|No kernels were profiled" "$OUT/$N.log" && echo "   !! see $OUT/$N.log"
         export_csv "$N"
     done
 done
 
 # B. prefill down projection: heuristic (split-K) vs tuned algorithm
-for RANGE in heuristic tuned; do
+[ "$VIT_FA" = on ] && RANGES="" || RANGES="heuristic tuned"
+for RANGE in $RANGES; do
     N="gemm_down_${RANGE}"
     echo "[$(date +%T)] $N"
     "$NCU" --nvtx --nvtx-include "$RANGE/" "${SECTIONS[@]}" -o "$OUT/$N" -f \

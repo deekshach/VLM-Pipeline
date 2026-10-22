@@ -8,6 +8,8 @@
 # The board guard keeps running: a request it pauses has a wall-time gap in its timings, so any request with a new
 # "paused" line in the guard log is moved aside (<name>.paused.*) and run again, at most 3 times.
 # Results: jetson/experiments/power_modes/<tag>/ (nsys traces in experiments/profiles/nsys/pm_<tag>_f8.*).
+# VIT_FA=on: ViT flash attention on for every request (the design also gains --vit-rope-f16 --gemm-residual-fuse);
+# results in power_modes_fa/<tag>/ and traces pm_fa_<tag>_f8.*. Default off, as the results in power_modes/.
 set -u
 TAG="${1:?mode tag, e.g. 50w}"
 DESIGN="${2:-}"
@@ -15,10 +17,19 @@ HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO="$(cd "$HERE/../.." && pwd)"
 source "$REPO/dmc955/model_config.sh"
 BIN="$REPO/build/bin/llama-jetson-vlm"
+VIT_FA="${VIT_FA:-off}"
 OUT="$REPO/jetson/experiments/power_modes/$TAG"
+NSN="pm_${TAG}_f8"
+if [ "$VIT_FA" = on ]; then OUT="$REPO/jetson/experiments/power_modes_fa/$TAG"; NSN="pm_fa_${TAG}_f8"; fi
 GUARD=/home/nvidia/data/accuracy/board_guard.log
 OC=$(grep -l soctherm_oc /sys/class/hwmon/hwmon*/name | head -1 | xargs dirname)/oc3_event_cnt
 mkdir -p "$OUT/design"
+# the ceilings do not depend on ViT flash attention: reuse the mode's earlier measurement
+if [ "$VIT_FA" = on ]; then
+    for f in peaks.json l2_bandwidth.csv; do
+        [ -f "$REPO/jetson/experiments/power_modes/$TAG/$f" ] && [ ! -f "$OUT/$f" ] && cp "$REPO/jetson/experiments/power_modes/$TAG/$f" "$OUT/$f"
+    done
+fi
 pgrep -f board_guard.sh > /dev/null || echo "WARNING: board guard not running"
 
 # what the mode sets
@@ -60,7 +71,7 @@ for N in 8 32; do
     run_sweep() {
         tegrastats --interval 100 --logfile "$B.tegrastats" &
         "$BIN" -m "$MODEL" --mmproj "$MMPROJ" --video alley_1 --baseline --base-frames $N -p "$P" -n 8 -ngl 99 -c 32768 \
-            --vit-flash-attn off --output-json "$B.json" > "$B.log" 2>&1
+            --vit-flash-attn $VIT_FA --output-json "$B.json" > "$B.log" 2>&1
         tegrastats --stop
     }
     guarded "$B" run_sweep
@@ -69,9 +80,9 @@ done
 python3 "$REPO/jetson/tools/frame_sweep_summary.py" "$OUT/sweep"
 
 # nsys trace at 8 frames: kernel classes and GPU idle
-NS="$REPO/jetson/experiments/profiles/nsys/pm_${TAG}_f8"
+NS="$REPO/jetson/experiments/profiles/nsys/$NSN"
 if [ ! -f "$NS.json" ]; then
-    guarded "$NS" bash "$HERE/profile_nsys.sh" "pm_${TAG}_f8" alley_1 --baseline
+    guarded "$NS" bash "$HERE/profile_nsys.sh" "$NSN" alley_1 --baseline --vit-flash-attn $VIT_FA
     python3 "$REPO/jetson/tools/nsys_idle.py" "$NS.sqlite" > "$OUT/nsys_idle.md"
     python3 "$REPO/jetson/tools/nsys_stage_kernels.py" "$NS.sqlite" > "$OUT/nsys_stage_kernels.md"
 fi
@@ -81,13 +92,14 @@ if [ "$DESIGN" = --design ]; then
     TABLE="$REPO/jetson/gemm/table_orin.txt"
     FULL="--live-flow --ofa-levels 4 --anchor-first --window-align --vit-window-batch --gemm-f32-out --gemm-bias-fuse \
 --gemm-table $TABLE --act-fuse --wc-per-window --wc-threshold 24"
+    [ "$VIT_FA" = on ] && FULL="$FULL --vit-rope-f16 --gemm-residual-fuse"
     for V in alley_1 sleeping_1 bandage_1 temple_2 ambush_5 cave_2; do
         for C in "uniform:--baseline" "design:$FULL"; do
             NAME="${C%%:*}"; FLAGS="${C#*:}"; B="$OUT/design/${V}__$NAME"
             [ -f "$B.json" ] && continue
             # shellcheck disable=SC2086
             guarded "$B" sh -c "\"$BIN\" -m \"$MODEL\" --mmproj \"$MMPROJ\" --video $V --base-frames 8 -p \"$P\" -n 8 -ngl 99 \
-                --vit-flash-attn off $FLAGS --output-json \"$B.json\" > \"$B.log\" 2>&1"
+                --vit-flash-attn $VIT_FA $FLAGS --output-json \"$B.json\" > \"$B.log\" 2>&1"
         done
     done
     python3 - "$OUT/design" <<'EOF'
