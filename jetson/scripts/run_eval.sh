@@ -6,7 +6,8 @@
 #
 #   e1  headline TTFT + accuracy: base, uni_arch, pw24 (the design), pwd24 (+ drop-clean) on all 123 clips of the
 #       seven datasets (MSVD: the 45-clip set); with VIT_FA=on also uni4 and ours_nocache, so each tier has its own run
-#   e3  attribution ladder, one switch added per step, on six Sintel clips, 3 repetitions
+#   e3  attribution ladder, one switch added per step, 3 repetitions, where the window cache matters: the 9 TACoS clips
+#       (static camera) and 6 Perception Test videos (one question each); repetition 1 of base, pw24, pwd24 is E1's run
 #   e4  accuracy vs TTFT: uniform 4 / 16 frames with the kernel switches (uni4, uni16), cache threshold 12 / 36
 #       (pw12, pw36) on NExT-QA, Video-MME, Perception Test and Charades
 #   e6  base and pw24 on NExT-QA and TACoS, run under 30W (the script then expects MODE_30W)
@@ -146,9 +147,11 @@ jobs() {
     case "$EXP" in
         e1) for D in sintel msvd charades nextqa videomme perception tacos; do
                 for V in $(clips $D); do for C in $E1_ARMS; do echo "$D $C 1 $V"; done; done; done ;;
-        e3) for R in 1 2 3; do for V in alley_1 sleeping_1 bandage_1 temple_2 ambush_5 cave_2; do
-                for C in base l1_sel l2_anchor l3_align l4_winbatch l5_f32bias l6_table l7_actfuse pw24 pwd24; do
-                    echo "sintel $C $R $V"; done; done; done ;;
+        e3) for R in 1 2 3; do
+                for DV in $(for V in $(clips tacos); do echo tacos:$V; done) perception:video_10993_q1 perception:video_1580_q0 \
+                          perception:video_3501_q2 perception:video_6860_q0 perception:video_874_q1 perception:video_9253_q0; do
+                    for C in base l1_sel l2_anchor l3_align l4_winbatch l5_f32bias l6_table l7_actfuse pw24 pwd24; do
+                        echo "${DV%%:*} $C $R ${DV#*:}"; done; done; done ;;
         e4) for D in nextqa videomme perception charades; do
                 for V in $(clips $D); do for C in uni4 uni16 pw12 pw36; do echo "$D $C 1 $V"; done; done; done ;;
         e6) for D in nextqa tacos; do
