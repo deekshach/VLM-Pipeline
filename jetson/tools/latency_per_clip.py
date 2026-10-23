@@ -14,7 +14,9 @@ window cache's frame actions. qwen2fps TTFT includes writing its token dump (the
 smaller frame size on Sintel and MSVD, so they are not used; on Charades-STA, at the same size, the dump costs nothing
 measurable).
 
-Savings by optimization tier (s), base -> pwd24 one tier at a time; the tiers sum to base TTFT minus pwd24 TTFT:
+Savings by optimization tier (s), from qwen2fps (the baseline of prior work) to pwd24 one tier at a time; the tiers sum
+to qwen2fps TTFT minus pwd24 TTFT:
+  input     qwen2fps -> base       8 uniform frames as images on stock kernels, instead of Qwen's 2 fps frame pairs
   kernels   base -> uni_arch       the kernel switches and window alignment (same 8 frames)
   frames    uni_arch -> uni4       4 uniform frames instead of 8
   adaptive  uni4 -> ours_nocache   motion-selected frames (3-8), live optical flow, anchor-first
@@ -28,7 +30,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import eval_summary as E
 
 ARMS = ["qwen2fps", "base", "uni_arch", "uni4", "ours_nocache", "pw24", "pwd24"]
-TIERS = [("kernels", "uni_arch"), ("frames", "uni4"), ("adaptive", "ours_nocache"), ("cache", "pw24"), ("drop", "pwd24")]
+TIERS = [("input", "base"), ("kernels", "uni_arch"), ("frames", "uni4"), ("adaptive", "ours_nocache"), ("cache", "pw24"), ("drop", "pwd24")]
 DATASETS = [("sintel", "Sintel"), ("msvd", "MSVD"), ("charades", "Charades-STA"), ("tacos", "TACoS"),
             ("nextqa", "NExT-QA"), ("videomme", "Video-MME"), ("perception", "Perception Test")]
 TOK_PER_WINDOW = 16   # a 112 px ViT window = 4 x 4 merged tokens
@@ -100,7 +102,7 @@ def main():
             "ours_nocache": "ours_nocache (3–8)", "pw24": "pw24 (3–8)", "pwd24": "pwd24 (3–8)"}
     summ1 = ["| Dataset | clips | qwen2fps frames | our frames | qwen2fps TTFT | base TTFT | pwd24 TTFT | pwd24 × vs qwen2fps | pwd24 × vs base |",
              "|---|---|---|---|---|---|---|---|---|"]
-    summ2 = ["| Dataset (clips) | base TTFT | kernels | frame count | adaptive sampling | window cache | drop-clean | pwd24 TTFT | saved vs base | saved vs qwen2fps |",
+    summ2 = ["| Dataset (clips) | qwen2fps TTFT | input (→ base) | kernels | frame count | adaptive sampling | window cache | drop-clean | pwd24 TTFT | saved vs qwen2fps |",
              "|---|---|---|---|---|---|---|---|---|---|"]
     out = []
     for ds, name in DATASETS:
@@ -130,18 +132,19 @@ def main():
                      f"{s1(col('base'))} | {s1(col('pwd24'))} | {spm['qwen2fps']:.2f} | {spm['base']:.2f} |")
 
         # 2. savings by optimization tier, from base
-        out += ["**Savings by optimization tier (s saved; negative = slower).** kernels: base → uni_arch (same 8 frames); "
+        out += ["**Savings by optimization tier, from qwen2fps (s saved; negative = slower).** input: qwen2fps → base (8 uniform "
+                "frames as images on stock kernels, instead of Qwen's 2 fps frame pairs); kernels: base → uni_arch (same 8 frames); "
                 "frame count: uni_arch → uni4 (8 → 4 uniform frames); adaptive sampling: uni4 → ours_nocache (motion-selected "
                 "3–8 frames, live optical flow, anchor-first); window cache: ours_nocache → pw24; drop-clean: pw24 → pwd24. "
-                "The tiers add up to base − pwd24. \\* this tier includes the one before it, whose arm has no run:\n",
-                "| clip | base TTFT | kernels | frame count | adaptive sampling | window cache | drop-clean | pwd24 TTFT | saved vs base | saved vs qwen2fps |",
+                "The tiers add up to qwen2fps − pwd24; the share of that saving is in parentheses where pwd24 is faster. \\* this tier includes the one before it, whose arm has no run:\n",
+                "| clip | qwen2fps TTFT | input (→ base) | kernels | frame count | adaptive sampling | window cache | drop-clean | pwd24 TTFT | saved vs qwen2fps |",
                 "|---|---|---|---|---|---|---|---|---|---|"]
-        tot = {k: [] for k in [k for k, _ in TIERS] + ["base", "pwd24", "vs_base", "vs_q"]}
+        tot = {k: [] for k in [k for k, _ in TIERS] + ["q", "pwd24", "vs_q"]}
         complete = [c for c in cl if all((c, a) in get for a in arms)]
         for c in cl:
-            if g(c, "base") is None or g(c, "pwd24") is None:
+            if g(c, "qwen2fps") is None or g(c, "pwd24") is None:
                 continue
-            cells, prev, merged = [], g(c, "base"), False
+            cells, prev, merged = [], g(c, "qwen2fps"), False
             for k, a in TIERS:
                 if g(c, a) is None:
                     cells.append("—")
@@ -152,20 +155,20 @@ def main():
                 if c in complete:
                     tot[k].append(v)
                 prev, merged = g(c, a), False
-            vb, vq = g(c, "base") - g(c, "pwd24"), (g(c, "qwen2fps") - g(c, "pwd24")) if g(c, "qwen2fps") else None
+            vq = g(c, "qwen2fps") - g(c, "pwd24")
             if c in complete:
-                tot["base"].append(g(c, "base")); tot["pwd24"].append(g(c, "pwd24")); tot["vs_base"].append(vb)
-                tot["vs_q"] += [vq] if vq is not None else []
-            out.append(f"| {c} | {s1(g(c, 'base'))} | " + " | ".join(cells) + f" | {s1(g(c, 'pwd24'))} | {s1(vb)} | {s1(vq)} |")
+                tot["q"].append(g(c, "qwen2fps")); tot["pwd24"].append(g(c, "pwd24")); tot["vs_q"].append(vq)
+            out.append(f"| {c} | {s1(g(c, 'qwen2fps'))} | " + " | ".join(cells) + f" | {s1(g(c, 'pwd24'))} | {s1(vq)} |")
         star = lambda k: "*" if k != TIERS[0][0] and TIERS[[x for x, _ in TIERS].index(k) - 1][1] not in arms else ""
         tm = {k: mean(v) for k, v in tot.items()}
-        share = lambda k: f" ({100 * tm[k] / tm['vs_base']:.0f}%)" if tm[k] is not None and tm["vs_base"] else ""
-        out.append(f"| **mean** ({len(complete)} clips with every arm) | {s1(tm['base'])} | " +
+        # share of the saving over qwen2fps; only meaningful where pwd24 is faster than qwen2fps
+        share = lambda k: f" ({100 * tm[k] / tm['vs_q']:.0f}%)" if tm[k] is not None and tm["vs_q"] and tm["vs_q"] > 0 else ""
+        out.append(f"| **mean** ({len(complete)} clips with every arm) | {s1(tm['q'])} | " +
                    " | ".join(s1(tm[k]) + (star(k) if tm[k] is not None else "") + share(k) for k, _ in TIERS) +
-                   f" | {s1(tm['pwd24'])} | {s1(tm['vs_base'])} | {s1(tm['vs_q'])} |\n")
-        summ2.append(f"| {name} ({len(complete)}) | {s1(tm['base'])} | " +
+                   f" | {s1(tm['pwd24'])} | {s1(tm['vs_q'])} |\n")
+        summ2.append(f"| {name} ({len(complete)}) | {s1(tm['q'])} | " +
                      " | ".join(s1(tm[k]) + (star(k) if tm[k] is not None else "") + share(k) for k, _ in TIERS) +
-                     f" | {s1(tm['pwd24'])} | {s1(tm['vs_base'])} | {s1(tm['vs_q'])} |")
+                     f" | {s1(tm['pwd24'])} | {s1(tm['vs_q'])} |")
 
         # 3. stages, qwen2fps against the design
         keys = [("qwen2fps", "vit"), ("qwen2fps", "prefill_img"), ("qwen2fps", "other"), ("pwd24", "flow_exposed"),
@@ -217,7 +220,7 @@ def main():
         out.append("| **mean** | " + " | ".join(f"{mm(a, 'tokens_llm'):,.0f}" for a in ("qwen2fps", "pwd24")) + " | " +
                    " | ".join(f"{mm(a, 'energy_j'):.0f}" if mm(a, "energy_j") else "—" for a in ea) + " |\n")
     top = ["## Summary\n", "Frames sent, TTFT (mean s) and the speed-up of pwd24 (mean of per-clip ratios):\n", *summ1, "",
-           "Mean seconds saved by each optimization tier, base → pwd24 (share of the saving over base in parentheses):\n", *summ2, ""]
+           "Mean seconds saved by each optimization tier, qwen2fps → pwd24 (share of the saving over qwen2fps in parentheses):\n", *summ2, ""]
     open(f"{prefix}.md", "w").write("\n".join(top + out) + "\n")
     print(f"{len(rows)} rows -> {prefix}.csv, {prefix}.md")
 
