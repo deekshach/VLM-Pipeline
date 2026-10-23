@@ -16,6 +16,9 @@ Per clip and config:
   diversity   tokens      visual tokens the LLM receives (drop-clean: the key frame + the re-encoded windows)
               spec_H      spectral entropy (bits) of those tokens; 2**spec_H = effective rank. Grows with the token
                           count by construction (at most log2(min(tokens, 3584))), so read it next to `tokens`
+              spec_Hm     count-matched spec_H: every config of the clip subsampled to the same number of tokens (the
+                          fewest any config of that clip sends), mean of N_DRAW random draws -- the fair comparison
+              spec_Hn     spec_H / log2(min(tokens, 3584)), the share of its maximum
               redund      mean cosine between the frames' mean tokens (Qwen 2 fps: per frame pair); 1 = duplicates
   coverage    t_cover     mean over the clip's frames of the best cosine to a frame the run sent (mean tokens)
               tok_recall  mean over the clip's tokens of the best cosine to a token the run sent
@@ -53,6 +56,7 @@ WIN = 4          # tokens per window side (the ViT's 112 px windows)
 K_SUB = 64       # principal directions for sub_energy
 K_CB = 64        # codebook cells
 MAX_TOK = 8192
+N_DRAW = 3       # random draws for spec_Hm
 RNG = np.random.default_rng(0)
 unit = aa.unit
 
@@ -156,6 +160,7 @@ def token_metrics(run, ref, cb, p_ref):
     x = np.concatenate([g["sent"] for g in run["groups"]])
     w, top = eig_unit(x)
     out = dict(tokens=len(x), spec_H=spec_entropy(w))
+    out["spec_Hn"] = out["spec_H"] / np.log2(min(len(x), x.shape[1]))
     means = unit(np.stack([g["x"].mean(0) for g in run["groups"]]))   # per frame (pair), whole image
     if len(means) > 1:
         s = means @ means.T
@@ -252,11 +257,14 @@ def main():
             if dn and da:
                 allx = np.concatenate([f["x"] for f in dn.values()] + [f["x"] for f in da.values()])
                 cb = aa.kmeans(sub(allx, 20000), K_CB)
+            sent = {}   # cfg -> (row, tokens the LLM receives), for spec_Hm
             for c in CFGS:
                 run = load(ds, c, v)
                 if run is None:
                     continue
                 row = dict(dataset=ds, clip=v, cfg=c, frames=len(run["paths"]))
+                if run["groups"]:
+                    sent[c] = (row, np.concatenate([g["sent"] for g in run["groups"]]))
                 if run["groups"] and cb is not None:
                     f0 = next(iter(da.values()))
                     aligned = (run["groups"][0]["nx"], run["groups"][0]["ny"]) == (f0["nx"], f0["ny"])
@@ -282,6 +290,12 @@ def main():
                         vids[c, v] = unit(F.mean(0))
                 rows.append(row)
                 print(ds, v, c, {k: round(x, 3) for k, x in row.items() if isinstance(x, float)}, flush=True)
+            if sent:
+                m = min(len(x) for _, x in sent.values())
+                for row, x in sent.values():
+                    row["spec_Hm"] = float(np.mean([spec_entropy(eig_unit(x[RNG.choice(len(x), m, replace=False)])[0])
+                                                    for _ in range(N_DRAW)]))
+                    row["matched_tokens"] = m
         # retrieval: each clip's mean frame embedding against every clip's mean caption embedding
         if caps:
             cv = sorted(caps)
@@ -291,7 +305,7 @@ def main():
                     s = C @ vids[row["cfg"], row["clip"]]
                     row["clip_r1"] = float(cv[int(np.argmax(s))] == row["clip"])
 
-    keys = ["frames", "tokens", "spec_H", "redund", "t_cover", "tok_recall", "tok_prec", "sub_energy", "cb_cover",
+    keys = ["frames", "tokens", "spec_H", "spec_Hm", "matched_tokens", "spec_Hn", "redund", "t_cover", "tok_recall", "tok_prec", "sub_energy", "cb_cover",
             "cb_jsd", "cos_key", "cos_reenc", "cos_reused", "frac_sent", "clip_ground", "clip_mc", "clip_r1"]
     with open(f"{ACC}/vision_metrics.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=["dataset", "clip", "cfg"] + keys, extrasaction="ignore")
