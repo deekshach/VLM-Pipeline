@@ -1,6 +1,6 @@
 #!/bin/bash
 # Characterization: TTFT and its stages vs the number of uniformly sampled frames, at baseline (stock kernels, no
-# switches, ViT flash attention off). tegrastats runs beside each request (100 ms) for power and memory, and the
+# switches; ViT flash attention off, or on with VIT_FA=on: results in <out_dir>_fa). tegrastats runs beside each request (100 ms) for power and memory, and the
 # board's over-current event counter (oc3, the hardware throttle) is recorded before and after it (<run>.oc3).
 # The board guard pauses requests on every oc3 event, which would add its pauses to the timings: stop it for the
 # sweep and restart it afterwards.
@@ -11,7 +11,9 @@ HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO="$(cd "$HERE/../.." && pwd)"
 source "$REPO/dmc955/model_config.sh"
 BIN="$REPO/build/bin/llama-jetson-vlm"
+VIT_FA="${VIT_FA:-off}"
 OUT="${1:-$REPO/jetson/experiments/frame_sweep}"
+[ "$VIT_FA" = on ] && [ $# -lt 1 ] && OUT="${OUT}_fa"
 V="${2:-alley_1}"
 NS="${3:-1,2,4,8,16,24,32,48}"
 mkdir -p "$OUT"
@@ -24,7 +26,7 @@ for N in ${NS//,/ }; do
     tegrastats --interval 100 --logfile "$OUT/${V}__f${N}.tegrastats" &
     # -c 32768 for every N: 48 frames are ~28k image tokens
     "$BIN" -m "$MODEL" --mmproj "$MMPROJ" --video "$V" --baseline --base-frames $N -p "$P" -n 8 -ngl 99 -c 32768 \
-        --vit-flash-attn off --output-json "$J" > "$OUT/${V}__f${N}.log" 2>&1 || echo "FAIL $V f$N"
+        --vit-flash-attn $VIT_FA --output-json "$J" > "$OUT/${V}__f${N}.log" 2>&1 || echo "FAIL $V f$N"
     tegrastats --stop
     echo "after $(cat $OC)" >> "$OUT/${V}__f${N}.oc3"
     sleep 2
