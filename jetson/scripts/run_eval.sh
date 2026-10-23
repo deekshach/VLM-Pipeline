@@ -5,7 +5,7 @@
 #   bash jetson/scripts/run_eval.sh <e1|e3|e4|e6|e8|e9|e10|e11|e12|e13> [minutes=60]
 #
 #   e1  headline TTFT + accuracy: base, uni_arch, pw24 (the design), pwd24 (+ drop-clean) on all 123 clips of the
-#       seven datasets (MSVD: the 45-clip set)
+#       seven datasets (MSVD: the 45-clip set); with VIT_FA=on also uni4 and ours_nocache, so each tier has its own run
 #   e3  attribution ladder, one switch added per step, on six Sintel clips, 3 repetitions
 #   e4  accuracy vs TTFT: uniform 4 / 16 frames with the kernel switches (uni4, uni16), cache threshold 12 / 36
 #       (pw12, pw36) on NExT-QA, Video-MME, Perception Test and Charades
@@ -57,6 +57,10 @@ ACC=/home/nvidia/data/accuracy
 OUTROOT=$ACC/runs_eval
 VIT_FA="${VIT_FA:-off}"
 [ "$VIT_FA" = on ] && OUTROOT=$ACC/runs_eval_fa
+# E1 arms; with ViT flash attention on, every tier of the design on every clip: kernels (base -> uni_arch), frame count
+# (-> uni4), motion selection (-> ours_nocache), window cache (-> pw24), drop-clean (-> pwd24)
+E1_ARMS="base uni_arch pw24 pwd24"
+[ "$VIT_FA" = on ] && E1_ARMS="base uni_arch uni4 ours_nocache pw24 pwd24"
 TABLE="$REPO/jetson/gemm/table_orin.txt"
 GUARD_LOG=$ACC/board_guard.log
 COOL_TJ="${COOL_TJ:-55}"; STOP_TJ="${STOP_TJ:-80}"; BURST_MIN="${BURST_MIN:-20}"; COOL_MIN="${COOL_MIN:-5}"
@@ -141,7 +145,7 @@ cfg() {
 jobs() {
     case "$EXP" in
         e1) for D in sintel msvd charades nextqa videomme perception tacos; do
-                for V in $(clips $D); do for C in base uni_arch pw24 pwd24; do echo "$D $C 1 $V"; done; done; done ;;
+                for V in $(clips $D); do for C in $E1_ARMS; do echo "$D $C 1 $V"; done; done; done ;;
         e3) for R in 1 2 3; do for V in alley_1 sleeping_1 bandage_1 temple_2 ambush_5 cave_2; do
                 for C in base l1_sel l2_anchor l3_align l4_winbatch l5_f32bias l6_table l7_actfuse pw24 pwd24; do
                     echo "sintel $C $R $V"; done; done; done ;;
