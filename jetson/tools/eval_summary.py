@@ -17,8 +17,9 @@ e5     overheads and where the time goes, per dataset and config: mean optical f
 e12    ViT flash attention on vs off, per dataset, for base and the design (pw24) on the e12 clips: mean TTFT and ViT
        time each way, the speed-up from turning it on (mean of per-clip ratios), the design's speed-up over base under
        each setting, how often the answer is unchanged, and multiple-choice accuracy.
-e3     the attribution ladder on six Sintel clips: per step the median over the 3 repetitions of each clip, averaged
-       over clips, and the saving of each step.
+e3     the attribution ladder on TACoS and the six Perception Test e3 clips: per step the run with the median TTFT of the
+       3 repetitions of each clip, averaged over clips (TTFT, ViT, image prefill), the spread of the repetitions, and
+       the saving of each step.
 e4     accuracy vs TTFT points for the multiple-choice sets: uniform 4 / 8 / 16 frames with the kernel switches and the
        design at cache threshold 12 / 24 / 36 (uni_arch and pw24 come from e1).
 Energy = module power (GPU/SoC + CPU/CV + 5 V rails, mean over samples with the GPU >= 50% busy) x TTFT.
@@ -156,22 +157,31 @@ def e12():
 
 def e3():
     steps = ["base", "l1_sel", "l2_anchor", "l3_align", "l4_winbatch", "l5_f32bias", "l6_table", "l7_actfuse", "pw24", "pwd24"]
-    vids = ["alley_1", "sleeping_1", "bandage_1", "temple_2", "ambush_5", "cave_2"]
-    out = ["| step | clips | TTFT ms (mean over clips of the median of 3) | saving vs previous step | vs base |", "|---|---|---|---|---|"]
-    prev = first = None
-    for s in steps:
-        per = []
-        for v in vids:
-            reps = [run("sintel", s + suf, v) for suf in ("", "_r2", "_r3")]
-            reps = [r["ttft"] for r in reps if r]
-            if reps:
-                per.append(st.median(reps))
-        if not per:
+    part = lambda r, k: r["t"]["breakdown"].get("rest", {}).get(k, 0) + r["t"]["breakdown"].get("anchor", {}).get(k, 0)
+    out = []
+    for ds in ("tacos", "perception"):
+        vids = clips(ds, "base_r2")
+        if not vids:
             continue
-        m = st.mean(per)
-        first = first or m
-        out.append(f"| {s} | {len(per)} | {fmt(m)} | {fmt(prev - m) + ' ms' if prev else ''} | {fmt(first / m, 2)}x |")
-        prev = m
+        out += [f"\n**{ds}** ({len(vids)} clips x 3 repetitions)\n",
+                "| step | clips | frames | TTFT ms | ViT ms | image prefill ms | spread of the 3 reps | saving vs previous step | vs base |",
+                "|---|---|---|---|---|---|---|---|---|"]
+        prev = first = None
+        for s in steps:
+            per = []
+            for v in vids:
+                reps = [r for r in (run(ds, s + suf, v) for suf in ("", "_r2", "_r3")) if r]
+                if reps:
+                    med = sorted(reps, key=lambda r: r["ttft"])[len(reps) // 2]
+                    per.append((med, (max(r["ttft"] for r in reps) - min(r["ttft"] for r in reps)) / med["ttft"]))
+            if not per:
+                continue
+            m = st.mean(r["ttft"] for r, _ in per)
+            first = first or m
+            out.append(f"| {s} | {len(per)} | {fmt(st.mean(r['frames'] for r, _ in per), 1)} | {fmt(m)} | "
+                       f"{fmt(st.mean(part(r, 'vit_ms') for r, _ in per))} | {fmt(st.mean(part(r, 'prefill_img_ms') for r, _ in per))} | "
+                       f"{100 * st.mean(x for _, x in per):.0f}% | {fmt(prev - m) + ' ms' if prev else ''} | {fmt(first / m, 2)}x |")
+            prev = m
     return out
 
 

@@ -9,7 +9,7 @@ Per clip and arm: TTFT and its stages, summing to TTFT
   llama-jetson-vlm  flow exposed (live optical flow not hidden behind the anchor frame), ViT, image prefill, text
                     prefill, other (frame load, tokenize, selection, the cache's change test); flow hidden is the
                     part of the flow that ran under the anchor frame's ViT and prefill
-plus energy to the first token (eval_summary.py), peak board RAM (tegrastats; CSV only: it includes the OS), visual tokens encoded and prefilled, and the
+plus energy to the first token (power_analysis.py: the rails integrated over the samples up to it), peak board RAM (tegrastats; CSV only: it includes the OS), visual tokens encoded and prefilled, and the
 window cache's frame actions. qwen2fps TTFT includes writing its token dump (the qwen2fps_nodump runs are at the older,
 smaller frame size on Sintel and MSVD, so they are not used; on Charades-STA, at the same size, the dump costs nothing
 measurable).
@@ -28,6 +28,7 @@ import csv, json, os, re, statistics as st, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import eval_summary as E
+import power_analysis as P
 
 ARMS = ["qwen2fps", "base", "uni_arch", "uni4", "ours_nocache", "pw24", "pwd24"]
 TIERS = [("input", "base"), ("kernels", "uni_arch"), ("frames", "uni4"), ("adaptive", "ours_nocache"), ("cache", "pw24"), ("drop", "pwd24")]
@@ -47,7 +48,8 @@ def row(ds, arm, clip):
     r = E.run(ds, cfg, clip)
     if not r:
         return None
-    d = dict(dataset=ds, clip=clip, arm=arm, ttft=r["ttft"], energy_j=r["energy"], oc3=r["oc3"],
+    pr = P.row(ds, cfg, clip, 0.0)
+    d = dict(dataset=ds, clip=clip, arm=arm, ttft=r["ttft"], energy_j=pr[0]["e_ttft"] if pr else None, oc3=r["oc3"],
              ram_peak_mb=peak_ram(ds, cfg, clip), frames=r["frames"], tokens_vit=r["tokens"])
     if arm == "qwen2fps":
         q = json.load(open(f"{E.R}/{ds}/{cfg}/{clip}.json"))["requests"][0]
@@ -215,10 +217,10 @@ def main():
         g = lambda c, a, k: get[(c, a)][k] if (c, a) in get and get[(c, a)].get(k) is not None else None
         for c in cl:
             out.append(f"| {c} | " + " | ".join(f"{g(c, a, 'tokens_llm'):,}" if g(c, a, "tokens_llm") is not None else "—" for a in ("qwen2fps", "pwd24")) +
-                       " | " + " | ".join(f"{g(c, a, 'energy_j'):.0f}" if g(c, a, "energy_j") else "—" for a in ea) + " |")
+                       " | " + " | ".join(f"{g(c, a, 'energy_j'):,.0f}" if g(c, a, "energy_j") else "—" for a in ea) + " |")
         mm = lambda a, k: mean([g(c, a, k) for c in cl if g(c, a, k) is not None])
         out.append("| **mean** | " + " | ".join(f"{mm(a, 'tokens_llm'):,.0f}" for a in ("qwen2fps", "pwd24")) + " | " +
-                   " | ".join(f"{mm(a, 'energy_j'):.0f}" if mm(a, "energy_j") else "—" for a in ea) + " |\n")
+                   " | ".join(f"{mm(a, 'energy_j'):,.0f}" if mm(a, "energy_j") else "—" for a in ea) + " |\n")
     top = ["## Summary\n", "Frames sent, TTFT (mean s) and the speed-up of pwd24 (mean of per-clip ratios):\n", *summ1, "",
            "Mean seconds saved by each optimization tier, qwen2fps → pwd24 (share of the saving over qwen2fps in parentheses):\n", *summ2, ""]
     open(f"{prefix}.md", "w").write("\n".join(top + out) + "\n")
