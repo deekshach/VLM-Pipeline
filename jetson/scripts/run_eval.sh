@@ -124,6 +124,11 @@ cfg() {
         uni_arch)  echo "8 --baseline --window-align $ARCH" ;;
         uni4)      echo "4 --baseline --window-align $ARCH" ;;
         uni16)     echo "16 --baseline --window-align $ARCH" ;;
+        # E14, equal frames: the same N uniform frames for every arm, one optimization tier added per arm
+        base4)     echo "4 --baseline" ;;
+        base16)    echo "16 --baseline" ;;
+        ucw4|ucw8|ucw16)    echo "${1#ucw} --baseline --window-align $ARCH --wc-per-window --wc-threshold 24" ;;
+        ucwd4|ucwd8|ucwd16) echo "${1#ucwd} --baseline --window-align $ARCH --wc-per-window --wc-drop-clean --wc-threshold 24" ;;
         ours_nocache) echo "8 --live-flow $OFA --window-align $ARCH --anchor-first" ;;
         # E3 ladder: each step adds to the previous one
         l1_sel)      echo "8 $L" ;;
@@ -154,6 +159,10 @@ jobs() {
                         echo "${DV%%:*} $C $R ${DV#*:}"; done; done; done ;;
         e4) for D in nextqa videomme perception charades; do
                 for V in $(clips $D); do for C in uni4 uni16 pw12 pw36; do echo "$D $C 1 $V"; done; done; done ;;
+        e14) for D in tacos perception videomme sintel; do
+                for V in $(clips $D); do
+                    for C in base4 uni4 ucw4 ucwd4 base uni_arch ucw8 ucwd8 base16 uni16 ucw16 ucwd16; do echo "$D $C 1 $V"; done
+                done; done ;;
         e6) for D in nextqa tacos; do
                 for V in $(clips $D); do for C in base pw24; do echo "$D $C 1 $V"; done; done; done ;;
         e8) for D in sintel msvd charades nextqa videomme perception tacos; do
