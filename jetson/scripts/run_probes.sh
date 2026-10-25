@@ -44,7 +44,7 @@ VIT_ENV="MTMD_VIT_WINDOW_BATCH=1 $LLM_ENV GGML_CUDA_JETSON_ROPE_F16=1"
 
 if [[ " $PARTS " == *" B "* ]]; then
     NS=$(seq -s, 576 64 2560),$(seq -s, 3072 512 6144)
-    for CFG in stock design; do
+    for CFG in ${B_CFGS:-stock design}; do   # B_CFGS=design: only that one
         E=""; [ $CFG = design ] && E="$LLM_ENV"
         cool; log "B prefill $CFG"
         # shellcheck disable=SC2086
