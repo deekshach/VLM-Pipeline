@@ -10,6 +10,8 @@
 #       (static camera) and 6 Perception Test videos (one question each); repetition 1 of base, pw24, pwd24 is E1's run
 #   e4  accuracy vs TTFT: uniform 4 / 16 frames with the kernel switches (uni4, uni16), cache threshold 12 / 36
 #       (pw12, pw36) on NExT-QA, Video-MME, Perception Test and Charades
+#   e15 15 W (POWER_TAG=_15w): equal frames at 8, the ladder on TACoS, uni4 / ucwd4 / pw24 / pwd24 / qwen2fps, 5 clips
+#       per dataset (Sintel: the six of e12)
 #   e6  base and pw24 on NExT-QA and TACoS, run under 30W (the script then expects MODE_30W)
 #   e8  qwen2fps on all 123 clips: Qwen2.5-VL's own video input -- every frame of its 2 fps sampling (qwen-vl-utils
 #       smart_nframes, frames from video_redundancy.py, long side <= 644 px) fed as the reference does, two frames per
@@ -163,6 +165,16 @@ jobs() {
         e14) for D in tacos perception videomme sintel; do
                 for V in $(clips $D); do
                     for C in base4 uni4 ucw4 ucwd4 base uni_arch ucw8 ucwd8 base16 uni16 ucw16 ucwd16; do echo "$D $C 1 $V"; done
+                done; done ;;
+        # E15, 15 W (run with POWER_TAG=_15w): 5 clips per dataset (Sintel: the six of e12), per clip the equal-frames
+        # tiers at 8 frames, the ladder (TACoS), then 4 uniform frames, uniform + cache + drop-clean, the design, qwen2fps
+        e15) for D in tacos perception videomme sintel nextqa; do
+                if [ $D = sintel ]; then VS="alley_1 sleeping_1 bandage_1 temple_2 ambush_5 cave_2"
+                else VS=$(clips $D | tr ' ' '\n' | grep -v '^$' | head -5); fi
+                for V in $VS; do
+                    for C in base uni_arch ucw8 ucwd8; do echo "$D $C 1 $V"; done
+                    [ $D = tacos ] && for C in l1_sel l2_anchor l3_align l4_winbatch l5_f32bias l6_table l7_actfuse; do echo "$D $C 1 $V"; done
+                    for C in uni4 ucwd4 pwd24 pw24 qwen2fps; do echo "$D $C 1 $V"; done
                 done; done ;;
         e6) for D in nextqa tacos; do
                 for V in $(clips $D); do for C in base pw24; do echo "$D $C 1 $V"; done; done; done ;;
