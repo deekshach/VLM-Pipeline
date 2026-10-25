@@ -11,7 +11,8 @@
 #   e4  accuracy vs TTFT: uniform 4 / 16 frames with the kernel switches (uni4, uni16), cache threshold 12 / 36
 #       (pw12, pw36) on NExT-QA, Video-MME, Perception Test and Charades
 #   e15 15 W (POWER_TAG=_15w): equal frames at 8, the ladder on TACoS, uni4 / ucwd4 / pw24 / pwd24 / qwen2fps, 5 clips
-#       per dataset (Sintel: the six of e12)
+#       per dataset (Sintel: the six of e12), all seven datasets
+#   e15t the kernel arms with a GEMM table retuned for 15 W (POWER_TAG=_15w_t15w GEMM_TABLE=...), TACoS + Perception
 #   e6  base and pw24 on NExT-QA and TACoS, run under 30W (the script then expects MODE_30W)
 #   e8  qwen2fps on all 123 clips: Qwen2.5-VL's own video input -- every frame of its 2 fps sampling (qwen-vl-utils
 #       smart_nframes, frames from video_redundancy.py, long side <= 644 px) fed as the reference does, two frames per
@@ -64,7 +65,8 @@ VIT_FA="${VIT_FA:-off}"
 # (-> uni4), motion selection (-> ours_nocache), window cache (-> pw24), drop-clean (-> pwd24)
 E1_ARMS="base uni_arch pw24 pwd24"
 [ "$VIT_FA" = on ] && E1_ARMS="base uni_arch uni4 ours_nocache pw24 pwd24"
-TABLE="$REPO/jetson/gemm/table_orin.txt"
+# GEMM_TABLE: another tuned table (e.g. gemm/table_orin_15w.txt, retuned for that power mode) for the kernel arms
+TABLE="${GEMM_TABLE:-$REPO/jetson/gemm/table_orin.txt}"
 GUARD_LOG=$ACC/board_guard.log
 COOL_TJ="${COOL_TJ:-55}"; STOP_TJ="${STOP_TJ:-80}"; BURST_MIN="${BURST_MIN:-20}"; COOL_MIN="${COOL_MIN:-5}"
 OC=$(grep -l soctherm_oc /sys/class/hwmon/hwmon*/name | head -1 | xargs dirname)/oc3_event_cnt
@@ -74,7 +76,7 @@ log() { echo "[$(date +%T)] $*"; }
 
 # the board must be in the expected mode with clocks pinned
 WANT_MODE=MAXN; [ "$EXP" = e6 ] && WANT_MODE=MODE_30W
-case "${POWER_TAG:-}" in _15w) WANT_MODE=MODE_15W ;; _30w) WANT_MODE=MODE_30W ;; esac
+case "${POWER_TAG:-}" in _15w*) WANT_MODE=MODE_15W ;; _30w*) WANT_MODE=MODE_30W ;; esac
 MODE=$(nvpmodel -q 2>/dev/null | head -1 | sed 's/.*: //')
 F=/sys/class/devfreq/17000000.gpu
 if [ "$MODE" != "$WANT_MODE" ] || [ "$(cat $F/cur_freq)" != "$(cat $F/max_freq)" ] || [ "$(cat $F/min_freq)" != "$(cat $F/max_freq)" ]; then
@@ -168,7 +170,7 @@ jobs() {
                 done; done ;;
         # E15, 15 W (run with POWER_TAG=_15w): 5 clips per dataset (Sintel: the six of e12), per clip the equal-frames
         # tiers at 8 frames, the ladder (TACoS), then 4 uniform frames, uniform + cache + drop-clean, the design, qwen2fps
-        e15) for D in tacos perception videomme sintel nextqa; do
+        e15) for D in tacos perception videomme sintel nextqa msvd charades; do
                 if [ $D = sintel ]; then VS="alley_1 sleeping_1 bandage_1 temple_2 ambush_5 cave_2"
                 else VS=$(clips $D | tr ' ' '\n' | grep -v '^$' | head -5); fi
                 for V in $VS; do
@@ -176,6 +178,11 @@ jobs() {
                     [ $D = tacos ] && for C in l1_sel l2_anchor l3_align l4_winbatch l5_f32bias l6_table l7_actfuse; do echo "$D $C 1 $V"; done
                     for C in uni4 ucwd4 pwd24 pw24 qwen2fps; do echo "$D $C 1 $V"; done
                 done; done ;;
+        # E15t: the kernel arms again with the GEMM table retuned for 15 W (POWER_TAG=_15w_t15w,
+        # GEMM_TABLE=jetson/gemm/table_orin_15w.txt), on the TACoS and Perception Test clips of e15
+        e15t) for D in tacos perception; do
+                for V in $(clips $D | tr ' ' '\n' | grep -v '^$' | head -5); do
+                    for C in uni_arch ucwd8 uni4 pwd24; do echo "$D $C 1 $V"; done; done; done ;;
         e6) for D in nextqa tacos; do
                 for V in $(clips $D); do for C in base pw24; do echo "$D $C 1 $V"; done; done; done ;;
         e8) for D in sintel msvd charades nextqa videomme perception tacos; do

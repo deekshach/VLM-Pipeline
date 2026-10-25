@@ -9,6 +9,9 @@
 // nsys and ncu can select it.
 //
 //   jetson-vit-probe <model.gguf> <mmproj.gguf> <frame.png> <shapes e.g. 9x4,5x2> [warm=2] [reps=5] [fa=on|off]
+//   jetson-vit-probe <model.gguf> <mmproj.gguf> <frame.png> w:<k list e.g. 1,4,9,18,36> [warm] [reps] [fa]
+//     per-window mode: the whole frame is the key frame, then k of its windows re-encoded (the window cache's
+//     per-window path, which needs MTMD_VIT_WINDOW_BATCH=1); 16 tokens per window
 //
 // Environment: PROBE_DUMP_PREFIX=<p> writes each shape's embeddings to <p>_<shape>.f32 (for comparing
 // switches); PROBE_CPU=1 runs the ViT on the CPU (F32-output reference); PROBE_MARK_ALL=1 puts every timed
@@ -101,6 +104,67 @@ int main(int argc, char ** argv) {
     auto round_to = [](int v) { return std::max(WINDOW_PX, (int)std::lround((double)v / WINDOW_PX) * WINDOW_PX); };
     const rgb frame = resize_bilinear(raw, round_to(raw.w), round_to(raw.h));
     printf("frame %dx%d px -> %dx%d windows, flash attention %s\n", frame.w, frame.h, frame.w / WINDOW_PX, frame.h / WINDOW_PX, fa ? "on" : "off");
+
+    if (strncmp(argv[4], "w:", 2) == 0) {
+        // Per-window re-encode (the window cache's --wc-per-window path): encode the whole frame once through
+        // mtmd_encode_chunk_windows, which fills the encoder's K/V cache as a key frame does, then re-encode
+        // exactly k windows, spread evenly over the frame, for each k in the list. NVTX range "vitw_<k>".
+        mtmd_bitmap * fb = mtmd_bitmap_init(frame.w, frame.h, frame.px.data());
+        mtmd_input_chunks * chunks = mtmd_input_chunks_init();
+        mtmd_input_text text = { mtmd_default_marker(), false, true };
+        const mtmd_bitmap * fbp = fb;
+        if (mtmd_tokenize(vctx, chunks, &text, &fbp, 1) != 0) return 1;
+        const mtmd_input_chunk * img = nullptr;
+        for (size_t k = 0; k < mtmd_input_chunks_size(chunks); k++) {
+            const mtmd_input_chunk * ch = mtmd_input_chunks_get(chunks, k);
+            if (mtmd_input_chunk_get_type(ch) == MTMD_INPUT_CHUNK_TYPE_IMAGE) img = ch;
+        }
+        if (!img) return 1;
+        const int nw = (frame.w / WINDOW_PX) * (frame.h / WINDOW_PX);
+        std::vector<int32_t> all(nw);
+        for (int w = 0; w < nw; w++) all[w] = w;
+        // a plain encode first: it allocates the encoder's buffers (its warm-up graph knows no per-window state)
+        if (mtmd_encode_chunk(vctx, img) != 0) return 1;
+        for (int i = 0; i < warm; i++) if (mtmd_encode_chunk_windows(vctx, img, all.data(), nw) != 0) return 1;
+        {   // the whole frame through the per-window path, timed: the key-frame cost the k-window encodes compare to
+            std::vector<double> t;
+            for (int i = 0; i < reps; i++) {
+                const double t0 = now_ms();
+                if (mtmd_encode_chunk_windows(vctx, img, all.data(), nw) != 0) return 1;
+                t.push_back(now_ms() - t0);
+            }
+            std::sort(t.begin(), t.end());
+            printf("key frame (all %d windows): median %.2f ms, min %.2f ms\n", nw, t[t.size() / 2], t[0]);
+        }
+        printf("windows,of,tokens,median_ms,min_ms\n");
+        std::stringstream ws(argv[4] + 2);
+        std::string item;
+        while (std::getline(ws, item, ',')) {
+            const int k = std::min(nw, std::max(1, atoi(item.c_str())));
+            std::vector<int32_t> wins;
+            for (int i = 0; i < k; i++) wins.push_back((int32_t)((long)i * nw / k));
+            if (mtmd_encode_chunk_windows(vctx, img, all.data(), nw) != 0) return 1;   // a fresh key frame
+            for (int i = 0; i < warm; i++) if (mtmd_encode_chunk_windows(vctx, img, wins.data(), k) != 0) return 1;
+            std::vector<double> t;
+            const std::string range = "vitw_" + std::to_string(k);
+            for (int i = 0; i < reps; i++) {
+                const bool mark = i == reps - 1 || mark_all;
+                if (mark) nvtxRangePushA(range.c_str());
+                const double t0 = now_ms();
+                if (mtmd_encode_chunk_windows(vctx, img, wins.data(), k) != 0) return 1;
+                t.push_back(now_ms() - t0);
+                if (mark) nvtxRangePop();
+            }
+            std::vector<double> s = t; std::sort(s.begin(), s.end());
+            printf("%d,%d,%d,%.2f,%.2f\n", k, nw, k * 16, s[s.size() / 2], s[0]);
+            fflush(stdout);
+        }
+        mtmd_input_chunks_free(chunks);
+        mtmd_bitmap_free(fb);
+        mtmd_free(vctx);
+        llama_model_free(model);
+        return 0;
+    }
 
     printf("shape,windows,tokens,patches,median_ms,min_ms\n");
     std::stringstream ss(argv[4]);

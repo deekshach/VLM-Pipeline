@@ -13,6 +13,8 @@
 #   C. Nsight Compute, the last 512-token ubatch of an 8-frame image prefill (4,608 tokens), the ladder steps that
 #      touch the LLM: base, f32bias, table, actfuse, design -> experiments/profiles/microarch_ladder/llm_<cfg>
 # Afterwards (no sudo): python3 jetson/tools/microarch_ladder.py jetson/experiments/profiles/microarch_ladder
+# PM=15w (or 30w, 50w): under that nvpmodel mode instead of MAXN; profiles go to microarch_ladder_<PM> and the
+# nsys traces get the suffix _<PM>, beside the MAXN ones.
 set -u
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO="$(cd "$HERE/../.." && pwd)"
@@ -21,6 +23,8 @@ M=/home/nvidia/data/models/Qwen2.5VL
 FRAME=/home/nvidia/data/MPI-Sintel/training/clean/alley_1/frame_0001.png
 TABLE="$REPO/jetson/gemm/table_orin.txt"
 OUT="$REPO/jetson/experiments/profiles/microarch_ladder"
+PM="${PM:-maxn}"; WANT=MAXN; SUF=""
+if [ "$PM" != maxn ]; then WANT="MODE_${PM^^}"; OUT="${OUT}_$PM"; SUF="_$PM"; fi
 GUARD_LOG=/home/nvidia/data/accuracy/board_guard.log
 USR="${SUDO_USER:-$(id -un)}"
 TZ=$(grep -l tj-thermal /sys/devices/virtual/thermal/thermal_zone*/type | head -1 | xargs dirname)/temp
@@ -36,8 +40,8 @@ if [ -n "${1:-}" ]; then
 fi
 F=/sys/class/devfreq/17000000.gpu
 MODE=$(nvpmodel -q 2>/dev/null | head -1 | sed 's/.*: //')
-if [ "$MODE" != MAXN ] || [ "$(cat $F/min_freq)" != "$(cat $F/max_freq)" ]; then
-    log "board is '$MODE', clocks $(cat $F/min_freq)-$(cat $F/max_freq): want MAXN pinned (sudo jetson_clocks)"; exit 1
+if [ "$MODE" != "$WANT" ] || [ "$(cat $F/min_freq)" != "$(cat $F/max_freq)" ]; then
+    log "board is '$MODE', clocks $(cat $F/min_freq)-$(cat $F/max_freq): want $WANT pinned (sudo jetson_clocks)"; exit 1
 fi
 GPID=$(pgrep -x bash -a | awk '/board_guard.sh \/home/ {print $1}')
 [ -n "$GPID" ] && kill "$GPID" && echo "[$(date +%T)] guard stopped by run_microarch_fa.sh (restarted on exit)" >> "$GUARD_LOG"
@@ -70,11 +74,11 @@ export_csv() {
 # A. nsys, whole request
 ARCH="--vit-window-batch --gemm-f32-out --gemm-bias-fuse --gemm-table $TABLE --act-fuse --vit-rope-f16"
 cool; log "A stock_fa"
-sudo -u "$USR" bash "$HERE/profile_nsys.sh" stock_fa alley_1 --baseline --vit-flash-attn on | tail -3
+sudo -u "$USR" bash "$HERE/profile_nsys.sh" stock_fa$SUF alley_1 --baseline --vit-flash-attn on | tail -3
 cool; log "A design_fa"
-sudo -u "$USR" bash "$HERE/profile_nsys.sh" design_fa alley_1 --baseline --window-align $ARCH --gemm-residual-fuse --vit-flash-attn on | tail -3
+sudo -u "$USR" bash "$HERE/profile_nsys.sh" design_fa$SUF alley_1 --baseline --window-align $ARCH --gemm-residual-fuse --vit-flash-attn on | tail -3
 cool; log "A design_nores_fa"
-sudo -u "$USR" bash "$HERE/profile_nsys.sh" design_nores_fa alley_1 --baseline --window-align $ARCH --vit-flash-attn on | tail -3
+sudo -u "$USR" bash "$HERE/profile_nsys.sh" design_nores_fa$SUF alley_1 --baseline --window-align $ARCH --vit-flash-attn on | tail -3
 
 # B. ncu, one full-frame ViT encode per ladder step
 for CFG in base winbatch f32bias table actfuse ropef16 design; do
