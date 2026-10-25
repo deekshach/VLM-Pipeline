@@ -72,6 +72,7 @@ log() { echo "[$(date +%T)] $*"; }
 
 # the board must be in the expected mode with clocks pinned
 WANT_MODE=MAXN; [ "$EXP" = e6 ] && WANT_MODE=MODE_30W
+case "${POWER_TAG:-}" in _15w) WANT_MODE=MODE_15W ;; _30w) WANT_MODE=MODE_30W ;; esac
 MODE=$(nvpmodel -q 2>/dev/null | head -1 | sed 's/.*: //')
 F=/sys/class/devfreq/17000000.gpu
 if [ "$MODE" != "$WANT_MODE" ] || [ "$(cat $F/cur_freq)" != "$(cat $F/max_freq)" ] || [ "$(cat $F/min_freq)" != "$(cat $F/max_freq)" ]; then
