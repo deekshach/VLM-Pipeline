@@ -188,6 +188,8 @@ jobs() {
 
 T_END=$(( $(date +%s) + MINUTES * 60 )); T_BURST=$(date +%s); DONE=0; TODO=0; HOT=0
 TAG=""; [ "$EXP" = e6 ] && TAG="_30w"
+# POWER_TAG (e.g. _15w): results of another nvpmodel mode go to <arm>$POWER_TAG, beside the MAXN ones
+[ -n "$POWER_TAG" ] && TAG="$POWER_TAG"
 while read -r D C R V <&3; do
     [ -n "${DATASETS:-}" ] && [[ " $DATASETS " != *" $D "* ]] && continue
     setds "$D"
