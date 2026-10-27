@@ -13,6 +13,8 @@
 #   e15 15 W (POWER_TAG=_15w): equal frames at 8, the ladder on TACoS, uni4 / ucwd4 / pw24 / pwd24 / qwen2fps, 5 clips
 #       per dataset (Sintel: the six of e12), all seven datasets
 #   e15t the kernel arms with a GEMM table retuned for 15 W (POWER_TAG=_15w_t15w GEMM_TABLE=...), TACoS + Perception
+#   eq8 INT8 LLM weights (MODEL=<Q8_0 gguf>, POWER_TAG=<mode tag>_q8; vision encoder stays BF16): base, uni_arch,
+#       pwd24, qwen2fps on the 5 TACoS clips of e15. A study of quantization beside the BF16 results, not part of them
 #   e6  base and pw24 on NExT-QA and TACoS, run under 30W (the script then expects MODE_30W)
 #   e8  qwen2fps on all 123 clips: Qwen2.5-VL's own video input -- every frame of its 2 fps sampling (qwen-vl-utils
 #       smart_nframes, frames from video_redundancy.py, long side <= 644 px) fed as the reference does, two frames per
@@ -183,6 +185,8 @@ jobs() {
         e15t) for D in tacos perception; do
                 for V in $(clips $D | tr ' ' '\n' | grep -v '^$' | head -5); do
                     for C in uni_arch ucwd8 uni4 pwd24; do echo "$D $C 1 $V"; done; done; done ;;
+        eq8) for V in $(clips tacos | tr ' ' '\n' | grep -v '^$' | head -5); do
+                for C in base uni_arch pwd24 qwen2fps; do echo "tacos $C 1 $V"; done; done ;;
         e6) for D in nextqa tacos; do
                 for V in $(clips $D); do for C in base pw24; do echo "$D $C 1 $V"; done; done; done ;;
         e8) for D in sintel msvd charades nextqa videomme perception tacos; do
