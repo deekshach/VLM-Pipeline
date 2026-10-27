@@ -1,0 +1,163 @@
+part,step,cfg,cls,t_us,dram_mb,kernels,tensor_pct,occ_pct
+vit_window,stock kernels,base,GEMM,15476.9,259.87,2.0,55.0,16.6
+vit_window,stock kernels,base,GEMM split-K,16835.3,184.22,5.0,60.7,16.5
+vit_window,stock kernels,base,add,9963.0,169.34,9.0,3.7,89.2
+vit_window,stock kernels,base,attention,12476.8,123.98,2.0,24.4,24.7
+vit_window,stock kernels,base,cast,17950.2,163.36,14.0,2.2,83.7
+vit_window,stock kernels,base,copy,6953.2,23.61,2.0,2.2,62.6
+vit_window,stock kernels,base,glu,2926.6,63.04,1.0,1.9,85.0
+vit_window,stock kernels,base,norm,6433.7,23.62,2.0,2.1,62.9
+vit_window,stock kernels,base,rope,6106.7,23.64,2.0,1.0,37.0
+vit_window,+ batched window attention,winbatch,GEMM,15464.7,263.11,2.0,55.0,16.6
+vit_window,+ batched window attention,winbatch,GEMM split-K,16826.4,185.51,5.0,60.7,16.5
+vit_window,+ batched window attention,winbatch,add,9965.7,169.34,9.0,3.7,89.3
+vit_window,+ batched window attention,winbatch,attention,1136.9,23.69,1.0,14.0,24.5
+vit_window,+ batched window attention,winbatch,cast,17945.2,163.36,14.0,2.2,83.8
+vit_window,+ batched window attention,winbatch,copy,6948.9,23.61,2.0,2.2,62.5
+vit_window,+ batched window attention,winbatch,glu,2929.1,63.04,1.0,1.9,85.0
+vit_window,+ batched window attention,winbatch,norm,6440.2,23.62,2.0,2.1,62.9
+vit_window,+ batched window attention,winbatch,rope,6105.8,23.64,2.0,1.0,37.0
+vit_window,"+ F32 output, bias in epilogue",f32bias,GEMM,18037.3,294.9,2.0,51.6,16.7
+vit_window,"+ F32 output, bias in epilogue",f32bias,GEMM split-K,17761.3,230.42,5.0,57.7,16.5
+vit_window,"+ F32 output, bias in epilogue",f32bias,add,1730.2,47.19,2.0,3.6,90.2
+vit_window,"+ F32 output, bias in epilogue",f32bias,attention,1137.2,23.69,1.0,13.9,24.5
+vit_window,"+ F32 output, bias in epilogue",f32bias,cast,8185.8,102.33,7.0,2.2,83.5
+vit_window,"+ F32 output, bias in epilogue",f32bias,copy,6949.9,23.61,2.0,2.2,62.5
+vit_window,"+ F32 output, bias in epilogue",f32bias,glu,3375.2,63.04,1.0,1.8,85.0
+vit_window,"+ F32 output, bias in epilogue",f32bias,norm,6875.2,23.63,2.0,2.1,62.9
+vit_window,"+ F32 output, bias in epilogue",f32bias,rope,6545.2,23.64,2.0,1.0,36.9
+vit_window,+ tuned GEMM table,table,GEMM,32171.4,366.81,7.0,57.6,16.6
+vit_window,+ tuned GEMM table,table,add,1726.4,47.19,2.0,3.7,90.2
+vit_window,+ tuned GEMM table,table,attention,1135.1,23.69,1.0,13.9,24.5
+vit_window,+ tuned GEMM table,table,cast,8172.0,102.32,7.0,2.2,83.5
+vit_window,+ tuned GEMM table,table,copy,6948.2,23.61,2.0,2.2,62.5
+vit_window,+ tuned GEMM table,table,glu,2932.0,63.04,1.0,1.8,85.0
+vit_window,+ tuned GEMM table,table,norm,6428.0,23.62,2.0,2.1,62.9
+vit_window,+ tuned GEMM table,table,rope,6107.2,23.64,2.0,1.0,36.9
+vit_window,+ GEMM-input fusion,actfuse,GEMM,32204.2,363.63,7.0,57.6,16.6
+vit_window,+ GEMM-input fusion,actfuse,add,1730.0,47.19,2.0,3.6,90.3
+vit_window,+ GEMM-input fusion,actfuse,attention,1138.4,23.69,1.0,14.0,24.5
+vit_window,+ GEMM-input fusion,actfuse,cast,945.2,11.8,1.0,2.2,83.5
+vit_window,+ GEMM-input fusion,actfuse,copy,6949.3,23.61,2.0,2.2,62.5
+vit_window,+ GEMM-input fusion,actfuse,glu,2868.4,63.04,1.0,1.9,85.2
+vit_window,+ GEMM-input fusion,actfuse,norm,6244.1,23.62,2.0,1.0,63.3
+vit_window,+ GEMM-input fusion,actfuse,rope,6108.9,23.64,2.0,1.0,36.9
+vit_window,+ F16 vision RoPE,ropef16,GEMM,32199.2,364.19,7.0,57.6,16.6
+vit_window,+ F16 vision RoPE,ropef16,add,1729.9,47.19,2.0,3.7,90.2
+vit_window,+ F16 vision RoPE,ropef16,attention,1140.1,23.69,1.0,13.9,24.5
+vit_window,+ F16 vision RoPE,ropef16,cast,945.1,11.8,1.0,2.2,83.5
+vit_window,+ F16 vision RoPE,ropef16,copy,3474.4,11.81,1.0,2.2,62.5
+vit_window,+ F16 vision RoPE,ropef16,glu,2870.4,63.04,1.0,1.9,85.2
+vit_window,+ F16 vision RoPE,ropef16,norm,6245.6,23.62,2.0,1.0,63.3
+vit_window,+ F16 vision RoPE,ropef16,rope,5394.6,23.66,2.0,1.4,95.1
+vit_window,+ residual in GEMM (every switch),design,GEMM,32238.1,384.5,7.0,57.6,16.6
+vit_window,+ residual in GEMM (every switch),design,add,864.8,23.6,1.0,3.6,90.3
+vit_window,+ residual in GEMM (every switch),design,attention,1138.1,23.69,1.0,13.9,24.5
+vit_window,+ residual in GEMM (every switch),design,cast,944.8,11.8,1.0,2.2,83.5
+vit_window,+ residual in GEMM (every switch),design,copy,3474.5,11.81,1.0,2.2,62.5
+vit_window,+ residual in GEMM (every switch),design,glu,2871.9,63.04,1.0,1.9,85.2
+vit_window,+ residual in GEMM (every switch),design,norm,6244.4,23.62,2.0,1.0,63.3
+vit_window,+ residual in GEMM (every switch),design,rope,5395.0,23.66,2.0,1.4,95.1
+vit_full,stock kernels,base,GEMM,15480.1,260.59,2.0,55.0,16.6
+vit_full,stock kernels,base,GEMM split-K,16830.5,184.67,5.0,60.7,16.5
+vit_full,stock kernels,base,add,9963.4,169.34,9.0,3.7,89.2
+vit_full,stock kernels,base,attention,16368.8,23.71,1.0,33.3,24.8
+vit_full,stock kernels,base,cast,17958.8,163.36,14.0,2.2,83.7
+vit_full,stock kernels,base,copy,6954.1,23.61,2.0,2.2,62.6
+vit_full,stock kernels,base,glu,2926.1,63.04,1.0,1.9,85.0
+vit_full,stock kernels,base,norm,6433.8,23.62,2.0,2.1,62.9
+vit_full,stock kernels,base,rope,6115.1,23.64,2.0,1.0,37.0
+vit_full,+ batched window attention,winbatch,GEMM,15479.9,291.67,2.0,55.0,16.6
+vit_full,+ batched window attention,winbatch,GEMM split-K,16819.5,184.57,5.0,60.7,16.5
+vit_full,+ batched window attention,winbatch,add,9953.9,169.34,9.0,3.7,89.3
+vit_full,+ batched window attention,winbatch,attention,16407.3,23.71,1.0,33.3,24.8
+vit_full,+ batched window attention,winbatch,cast,17952.5,163.36,14.0,2.2,83.8
+vit_full,+ batched window attention,winbatch,copy,6953.2,23.61,2.0,2.2,62.6
+vit_full,+ batched window attention,winbatch,glu,2927.0,63.04,1.0,1.8,85.0
+vit_full,+ batched window attention,winbatch,norm,6442.0,23.62,2.0,2.1,62.9
+vit_full,+ batched window attention,winbatch,rope,6103.3,23.64,2.0,1.0,37.0
+vit_full,"+ F32 output, bias in epilogue",f32bias,GEMM,16535.6,299.48,2.0,51.6,16.7
+vit_full,"+ F32 output, bias in epilogue",f32bias,GEMM split-K,17776.7,229.37,5.0,57.7,16.5
+vit_full,"+ F32 output, bias in epilogue",f32bias,add,1729.0,47.19,2.0,3.7,90.2
+vit_full,"+ F32 output, bias in epilogue",f32bias,attention,16393.9,23.71,1.0,33.2,24.8
+vit_full,"+ F32 output, bias in epilogue",f32bias,cast,8175.1,102.32,7.0,2.2,83.5
+vit_full,"+ F32 output, bias in epilogue",f32bias,copy,6953.6,23.61,2.0,2.2,62.6
+vit_full,"+ F32 output, bias in epilogue",f32bias,glu,2934.8,63.04,1.0,1.8,85.0
+vit_full,"+ F32 output, bias in epilogue",f32bias,norm,6430.3,23.62,2.0,2.1,62.9
+vit_full,"+ F32 output, bias in epilogue",f32bias,rope,6107.1,23.64,2.0,1.0,36.9
+vit_full,+ tuned GEMM table,table,GEMM,32180.2,368.89,7.0,57.6,16.6
+vit_full,+ tuned GEMM table,table,add,1724.7,47.19,2.0,3.7,90.3
+vit_full,+ tuned GEMM table,table,attention,16393.3,23.71,1.0,33.2,24.8
+vit_full,+ tuned GEMM table,table,cast,8174.0,102.32,7.0,2.2,83.5
+vit_full,+ tuned GEMM table,table,copy,6953.3,23.61,2.0,2.2,62.6
+vit_full,+ tuned GEMM table,table,glu,2928.5,63.04,1.0,1.9,85.0
+vit_full,+ tuned GEMM table,table,norm,6427.0,23.62,2.0,2.1,62.9
+vit_full,+ tuned GEMM table,table,rope,6111.3,23.64,2.0,1.0,37.0
+vit_full,+ GEMM-input fusion,actfuse,GEMM,32194.4,367.67,7.0,57.6,16.6
+vit_full,+ GEMM-input fusion,actfuse,add,1731.7,47.19,2.0,3.6,90.2
+vit_full,+ GEMM-input fusion,actfuse,attention,16391.6,23.71,1.0,33.2,24.8
+vit_full,+ GEMM-input fusion,actfuse,cast,946.3,11.8,1.0,2.2,83.5
+vit_full,+ GEMM-input fusion,actfuse,copy,6954.5,23.61,2.0,2.2,62.6
+vit_full,+ GEMM-input fusion,actfuse,glu,2869.2,63.04,1.0,1.9,85.2
+vit_full,+ GEMM-input fusion,actfuse,norm,6243.7,23.62,2.0,1.0,63.3
+vit_full,+ GEMM-input fusion,actfuse,rope,6105.2,23.64,2.0,1.0,37.0
+vit_full,+ F16 vision RoPE,ropef16,GEMM,32176.4,363.05,7.0,57.6,16.6
+vit_full,+ F16 vision RoPE,ropef16,add,1730.6,47.19,2.0,3.7,90.2
+vit_full,+ F16 vision RoPE,ropef16,attention,16404.5,23.72,1.0,33.2,24.8
+vit_full,+ F16 vision RoPE,ropef16,cast,944.9,11.8,1.0,2.2,83.5
+vit_full,+ F16 vision RoPE,ropef16,copy,3476.3,11.81,1.0,2.2,62.6
+vit_full,+ F16 vision RoPE,ropef16,glu,2869.0,63.04,1.0,1.9,85.2
+vit_full,+ F16 vision RoPE,ropef16,norm,6245.0,23.62,2.0,1.0,63.3
+vit_full,+ F16 vision RoPE,ropef16,rope,5393.3,23.66,2.0,1.4,95.1
+vit_full,+ residual in GEMM (every switch),design,GEMM,32226.5,386.88,7.0,57.6,16.6
+vit_full,+ residual in GEMM (every switch),design,add,866.9,23.6,1.0,3.6,90.2
+vit_full,+ residual in GEMM (every switch),design,attention,16385.9,23.71,1.0,33.3,24.8
+vit_full,+ residual in GEMM (every switch),design,cast,945.4,11.8,1.0,2.2,83.5
+vit_full,+ residual in GEMM (every switch),design,copy,3477.0,11.81,1.0,2.2,62.6
+vit_full,+ residual in GEMM (every switch),design,glu,2874.4,63.04,1.0,1.9,85.2
+vit_full,+ residual in GEMM (every switch),design,norm,6245.2,23.62,2.0,1.0,63.3
+vit_full,+ residual in GEMM (every switch),design,rope,5393.5,23.66,2.0,1.4,95.1
+llm,stock kernels,base,GEMM,968.7,25.05,2.0,89.6,13.8
+llm,stock kernels,base,GEMM split-K,80128.1,1205.67,5.0,58.8,16.5
+llm,stock kernels,base,add,1786.3,38.84,5.0,3.7,89.9
+llm,stock kernels,base,attention,15327.3,56.15,1.0,51.4,16.5
+llm,stock kernels,base,cast,14809.9,133.74,14.0,2.2,83.8
+llm,stock kernels,base,copy,228.4,2.11,2.0,1.7,84.5
+llm,stock kernels,base,glu,3653.8,77.6,1.0,1.9,85.3
+llm,stock kernels,base,norm,1964.6,14.73,2.0,1.8,64.7
+llm,stock kernels,base,rope,1380.5,8.41,2.0,1.0,38.9
+llm,"+ F32 output, bias in epilogue",f32bias,GEMM,990.4,26.19,2.0,88.0,13.8
+llm,"+ F32 output, bias in epilogue",f32bias,GEMM split-K,81266.9,1310.43,5.0,58.1,16.5
+llm,"+ F32 output, bias in epilogue",f32bias,add,1119.8,29.37,2.0,3.7,90.1
+llm,"+ F32 output, bias in epilogue",f32bias,attention,15342.8,55.61,1.0,51.4,16.5
+llm,"+ F32 output, bias in epilogue",f32bias,cast,6620.9,82.86,7.0,2.2,83.6
+llm,"+ F32 output, bias in epilogue",f32bias,copy,228.6,2.11,2.0,1.7,84.5
+llm,"+ F32 output, bias in epilogue",f32bias,glu,3645.8,77.6,1.0,1.9,85.3
+llm,"+ F32 output, bias in epilogue",f32bias,norm,1965.7,14.73,2.0,1.8,64.7
+llm,"+ F32 output, bias in epilogue",f32bias,rope,1379.2,8.41,2.0,1.0,38.9
+llm,+ tuned GEMM table,table,GEMM,38597.8,895.57,6.0,90.6,16.4
+llm,+ tuned GEMM table,table,GEMM split-K,16487.0,375.94,1.0,86.1,16.6
+llm,+ tuned GEMM table,table,add,1120.5,29.37,2.0,3.6,90.2
+llm,+ tuned GEMM table,table,attention,15343.9,56.83,1.0,51.5,16.5
+llm,+ tuned GEMM table,table,cast,6617.7,82.86,7.0,2.2,83.7
+llm,+ tuned GEMM table,table,copy,228.9,2.11,2.0,1.7,84.5
+llm,+ tuned GEMM table,table,glu,3648.0,77.6,1.0,1.9,85.3
+llm,+ tuned GEMM table,table,norm,1965.4,14.73,2.0,1.8,64.7
+llm,+ tuned GEMM table,table,rope,1376.9,8.41,2.0,1.0,38.9
+llm,+ GEMM-input fusion,actfuse,GEMM,38600.8,895.64,6.0,90.6,16.4
+llm,+ GEMM-input fusion,actfuse,GEMM split-K,16491.3,375.94,1.0,86.1,16.6
+llm,+ GEMM-input fusion,actfuse,add,1124.5,29.37,2.0,3.6,90.2
+llm,+ GEMM-input fusion,actfuse,attention,15337.9,57.59,1.0,51.5,16.5
+llm,+ GEMM-input fusion,actfuse,cast,590.3,7.34,1.0,2.2,83.6
+llm,+ GEMM-input fusion,actfuse,copy,225.0,2.11,2.0,1.7,84.5
+llm,+ GEMM-input fusion,actfuse,glu,3503.6,77.6,1.0,1.9,85.4
+llm,+ GEMM-input fusion,actfuse,norm,1953.3,14.73,2.0,0.9,65.3
+llm,+ GEMM-input fusion,actfuse,rope,1375.5,8.41,2.0,1.0,38.9
+llm,+ residual in GEMM (every switch),design,GEMM,38651.7,903.28,6.0,90.4,16.4
+llm,+ residual in GEMM (every switch),design,GEMM split-K,16563.8,383.28,1.0,85.7,16.7
+llm,+ residual in GEMM (every switch),design,attention,15404.1,56.66,1.0,51.4,16.5
+llm,+ residual in GEMM (every switch),design,cast,590.9,7.34,1.0,2.2,83.6
+llm,+ residual in GEMM (every switch),design,copy,225.4,2.11,2.0,1.7,84.5
+llm,+ residual in GEMM (every switch),design,glu,3505.0,77.6,1.0,1.9,85.4
+llm,+ residual in GEMM (every switch),design,norm,1952.5,14.73,2.0,0.9,65.3
+llm,+ residual in GEMM (every switch),design,rope,1372.7,8.41,2.0,1.0,38.9
