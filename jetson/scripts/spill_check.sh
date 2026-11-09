@@ -33,20 +33,25 @@ for s in "${SHAPES[@]}"; do
         >> "$OUT/spills_raw.csv"
 done
 python3 - "$OUT/spills_raw.csv" > "$OUT/spills.md" <<'EOF'
+# Per shape --profile launches four kernels in order (jetson-gemm-tune is built without NVTX, so ncu's range columns
+# are empty): heuristic warm-up, heuristic, tuned warm-up, tuned. The timed launches (IDs 1 and 3) are reported.
+# Columns of a row: role, shape, then ncu's ID, ..., kernel name (8), grid (12), ..., metric (16), unit, value.
 import csv, sys
-rows = list(csv.reader(open(sys.argv[1])))
 k = {}
-for r in rows:
-    if len(r) < 4: continue
-    role, shape, metric, val = r[0], r[1], r[-3], r[-1]
-    name = next((x for x in r if "gemm" in x.lower() or "Kernel2" in x or "xmma" in x.lower()), "?")
-    rng = "tuned" if any(x.endswith("tuned") for x in r[2:]) else "heuristic" if any(x.endswith("heuristic") for x in r[2:]) else "?"
-    k.setdefault((role, shape, rng, name), {})[metric] = val
-print("| GEMM | shape (m n k f32 bias) | algorithm | kernel | registers | local load B | local store B |")
-print("|---|---|---|---|---|---|---|")
-for (role, shape, rng, name), m in k.items():
-    print(f"| {role} | {shape} | {rng} | {name[:70]} | {m.get('launch__registers_per_thread', '')} | "
-          f"{m.get('l1tex__t_bytes_pipe_lsu_mem_local_op_ld.sum', '')} | {m.get('l1tex__t_bytes_pipe_lsu_mem_local_op_st.sum', '')} |")
+for r in csv.reader(open(sys.argv[1])):
+    if len(r) < 19: continue
+    role, shape, kid, name, grid, metric, val = r[0], r[1], int(r[2]), r[8], r[12], r[16], r[18]
+    k.setdefault(role, {}).setdefault(kid, {"name": name, "grid": grid})[metric] = val
+print("| GEMM | shape (m n k f32 bias) | algorithm | kernel | grid | registers | shared B / block | local load B | local store B |")
+print("|---|---|---|---|---|---|---|---|---|")
+for role, ks in k.items():
+    ids = sorted(ks)
+    for alg, kid in (("heuristic", ids[1]), ("tuned", ids[3])):
+        m = ks[kid]
+        name = m["name"].replace("void ", "").replace("cutlass::", "").split("(")[0]
+        print(f"| {role} | {next(r[1] for r in csv.reader(open(sys.argv[1])) if r[0] == role)} | {alg} | {name} | "
+              f"{m['grid']} | {m.get('launch__registers_per_thread', '')} | {m.get('launch__shared_mem_per_block', '')} | "
+              f"{m.get('l1tex__t_bytes_pipe_lsu_mem_local_op_ld.sum', '')} | {m.get('l1tex__t_bytes_pipe_lsu_mem_local_op_st.sum', '')} |")
 EOF
 chown -R "$USR:" "$OUT"
 cat "$OUT/spills.md"

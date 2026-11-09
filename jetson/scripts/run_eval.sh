@@ -14,7 +14,9 @@
 #       per dataset (Sintel: the six of e12), all seven datasets
 #   e15t the kernel arms with a GEMM table retuned for 15 W (POWER_TAG=_15w_t15w GEMM_TABLE=...), TACoS + Perception
 #   eq8 INT8 LLM weights (MODEL=<Q8_0 gguf>, POWER_TAG=<mode tag>_q8; vision encoder stays BF16): base, uni_arch,
-#       pwd24, qwen2fps on the 5 TACoS clips of e15. A study of quantization beside the BF16 results, not part of them
+#       pwd24, qwen2fps on the 5 TACoS clips of e15. A study of quantization beside the BF16 results, not part of them.
+#       Also the model-scale study: Qwen2.5-VL-32B (MODEL=<32B Q8_0 gguf> MMPROJ=<its BF16 mmproj>, POWER_TAG=_32b_q8,
+#       MAXN; 32B BF16 is ~65 GB and does not fit), with QCTX=16384 so qwen2fps's KV cache (256 KB/token) fits
 #   e6  base and pw24 on NExT-QA and TACoS, run under 30W (the script then expects MODE_30W)
 #   e8  qwen2fps on all 123 clips: Qwen2.5-VL's own video input -- every frame of its 2 fps sampling (qwen-vl-utils
 #       smart_nframes, frames from video_redundancy.py, long side <= 644 px) fed as the reference does, two frames per
@@ -231,9 +233,9 @@ while read -r D C R V <&3; do
     tegrastats --interval 100 --logfile "$OUT/$V.tegrastats" &
     if [ "$C" = qwen2fps ]; then
         # all frames of the clip's 2 fps sampling: up to 210 frames, 105 pairs of up to ~770 tokens at Qwen's resolution
-        # (Video-MME: ~76k visual tokens), so -c 81920
+        # (Video-MME: ~76k visual tokens), so -c 81920 (QCTX: smaller for a bigger model's KV cache)
         mkdir -p "$OUT/$V"
-        "$QBIN" -m "$MODEL" --mmproj "$MMPROJ" -c 81920 --no-mmap --sintel-dir $QFRAMES --frames-subdir $D --videos $V \
+        "$QBIN" -m "$MODEL" --mmproj "$MMPROJ" -c "${QCTX:-81920}" --no-mmap --sintel-dir $QFRAMES --frames-subdir $D --videos $V \
             --base-frames 100000 --mode video --video-fps 2 --warmup-requests 0 -p "$P" -n $N --temp 0 -ngl 99 \
             --dump-dir "$OUT/$V" --output-json "$OUT/$V.json" > "$OUT/$V.log" 2>&1 || log "FAIL $D $C $R $V"
         rm -f "$OUT/$V/$V.video.frames.bin"   # the input frames, up to 150 MB; they are on the SSD already
